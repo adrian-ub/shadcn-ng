@@ -1,0 +1,21 @@
+{
+  "name": "ui",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "release": "changeset version",
+    "build:cli": "nx build shadcn-ng"
+  },
+  "private": true,
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.7",
+    "@nx/js": "19.5.1",
+    "cross-env": "^7.0.3",
+    "nx": "19.5.1",
+    "verdaccio": "^5.0.4"
+  },
+  "nx": {
+    "includedScripts": []
+  }
+}
