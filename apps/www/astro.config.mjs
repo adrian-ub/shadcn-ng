@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://ui.adrianub.dev",
   integrations: [
     // angular(),
     starlight({
