@@ -38,6 +38,9 @@ importers:
       '@angular/animations':
         specifier: ^18.1.1
         version: 18.1.1(@angular/core@18.1.1)
+      '@angular/cdk':
+        specifier: ^18.1.1
+        version: 18.1.1(@angular/common@18.1.1)(@angular/core@18.1.1)(rxjs@7.8.1)
       '@angular/common':
         specifier: ^18.1.1
         version: 18.1.1(@angular/core@18.1.1)(rxjs@7.8.1)
@@ -74,9 +77,9 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.0
         version: 5.1.0(astro@4.12.2)(tailwindcss@3.4.6)
-      '@types/lodash.template':
-        specifier: ^4.5.1
-        version: 4.5.3
+      '@radix-ng/primitives':
+        specifier: ^0.8.2
+        version: 0.8.2(@angular/cdk@18.1.1)(@angular/core@18.1.1)
       astro:
         specifier: ^4.12.2
         version: 4.12.2(@types/node@20.14.11)(less@4.2.0)(typescript@5.5.3)
@@ -110,6 +113,10 @@ importers:
       zone.js:
         specifier: ^0.14.8
         version: 0.14.8
+    devDependencies:
+      '@types/lodash.template':
+        specifier: ^4.5.1
+        version: 4.5.3
 
   packages/cli:
     dependencies:
@@ -492,6 +499,21 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: false
+
+  /@angular/cdk@18.1.1(@angular/common@18.1.1)(@angular/core@18.1.1)(rxjs@7.8.1):
+    resolution: {integrity: sha512-IaDjvRUgAoKnEeafrnBX+hjTR+1M3O3fV3AybBCjN4NuiPtuyOJiTMg0cTv6RbluJ/SenbT4MQq3tMpOsa9i4w==}
+    peerDependencies:
+      '@angular/common': ^18.0.0 || ^19.0.0
+      '@angular/core': ^18.0.0 || ^19.0.0
+      rxjs: ^6.5.3 || ^7.4.0
+    dependencies:
+      '@angular/common': 18.1.1(@angular/core@18.1.1)(rxjs@7.8.1)
+      '@angular/core': 18.1.1(rxjs@7.8.1)(zone.js@0.14.8)
+      rxjs: 7.8.1
+      tslib: 2.6.3
+    optionalDependencies:
+      parse5: 7.1.2
     dev: false
 
   /@angular/common@18.1.1(@angular/core@18.1.1)(rxjs@7.8.1):
@@ -4688,6 +4710,17 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@radix-ng/primitives@0.8.2(@angular/cdk@18.1.1)(@angular/core@18.1.1):
+    resolution: {integrity: sha512-3eL6U61WJ+K4VqxkeIWqNlVh/9fGWeAQroL7h75RVO8qLwphyeNrLSROlMjozhbBQf4HqXS7DkJyjxGLIfmS6w==}
+    peerDependencies:
+      '@angular/cdk': ^18.0.0
+      '@angular/core': ^18.0.0
+    dependencies:
+      '@angular/cdk': 18.1.1(@angular/common@18.1.1)(@angular/core@18.1.1)(rxjs@7.8.1)
+      '@angular/core': 18.1.1(rxjs@7.8.1)(zone.js@0.14.8)
+      tslib: 2.6.3
+    dev: false
+
   /@rollup/rollup-android-arm-eabi@4.18.0:
     resolution: {integrity: sha512-Tya6xypR10giZV1XzxmH5wr25VcZSncG0pZIjfePT0OVBvqNEurzValetGNarVrGiq66EBVAFn15iYX4w6FKgQ==}
     cpu: [arm]
@@ -5153,9 +5186,11 @@ packages:
     resolution: {integrity: sha512-Mo0UYKLu1oXgkV9TVoXZLlXXjyIXlW7ZQRxi/4gQJmzJr63dmicE8gG0OkPjYTKBrBic852q0JzqrtNUWLBIyA==}
     dependencies:
       '@types/lodash': 4.17.7
+    dev: true
 
   /@types/lodash@4.17.7:
     resolution: {integrity: sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==}
+    dev: true
 
   /@types/mdast@4.0.4:
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}

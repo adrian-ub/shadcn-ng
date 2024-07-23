@@ -31,4 +31,10 @@ export const ui: Registry = [
     type: "components:ui",
     files: ["ui/skeleton.directive.ts"],
   },
+  {
+    name: "tabs",
+    type: "components:ui",
+    dependencies: ["@angular/cdk", "@radix-ng/primitives"],
+    files: ["ui/tabs.directive.ts"],
+  },
 ];
