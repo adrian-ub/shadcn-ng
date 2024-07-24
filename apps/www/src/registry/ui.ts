@@ -22,6 +22,12 @@ export const ui: Registry = [
     files: ["ui/card.directive.ts"],
   },
   {
+    name: "label",
+    type: "components:ui",
+    dependencies: ["@radix-ng/primitives"],
+    files: ["ui/label.directive.ts"],
+  },
+  {
     name: "separator",
     type: "components:ui",
     files: ["ui/separator.directive.ts"],
