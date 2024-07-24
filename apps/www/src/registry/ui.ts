@@ -22,6 +22,11 @@ export const ui: Registry = [
     files: ["ui/card.directive.ts"],
   },
   {
+    name: "input",
+    type: "components:ui",
+    files: ["ui/input.directive.ts"],
+  },
+  {
     name: "label",
     type: "components:ui",
     dependencies: ["@radix-ng/primitives"],
