@@ -12,6 +12,12 @@ export const ui: Registry = [
     files: ["ui/badge.directive.ts"],
   },
   {
+    name: "breadcrumb",
+    type: "components:ui",
+    files: ["ui/breadcrumb.directive.ts"],
+    dependencies: ["lucide-angular"],
+  },
+  {
     name: "button",
     type: "components:ui",
     files: ["ui/button.directive.ts"],
