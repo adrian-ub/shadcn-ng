@@ -1,0 +1,37 @@
+---
+import { logos } from 'virtual:starlight/user-images';
+import config from 'virtual:starlight/user-config';
+import type { Props } from '@astrojs/starlight/props';
+const { siteTitle, siteTitleHref } = Astro.props;
+---
+
+<a href={siteTitleHref} class="mr-4 flex items-center space-x-2 lg:mr-6">
+	{
+		config.logo && logos.dark && (
+			<>
+				<img
+					class:list={{ 'light:sl-hidden': !('src' in config.logo) }}
+					alt={config.logo.alt}
+					src={logos.dark.src}
+					width={logos.dark.width}
+					height={logos.dark.height}
+                    class="h-6 w-6"
+				/>
+				{/* Show light alternate if a user configure both light and dark logos. */}
+				{!('src' in config.logo) && (
+					<img
+						class="dark:sl-hidden"
+						alt={config.logo.alt}
+						src={logos.light?.src}
+						width={logos.light?.width}
+						height={logos.light?.height}
+                        class="h-6 w-6"
+					/>
+				)}
+			</>
+		)
+	}
+	<span class:list={{ 'sr-only': config.logo?.replacesTitle }} class="hidden font-bold lg:inline-block">
+		{siteTitle}
+	</span>
+</a>

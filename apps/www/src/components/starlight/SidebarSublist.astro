@@ -1,0 +1,49 @@
+---
+import { cn } from "@/lib/utils";
+import { type SidebarEntry } from "../../utils/navigation";
+import { Badge } from "@astrojs/starlight/components";
+
+interface Props {
+  sublist: SidebarEntry[];
+  nested?: boolean;
+}
+
+const { sublist, nested } = Astro.props;
+---
+
+<div class="w-full">
+  <div class={nested ? "" : "grid grid-flow-row auto-rows-max text-sm"}>
+    {
+      sublist.map((entry) =>
+        entry.type === "link" ? (
+          <a
+            href={entry.href}
+            aria-current={entry.isCurrent && "page"}
+            class={cn(
+              "group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline",
+              entry.isCurrent
+                ? "font-medium text-foreground"
+                : "text-muted-foreground"
+            )}
+          >
+            <span>{entry.label}</span>
+            {entry.badge && (
+              <Badge
+                variant={entry.badge.variant}
+                class={entry.badge.class}
+                text={entry.badge.text}
+              />
+            )}
+          </a>
+        ) : (
+          <div class="pb-4">
+            <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
+              {entry.label}
+            </h4>
+            <Astro.self sublist={entry.entries} />
+          </div>
+        )
+      )
+    }
+  </div>
+</div>

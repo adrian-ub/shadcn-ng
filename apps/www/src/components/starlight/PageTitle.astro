@@ -1,0 +1,59 @@
+---
+import { cn } from "@/lib/utils";
+import { PAGE_TITLE_ID } from "../../constants";
+import type { Props } from "@astrojs/starlight/props";
+
+import { badgeVariants } from "@/registry/new-york/ui/badge.directive";
+---
+
+<div
+  class="mb-4 flex items-center space-x-1 text-sm leading-none text-muted-foreground"
+>
+  <div class="truncate">Docs</div>
+  <!-- <ChevronRightIcon class="h-3.5 w-3.5" /> -->
+  <div class="text-foreground">{Astro.props.entry.data.title}</div>
+</div>
+
+<div class="space-y-2">
+  <h1 class="scroll-m-20 text-3xl font-bold tracking-tight" id={PAGE_TITLE_ID}>
+    {Astro.props.entry.data.title}
+  </h1>
+  {
+    Astro.props.entry.data.description && (
+      <p class="text-base text-muted-foreground">
+        <span style="text-wrap: balance; display: inline-block; vertical-align: top; text-decoration: inherit; max-width: 454px;">
+          {Astro.props.entry.data.description}
+        </span>
+      </p>
+    )
+  }
+</div>
+
+{
+  Astro.props.entry.data.links ? (
+    <div class="flex items-center space-x-2 pt-4">
+      {Astro.props.entry.data.links.doc && (
+        <a
+          href={Astro.props.entry.data.links.doc}
+          target="_blank"
+          rel="noreferrer"
+          class={cn(badgeVariants({ variant: "secondary" }), "gap-1")}
+        >
+          Docs
+          {/* <ExternalLinkIcon class="h-3 w-3" /> */}
+        </a>
+      )}
+      {Astro.props.entry.data.links.api && (
+        <a
+          href={Astro.props.entry.data.links.api}
+          target="_blank"
+          rel="noreferrer"
+          class={cn(badgeVariants({ variant: "secondary" }), "gap-1")}
+        >
+          API Reference
+          {/* <ExternalLinkIcon class="h-3 w-3" /> */}
+        </a>
+      )}
+    </div>
+  ) : null
+}
