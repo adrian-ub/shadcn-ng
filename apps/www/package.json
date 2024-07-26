@@ -11,22 +11,23 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@analogjs/astro-angular": "^1.6.3",
-    "@angular-devkit/build-angular": "^18.1.1",
-    "@angular/animations": "^18.1.1",
+    "@analogjs/astro-angular": "^1.6.4",
+    "@angular-devkit/build-angular": "^18.1.2",
+    "@angular/animations": "^18.1.2",
     "@angular/cdk": "^18.1.1",
-    "@angular/common": "^18.1.1",
-    "@angular/compiler": "^18.1.1",
-    "@angular/compiler-cli": "^18.1.1",
-    "@angular/core": "^18.1.1",
-    "@angular/language-service": "^18.1.1",
-    "@angular/platform-browser": "^18.1.1",
-    "@angular/platform-browser-dynamic": "^18.1.1",
-    "@angular/platform-server": "^18.1.1",
-    "@astrojs/check": "^0.8.2",
+    "@angular/common": "^18.1.2",
+    "@angular/compiler": "^18.1.2",
+    "@angular/compiler-cli": "^18.1.2",
+    "@angular/core": "^18.1.2",
+    "@angular/language-service": "^18.1.2",
+    "@angular/platform-browser": "^18.1.2",
+    "@angular/platform-browser-dynamic": "^18.1.2",
+    "@angular/platform-server": "^18.1.2",
+    "@astrojs/check": "^0.8.3",
     "@astrojs/starlight": "^0.25.2",
     "@astrojs/starlight-tailwind": "^2.0.3",
     "@astrojs/tailwind": "^5.1.0",
+    "@pagefind/default-ui": "^1.1.0",
     "@radix-ng/primitives": "^0.8.2",
     "astro": "^4.12.2",
     "class-variance-authority": "^0.7.0",
@@ -42,6 +43,7 @@
     "zone.js": "^0.14.8"
   },
   "devDependencies": {
-    "@types/lodash.template": "^4.5.1"
+    "@types/lodash.template": "^4.5.1",
+    "prettier": "^3.3.3"
   }
 }

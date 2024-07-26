@@ -17,7 +17,6 @@ export default {
     },
     extend: {
       colors: {
-        accent: colors.neutral,
         gray: colors.neutral,
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -41,6 +40,7 @@ export default {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
+          ...colors.neutral,
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
@@ -73,6 +73,9 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+  },
+  corePlugins: {
+    preflight: true,
   },
   plugins: [starlightPlugin()],
 };

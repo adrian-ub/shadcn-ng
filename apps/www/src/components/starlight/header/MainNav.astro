@@ -1,0 +1,92 @@
+---
+import type { Props } from "@astrojs/starlight/props";
+import SiteTitle from "@/components/starlight/SiteTitle.astro";
+
+import { cn } from "@/lib/utils";
+
+const pathname = new URL(Astro.request.url).pathname.slice(1);
+---
+
+<div class="mr-4 hidden md:flex">
+  <SiteTitle {...Astro.props} />
+
+  <nav class="flex items-center gap-4 text-sm lg:gap-6">
+    <a
+      href="/docs"
+      class={cn(
+        "transition-colors hover:text-foreground/80",
+        pathname === "docs" ? "text-foreground" : "text-foreground/60"
+      )}
+    >
+      Docs
+    </a>
+    <a
+      href="/docs/components"
+      class={cn(
+        "transition-colors hover:text-foreground/80",
+        pathname?.startsWith("docs/components") &&
+          !pathname?.startsWith("docs/component/chart")
+          ? "text-foreground"
+          : "text-foreground/60"
+      )}
+    >
+      Components
+    </a>
+    <a
+      href="/blocks"
+      class={cn(
+        "transition-colors hover:text-foreground/80",
+        pathname?.startsWith("blocks")
+          ? "text-foreground"
+          : "text-foreground/60"
+      )}
+    >
+      Blocks
+    </a>
+    <a
+      href="/charts"
+      class={cn(
+        "transition-colors hover:text-foreground/80",
+        pathname?.startsWith("docs/component/chart") ||
+          pathname?.startsWith("charts")
+          ? "text-foreground"
+          : "text-foreground/60"
+      )}
+    >
+      Charts
+    </a>
+    <a
+      href="/themes"
+      class={cn(
+        "transition-colors hover:text-foreground/80",
+        pathname?.startsWith("themes")
+          ? "text-foreground"
+          : "text-foreground/60"
+      )}
+    >
+      Themes
+    </a>
+    <a
+      href="/examples"
+      class={cn(
+        "transition-colors hover:text-foreground/80",
+        pathname?.startsWith("examples")
+          ? "text-foreground"
+          : "text-foreground/60"
+      )}
+    >
+      Examples
+    </a>
+    <a
+      href="/colors"
+      class={cn(
+        "transition-colors hover:text-foreground/80",
+        pathname?.startsWith("colors")
+          ? "text-foreground"
+          : "text-foreground/60"
+      )}
+    >
+      Colors
+    </a>
+  </nav>
+</div>
