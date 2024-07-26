@@ -1,6 +1,7 @@
 import { Component, computed, Directive, input } from "@angular/core";
 
-import { LucideAngularModule } from "lucide-angular";
+import { NgIconComponent, provideIcons } from "@ng-icons/core";
+import { radixChevronRight, radixDotsHorizontal } from "@ng-icons/radix-icons";
 
 import { cn } from "@/lib/utils";
 
@@ -82,15 +83,12 @@ export class UbBreadcrumbPageDirective {
 @Component({
   selector: "li[ubBreadcrumbSeparator]",
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [NgIconComponent],
+  viewProviders: [provideIcons({ radixChevronRight })],
   template: `
     <span #ref><ng-content></ng-content></span>
-    @if(ref.children.length == 0) {
-    <lucide-angular
-      name="ChevronRight"
-      size="16"
-      class="flex h-3.5"
-    ></lucide-angular>
+    @if (ref.children.length == 0) {
+      <ng-icon name="radixChevronRight" size="16" class="flex h-3.5" />
     }
   `,
   host: {
@@ -110,9 +108,10 @@ export class UbBreadcrumbSeparatorComponent {
 @Component({
   selector: "span[ubBreadcrumbEllipsis]",
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [NgIconComponent],
+  viewProviders: [provideIcons({ radixDotsHorizontal })],
   template: `
-    <lucide-angular name="MoreHorizontal" class="h-4 w-4"></lucide-angular>
+    <ng-icon name="radixDotsHorizontal" class="h-4 w-4" />
     <span class="sr-only">More</span>
   `,
   host: {

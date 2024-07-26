@@ -39,8 +39,8 @@ importers:
         specifier: ^18.1.2
         version: 18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))
       '@angular/cdk':
-        specifier: ^18.1.1
-        version: 18.1.1(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
+        specifier: ^18.1.2
+        version: 18.1.2(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
       '@angular/common':
         specifier: ^18.1.2
         version: 18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
@@ -77,12 +77,18 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.0
         version: 5.1.0(astro@4.12.2(@types/node@20.14.11)(less@4.2.0)(sass@1.77.6)(terser@5.29.2)(typescript@5.5.3))(tailwindcss@3.4.6(ts-node@10.9.1(@types/node@20.14.11)(typescript@5.5.3)))(ts-node@10.9.1(@types/node@20.14.11)(typescript@5.5.3))
+      '@ng-icons/core':
+        specifier: ^29.0.0
+        version: 29.0.0(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
+      '@ng-icons/radix-icons':
+        specifier: ^29.0.0
+        version: 29.0.0
       '@pagefind/default-ui':
         specifier: ^1.1.0
         version: 1.1.0
       '@radix-ng/primitives':
         specifier: ^0.8.2
-        version: 0.8.2(@angular/cdk@18.1.1(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))
+        version: 0.8.2(@angular/cdk@18.1.2(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))
       astro:
         specifier: ^4.12.2
         version: 4.12.2(@types/node@20.14.11)(less@4.2.0)(sass@1.77.6)(terser@5.29.2)(typescript@5.5.3)
@@ -95,9 +101,6 @@ importers:
       lodash.template:
         specifier: ^4.5.0
         version: 4.5.0
-      lucide-angular:
-        specifier: ^0.414.0
-        version: 0.414.0(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
@@ -326,8 +329,8 @@ packages:
       tailwindcss:
         optional: true
 
-  '@angular/cdk@18.1.1':
-    resolution: {integrity: sha512-IaDjvRUgAoKnEeafrnBX+hjTR+1M3O3fV3AybBCjN4NuiPtuyOJiTMg0cTv6RbluJ/SenbT4MQq3tMpOsa9i4w==}
+  '@angular/cdk@18.1.2':
+    resolution: {integrity: sha512-yiAJ/9AMVF2zk7VLEuyJxNJwpV84xLlf0zCaXiYIs6Z8xU6m8N9KR2nqxC59gQc4nTjItmoO/Sgk7XH0X4yGOQ==}
     peerDependencies:
       '@angular/common': ^18.0.0 || ^19.0.0
       '@angular/core': ^18.0.0 || ^19.0.0
@@ -1752,6 +1755,15 @@ packages:
 
   '@napi-rs/wasm-runtime@0.2.4':
     resolution: {integrity: sha512-9zESzOO5aDByvhIAsOy9TbpZ0Ur2AJbUI7UT73kcUTS2mxAMHOBaa1st/jAymNoCtvrit99kkzT1FZuXVcgfIQ==}
+
+  '@ng-icons/core@29.0.0':
+    resolution: {integrity: sha512-HAPB4KbMMCkc7SEk/kKzyNzSIRO241bVtXWUMQPr/JuY5Gd7Jh2fFjdue0VIUBP3qjjCEMOhwdZV6zsefrVVaA==}
+    peerDependencies:
+      '@angular/core': '>=18.0.0'
+      rxjs: ^6.5.3 || ^7.4.0
+
+  '@ng-icons/radix-icons@29.0.0':
+    resolution: {integrity: sha512-t7B2LVGMsrqrwhkjc8zLsw5v6AjBnx/vpDzu2KFF7DitXVDlqNG6HEcy6TVtVHgsNlRamtYR4OoBSZspDApFnw==}
 
   '@ngtools/webpack@18.1.2':
     resolution: {integrity: sha512-oIpkr1oeRMO0CVdEaxiLqqZ7E8RgDR8rf3LrM5sVOBX4aXAbzVkOZf9yZejmrXaLxj7SU/Fhkljr49ErlpB20g==}
@@ -4442,12 +4454,6 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-  lucide-angular@0.414.0:
-    resolution: {integrity: sha512-61cEVCPjZt5jyR9ZI6fS4u6iWaACOct4fvvq8kQdpGubhqTf6XOTEysBsFCHnIVwTaZMH2e3OXg53TJYGKpYaw==}
-    peerDependencies:
-      '@angular/common': 13.x - 18.x
-      '@angular/core': 13.x - 18.x
-
   magic-string@0.30.10:
     resolution: {integrity: sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==}
 
@@ -4523,8 +4529,8 @@ packages:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
 
-  memfs@4.9.3:
-    resolution: {integrity: sha512-bsYSSnirtYTWi1+OPMFb0M048evMKyUYe0EbtuGQgq6BVQM1g1W8/KIUJCCvjgI/El0j6Q4WsmMiBwLUBSw8LA==}
+  memfs@4.9.4:
+    resolution: {integrity: sha512-Xlj8b2rU11nM6+KU6wC7cuWcHQhVINWCUgdPS4Ar9nPxLaOya3RghqK7ALyDW2QtGebYAYs6uEdEVnwPVT942A==}
     engines: {node: '>= 4.0.0'}
 
   merge-descriptors@1.0.1:
@@ -6900,7 +6906,7 @@ snapshots:
       - supports-color
       - terser
 
-  '@angular/cdk@18.1.1(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)':
+  '@angular/cdk@18.1.2(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)':
     dependencies:
       '@angular/common': 18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
       '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
@@ -9244,6 +9250,16 @@ snapshots:
       '@emnapi/runtime': 1.2.0
       '@tybys/wasm-util': 0.9.0
 
+  '@ng-icons/core@29.0.0(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
+      rxjs: 7.8.1
+      tslib: 2.6.3
+
+  '@ng-icons/radix-icons@29.0.0':
+    dependencies:
+      tslib: 2.6.3
+
   '@ngtools/webpack@18.1.2(@angular/compiler-cli@18.1.2(@angular/compiler@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8)))(typescript@5.5.3))(typescript@5.5.3)(webpack@5.92.1(esbuild@0.21.5))':
     dependencies:
       '@angular/compiler-cli': 18.1.2(@angular/compiler@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8)))(typescript@5.5.3)
@@ -9421,9 +9437,9 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@radix-ng/primitives@0.8.2(@angular/cdk@18.1.1(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))':
+  '@radix-ng/primitives@0.8.2(@angular/cdk@18.1.2(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))':
     dependencies:
-      '@angular/cdk': 18.1.1(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
+      '@angular/cdk': 18.1.2(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
       '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
       tslib: 2.6.3
 
@@ -10101,9 +10117,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ajv-formats@2.1.1(ajv@8.16.0):
+  ajv-formats@2.1.1(ajv@8.12.0):
     optionalDependencies:
-      ajv: 8.16.0
+      ajv: 8.12.0
 
   ajv-formats@3.0.1(ajv@8.16.0):
     optionalDependencies:
@@ -10113,9 +10129,9 @@ snapshots:
     dependencies:
       ajv: 6.12.6
 
-  ajv-keywords@5.1.0(ajv@8.16.0):
+  ajv-keywords@5.1.0(ajv@8.12.0):
     dependencies:
-      ajv: 8.16.0
+      ajv: 8.12.0
       fast-deep-equal: 3.1.3
 
   ajv@6.12.6:
@@ -12327,12 +12343,6 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
-  lucide-angular@0.414.0(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8)):
-    dependencies:
-      '@angular/common': 18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
-      '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
-      tslib: 2.6.3
-
   magic-string@0.30.10:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -12533,7 +12543,7 @@ snapshots:
 
   media-typer@0.3.0: {}
 
-  memfs@4.9.3:
+  memfs@4.9.4:
     dependencies:
       '@jsonjoy.com/json-pack': 1.0.4(tslib@2.6.3)
       '@jsonjoy.com/util': 1.2.0(tslib@2.6.3)
@@ -13946,9 +13956,9 @@ snapshots:
   schema-utils@4.2.0:
     dependencies:
       '@types/json-schema': 7.0.15
-      ajv: 8.16.0
-      ajv-formats: 2.1.1(ajv@8.16.0)
-      ajv-keywords: 5.1.0(ajv@8.16.0)
+      ajv: 8.12.0
+      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-keywords: 5.1.0(ajv@8.12.0)
 
   section-matter@1.0.0:
     dependencies:
@@ -14942,7 +14952,7 @@ snapshots:
   webpack-dev-middleware@7.2.1(webpack@5.92.1(esbuild@0.21.5)):
     dependencies:
       colorette: 2.0.20
-      memfs: 4.9.3
+      memfs: 4.9.4
       mime-types: 2.1.35
       on-finished: 2.4.1
       range-parser: 1.2.1

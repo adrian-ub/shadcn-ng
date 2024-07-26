@@ -15,7 +15,7 @@ export const ui: Registry = [
     name: "breadcrumb",
     type: "components:ui",
     files: ["ui/breadcrumb.directive.ts"],
-    dependencies: ["lucide-angular"],
+    dependencies: ["@ng-icons/core", "@ng-icons/radix-icons"],
   },
   {
     name: "button",
