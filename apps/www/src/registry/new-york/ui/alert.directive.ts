@@ -21,7 +21,7 @@ const alertVariants = cva(
 );
 
 type AlertProps = VariantProps<typeof alertVariants>;
-export type UbAlertVariant = NonNullable<AlertProps["variant"]>;
+type UbAlertVariant = NonNullable<AlertProps["variant"]>;
 
 @Directive({
   selector: "div[ubAlert]",
@@ -40,7 +40,6 @@ export class UbAlertDirective {
   );
 }
 
-const alertTitleVariants = cva("mb-1 font-medium leading-none tracking-tight");
 @Directive({
   selector: "h5[ubAlertTitle]",
   standalone: true,
@@ -52,11 +51,10 @@ export class UbAlertTitleDirective {
   readonly class = input<string>();
 
   protected computedClass = computed(() =>
-    cn(alertTitleVariants({ class: this.class() }))
+    cn("mb-1 font-medium leading-none tracking-tight", this.class())
   );
 }
 
-const alertDescriptionVariants = cva("text-sm [&_p]:leading-relaxed");
 @Directive({
   selector: "div[ubAlertDescription]",
   standalone: true,
@@ -68,6 +66,6 @@ export class UbAlertDescriptionDirective {
   readonly class = input<string>();
 
   protected computedClass = computed(() =>
-    cn(alertDescriptionVariants({ class: this.class() }))
+    cn("text-sm [&_p]:leading-relaxed", this.class())
   );
 }
