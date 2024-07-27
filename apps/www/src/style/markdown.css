@@ -1,3 +1,69 @@
+.sl-marldown-content h1:not(:where(.not-content *)) {
+  @apply mt-2 scroll-m-20 text-4xl font-bold;
+}
+.sl-markdown-content h2:not(:where(.not-content *)) {
+  @apply mt-12 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0;
+}
+.sl-marldown-content h3:not(:where(.not-content *)) {
+  @apply mt-8 scroll-m-20 text-xl font-semibold tracking-tight;
+}
+.sl-marldown-content h4:not(:where(.not-content *)) {
+  @apply mt-8 scroll-m-20 text-lg font-semibold tracking-tight;
+}
+.sl-marldown-content h5:not(:where(.not-content *)) {
+  @apply mt-8 scroll-m-20 text-lg font-semibold tracking-tight;
+}
+.sl-marldown-content h6:not(:where(.not-content *)) {
+  @apply mt-8 scroll-m-20 text-base font-semibold tracking-tight;
+}
+.sl-markdown-content a:not(:where(.not-content *)) {
+  @apply font-medium underline underline-offset-4;
+}
+.sl-markdown-content p:not(:where(.not-content *)) {
+  @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+.sl-markdown-content
+  ul:not(:where(.not-content *))
+  + :not(:where(.sl-steps *)) {
+  @apply my-6 ml-6 list-disc;
+}
+.sl-markdown-content
+  ol:not(:where(.not-content *))
+  + :not(:where(.sl-steps *)) {
+  @apply my-6 ml-6 list-decimal;
+}
+.sl-markdown-content
+  li:not(:where(.not-content *))
+  + :not(:where(.sl-steps *)) {
+  @apply mt-2;
+}
+.sl-markdown-content blockquote:not(:where(.not-content *)) {
+  @apply mt-6 border-l-2 pl-6 italic;
+}
+.sl-markdown-content img:not(:where(.not-content *)) {
+  @apply rounded-md;
+}
+.sl-markdown-content hr:not(:where(.not-content *)) {
+  @apply my-4 md:my-8;
+}
+.sl-markdown-content table:not(:where(.not-content *)) {
+  @apply w-full overflow-hidden rounded-lg;
+}
+.sl-markdown-content tr:not(:where(.not-content *)) {
+  @apply m-0 border-t p-0;
+}
+.sl-markdown-content th:not(:where(.not-content *)) {
+  @apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
+}
+.sl-markdown-content td:not(:where(.not-content *)) {
+  @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+}
+.sl-markdown-content pre:not(:where(.not-content *)) {
+  @apply mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border bg-zinc-950 py-4 dark:bg-zinc-900;
+}
+.sl-markdown-content code:not(:where(.not-content *)) {
+  @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm;
+}
 .sl-markdown-content
   :not(a, strong, em, del, span, input, code)
   + :not(a, strong, em, del, span, input, code, :where(.not-content *)) {
