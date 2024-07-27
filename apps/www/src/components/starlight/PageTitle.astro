@@ -1,7 +1,7 @@
 ---
 import type { Props } from "@astrojs/starlight/props";
 
-import {} from "@ng-icons/radix-icon";
+import { radixChevronRight, radixExternalLink } from "@ng-icons/radix-icons";
 
 import { cn } from "@/lib/utils";
 import { badgeVariants } from "@/registry/new-york/ui/badge.directive";
@@ -13,7 +13,7 @@ import { PAGE_TITLE_ID } from "../../constants";
   class="mb-4 flex items-center space-x-1 text-sm leading-none text-muted-foreground"
 >
   <div class="truncate">Docs</div>
-  <!-- <ChevronRightIcon class="h-3.5 w-3.5" /> -->
+  <fragment set:html={radixChevronRight} class="h-3.5 w-3.5" />
   <div class="text-foreground">{Astro.props.entry.data.title}</div>
 </div>
 
@@ -43,7 +43,7 @@ import { PAGE_TITLE_ID } from "../../constants";
           class={cn(badgeVariants({ variant: "secondary" }), "gap-1")}
         >
           Docs
-          {/* <ExternalLinkIcon class="h-3 w-3" /> */}
+          <fragment set:html={radixExternalLink} class="h-3 w-3" />
         </a>
       )}
       {Astro.props.entry.data.links.api && (
@@ -54,7 +54,7 @@ import { PAGE_TITLE_ID } from "../../constants";
           class={cn(badgeVariants({ variant: "secondary" }), "gap-1")}
         >
           API Reference
-          {/* <ExternalLinkIcon class="h-3 w-3" /> */}
+          <fragment set:html={radixExternalLink} class="h-3 w-3" />
         </a>
       )}
     </div>
