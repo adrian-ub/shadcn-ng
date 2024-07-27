@@ -1,0 +1,107 @@
+---
+import path from "path";
+import { styles } from "@/registry/styles";
+import { readFileSync } from "fs";
+
+import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
+
+export interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+
+const components = await Promise.all(
+  styles.map(async (style) => {
+    const filename = path.join(
+      process.cwd(),
+      "src",
+      "registry",
+      style.name,
+      "example",
+      `${name}.ts`
+    );
+    const Component = (await import(/* @vite-ignore */ `${filename}`)).default;
+    const code = readFileSync(`${filename}`)
+      .toString()
+      .replace(/export\s+default\s+.*;\s*/, "")
+      .replace(/@\/registry\/.*\/ui/g, "@/components/ui");
+
+    return {
+      style,
+      Component,
+      code,
+    };
+  })
+);
+---
+
+<div class="not-content group relative my-4 flex flex-col space-y-2">
+  <Tabs>
+    <TabItem label="Preview">
+      <div
+        class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative rounded-md border"
+      >
+        <div class="flex items-center justify-between p-4">
+          <select
+            class="flex items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>option]:line-clamp-1 h-7 w-[145px] text-xs [&_svg]:h-4 [&_svg]:w-4"
+            data-target={$("change-theme")}
+          >
+            {
+              styles.map(({ name, label }, index) => (
+                <option value={name}>{label}</option>
+              ))
+            }
+          </select>
+        </div>
+
+        <div class="w-full" style="--radius: 0.5rem;">
+          <div
+            class="preview flex min-h-[350px] w-full justify-center p-10 items-center"
+          >
+            {
+              components.map(({ Component, style }, index) => (
+                <div
+                  data-target={$("preview-" + style.name)}
+                  hidden={index !== 0}
+                >
+                  <Component />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </TabItem>
+    <TabItem label="Code">
+      <div>
+        {
+          components.map(({ code, style }, index) => (
+            <div data-target={$("code-" + style.name)} hidden={index !== 0}>
+              <Code code={code} lang="angular-ts" />
+            </div>
+          ))
+        }
+      </div>
+    </TabItem>
+  </Tabs>
+</div>
+
+<script>
+  import { styles } from "@/registry/styles";
+
+  $.ready(async () => {
+    $("change-theme").addEventListener("change", (event) => {
+      const value = event.target.value;
+      hiddeComponents();
+      $(`preview-${value}`).hidden = false;
+      $(`code-${value}`).hidden = false;
+    });
+
+    function hiddeComponents() {
+      styles.forEach(({ name }) => {
+        $(`preview-${name}`).hidden = true;
+        $(`code-${name}`).hidden = true;
+      });
+    }
+  });
+</script>

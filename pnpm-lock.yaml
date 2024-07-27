@@ -80,6 +80,9 @@ importers:
       '@ng-icons/core':
         specifier: ^29.0.0
         version: 29.0.0(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
+      '@ng-icons/lucide':
+        specifier: ^29.0.0
+        version: 29.0.0
       '@ng-icons/radix-icons':
         specifier: ^29.0.0
         version: 29.0.0
@@ -107,6 +110,9 @@ importers:
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
+      simple-stack-query:
+        specifier: ^0.1.1
+        version: 0.1.1(@types/node@20.14.11)(less@4.2.0)(sass@1.77.6)(terser@5.29.2)
       tailwind-merge:
         specifier: ^2.4.0
         version: 2.4.0
@@ -1170,6 +1176,14 @@ packages:
   '@changesets/write@0.3.1':
     resolution: {integrity: sha512-SyGtMXzH3qFqlHKcvFY2eX+6b0NGiFcNav8AFsYwy5l8hejOeoeTDemu5Yjmke2V5jpzY+pBvM0vCCQ3gdZpfw==}
 
+  '@clack/core@0.3.4':
+    resolution: {integrity: sha512-H4hxZDXgHtWTwV3RAVenqcC4VbJZNegbBjlPvzOzCouXtS2y3sDvlO3IsbrPNWuLWPPlYVYPghQdSF64683Ldw==}
+
+  '@clack/prompts@0.7.0':
+    resolution: {integrity: sha512-0MhX9/B4iL6Re04jPrttDm+BsP8y6mS7byuv0BvXgdXhbV5PdlsHt55dvNsuBCPZ7xq1oTAOOuotR9NFbQyMSA==}
+    bundledDependencies:
+      - is-unicode-supported
+
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
@@ -1761,6 +1775,9 @@ packages:
     peerDependencies:
       '@angular/core': '>=18.0.0'
       rxjs: ^6.5.3 || ^7.4.0
+
+  '@ng-icons/lucide@29.0.0':
+    resolution: {integrity: sha512-sTkxb5rdRHtRyomKuQcT9s3OcJnA6WEF1e569PAXwxppswQcVoUceohkTaHkN43z2YqTNE7pcfMB35EmvpTI0g==}
 
   '@ng-icons/radix-icons@29.0.0':
     resolution: {integrity: sha512-t7B2LVGMsrqrwhkjc8zLsw5v6AjBnx/vpDzu2KFF7DitXVDlqNG6HEcy6TVtVHgsNlRamtYR4OoBSZspDApFnw==}
@@ -5768,6 +5785,10 @@ packages:
   simple-get@4.0.1:
     resolution: {integrity: sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==}
 
+  simple-stack-query@0.1.1:
+    resolution: {integrity: sha512-jqx20JqAndY+64qha/+fD36oYLaIh4e7vdH/0kuH0HtYC7Wdno2b6+CeXxTT7dqyn1OEwe+LrEyMDnASh9Olow==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
 
@@ -6342,6 +6363,10 @@ packages:
 
   vfile@6.0.2:
     resolution: {integrity: sha512-zND7NlS8rJYb/sPqkb13ZvbbUoExdbi4w3SfRrMq6R3FvnLQmmfpajJNITuuYm6AZ5uao9vy4BAos3EXBPf2rg==}
+
+  vite-plugin-simple-scope@2.0.2:
+    resolution: {integrity: sha512-UvF++rRZbmGK4A+JsTo0YVKw55wk5IyBTgURspzlkjbt66FXWMOND5yZmGB/2CtFky7wKNz6LHB2B6gHCVrfAw==}
+    engines: {node: '>=18.14.1'}
 
   vite@5.3.2:
     resolution: {integrity: sha512-6lA7OBHBlXUxiJxbO5aAY2fsHHzDr1q7DvXYnyZycRs2Dz+dXBWuhpWHvmljTRTpQC2uvGmUFFkSHF2vGo90MA==}
@@ -8777,6 +8802,17 @@ snapshots:
       human-id: 1.0.2
       prettier: 2.8.8
 
+  '@clack/core@0.3.4':
+    dependencies:
+      picocolors: 1.0.1
+      sisteransi: 1.0.5
+
+  '@clack/prompts@0.7.0':
+    dependencies:
+      '@clack/core': 0.3.4
+      picocolors: 1.0.1
+      sisteransi: 1.0.5
+
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
@@ -9254,6 +9290,10 @@ snapshots:
     dependencies:
       '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
       rxjs: 7.8.1
+      tslib: 2.6.3
+
+  '@ng-icons/lucide@29.0.0':
+    dependencies:
       tslib: 2.6.3
 
   '@ng-icons/radix-icons@29.0.0':
@@ -14121,6 +14161,20 @@ snapshots:
       once: 1.4.0
       simple-concat: 1.0.1
 
+  simple-stack-query@0.1.1(@types/node@20.14.11)(less@4.2.0)(sass@1.77.6)(terser@5.29.2):
+    dependencies:
+      '@clack/prompts': 0.7.0
+      kleur: 4.1.5
+      vite-plugin-simple-scope: 2.0.2(@types/node@20.14.11)(less@4.2.0)(sass@1.77.6)(terser@5.29.2)
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - terser
+
   simple-swizzle@0.2.2:
     dependencies:
       is-arrayish: 0.3.2
@@ -14813,6 +14867,19 @@ snapshots:
       '@types/unist': 3.0.2
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
+
+  vite-plugin-simple-scope@2.0.2(@types/node@20.14.11)(less@4.2.0)(sass@1.77.6)(terser@5.29.2):
+    dependencies:
+      typescript: 5.5.3
+      vite: 5.3.4(@types/node@20.14.11)(less@4.2.0)(sass@1.77.6)(terser@5.29.2)
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - terser
 
   vite@5.3.2(@types/node@20.14.11)(less@4.2.0)(sass@1.77.6)(terser@5.29.2):
     dependencies:
