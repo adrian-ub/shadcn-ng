@@ -1,0 +1,38 @@
+---
+import type { Props } from "@astrojs/starlight/props";
+
+import { buttonVariants } from "@/registry/default/ui/button.directive";
+import { cn } from "@/lib/utils";
+
+import { radixChevronLeft, radixChevronRight } from "@ng-icons/radix-icons";
+
+const { dir, pagination } = Astro.props;
+const { prev, next } = pagination;
+---
+
+<div class="flex flex-row items-center justify-between" dir={dir}>
+  {
+    prev && (
+      <a
+        href={prev.href}
+        rel="prev"
+        class={buttonVariants({ variant: "outline" })}
+      >
+        <fragment set:html={radixChevronLeft} class="mr-2 h-4 w-4" />
+        {prev.label}
+      </a>
+    )
+  }
+  {
+    next && (
+      <a
+        href={next.href}
+        rel="next"
+        class={cn(buttonVariants({ variant: "outline" }), "ml-auto")}
+      >
+        {next.label}
+        <fragment set:html={radixChevronRight} class="ml-2 h-4 w-4" />
+      </a>
+    )
+  }
+</div>
