@@ -20,7 +20,9 @@ const components = await Promise.all(
       "example",
       `${name}.ts`
     );
-    const Component = (await import(/* @vite-ignore */ `${filename}`)).default;
+    const Component = (
+      await import(`../registry/${style.name}/example/${name}.ts`)
+    ).default;
     const code = readFileSync(`${filename}`)
       .toString()
       .replace(/export\s+default\s+.*;\s*/, "")
@@ -44,10 +46,11 @@ const components = await Promise.all(
         <div class="flex items-center justify-between p-4">
           <select
             class="flex items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>option]:line-clamp-1 h-7 w-[145px] text-xs [&_svg]:h-4 [&_svg]:w-4"
+            id="change-style"
             data-target={$("change-theme")}
           >
             {
-              styles.map(({ name, label }, index) => (
+              styles.map(({ name, label }) => (
                 <option value={name}>{label}</option>
               ))
             }
@@ -91,6 +94,7 @@ const components = await Promise.all(
 
   $.ready(async () => {
     $("change-theme").addEventListener("change", (event) => {
+      // @ts-expect-error
       const value = event.target.value;
       hiddeComponents();
       $(`preview-${value}`).hidden = false;

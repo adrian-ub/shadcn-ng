@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { NgIconComponent, provideIcons } from "@ng-icons/core";
-import { lucideRocket } from "@ng-icons/lucide";
+import { lucideTerminal } from "@ng-icons/lucide";
 
 import {
   UbAlertDirective,
@@ -16,10 +16,10 @@ import {
     UbAlertTitleDirective,
     UbAlertDescriptionDirective,
   ],
-  viewProviders: [provideIcons({ lucideRocket })],
+  viewProviders: [provideIcons({ lucideTerminal })],
   template: `
-    <div ubAlert>
-      <ng-icon name="lucideRocket" class="h-4 w-4" />
+    <div ubAlert variant="destructive">
+      <ng-icon name="lucideTerminal" class="h-4 w-4" />
       <h5 ubAlertTitle>Heads up!</h5>
       <div ubAlertDescription>
         You can add components and dependencies to your app using the cli.
