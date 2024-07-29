@@ -4,8 +4,9 @@ import tailwind from "@astrojs/tailwind";
 import angular from "@analogjs/astro-angular";
 import { siteConfig } from "./src/config/site";
 import theme from "./src/lib/highlighter-theme.json";
-
 import simpleStackQuery from "simple-stack-query";
+
+import AutoImport from "astro-auto-import";
 
 // https://astro.build/config
 export default defineConfig({
@@ -58,6 +59,12 @@ export default defineConfig({
         MobileMenuToggle: "./src/components/starlight/MobileMenuToggle.astro",
         PageFrame: "./src/components/starlight/PageFrame.astro",
       },
+    }),
+    AutoImport({
+      imports: [
+        "@/components/ComponentPreview/ComponentPreview.astro",
+        "@/components/ComponentSource.astro",
+      ],
     }),
     tailwind(),
     angular(),

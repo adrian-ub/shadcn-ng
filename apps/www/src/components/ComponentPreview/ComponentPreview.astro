@@ -21,7 +21,7 @@ const components = await Promise.all(
       `${name}.ts`
     );
     const Component = (
-      await import(`../registry/${style.name}/example/${name}.ts`)
+      await import(`../../registry/${style.name}/example/${name}.ts`)
     ).default;
     const code = readFileSync(`${filename}`)
       .toString()
