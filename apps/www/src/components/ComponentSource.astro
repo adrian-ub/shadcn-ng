@@ -38,12 +38,8 @@ const allComponents = componentUi?.files.flatMap((file) => {
 
 {
   allComponents?.map(({ code, style }, index) => (
-    <div
-      data-target={$("source-" + style.name)}
-      class="w-[38rem]"
-      hidden={index !== 0}
-    >
-      <Code code={code} class="w-[38rem]" wrap={true} />
+    <div data-target={$("source-" + style.name)} hidden={index !== 0}>
+      <Code code={code} wrap={true} />
     </div>
   ))
 }

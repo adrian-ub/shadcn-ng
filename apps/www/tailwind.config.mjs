@@ -17,7 +17,7 @@ export default {
     },
     extend: {
       colors: {
-        gray: colors.neutral,
+        gray: colors.stone,
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

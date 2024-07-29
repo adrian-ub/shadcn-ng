@@ -45,7 +45,6 @@ export default defineConfig({
       customCss: ["./src/tailwind.css"],
       components: {
         Header: "./src/components/starlight/header/Header.astro",
-        PageFrame: "./src/components/starlight/PageFrame.astro",
         SiteTitle: "./src/components/starlight/SiteTitle.astro",
         SocialIcons: "./src/components/starlight/SocialIcons.astro",
         Search: "./src/components/starlight/Search.astro",
@@ -56,6 +55,8 @@ export default defineConfig({
         TwoColumnContent: "./src/components/starlight/TwoColumnContent.astro",
         Sidebar: "./src/components/starlight/Sidebar.astro",
         Pagination: "./src/components/starlight/Pagination.astro",
+        MobileMenuToggle: "./src/components/starlight/MobileMenuToggle.astro",
+        PageFrame: "./src/components/starlight/PageFrame.astro",
       },
     }),
     tailwind(),
