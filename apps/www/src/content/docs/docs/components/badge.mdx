@@ -1,0 +1,41 @@
+---
+title: Badge
+description: Displays a badge or a component that looks like a badge.
+---
+
+import ComponentPreview from "@/components/ComponentPreview.astro";
+import { Steps } from "@astrojs/starlight/components";
+import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
+import ComponentSource from "@/components/ComponentSource.astro";
+
+<ComponentPreview name="badge-demo" />
+
+## Installation
+
+<Tabs>
+  <TabItem label="CLI">
+    ```bash frame="code"
+    npx shadcn-ng@latest add badge
+    ```
+  </TabItem>
+
+  <TabItem label="Manual">
+    <Steps>
+        1. Copy and paste the following code into your project.
+            <ComponentSource name="badge" />
+
+        2. Update the import paths to match your project setup.
+    </Steps>
+
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```ts
+import { UbBadgeDirective } from "@/components/ui/badge.directive";
+```
+
+```angular-html
+<div ubBadge variant="outline">Badge</div>
+```
