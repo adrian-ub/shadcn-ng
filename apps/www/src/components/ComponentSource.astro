@@ -5,6 +5,8 @@ import { ui } from "@/registry/ui";
 import { readFileSync } from "fs";
 import { Code } from "@astrojs/starlight/components";
 
+import { SelectStyleItem, SelectStyle, syncKey } from "./SelectStyle";
+
 export interface Props {
   name: string;
 }
@@ -36,30 +38,12 @@ const allComponents = componentUi?.files.flatMap((file) => {
 });
 ---
 
-{
-  allComponents?.map(({ code, style }, index) => (
-    <div data-target={$("source-" + style.name)} hidden={index !== 0}>
-      <Code code={code} wrap={true} />
-    </div>
-  ))
-}
-<script>
-  import { styles } from "@/registry/styles";
-
-  $.ready(async () => {
-    document
-      .getElementById("change-style")
-      ?.addEventListener("change", (event) => {
-        // @ts-expect-error
-        const value = event.target.value;
-        hiddeComponents();
-        $(`source-${value}`).hidden = false;
-      });
-
-    function hiddeComponents() {
-      styles.forEach(({ name }) => {
-        $(`source-${name}`).hidden = true;
-      });
-    }
-  });
-</script>
+<SelectStyle syncKey={syncKey} hiddenSelect={true}>
+  {
+    allComponents?.map(({ code, style }) => (
+      <SelectStyleItem label={style.label}>
+        <Code code={code} lang="angular-ts" wrap={true} />
+      </SelectStyleItem>
+    ))
+  }
+</SelectStyle>

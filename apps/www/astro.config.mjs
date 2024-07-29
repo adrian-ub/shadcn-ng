@@ -62,7 +62,7 @@ export default defineConfig({
     }),
     AutoImport({
       imports: [
-        "@/components/ComponentPreview/ComponentPreview.astro",
+        "@/components/ComponentPreview.astro",
         "@/components/ComponentSource.astro",
       ],
     }),

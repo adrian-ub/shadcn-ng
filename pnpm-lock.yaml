@@ -104,9 +104,18 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      hast:
+        specifier: ^1.0.0
+        version: 1.0.0
+      hast-util-select:
+        specifier: ^6.0.2
+        version: 6.0.2
       lodash.template:
         specifier: ^4.5.0
         version: 4.5.0
+      rehype:
+        specifier: ^13.0.1
+        version: 13.0.1
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
@@ -128,10 +137,19 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.5.4
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
+      vfile:
+        specifier: ^6.0.2
+        version: 6.0.2
       zone.js:
         specifier: ^0.14.8
         version: 0.14.8
     devDependencies:
+      '@types/hast':
+        specifier: ^3.0.4
+        version: 3.0.4
       '@types/lodash.template':
         specifier: ^4.5.1
         version: 4.5.3
@@ -3892,6 +3910,10 @@ packages:
 
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
+
+  hast@1.0.0:
+    resolution: {integrity: sha512-vFUqlRV5C+xqP76Wwq2SrM0kipnmpxJm7OfvVXpB35Fp+Fn4MV+ozr+JZr5qFvyR1q/U+Foim2x+3P+x9S1PLA==}
+    deprecated: Renamed to rehype
 
   hastscript@8.0.0:
     resolution: {integrity: sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==}
@@ -11864,6 +11886,8 @@ snapshots:
   hast-util-whitespace@3.0.0:
     dependencies:
       '@types/hast': 3.0.4
+
+  hast@1.0.0: {}
 
   hastscript@8.0.0:
     dependencies:

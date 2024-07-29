@@ -1,0 +1,17 @@
+---
+import { SelectStyleItemTagname } from "./rehype-select-style";
+
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+
+if (!label) {
+  throw new Error("Missing prop `label` on `<TabItem>` component.");
+}
+---
+
+<SelectStyleItemTagname data-label={label}>
+  <slot />
+</SelectStyleItemTagname>

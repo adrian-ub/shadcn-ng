@@ -1,0 +1,67 @@
+---
+import path from "path";
+import { styles } from "@/registry/styles";
+import { readFileSync } from "fs";
+
+import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
+
+import { SelectStyleItem, SelectStyle, syncKey } from "./SelectStyle";
+
+export interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+
+const components = await Promise.all(
+  styles.map(async (style) => {
+    const filename = path.join(
+      process.cwd(),
+      "src",
+      "registry",
+      style.name,
+      "example",
+      `${name}.ts`
+    );
+    const Component = (
+      await import(`../registry/${style.name}/example/${name}.ts`)
+    ).default;
+    const code = readFileSync(`${filename}`)
+      .toString()
+      .replace(/export\s+default\s+.*;\s*/, "")
+      .replace(/@\/registry\/.*\/ui/g, "@/components/ui");
+
+    return {
+      style,
+      Component,
+      code,
+    };
+  })
+);
+---
+
+<div class="not-content group relative my-4 flex flex-col space-y-2">
+  <Tabs>
+    <TabItem label="Preview">
+      <SelectStyle syncKey={syncKey}>
+        {
+          components.map(({ Component, style }) => (
+            <SelectStyleItem label={style.label}>
+              <Component />
+            </SelectStyleItem>
+          ))
+        }
+      </SelectStyle>
+    </TabItem>
+    <TabItem label="Code">
+      <SelectStyle syncKey={syncKey} hiddenSelect={true}>
+        {
+          components.map(({ style, code }) => (
+            <SelectStyleItem label={style.label}>
+              <Code code={code} lang="angular-ts" />
+            </SelectStyleItem>
+          ))
+        }
+      </SelectStyle>
+    </TabItem>
+  </Tabs>
+</div>
