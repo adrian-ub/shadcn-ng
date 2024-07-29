@@ -11,6 +11,7 @@ interface Panel {
 
 declare module "vfile" {
   interface DataMap {
+    // @ts-ignore
     panels: Panel[];
   }
 }
