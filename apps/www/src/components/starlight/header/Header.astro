@@ -17,7 +17,7 @@ const shouldRenderSearch =
 ---
 
 <header
-  class="sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+  class="sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 -mt-4"
 >
   <div class="container flex h-14 max-w-screen-2xl items-center">
     <MainNav {...Astro.props} />
@@ -27,7 +27,7 @@ const shouldRenderSearch =
       <div class="w-full flex-1 md:w-auto md:flex-none">
         {shouldRenderSearch && <Search {...Astro.props} />}
       </div>
-      <nav class="flex items-center">
+      <nav class="hidden md:flex items-center">
         <SocialIcons {...Astro.props} />
         <ThemeSelect {...Astro.props} />
         <LanguageSelect {...Astro.props} />
