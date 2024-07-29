@@ -6,6 +6,7 @@ import {
   UbAlertDirective,
   UbAlertTitleDirective,
   UbAlertDescriptionDirective,
+  UbAlertIconDirective,
 } from "@/registry/new-york/ui/alert.directive";
 
 @Component({
@@ -15,11 +16,12 @@ import {
     UbAlertDirective,
     UbAlertTitleDirective,
     UbAlertDescriptionDirective,
+    UbAlertIconDirective,
   ],
   viewProviders: [provideIcons({ lucideRocket })],
   template: `
     <div ubAlert>
-      <ng-icon name="lucideRocket" class="h-4 w-4" />
+      <ng-icon ubAlertIcon name="lucideRocket" class="h-4 w-4" />
       <h5 ubAlertTitle>Heads up!</h5>
       <div ubAlertDescription>
         You can add components and dependencies to your app using the cli.

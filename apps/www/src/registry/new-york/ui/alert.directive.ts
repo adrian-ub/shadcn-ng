@@ -5,13 +5,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7",
+  "relative w-full rounded-lg border px-4 py-3 text-sm [&>[ubAlertIcon]+div]:translate-y-[-3px] [&>[ubAlertIcon]]:absolute [&>[ubAlertIcon]]:left-4 [&>[ubAlertIcon]]:top-4 [&>[ubAlertIcon]]:text-foreground [&>[ubAlertIcon]~*]:pl-7",
   {
     variants: {
       variant: {
         default: "bg-background text-foreground",
         destructive:
-          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+          "border-destructive/50 text-destructive dark:border-destructive [&>[ubAlertIcon]]:text-destructive",
       },
     },
     defaultVariants: {
@@ -39,6 +39,12 @@ export class UbAlertDirective {
     cn(alertVariants({ variant: this.variant(), class: this.class() }))
   );
 }
+
+@Directive({
+  standalone: true,
+  selector: "[ubAlertIcon]",
+})
+export class UbAlertIconDirective {}
 
 @Directive({
   selector: "h5[ubAlertTitle]",
