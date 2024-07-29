@@ -1,0 +1,18 @@
+import { Component } from "@angular/core";
+
+import { NgIconComponent, provideIcons } from "@ng-icons/core";
+import { lucideChevronRight } from "@ng-icons/lucide";
+
+import { UbButtonDirective } from "@/registry/new-york/ui/button.directive";
+
+@Component({
+  standalone: true,
+  imports: [UbButtonDirective, NgIconComponent],
+  viewProviders: [provideIcons({ lucideChevronRight })],
+  template: `<button ubButton variant="outline" size="icon">
+    <ng-icon name="lucideChevronRight" class="h-4 w-4" />
+  </button>`,
+})
+export class ButtonDemoComponent {}
+
+export default ButtonDemoComponent;

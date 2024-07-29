@@ -1,0 +1,77 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
+
+<ComponentPreview name="button-demo" />
+
+## Installation
+
+<Tabs>
+  <TabItem label="CLI">
+    ```bash frame="code"
+    npx shadcn-ng@latest add button
+    ```
+  </TabItem>
+
+  <TabItem label="Manual">
+    <Steps>
+        1. Copy and paste the following code into your project.
+            <ComponentSource name="button" />
+
+        2. Update the import paths to match your project setup.
+    </Steps>
+
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```ts
+import { UbButtonDirective } from "@/components/ui/button.directive";
+```
+
+```angular-html
+<button ubButton>Button</button>
+```
+
+## Examples
+
+### Primary
+
+<ComponentPreview name="button-demo" />
+
+### Secondary
+
+<ComponentPreview name="button-secondary" />
+
+### Destructive
+
+<ComponentPreview name="button-destructive" />
+
+### Outline
+
+<ComponentPreview name="button-outline" />
+
+### Ghost
+
+<ComponentPreview name="button-ghost" />
+
+### Link
+
+<ComponentPreview name="button-link" />
+
+### Icon
+
+<ComponentPreview name="button-icon" />
+
+### With Icon
+
+<ComponentPreview name="button-with-icon" />
+
+### Loading
+
+<ComponentPreview name="button-loading" />
