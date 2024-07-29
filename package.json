@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "release": "changeset version",
-    "build:cli": "nx build shadcn-ng"
+    "build:cli": "nx build shadcn-ng",
+    "pub:beta": "cd packages/cli && pnpm pub:beta",
+    "pub:release": "cd packages/cli && pnpm pub:release"
   },
   "private": true,
   "devDependencies": {

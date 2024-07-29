@@ -1,5 +1,11 @@
 # shadcn-ng
 
+## 0.0.2
+
+### Patch Changes
+
+- [`3934b13`](https://github.com/adrian-ub/shadcn-ng/commit/3934b13437802ac51948dd298fbb5da43953bee3) Thanks [@adrian-ub](https://github.com/adrian-ub)! - change tailwind.config.ts to tailwind.config.js
+
 ## 0.0.1
 
 ### Patch Changes
