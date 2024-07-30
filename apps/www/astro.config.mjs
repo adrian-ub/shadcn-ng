@@ -34,6 +34,10 @@ export default defineConfig({
               label: "Introduction",
               slug: "docs",
             },
+            {
+              label: "Installation",
+              slug: "docs/installation",
+            },
           ],
         },
         {

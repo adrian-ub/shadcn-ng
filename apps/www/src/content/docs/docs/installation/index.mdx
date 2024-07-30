@@ -1,0 +1,30 @@
+---
+title: Installation
+description: How to install dependencies and structure your app.
+---
+
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
+
+## Frameworks
+
+<CardGrid>
+  <LinkCard
+    title="Angular"
+    href="/docs/installation/angular"
+    class="!no-underline"
+  />
+</CardGrid>
+
+## TypeScript
+
+To configure import aliases, you can use the following `jsconfig.json`:
+
+```json {4} title="jsconfig.json"
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
