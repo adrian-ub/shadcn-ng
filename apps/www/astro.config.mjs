@@ -42,6 +42,10 @@ export default defineConfig({
               label: "components.json",
               slug: "docs/components-json",
             },
+            {
+              label: "Theming",
+              slug: "docs/theming",
+            },
           ],
         },
         {
