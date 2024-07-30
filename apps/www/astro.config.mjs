@@ -46,6 +46,10 @@ export default defineConfig({
               label: "Theming",
               slug: "docs/theming",
             },
+            {
+              label: "CLI",
+              slug: "docs/cli",
+            },
           ],
         },
         {
