@@ -1,0 +1,134 @@
+---
+title: Astro
+description: Install and configure Astro.
+---
+
+import { Steps, Aside } from "@astrojs/starlight/components";
+
+<Steps>
+
+1.  ### Create project
+
+    Start by creating a new Astro project:
+
+    ```bash
+    npm create astro@latest
+    ```
+
+2.  ### Configure your Astro project
+
+    You will be asked a few questions to configure your project:
+
+    ```txt showLineNumbers
+    - Where should we create your new project?
+    ./your-app-name
+    - How would you like to start your new project?
+    Choose a starter template (or Empty)
+    - Install dependencies?
+    Yes
+    - Do you plan to write TypeScript?
+    Yes
+    - How strict should TypeScript be?
+    Strict
+    - Initialize a new git repository? (optional)
+    Yes/No
+    ```
+
+3.  ### Add Angular to your project
+
+    Install Angular using the Astro CLI:
+
+    ```bash
+    npx astro add @analogjs/astro-angular
+    ```
+
+    <Aside class="mt-4">
+      Answer `Yes` to all the question prompted by the CLI when installing
+      Angular.
+    </Aside>
+
+4.  ### Add Tailwind CSS to your project
+
+    Install Tailwind CSS using the Astro CLI:
+
+    ```bash
+    npx astro add tailwind
+    ```
+
+    <Aside class="mt-4">
+      Answer `Yes` to all the question prompted by the CLI when installing
+      Tailwind CSS.
+    </Aside>
+
+5.  ### Edit tsconfig.json file
+
+    Add the following code to the `tsconfig.json` file to resolve paths:
+
+    ```json showLineNumbers
+    {
+      "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+          "@/*": ["./src/*"]
+        }
+      }
+    }
+    ```
+
+6.  ### Run the CLI
+
+    Run the `shadcn-ng` init command to setup your project:
+
+    ```bash
+    npx shadcn-ng@latest init
+    ```
+
+7.  ### Configure components.json
+
+    You will be asked a few questions to configure `components.json`:
+
+    ```txt showLineNumbers
+    Which style would you like to use? › Default
+    Which color would you like to use as base color? › Slate
+    Where is your global CSS file? › ./src/styles/globals.css
+    Do you want to use CSS variables for colors? › no / yes
+    Where is your tailwind.config.js located? › tailwind.config.mjs
+    Configure the import alias for components: › @/components
+    Configure the import alias for utils: › @/lib/utils
+    ```
+
+8.  ### Import the globals.css file
+
+    Import the `globals.css` file in the `src/pages/index.astro` file:
+
+    ```astro showLineNumbers
+    ---
+    import '@/styles/globals.css'
+    ---
+    ```
+
+9.  ### Update astro tailwind config
+
+    To prevent serving the Tailwind base styles twice, we need to tell Astro not to apply the base styles, since we already include them in our own `globals.css` file. To do this, set the `applyBaseStyles` config option for the tailwind plugin in `astro.config.mjs` to `false`.
+
+    ```ts showLineNumbers
+    export default defineConfig({
+      integrations: [
+        tailwind({
+          applyBaseStyles: false,
+        }),
+      ],
+    });
+    ```
+
+10. ### Update tailwind.config.mjs
+
+    When running `npx shadcn-ng@latest init`, your tailwind config for content will be overwritten. To fix this, change the `module.exports` to `export default` and the `content` section with the code below to your `tailwind.config.mjs` file:
+
+    ```js showLineNumbers
+    export default {
+      content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+    };
+    ```
+
+</Steps>
