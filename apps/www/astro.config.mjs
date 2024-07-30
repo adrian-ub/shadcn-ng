@@ -38,6 +38,10 @@ export default defineConfig({
               label: "Installation",
               slug: "docs/installation",
             },
+            {
+              label: "components.json",
+              slug: "docs/components-json",
+            },
           ],
         },
         {
