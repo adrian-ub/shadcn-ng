@@ -17,11 +17,8 @@ export default defineConfig({
       expressiveCode: {
         themes: [theme],
       },
-      logo: {
-        dark: "./src/assets/logo-dark.svg",
-        light: "./src/assets/logo-light.svg",
-      },
-      favicon: "./src/assets/logo-dark.svg",
+      logo: { src: "./src/assets/logo.svg" },
+      favicon: "/favicon.ico",
       social: {
         github: siteConfig.links.github,
         "x.com": siteConfig.links.twitter,
