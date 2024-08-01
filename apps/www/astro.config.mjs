@@ -14,6 +14,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: siteConfig.name,
+      titleDelimiter: "-",
       expressiveCode: {
         themes: [theme],
         styleOverrides: {
