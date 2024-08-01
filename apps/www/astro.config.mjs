@@ -52,6 +52,10 @@ export default defineConfig({
               label: "CLI",
               slug: "docs/cli",
             },
+            {
+              label: "Typography",
+              slug: "docs/components/typography",
+            },
           ],
         },
         {
@@ -61,7 +65,7 @@ export default defineConfig({
           },
         },
       ],
-      customCss: ["./src/tailwind.css"],
+      customCss: ["./src/fonts/font-face.css", "./src/tailwind.css"],
       components: {
         Header: "./src/components/starlight/header/Header.astro",
         SiteTitle: "./src/components/starlight/SiteTitle.astro",
