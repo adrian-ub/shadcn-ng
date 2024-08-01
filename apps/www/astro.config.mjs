@@ -16,6 +16,11 @@ export default defineConfig({
       title: siteConfig.name,
       expressiveCode: {
         themes: [theme],
+        styleOverrides: {
+          textMarkers: {
+            markHue: "rgba(63,63,70,.5)",
+          },
+        },
       },
       logo: { src: "./src/assets/logo.svg" },
       favicon: "/favicon.ico",
@@ -71,6 +76,7 @@ export default defineConfig({
         Pagination: "./src/components/starlight/Pagination.astro",
         MobileMenuToggle: "./src/components/starlight/MobileMenuToggle.astro",
         PageFrame: "./src/components/starlight/PageFrame.astro",
+        PageSidebar: "./src/components/starlight/PageSidebar.astro",
       },
     }),
     AutoImport({

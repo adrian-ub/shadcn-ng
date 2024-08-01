@@ -5,7 +5,55 @@ import type { Props } from "@astrojs/starlight/props";
 const { hasSidebar, labels } = Astro.props;
 ---
 
-<div class="page sl-flex">
+<div class="min-h-screen bg-background font-sans antialiased">
+  <div class="relative flex min-h-screen flex-col bg-background">
+    <slot name="header" />
+    <div class="flex-1">
+      <div class={hasSidebar ? "" : "container relative"}>
+        {
+          hasSidebar ? (
+            <div class="border-b">
+              <div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+                <nav
+                  class="md:sticky md:top-14"
+                  aria-label={labels["sidebarNav.accessibleLabel"]}
+                >
+                  <MobileMenuToggle {...Astro.props} />
+                  <aside class="z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block sidebar-pane">
+                    <div
+                      class="relative overflow-hidden h-full py-6 pr-6 lg:py-8 px-4 md:px-0"
+                      id="starlight__sidebar"
+                    >
+                      <div class="w-full">
+                        <slot name="sidebar" />
+                      </div>
+                    </div>
+                  </aside>
+                </nav>
+                <slot />
+              </div>
+            </div>
+          ) : (
+            <slot />
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  :global([aria-expanded="true"]) ~ .sidebar-pane {
+    @apply block -ml-0 fixed bg-background;
+
+    position: fixed;
+    inset-block: var(--sl-nav-height) 0;
+    inset-inline-start: 0;
+    width: var(--sl-sidebar-width);
+  }
+</style>
+
+<!-- <div class="page sl-flex">
   <header class="header">
     <slot name="header" />
   </header>
@@ -105,4 +153,4 @@ const { hasSidebar, labels } = Astro.props;
       border-inline-end: 1px solid var(--sl-color-hairline-shade);
     }
   }
-</style>
+</style> -->

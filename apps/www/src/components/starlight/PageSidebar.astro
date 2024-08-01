@@ -1,0 +1,38 @@
+---
+import type { Props } from "@astrojs/starlight/props";
+
+import MobileTableOfContents from "@astrojs/starlight/components/MobileTableOfContents.astro";
+import TableOfContents from "@astrojs/starlight/components/TableOfContents.astro";
+---
+
+{
+  Astro.props.toc && (
+    <>
+      <div class="lg:hidden">
+        <MobileTableOfContents {...Astro.props} />
+      </div>
+      <div class="hidden lg:block right-sidebar-panel">
+        <TableOfContents {...Astro.props} />
+      </div>
+    </>
+  )
+}
+
+<style>
+  .right-sidebar-panel ~ :global(h2) {
+    @apply font-medium;
+  }
+
+  .right-sidebar-panel :global(ul) {
+    @apply m-0 list-none;
+  }
+  .right-sidebar-panel :global(ul > li) {
+    @apply mt-0 pt-2;
+  }
+  .right-sidebar-panel :global(ul > li > a) {
+    @apply inline-block no-underline transition-colors hover:text-foreground text-muted-foreground;
+  }
+  .right-sidebar-panel :global(ul > li > a[aria-current="true"]) {
+    @apply text-primary;
+  }
+</style>
