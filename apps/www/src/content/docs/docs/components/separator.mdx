@@ -1,0 +1,39 @@
+---
+title: Separator
+description: Visually or semantically separates content.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
+
+<ComponentPreview name="separator-demo" description="A separator component." />
+
+## Installation
+
+<Tabs>
+    <TabItem label="CLI">
+        ```bash frame="code"
+        npx shadcn-ng@latest add separator
+        ```
+    </TabItem>
+
+    <TabItem label="Manual">
+        <Steps>
+            1. Copy and paste the following code into your project.
+                <ComponentSource name="separator" />
+
+            2. Update the import paths to match your project setup.
+        </Steps>
+    </TabItem>
+
+</Tabs>
+
+## Usage
+
+```ts
+import { UbSeparatorDirective } from "@/components/ui/separator.directive";
+```
+
+```angular-html
+<div ubSeparator></div>
+```

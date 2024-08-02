@@ -8,7 +8,7 @@ import { computed, Directive, input } from "@angular/core";
     "[class]": "computedClass()",
   },
 })
-export class UbSepearatorDirective {
+export class UbSeparatorDirective {
   readonly class = input<string>();
   readonly orientation = input<"horizontal" | "vertical">("horizontal");
 
