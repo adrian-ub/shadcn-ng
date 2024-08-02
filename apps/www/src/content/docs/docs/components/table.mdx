@@ -1,0 +1,67 @@
+---
+title: Table
+description: A responsive table component.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
+
+<ComponentPreview name="table-demo" />
+
+## Installation
+
+<Tabs>
+    <TabItem label="CLI">
+        ```bash frame="code"
+        npx shadcn-ng@latest add table
+        ```
+    </TabItem>
+
+    <TabItem label="Manual">
+        <Steps>
+            1. Copy and paste the following code into your project.
+                <ComponentSource name="table" />
+
+            2. Update the import paths to match your project setup.
+        </Steps>
+    </TabItem>
+
+</Tabs>
+
+## Usage
+
+```ts
+import {
+  UbTableDirective,
+  UbTableCaptionDirective,
+  UbTableHeaderDirective,
+  UbTableRowDirective,
+  UbTableHeadDirective,
+  UbTableBodyDirective,
+  UbTableCellDirective,
+} from "@/registry/default/ui/table.directive";
+```
+
+```angular-html
+<table ubTable>
+    <caption ubTableCaption>A list of your recent invoices.</caption>
+
+    <thead ubTableHeader>
+        <tr ubTableRow>
+            <th ubTableHead class="w-[100px]">Invoice</th>
+            <th ubTableHead>Status</th>
+            <th ubTableHead>Method</th>
+            <th ubTableHead class="text-right">Amount</th>
+        </tr>
+    </thead>
+
+    <tbody ubTableBody>
+        <tr ubTableRow>
+            <td ubTableCell class="font-medium">INV001</td>
+            <td ubTableCell>Paid</td>
+            <td ubTableCell>Credit Card</td>
+            <td ubTableCell class="text-right">$250.00</td>
+        </tr>
+    </tbody>
+</table>
+```
