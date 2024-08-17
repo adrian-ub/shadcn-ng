@@ -111,31 +111,6 @@ const { html, panels } = processPanels(panelHtml);
       }
     }
 
-    switchTab(
-      newTab: HTMLAnchorElement | null | undefined,
-      index: number,
-      shouldSync = true
-    ) {
-      if (!newTab) return;
-
-      // If tabs should be synced, we store the current position so we can restore it after
-      // switching tabs to prevent the page from jumping when the new tab content is of a different
-      // height than the previous tab.
-      const previousTabsOffset = shouldSync
-        ? this.getBoundingClientRect().top
-        : 0;
-
-      if (shouldSync) {
-        newTab.focus();
-        SelectsPreview.#syncTabs(this, newTab.innerText);
-        window.scrollTo({
-          top:
-            window.scrollY +
-            (this.getBoundingClientRect().top - previousTabsOffset),
-        });
-      }
-    }
-
     static #syncTabs(emitter: SelectsPreview, label: string | null) {
       const syncKey = emitter.#syncKey;
       if (!syncKey || !label) return;
