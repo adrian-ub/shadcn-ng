@@ -1,42 +1,41 @@
 ---
-import path from "path";
-import { styles } from "@/registry/styles";
-import { readFileSync } from "fs";
+import path from 'node:path'
+import { styles } from '@/registry/styles'
+import { readFileSync } from 'node:fs'
 
-import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components'
 
-import { SelectStyleItem, SelectStyle, syncKey } from "./SelectStyle";
+import { SelectStyleItem, SelectStyle, syncKey } from './SelectStyle'
 
 export interface Props {
-  name: string;
+  name: string
 }
-const { name } = Astro.props;
+const { name } = Astro.props
 
 const components = await Promise.all(
   styles.map(async (style) => {
-    const filename = path.join(
-      process.cwd(),
-      "src",
-      "registry",
-      style.name,
-      "example",
-      `${name}.ts`
-    );
-    const Component = (
-      await import(`../registry/${style.name}/example/${name}.ts`)
-    ).default;
-    const code = readFileSync(`${filename}`)
-      .toString()
-      .replace(/export\s+default\s+.*;\s*/, "")
-      .replace(/@\/registry\/.*\/ui/g, "@/components/ui");
+    const filename = path.join(process.cwd(), 'src', 'registry', style.name, 'example', `${name}.ts`)
+
+    let Component: any | null
+    let code: string | null
+    try {
+      Component = (await import(`../registry/${style.name}/example/${name}.ts`)).default
+      code = readFileSync(`${filename}`)
+        .toString()
+        .replace(/export\s+default\s+.*;\s*/, '')
+        .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
+    } catch (error) {
+      Component = null
+      code = null
+    }
 
     return {
       style,
       Component,
       code,
-    };
+    }
   })
-);
+)
 ---
 
 <div class="not-content group relative my-4 flex flex-col space-y-2">
@@ -46,7 +45,7 @@ const components = await Promise.all(
         {
           components.map(({ Component, style }) => (
             <SelectStyleItem label={style.label}>
-              <Component />
+                {Component ? <Component /> : <p>Not found</p>}
             </SelectStyleItem>
           ))
         }
@@ -57,7 +56,7 @@ const components = await Promise.all(
         {
           components.map(({ style, code }) => (
             <SelectStyleItem label={style.label}>
-              <Code code={code} lang="angular-ts" />
+              {code ? <Code code={code} lang="angular-ts" /> : <p>Not found</p>}
             </SelectStyleItem>
           ))
         }

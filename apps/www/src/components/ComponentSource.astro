@@ -1,49 +1,43 @@
 ---
-import path from "path";
-import { styles } from "@/registry/styles";
-import { ui } from "@/registry/ui";
-import { readFileSync } from "fs";
-import { Code } from "@astrojs/starlight/components";
+import path from 'node:path'
+import { styles } from '@/registry/styles'
+import { ui } from '@/registry/ui'
+import { readFileSync } from 'node:fs'
+import { Code } from '@astrojs/starlight/components'
 
-import { SelectStyleItem, SelectStyle, syncKey } from "./SelectStyle";
+import { SelectStyleItem, SelectStyle, syncKey } from './SelectStyle'
 
 export interface Props {
-  name: string;
+  name: string
 }
 
-const { name } = Astro.props;
+const { name } = Astro.props
 
-const componentUi = ui.find((value) => value.name === name);
+const componentUi = ui.find((value) => value.name === name)
 
 const allComponents = componentUi?.files.flatMap((file) => {
   return styles.map((style) => {
-    const filename = path.join(
-      process.cwd(),
-      "src",
-      "registry",
-      style.name,
-      file
-    );
+    const filename = path.join(process.cwd(), 'src', 'registry', style.name, file)
 
-    const code = readFileSync(`${filename}`)
-      .toString()
-      .replace(/export\s+default\s+.*;\s*/, "")
-      .replace(/@\/registry\/.*\/ui/g, "@/components/ui");
+    let code: string | null
+
+    try {
+      code = readFileSync(`${filename}`)
+        .toString()
+        .replace(/export\s+default\s+.*;\s*/, '')
+        .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
+    } catch (error) {
+      code = null
+    }
 
     return {
       style,
       code,
-    };
-  });
-});
+    }
+  })
+})
 ---
 
 <SelectStyle syncKey={syncKey} hiddenSelect={true}>
-  {
-    allComponents?.map(({ code, style }) => (
-      <SelectStyleItem label={style.label}>
-        <Code code={code} lang="angular-ts" wrap={true} />
-      </SelectStyleItem>
-    ))
-  }
+  {allComponents?.map(({ code, style }) => <SelectStyleItem label={style.label}>{code ? <Code code={code} lang="angular-ts" wrap={true} /> : <p>Not found</p>}</SelectStyleItem>)}
 </SelectStyle>
