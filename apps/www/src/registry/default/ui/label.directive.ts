@@ -1,6 +1,6 @@
 import { computed, Directive, input } from "@angular/core";
 
-import { RdxLabelRootDirective } from "@radix-ng/primitives/label";
+import { RdxLabelDirective } from "@radix-ng/primitives/label";
 import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
@@ -14,7 +14,7 @@ const labelVariants = cva(
   standalone: true,
   hostDirectives: [
     {
-      directive: RdxLabelRootDirective,
+      directive: RdxLabelDirective,
       inputs: ["htmlFor"],
     },
   ],
