@@ -15,12 +15,12 @@ import { cn } from "@/lib/utils";
   hostDirectives: [
     {
       directive: RdxTabsRootDirective,
-      inputs: ["defaultValue: ubDefaultValue"],
+      inputs: ["defaultValue: defaultValue"],
     },
   ],
 })
 export class UbTabsDirective {
-  @Input() ubDefaultValue?: string;
+  @Input() defaultValue?: string;
 }
 
 @Directive({
