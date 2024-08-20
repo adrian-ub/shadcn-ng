@@ -11,18 +11,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@analogjs/astro-angular": "^1.6.4",
-    "@angular-devkit/build-angular": "^18.1.2",
-    "@angular/animations": "^18.1.2",
+    "@analogjs/astro-angular": "^1.7.1",
+    "@angular-devkit/build-angular": "^18.2.0",
+    "@angular/animations": "^18.2.0",
     "@angular/cdk": "^18.1.2",
-    "@angular/common": "^18.1.2",
-    "@angular/compiler": "^18.1.2",
-    "@angular/compiler-cli": "^18.1.2",
-    "@angular/core": "^18.1.2",
-    "@angular/language-service": "^18.1.2",
-    "@angular/platform-browser": "^18.1.2",
-    "@angular/platform-browser-dynamic": "^18.1.2",
-    "@angular/platform-server": "^18.1.2",
+    "@angular/common": "^18.2.0",
+    "@angular/compiler": "^18.2.0",
+    "@angular/compiler-cli": "^18.2.0",
+    "@angular/core": "^18.2.0",
+    "@angular/language-service": "^18.2.0",
+    "@angular/platform-browser": "^18.2.0",
+    "@angular/platform-browser-dynamic": "^18.2.0",
+    "@angular/platform-server": "^18.2.0",
     "@astrojs/check": "^0.9.2",
     "@astrojs/starlight": "^0.26.1",
     "@astrojs/starlight-tailwind": "^2.0.3",
@@ -49,7 +49,7 @@
     "typescript": "^5.5.3",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.2",
-    "zone.js": "^0.14.8"
+    "zone.js": "^0.14.10"
   },
   "devDependencies": {
     "@types/hast": "^3.0.4",
