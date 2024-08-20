@@ -1,11 +1,12 @@
 ---
 import path from 'node:path'
 import { styles } from '@/registry/styles'
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 
 import { Tabs, TabItem, Code } from '@astrojs/starlight/components'
 
 import { SelectStyleItem, SelectStyle, syncKey } from './SelectStyle'
+import { ComponentPeviewComponent } from './component-preview'
 
 export interface Props {
   name: string
@@ -15,24 +16,24 @@ const { name } = Astro.props
 const components = await Promise.all(
   styles.map(async (style) => {
     const filename = path.join(process.cwd(), 'src', 'registry', style.name, 'example', `${name}.ts`)
-
-    let Component: any | null
+    let pathCode: string
     let code: string | null
-    try {
-      Component = (await import(`../registry/${style.name}/example/${name}.ts`)).default
+
+    if (existsSync(filename)) {
+      pathCode = `../registry/${style.name}/example/${name}.ts`
       code = readFileSync(`${filename}`)
         .toString()
         .replace(/export\s+default\s+.*;\s*/, '')
         .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
-    } catch (error) {
-      Component = null
+    } else {
+      pathCode = ''
       code = null
     }
 
     return {
       style,
-      Component,
       code,
+      path: pathCode,
     }
   })
 )
@@ -43,9 +44,9 @@ const components = await Promise.all(
     <TabItem label="Preview">
       <SelectStyle syncKey={syncKey}>
         {
-          components.map(({ Component, style }) => (
+          components.map(({ style, path }) => (
             <SelectStyleItem label={style.label}>
-                {Component ? <Component /> : <p>Not found</p>}
+              { path ? <ComponentPeviewComponent {path} client:load /> : <p>Not found</p> }
             </SelectStyleItem>
           ))
         }
@@ -53,13 +54,7 @@ const components = await Promise.all(
     </TabItem>
     <TabItem label="Code">
       <SelectStyle syncKey={syncKey} hiddenSelect={true}>
-        {
-          components.map(({ style, code }) => (
-            <SelectStyleItem label={style.label}>
-              {code ? <Code code={code} lang="angular-ts" /> : <p>Not found</p>}
-            </SelectStyleItem>
-          ))
-        }
+        {components.map(({ style, code }) => <SelectStyleItem label={style.label}>{code ? <Code code={code} lang="angular-ts" /> : <p>Not found</p>}</SelectStyleItem>)}
       </SelectStyle>
     </TabItem>
   </Tabs>
