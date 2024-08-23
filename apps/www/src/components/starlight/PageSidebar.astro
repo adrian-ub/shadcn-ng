@@ -1,8 +1,8 @@
 ---
-import type { Props } from "@astrojs/starlight/props";
+import type { Props } from '@astrojs/starlight/props'
 
-import MobileTableOfContents from "@astrojs/starlight/components/MobileTableOfContents.astro";
-import TableOfContents from "@astrojs/starlight/components/TableOfContents.astro";
+import MobileTableOfContents from '@astrojs/starlight/components/MobileTableOfContents.astro'
+import TableOfContents from '@astrojs/starlight/components/TableOfContents.astro'
 ---
 
 {
@@ -24,15 +24,18 @@ import TableOfContents from "@astrojs/starlight/components/TableOfContents.astro
   }
 
   .right-sidebar-panel :global(ul) {
-    @apply m-0 list-none;
+    @apply m-0 list-none pt-2;
   }
-  .right-sidebar-panel :global(ul > li) {
-    @apply mt-0 pt-2;
+
+  .right-sidebar-panel :global(ul > li > ul) {
+    @apply pt-0;
   }
+
   .right-sidebar-panel :global(ul > li > a) {
-    @apply inline-block no-underline transition-colors hover:text-foreground text-muted-foreground p-0;
+    @apply inline-block no-underline transition-colors hover:text-foreground text-muted-foreground;
   }
-  .right-sidebar-panel :global(ul > li > a[aria-current="true"]) {
+
+  .right-sidebar-panel :global(ul > li > a[aria-current='true']) {
     @apply text-primary;
   }
 </style>
