@@ -6,13 +6,16 @@ import { lucideChevronRight } from "@ng-icons/lucide";
 import { UbButtonDirective } from "@/registry/default/ui/button.directive";
 
 @Component({
-  standalone: true,
-  imports: [UbButtonDirective, NgIconComponent],
-  viewProviders: [provideIcons({ lucideChevronRight })],
-  template: `<button ubButton variant="outline" size="icon">
-    <ng-icon name="lucideChevronRight" class="h-4 w-4" />
-  </button>`,
+    standalone: true,
+    selector: "button-icon-default",
+    imports: [UbButtonDirective, NgIconComponent],
+    viewProviders: [provideIcons({ lucideChevronRight })],
+    template: `
+    <button ubButton variant="outline" size="icon">
+        <ng-icon name="lucideChevronRight" class="h-4 w-4" />
+    </button>
+    `,
 })
-export class ButtonDemoComponent {}
+export class ButtonIconDefault { }
 
-export default ButtonDemoComponent;
+export default ButtonIconDefault;

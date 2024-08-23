@@ -1,18 +1,6 @@
 import { Component } from "@angular/core";
 
 import {
-  UbBreadcrumbDirective,
-  UbBreadcrumbListDirective,
-  UbBreadcrumbItemDirective,
-  UbBreadcrumbLinkDirective,
-  UbBreadcrumbSeparatorComponent,
-  UbBreadcrumbEllipsisComponent,
-  UbBreadcrumbPageDirective,
-} from "@/registry/default/ui/breadcrumb.directive";
-
-@Component({
-  standalone: true,
-  imports: [
     UbBreadcrumbDirective,
     UbBreadcrumbListDirective,
     UbBreadcrumbItemDirective,
@@ -20,8 +8,21 @@ import {
     UbBreadcrumbSeparatorComponent,
     UbBreadcrumbEllipsisComponent,
     UbBreadcrumbPageDirective,
-  ],
-  template: `
+} from "@/registry/default/ui/breadcrumb.directive";
+
+@Component({
+    standalone: true,
+    selector: "breadcrumb-demo-default",
+    imports: [
+        UbBreadcrumbDirective,
+        UbBreadcrumbListDirective,
+        UbBreadcrumbItemDirective,
+        UbBreadcrumbLinkDirective,
+        UbBreadcrumbSeparatorComponent,
+        UbBreadcrumbEllipsisComponent,
+        UbBreadcrumbPageDirective,
+    ],
+    template: `
     <nav ubBreadcrumb>
       <ol ubBreadcrumbList>
         <li ubBreadcrumbItem>
@@ -43,6 +44,6 @@ import {
     </nav>
   `,
 })
-export class BreadcrumbDemoComponent {}
+export class BreadcrumbDemoDefault { }
 
-export default BreadcrumbDemoComponent;
+export default BreadcrumbDemoDefault;

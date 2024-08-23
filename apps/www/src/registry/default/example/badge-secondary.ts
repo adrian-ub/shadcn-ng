@@ -3,10 +3,11 @@ import { Component } from "@angular/core";
 import { UbBadgeDirective } from "@/registry/default/ui/badge.directive";
 
 @Component({
-  standalone: true,
-  imports: [UbBadgeDirective],
-  template: ` <div ubBadge variant="secondary">Badge</div> `,
+    standalone: true,
+    selector: "badge-secondary-default",
+    imports: [UbBadgeDirective],
+    template: `<div ubBadge variant="secondary">Badge</div>`,
 })
-export class BadgeSecondaryComponent {}
+export class BadgeSecondaryDefault { }
 
-export default BadgeSecondaryComponent;
+export default BadgeSecondaryDefault;

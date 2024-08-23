@@ -5,6 +5,7 @@ import { examples } from '@/__registry__/examples'
 
 @Component({
     standalone: true,
+    selector: 'component-preview',
     imports: [NgComponentOutlet, AsyncPipe],
     template: `
     @let componentRender = this.component() | async;

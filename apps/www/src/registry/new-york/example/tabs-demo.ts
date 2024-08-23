@@ -8,6 +8,7 @@ import { UbInputDirective } from '@/registry/new-york/ui/input.directive';
 
 @Component({
     standalone: true,
+    selector: 'tabs-demo-new-york',
     imports: [
         UbTabsDirective,
         UbTabsListDirective,
@@ -83,6 +84,6 @@ import { UbInputDirective } from '@/registry/new-york/ui/input.directive';
     </div>
     `
 })
-export class TabsDemoDefaultComponent { }
+export class TabsDemoNewYork { }
 
-export default TabsDemoDefaultComponent;
+export default TabsDemoNewYork;

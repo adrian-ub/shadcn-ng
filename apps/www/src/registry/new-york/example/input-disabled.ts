@@ -3,10 +3,11 @@ import { Component } from "@angular/core";
 import { UbInputDirective } from "@/registry/new-york/ui/input.directive";
 
 @Component({
-  standalone: true,
-  imports: [UbInputDirective],
-  template: ` <input disabled ubInput type="text" placeholder="Email" /> `,
+    standalone: true,
+    selector: "input-disabled-new-york",
+    imports: [UbInputDirective],
+    template: ` <input disabled ubInput type="text" placeholder="Email" /> `,
 })
-export class InputDisabledDemoComponent {}
+export class InputDisabledNewYork { }
 
-export default InputDisabledDemoComponent;
+export default InputDisabledNewYork;

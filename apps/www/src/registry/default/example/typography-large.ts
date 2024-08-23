@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
 
 @Component({
-  standalone: true,
-  template: `
+    standalone: true,
+    selector: "typography-large-default",
+    template: `
     <div class="text-lg font-semibold">Are you absolutely sure?</div>
   `,
 })
-export class TypographyLargeComponent {}
+export class TypographyLargeDefault { }
 
-export default TypographyLargeComponent;
+export default TypographyLargeDefault;

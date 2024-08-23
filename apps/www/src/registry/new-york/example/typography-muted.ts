@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
 
 @Component({
-  standalone: true,
-  template: `
+    standalone: true,
+    selector: "typography-muted-new-york",
+    template: `
     <p class="text-sm text-muted-foreground">Enter your email address.</p>
-  `,
+    `,
 })
-export class TypographyMutedComponent {}
+export class TypographyMutedNewYork { }
 
-export default TypographyMutedComponent;
+export default TypographyMutedNewYork;

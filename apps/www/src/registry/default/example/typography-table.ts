@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 
 @Component({
-  standalone: true,
-  template: `
+    standalone: true,
+    selector: "typography-table-default",
+    template: `
     <div class="my-6 w-full overflow-y-auto">
       <table class="w-full">
         <thead>
@@ -61,6 +62,6 @@ import { Component } from "@angular/core";
     </div>
   `,
 })
-export class TypographyTableComponent {}
+export class TypographyTableDefault { }
 
-export default TypographyTableComponent;
+export default TypographyTableDefault;

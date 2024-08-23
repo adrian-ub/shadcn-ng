@@ -3,10 +3,11 @@ import { Component } from "@angular/core";
 import { UbButtonDirective } from "@/registry/default/ui/button.directive";
 
 @Component({
-  standalone: true,
-  imports: [UbButtonDirective],
-  template: `<button ubButton variant="destructive">Button</button>`,
+    standalone: true,
+    selector: "button-destructive-default",
+    imports: [UbButtonDirective],
+    template: `<button ubButton variant="destructive">Button</button>`,
 })
-export class ButtonDemoComponent {}
+export class ButtonDestructiveDefault { }
 
-export default ButtonDemoComponent;
+export default ButtonDestructiveDefault;

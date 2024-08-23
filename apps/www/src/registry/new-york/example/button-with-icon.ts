@@ -6,14 +6,16 @@ import { radixEnvelopeOpen } from "@ng-icons/radix-icons";
 import { UbButtonDirective } from "@/registry/new-york/ui/button.directive";
 
 @Component({
-  standalone: true,
-  imports: [UbButtonDirective, NgIconComponent],
-  viewProviders: [provideIcons({ radixEnvelopeOpen })],
-  template: `<button ubButton>
-    <ng-icon name="radixEnvelopeOpen" class="mr-2 h-4 w-4" />
-    Login with Email
-  </button>`,
+    standalone: true,
+    selector: "button-with-icon-new-york",
+    imports: [UbButtonDirective, NgIconComponent],
+    viewProviders: [provideIcons({ radixEnvelopeOpen })],
+    template: `
+    <button ubButton>
+        <ng-icon name="radixEnvelopeOpen" class="mr-2 h-4 w-4" /> Login with Email
+    </button>
+    `,
 })
-export class ButtonDemoComponent {}
+export class ButtonWithIconNewYork { }
 
-export default ButtonDemoComponent;
+export default ButtonWithIconNewYork;

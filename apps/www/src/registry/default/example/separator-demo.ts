@@ -3,9 +3,10 @@ import { Component } from "@angular/core";
 import { UbSeparatorDirective } from "@/registry/default/ui/separator.directive";
 
 @Component({
-  standalone: true,
-  imports: [UbSeparatorDirective],
-  template: `
+    standalone: true,
+    selector: "separator-demo-default",
+    imports: [UbSeparatorDirective],
+    template: `
     <div>
       <div class="space-y-1">
         <h4 class="text-sm font-medium leading-none">Radix Primitives</h4>
@@ -22,8 +23,9 @@ import { UbSeparatorDirective } from "@/registry/default/ui/separator.directive"
         <div>Source</div>
       </div>
     </div>
-  `,
-})
-export class SeparatorDemoComponent {}
 
-export default SeparatorDemoComponent;
+    `,
+})
+export class SeparatorDemoDefault { }
+
+export default SeparatorDemoDefault;

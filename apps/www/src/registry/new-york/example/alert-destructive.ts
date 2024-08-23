@@ -3,23 +3,24 @@ import { NgIconComponent, provideIcons } from "@ng-icons/core";
 import { lucideRocket } from "@ng-icons/lucide";
 
 import {
-  UbAlertDirective,
-  UbAlertTitleDirective,
-  UbAlertDescriptionDirective,
-  UbAlertIconDirective,
-} from "@/registry/new-york/ui/alert.directive";
-
-@Component({
-  standalone: true,
-  imports: [
-    NgIconComponent,
     UbAlertDirective,
     UbAlertTitleDirective,
     UbAlertDescriptionDirective,
     UbAlertIconDirective,
-  ],
-  viewProviders: [provideIcons({ lucideRocket })],
-  template: `
+} from "@/registry/new-york/ui/alert.directive";
+
+@Component({
+    standalone: true,
+    selector: "alert-destructive-new-york",
+    imports: [
+        NgIconComponent,
+        UbAlertDirective,
+        UbAlertTitleDirective,
+        UbAlertDescriptionDirective,
+        UbAlertIconDirective,
+    ],
+    viewProviders: [provideIcons({ lucideRocket })],
+    template: `
     <div ubAlert variant="destructive">
       <ng-icon ubAlertIcon name="lucideRocket" class="h-4 w-4" />
       <h5 ubAlertTitle>Heads up!</h5>
@@ -29,6 +30,6 @@ import {
     </div>
   `,
 })
-export class AlertDemoComponent {}
+export class AlertDestructiveNewYork { }
 
-export default AlertDemoComponent;
+export default AlertDestructiveNewYork;

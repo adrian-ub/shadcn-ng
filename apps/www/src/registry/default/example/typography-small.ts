@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
 
 @Component({
-  standalone: true,
-  template: `
+    standalone: true,
+    selector: "typography-small-default",
+    template: `
     <small class="text-sm font-medium leading-none">Email address</small>
   `,
 })
-export class TypographySmallComponent {}
+export class TypographySmallDefault { }
 
-export default TypographySmallComponent;
+export default TypographySmallDefault;

@@ -3,10 +3,11 @@ import { Component } from "@angular/core";
 import { UbButtonDirective } from "@/registry/new-york/ui/button.directive";
 
 @Component({
-  standalone: true,
-  imports: [UbButtonDirective],
-  template: `<button ubButton variant="ghost">Button</button>`,
+    standalone: true,
+    selector: "button-ghost-new-york",
+    imports: [UbButtonDirective],
+    template: `<button ubButton variant="ghost">Button</button>`,
 })
-export class ButtonDemoComponent {}
+export class ButtonGhostNewYork { }
 
-export default ButtonDemoComponent;
+export default ButtonGhostNewYork;

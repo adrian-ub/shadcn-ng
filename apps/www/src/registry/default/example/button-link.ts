@@ -3,10 +3,11 @@ import { Component } from "@angular/core";
 import { UbButtonDirective } from "@/registry/default/ui/button.directive";
 
 @Component({
-  standalone: true,
-  imports: [UbButtonDirective],
-  template: `<button ubButton variant="link">Button</button>`,
+    standalone: true,
+    selector: "button-link-default",
+    imports: [UbButtonDirective],
+    template: `<button ubButton variant="link">Button</button>`,
 })
-export class ButtonDemoComponent {}
+export class ButtonLinkDefault { }
 
-export default ButtonDemoComponent;
+export default ButtonLinkDefault;

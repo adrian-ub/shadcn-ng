@@ -3,23 +3,24 @@ import { NgIconComponent, provideIcons } from "@ng-icons/core";
 import { lucideTerminal } from "@ng-icons/lucide";
 
 import {
-  UbAlertDirective,
-  UbAlertTitleDirective,
-  UbAlertDescriptionDirective,
-  UbAlertIconDirective,
-} from "@/registry/default/ui/alert.directive";
-
-@Component({
-  standalone: true,
-  imports: [
-    NgIconComponent,
     UbAlertDirective,
     UbAlertTitleDirective,
     UbAlertDescriptionDirective,
     UbAlertIconDirective,
-  ],
-  viewProviders: [provideIcons({ lucideTerminal })],
-  template: `
+} from "@/registry/default/ui/alert.directive";
+
+@Component({
+    standalone: true,
+    selector: "alert-demo-default",
+    imports: [
+        NgIconComponent,
+        UbAlertDirective,
+        UbAlertTitleDirective,
+        UbAlertDescriptionDirective,
+        UbAlertIconDirective,
+    ],
+    viewProviders: [provideIcons({ lucideTerminal })],
+    template: `
     <div ubAlert>
       <ng-icon ubAlertIcon name="lucideTerminal" class="h-4 w-4" />
       <h5 ubAlertTitle>Heads up!</h5>
@@ -29,6 +30,6 @@ import {
     </div>
   `,
 })
-export class AlertDemoComponent {}
+export class AlertDemoDefault { }
 
-export default AlertDemoComponent;
+export default AlertDemoDefault;

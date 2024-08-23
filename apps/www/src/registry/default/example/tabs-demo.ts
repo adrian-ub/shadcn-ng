@@ -8,6 +8,7 @@ import { UbInputDirective } from '@/registry/default/ui/input.directive';
 
 @Component({
     standalone: true,
+    selector: 'tabs-demo-default',
     imports: [
         UbTabsDirective,
         UbTabsListDirective,
@@ -83,6 +84,6 @@ import { UbInputDirective } from '@/registry/default/ui/input.directive';
     </div>
     `
 })
-export class TabsDemoDefaultComponent { }
+export class TabsDemoDefault { }
 
-export default TabsDemoDefaultComponent;
+export default TabsDemoDefault;

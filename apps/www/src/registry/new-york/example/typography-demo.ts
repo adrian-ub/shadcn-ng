@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 
 @Component({
-  standalone: true,
-  template: `
+    standalone: true,
+    selector: "typography-demo-new-york",
+    template: `
     <div>
       <h1
         class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
@@ -140,6 +141,6 @@ import { Component } from "@angular/core";
     </div>
   `,
 })
-export class TypographyDemoComponent {}
+export class TypographyDemoNewYork { }
 
-export default TypographyDemoComponent;
+export default TypographyDemoNewYork;
