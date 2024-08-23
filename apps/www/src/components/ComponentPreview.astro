@@ -45,9 +45,7 @@ const components = await Promise.all(
       <SelectStyle syncKey={syncKey}>
         {
           components.map(({ style, path }) => (
-            <SelectStyleItem label={style.label}>
-              { path ? <ComponentPeviewComponent {path} client:load /> : <p>Not found</p> }
-            </SelectStyleItem>
+            <SelectStyleItem label={style.label}>{path ? <ComponentPeviewComponent nameExample={name} styleName={style.name} client:load /> : <p>Not found</p>}</SelectStyleItem>
           ))
         }
       </SelectStyle>
