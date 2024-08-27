@@ -4,7 +4,6 @@ import tailwind from "@astrojs/tailwind";
 import angular from "@analogjs/astro-angular";
 import { siteConfig } from "./src/config/site";
 import theme from "./src/lib/highlighter-theme.json";
-import simpleStackQuery from "simple-stack-query";
 
 import AutoImport from "astro-auto-import";
 
@@ -92,7 +91,6 @@ export default defineConfig({
     }),
     tailwind(),
     angular(),
-    simpleStackQuery(),
   ],
   vite: {
     optimizeDeps: {
