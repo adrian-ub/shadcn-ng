@@ -53,6 +53,9 @@ importers:
       '@angular/core':
         specifier: ^18.2.0
         version: 18.2.0(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/forms':
+        specifier: ^18.2.0
+        version: 18.2.1(@angular/common@18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.0(@angular/animations@18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@angular/language-service':
         specifier: ^18.2.0
         version: 18.2.0
@@ -390,6 +393,15 @@ packages:
     peerDependencies:
       rxjs: ^6.5.3 || ^7.4.0
       zone.js: ~0.14.10
+
+  '@angular/forms@18.2.1':
+    resolution: {integrity: sha512-T7z8KUuj2PoPxrMrAruQVJha+x4a9Y6IrKYtArgOQQlTwCEJuqpVYuOk5l3fwWpHE9bVEjvgkAMI1D5YXA/U6w==}
+    engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0}
+    peerDependencies:
+      '@angular/common': 18.2.1
+      '@angular/core': 18.2.1
+      '@angular/platform-browser': 18.2.1
+      rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/language-service@18.2.0':
     resolution: {integrity: sha512-brl5061YqfNnT7yZNMWmsgv6ve6p9+kfhX6mZWOGICcY2SYVtCNVHdqzwWTTwY7MvTVfycHxiAf9PEmc5lD4/g==}
@@ -7307,6 +7319,14 @@ snapshots:
       rxjs: 7.8.1
       tslib: 2.6.3
       zone.js: 0.14.10
+
+  '@angular/forms@18.2.1(@angular/common@18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.0(@angular/animations@18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/common': 18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.0(rxjs@7.8.1)(zone.js@0.14.10)
+      '@angular/platform-browser': 18.2.0(@angular/animations@18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.0(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.0(rxjs@7.8.1)(zone.js@0.14.10))
+      rxjs: 7.8.1
+      tslib: 2.6.3
 
   '@angular/language-service@18.2.0': {}
 
