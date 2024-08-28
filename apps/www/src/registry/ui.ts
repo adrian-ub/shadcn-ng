@@ -13,6 +13,12 @@ export const ui: Registry = [
         files: ["ui/alert.directive.ts"],
     },
     {
+        name: "avatar",
+        type: "components:ui",
+        dependencies: ["@radix-ng/primitives"],
+        files: ["ui/avatar.directive.ts"],
+    },
+    {
         name: "badge",
         type: "components:ui",
         files: ["ui/badge.directive.ts"],
