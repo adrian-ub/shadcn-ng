@@ -1,5 +1,3 @@
-import { styles } from "@/registry/styles"
-
 export const examples: Record<string, Record<string, any>> = {};
 
 const components = import.meta.glob(`../registry/**/example/*.ts`);
