@@ -4,7 +4,7 @@ import { UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirec
 
 @Component({
     standalone: true,
-    selector: 'accordion-demo-default',
+    selector: 'accordion-demo-new-york',
     imports: [UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective, UbAccordionContentDirective],
     template: `
         <div ubAccordion class="w-full" orientation="vertical">
@@ -29,6 +29,6 @@ import { UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirec
         </div>
     `
 })
-export class AccordionDemoDefault { }
+export class AccordionDemoNewYork { }
 
-export default AccordionDemoDefault;
+export default AccordionDemoNewYork;
