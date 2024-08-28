@@ -4,7 +4,7 @@ export const ui: Registry = [
     {
         name: "accordion",
         type: "components:ui",
-        dependencies: ["@ng-icons/core", "@ng-icons/lucide"],
+        dependencies: ["@ng-icons/core", "@ng-icons/lucide", "@radix-ng/primitives"],
         files: ["ui/accordion.directive.ts"],
     },
     {
@@ -53,6 +53,12 @@ export const ui: Registry = [
         name: "skeleton",
         type: "components:ui",
         files: ["ui/skeleton.directive.ts"],
+    },
+    {
+        name: "switch",
+        type: "components:ui",
+        dependencies: ["@radix-ng/primitives"],
+        files: ["ui/switch.directive.ts"],
     },
     {
         name: "table",
