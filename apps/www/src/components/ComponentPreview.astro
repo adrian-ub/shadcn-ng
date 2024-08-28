@@ -7,9 +7,11 @@ import { Tabs, TabItem, Code } from '@astrojs/starlight/components'
 
 import { SelectStyleItem, SelectStyle, syncKey } from './SelectStyle'
 import { ComponentPeviewComponent } from './component-preview'
+import { cn } from '@/lib/utils'
 
 export interface Props {
   name: string
+  class?: string
 }
 const { name } = Astro.props
 
@@ -39,7 +41,7 @@ const components = await Promise.all(
 )
 ---
 
-<div class="not-content group relative my-4 flex flex-col space-y-2">
+<div class={cn('not-content group relative my-4 flex flex-col space-y-2', Astro.props.class)}>
   <Tabs>
     <TabItem label="Preview">
       <SelectStyle syncKey={syncKey}>
