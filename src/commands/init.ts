@@ -3,7 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 
 import chalk from 'chalk'
-import { Command } from 'commander'
+import { defineCommand } from 'citty'
 import { execa } from 'execa'
 import template from 'lodash.template'
 import ora from 'ora'
@@ -46,17 +46,31 @@ const initOptionsSchema = z.object({
   defaults: z.boolean(),
 })
 
-export const init = new Command()
-  .name('init')
-  .description('initialize your project and install dependencies')
-  .option('-y, --yes', 'skip confirmation prompt.', false)
-  .option('-d, --defaults,', 'use default configuration.', false)
-  .option(
-    '-c, --cwd <cwd>',
-    'the working directory. defaults to the current directory.',
-    process.cwd(),
-  )
-  .action(async (opts) => {
+export const init = defineCommand({
+  meta: {
+    description: 'initialize your project and install dependencies',
+  },
+  args: {
+    yes: {
+      type: 'boolean',
+      description: 'skip confirmation prompt.',
+      default: false,
+      alias: 'y',
+    },
+    defaults: {
+      type: 'boolean',
+      description: 'use default configuration.',
+      default: false,
+      alias: 'd',
+    },
+    cwd: {
+      type: 'string',
+      description: 'the working directory. defaults to the current directory.',
+      default: process.cwd(),
+      alias: 'c',
+    },
+  },
+  run: async ({ args: opts }) => {
     try {
       const options = initOptionsSchema.parse(opts)
       const cwd = path.resolve(options.cwd)
@@ -96,7 +110,8 @@ export const init = new Command()
     catch (error) {
       handleError(error)
     }
-  })
+  },
+})
 
 export async function promptForConfig(
   cwd: string,
