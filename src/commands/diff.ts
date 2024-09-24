@@ -2,9 +2,9 @@ import { existsSync, promises as fs } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
-import chalk from 'chalk'
 import { defineCommand } from 'citty'
 import { type Change, diffLines } from 'diff'
+import pc from 'picocolors'
 import { z } from 'zod'
 
 import { getConfig } from '../utils/get-config'
@@ -66,7 +66,7 @@ export const diff = defineCommand({
       const config = await getConfig(cwd)
       if (!config) {
         logger.warn(
-          `Configuration is missing. Please run ${chalk.green(
+          `Configuration is missing. Please run ${pc.green(
             `init`,
           )} to create a components.json file.`,
         )
@@ -116,7 +116,7 @@ export const diff = defineCommand({
         }
         logger.break()
         logger.info(
-          `Run ${chalk.green(`diff <component>`)} to see the changes.`,
+          `Run ${pc.green(`diff <component>`)} to see the changes.`,
         )
         process.exit(0)
       }
@@ -128,7 +128,7 @@ export const diff = defineCommand({
 
       if (!component) {
         logger.error(
-          `The component ${chalk.green(options.component)} does not exist.`,
+          `The component ${pc.green(options.component)} does not exist.`,
         )
         process.exit(1)
       }
@@ -202,10 +202,10 @@ async function printDiff(diff: Change[]): Promise<void> {
   diff.forEach((part) => {
     if (part) {
       if (part.added) {
-        return process.stdout.write(chalk.green(part.value))
+        return process.stdout.write(pc.green(part.value))
       }
       if (part.removed) {
-        return process.stdout.write(chalk.red(part.value))
+        return process.stdout.write(pc.red(part.value))
       }
 
       return process.stdout.write(part.value)

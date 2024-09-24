@@ -2,11 +2,11 @@ import { existsSync, promises as fs } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
-import chalk from 'chalk'
 import { defineCommand } from 'citty'
 import { execa } from 'execa'
 import template from 'lodash.template'
 import ora from 'ora'
+import pc from 'picocolors'
 import prompts from 'prompts'
 import { z } from 'zod'
 
@@ -101,7 +101,7 @@ export const init = defineCommand({
 
       logger.info('')
       logger.info(
-        `${chalk.green(
+        `${pc.green(
           'Success!',
         )} Project initialization completed. You may now add components.`,
       )
@@ -118,7 +118,7 @@ export async function promptForConfig(
   defaultConfig: Config | null = null,
   skip = false,
 ): Promise<{ style: string, tailwind: { config: string, css: string, baseColor: string, cssVariables: boolean, prefix?: string | undefined }, aliases: { components: string, utils: string, ui?: string | undefined }, resolvedPaths: { components: string, utils: string, ui: string, tailwindConfig: string, tailwindCss: string }, $schema?: string | undefined }> {
-  const highlight = (text: string): string => chalk.cyan(text)
+  const highlight = (text: string): string => pc.cyan(text)
 
   const styles = await getRegistryStyles()
   const baseColors = await getRegistryBaseColors()
@@ -234,7 +234,7 @@ export async function promptForMinimalConfig(
   defaultConfig: Config,
   defaults = false,
 ): Promise<{ style: string, tailwind: { config: string, css: string, baseColor: string, cssVariables: boolean, prefix?: string | undefined }, aliases: { components: string, utils: string, ui?: string | undefined }, resolvedPaths: { components: string, utils: string, ui: string, tailwindConfig: string, tailwindCss: string }, $schema?: string | undefined }> {
-  const highlight = (text: string): string => chalk.cyan(text)
+  const highlight = (text: string): string => pc.cyan(text)
   let style = defaultConfig.style
   let baseColor = defaultConfig.tailwind.baseColor
   let cssVariables = defaultConfig.tailwind.cssVariables

@@ -1,18 +1,18 @@
 /* eslint-disable no-console */
-import chalk from 'chalk'
+import pc from 'picocolors'
 
 export const logger = {
-  error(...args: unknown[]) {
-    console.log(chalk.red(...args))
+  error(args: string) {
+    console.log(pc.red(args))
   },
-  warn(...args: unknown[]) {
-    console.log(chalk.yellow(...args))
+  warn(args: string) {
+    console.log(pc.yellow(args))
   },
-  info(...args: unknown[]) {
-    console.log(chalk.cyan(...args))
+  info(args: string) {
+    console.log(pc.cyan(args))
   },
-  success(...args: unknown[]) {
-    console.log(chalk.green(...args))
+  success(args: string) {
+    console.log(pc.green(args))
   },
   break() {
     console.log('')

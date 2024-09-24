@@ -2,10 +2,10 @@ import { existsSync, promises as fs } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
-import chalk from 'chalk'
 import { defineCommand } from 'citty'
 import { execa } from 'execa'
 import ora from 'ora'
+import pc from 'picocolors'
 import prompts from 'prompts'
 import { z } from 'zod'
 
@@ -89,7 +89,7 @@ export const add = defineCommand({
       const config = await getConfig(cwd)
       if (!config) {
         logger.warn(
-          `Configuration is missing. Please run ${chalk.green(
+          `Configuration is missing. Please run ${pc.green(
             `init`,
           )} to create a components.json file.`,
         )
@@ -179,7 +179,7 @@ export const add = defineCommand({
 
             if (!overwrite) {
               logger.info(
-                `Skipped ${item.name}. To overwrite, run with the ${chalk.green(
+                `Skipped ${item.name}. To overwrite, run with the ${pc.green(
                   '--overwrite',
                 )} flag.`,
               )
