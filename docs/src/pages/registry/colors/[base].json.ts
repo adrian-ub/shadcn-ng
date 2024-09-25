@@ -76,7 +76,7 @@ const BASE_STYLES_WITH_VARIABLES = `@tailwind base;
   }
 }`
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<{ params: { base: string } }[]> {
   const paths = availableColors.map(color => ({
     params: { base: color },
   }))
@@ -84,7 +84,7 @@ export async function getStaticPaths() {
   return paths
 }
 
-export async function GET({ params }: { params: { base: string } }) {
+export async function GET({ params }: { params: { base: string } }): Promise<Response> {
   const baseColor = params.base
   const base: Record<string, any> = {
     inlineColors: {},

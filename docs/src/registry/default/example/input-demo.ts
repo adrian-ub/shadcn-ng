@@ -1,4 +1,4 @@
-import { UbInputDirective } from '@/registry/default/ui/input.directive'
+import { UbInputDirective } from '@/registry/default/ui/input'
 
 import { Component } from '@angular/core'
 

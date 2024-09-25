@@ -36,7 +36,7 @@ const trailingSlashStrategies = {
 function formatPath(
   href: string,
   { format = 'directory', trailingSlash = 'ignore' }: FormatPathOptions,
-) {
+): string {
   const formatStrategy = formatStrategies[format]
   const trailingSlashStrategy = trailingSlashStrategies[trailingSlash]
 

@@ -11,7 +11,6 @@ interface Panel {
 
 declare module 'vfile' {
   interface DataMap {
-    // @ts-ignore
     panels: Panel[]
   }
 }
@@ -39,7 +38,7 @@ const focusableElementSelectors = [
   .join(',')
 
 let count = 0
-function getIDs() {
+function getIDs(): { panelId: string, tabId: string } {
   const id = count++
   return { panelId: `tab-panel-${id}`, tabId: `tab-${id}` }
 }
@@ -103,7 +102,12 @@ const tabsProcessor = rehype()
  * each tab panel correctly.
  * @param html Inner HTML passed to the `<Tabs>` component.
  */
-export function processPanels(html: string) {
+export function processPanels(html: string): {
+  /** Data for each tab panel. */
+  panels: Panel[] | undefined
+  /** Processed HTML for the tab panels. */
+  html: string
+} {
   const file = tabsProcessor.processSync({ value: html })
   return {
     /** Data for each tab panel. */

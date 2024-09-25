@@ -1,6 +1,6 @@
 import { z } from 'astro/zod'
 
-function badgeSchema() {
+function badgeSchema(): z.ZodObject<{ variant: z.ZodDefault<z.ZodEnum<['note', 'danger', 'success', 'caution', 'tip', 'default']>>, text: z.ZodString, class: z.ZodOptional<z.ZodString> }, 'strip', z.ZodTypeAny, { variant: 'default' | 'note' | 'danger' | 'success' | 'caution' | 'tip', text: string, class?: string | undefined }, { text: string, variant?: 'default' | 'note' | 'danger' | 'success' | 'caution' | 'tip' | undefined, class?: string | undefined }> {
   return z.object({
     variant: z
       .enum(['note', 'danger', 'success', 'caution', 'tip', 'default'])
@@ -18,7 +18,7 @@ export const BadgeComponentSchema = badgeSchema()
 
 export type BadgeComponentProps = z.input<typeof BadgeComponentSchema>
 
-export function BadgeConfigSchema() {
+export function BadgeConfigSchema(): z.ZodOptional<z.ZodEffects<z.ZodUnion<[z.ZodString, z.ZodObject<{ variant: z.ZodDefault<z.ZodEnum<['note', 'danger', 'success', 'caution', 'tip', 'default']>>, text: z.ZodString, class: z.ZodOptional<z.ZodString> }, 'strip', z.ZodTypeAny, { variant: 'default' | 'note' | 'danger' | 'success' | 'caution' | 'tip', text: string, class?: string | undefined }, { text: string, variant?: 'default' | 'note' | 'danger' | 'success' | 'caution' | 'tip' | undefined, class?: string | undefined }>]>, { variant: 'default' | 'note' | 'danger' | 'success' | 'caution' | 'tip', text: string, class?: string | undefined }, string | { text: string, variant?: 'default' | 'note' | 'danger' | 'success' | 'caution' | 'tip' | undefined, class?: string | undefined }>> {
   return z
     .union([z.string(), badgeSchema()])
     .transform((badge) => {

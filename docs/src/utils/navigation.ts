@@ -54,6 +54,9 @@ interface Dir {
   [item: string]: Dir | Route
 }
 
+/** Remove the extension from a path. */
+const stripExtension = (path: string): string => path.replace(/\.\w+$/, '')
+
 /** Create a new directory object. */
 function makeDir(slug: string): Dir {
   const dir = {} as Dir
@@ -108,7 +111,7 @@ function groupFromAutogenerateConfig(
   const localeDir = locale ? `${locale}/${directory}` : directory
   const dirDocs = routes.filter(
     doc =>
-      // Match against `foo.md` or `foo/index.md`.
+    // Match against `foo.md` or `foo/index.md`.
       stripExtension(doc.id) === localeDir
       // Match against `foo/anything/else.md`.
       || doc.id.startsWith(`${localeDir}/`),
@@ -129,14 +132,14 @@ function groupFromAutogenerateConfig(
 }
 
 /** Check if a string starts with one of `http://` or `https://`. */
-const isAbsolute = (link: string) => /^https?:\/\//.test(link)
+const isAbsolute = (link: string): boolean => /^https?:\/\//.test(link)
 
 /** Create a link entry from a manual link item in user config. */
 function linkFromSidebarLinkItem(
   item: SidebarLinkItem,
   locale: string | undefined,
   currentPathname: string,
-) {
+): Link {
   let href = item.link
   if (!isAbsolute(href)) {
     href = ensureLeadingSlash(href)
@@ -153,14 +156,14 @@ function linkFromInternalSidebarLinkItem(
   item: InternalSidebarLinkItem,
   locale: string | undefined,
   currentPathname: string,
-) {
+): Link {
   let slugWithLocale = locale ? `${locale}/${item.slug}` : item.slug
   // Astro passes root `index.[md|mdx]` entries with a slug of `index`
   slugWithLocale = slugWithLocale.replace(/\/?index$/, '')
   const entry = routes.find(entry => slugWithLocale === entry.slug)
   if (!entry) {
     const hasExternalSlashes
-      = item.slug.at(0) === '/' || item.slug.at(-1) === '/'
+            = item.slug.at(0) === '/' || item.slug.at(-1) === '/'
     if (hasExternalSlashes) {
       throw new AstroError(
         `The slug \`"${item.slug}"\` specified in the Starlight sidebar config must not start or end with a slash.`,
@@ -176,9 +179,9 @@ function linkFromInternalSidebarLinkItem(
     }
   }
   const label
-    = pickLang(item.translations, localeToLang(locale))
-    || item.label
-    || entry.entry.data.title
+        = pickLang(item.translations, localeToLang(locale))
+        || item.label
+        || entry.entry.data.title
   return makeSidebarLink(
     entry.slug,
     label,
@@ -220,7 +223,7 @@ function makeLink({
 }
 
 /** Test if two paths are equivalent even if formatted differently. */
-function pathsMatch(pathA: string, pathB: string) {
+function pathsMatch(pathA: string, pathB: string): boolean {
   const format = createPathFormatter({ trailingSlash: 'never' })
   return format(pathA) === format(pathB)
 }
@@ -232,7 +235,7 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
   // Index paths will match `baseDir` and don’t include breadcrumbs.
   if (pathWithoutExt === baseDir)
     return []
-  // Ensure base directory ends in a trailing slash.
+    // Ensure base directory ends in a trailing slash.
   baseDir = ensureTrailingSlash(baseDir)
   // Strip base directory from path if present.
   const relativePath = pathWithoutExt.startsWith(baseDir)
@@ -246,11 +249,11 @@ function getBreadcrumbs(path: string, baseDir: string): string[] {
 function treeify(routes: Route[], baseDir: string): Dir {
   const treeRoot: Dir = makeDir(baseDir)
   routes
-    // Remove any entries that should be hidden
+  // Remove any entries that should be hidden
     .filter(doc => !doc.entry.data.sidebar.hidden)
-    // Sort by depth, to build the tree depth first.
+  // Sort by depth, to build the tree depth first.
     .sort((a, b) => b.id.split('/').length - a.id.split('/').length)
-    // Build the tree
+  // Build the tree
     .forEach((doc) => {
       const parts = getBreadcrumbs(doc.id, baseDir)
       let currentNode = treeRoot
@@ -259,7 +262,7 @@ function treeify(routes: Route[], baseDir: string): Dir {
         const isLeaf = index === parts.length - 1
 
         // Handle directory index pages by renaming them to `index`
-        if (isLeaf && currentNode.hasOwnProperty(part)) {
+        if (isLeaf && Object.prototype.hasOwnProperty.call(currentNode, part)) {
           currentNode = currentNode[part] as Dir
           part = 'index'
         }
@@ -299,8 +302,7 @@ function linkFromRoute(route: Route, currentPathname: string): Link {
 function getOrder(routeOrDir: Route | Dir): number {
   return isDir(routeOrDir)
     ? Math.min(...Object.values(routeOrDir).flatMap(getOrder))
-    : // If no order value is found, set it to the largest number possible.
-      (routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE)
+    : (routeOrDir.entry.data.sidebar.order ?? Number.MAX_VALUE)
 }
 
 /** Sort a directory’s entries by user-specified order or alphabetically if no order specified. */
@@ -374,7 +376,7 @@ function sidebarFromDir(
   currentPathname: string,
   locale: string | undefined,
   collapsed: boolean,
-) {
+): SidebarEntry[] {
   return sortDirEntries(Object.entries(tree)).map(([key, dirOrRoute]) =>
     dirToItem(dirOrRoute, key, key, currentPathname, locale, collapsed),
   )
@@ -413,7 +415,7 @@ export function getPrevNextLinks(
     next?: PrevNextLinkConfig
   },
 ): {
-  /** Link to previous page in the sidebar. */
+    /** Link to previous page in the sidebar. */
     prev: Link | undefined
     /** Link to next page in the sidebar. */
     next: Link | undefined
@@ -471,6 +473,3 @@ function applyPrevNextLinkConfig(
   // Otherwise, if the global config is enabled, return the generated link if any.
   return paginationEnabled ? link : undefined
 }
-
-/** Remove the extension from a path. */
-const stripExtension = (path: string) => path.replace(/\.\w+$/, '')

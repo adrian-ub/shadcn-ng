@@ -1,13 +1,13 @@
 ---
-import { processPanels } from "./rehype-select-style";
+import { processPanels } from './rehype-select-style'
 
 interface Props {
-  syncKey?: string;
-  hiddenSelect?: boolean;
+  syncKey?: string
+  hiddenSelect?: boolean
 }
 
-const { syncKey, hiddenSelect = false } = Astro.props;
-const panelHtml = await Astro.slots.render("default");
+const { syncKey, hiddenSelect = false } = Astro.props
+const panelHtml = await Astro.slots.render('default')
 const { html, panels } = processPanels(panelHtml);
 ---
 
@@ -60,79 +60,83 @@ const { html, panels } = processPanels(panelHtml);
 </style>
 
 <script>
-  class SelectsPreview extends HTMLElement {
-    // A map of sync keys to all tabs that are synced to that key.
-    static #syncedTabs = new Map<string, SelectsPreview[]>();
+class SelectsPreview extends HTMLElement {
+  // A map of sync keys to all tabs that are synced to that key.
+  static #syncedTabs = new Map<string, SelectsPreview[]>()
 
-    panels: HTMLElement[];
-    #syncKey: string | undefined;
+  panels: HTMLElement[]
+  #syncKey: string | undefined
 
-    constructor() {
-      super();
-      const tablist = this.querySelector<HTMLSelectElement>("select")!;
-      this.panels = [
-        ...this.querySelectorAll<HTMLElement>(
-          ':scope > div > div > div > [role="tabpanel"]'
-        ),
-      ];
-      this.#syncKey = this.dataset.syncKey;
+  constructor() {
+    super()
+    const tablist = this.querySelector<HTMLSelectElement>('select')!
+    this.panels = [
+      ...this.querySelectorAll<HTMLElement>(
+        ':scope > div > div > div > [role="tabpanel"]',
+      ),
+    ]
+    this.#syncKey = this.dataset.syncKey
 
-      if (this.#syncKey) {
-        const syncedTabs = SelectsPreview.#syncedTabs.get(this.#syncKey) ?? [];
-        syncedTabs.push(this);
-        SelectsPreview.#syncedTabs.set(this.#syncKey, syncedTabs);
-      }
-
-      tablist.addEventListener("change", (e) => {
-        const value = (e.target as HTMLSelectElement).value;
-        e.preventDefault();
-        // get label of selected option
-        const selectedOption = tablist.options[tablist.selectedIndex];
-        this.changePreview(this, value, selectedOption.text);
-      });
+    if (this.#syncKey) {
+      const syncedTabs = SelectsPreview.#syncedTabs.get(this.#syncKey) ?? []
+      syncedTabs.push(this)
+      SelectsPreview.#syncedTabs.set(this.#syncKey, syncedTabs)
     }
 
-    changePreview(
-      newTab: SelectsPreview,
-      id: string,
-      label: string,
-      syncPreview = true
-    ) {
-      newTab.panels.forEach((oldPanel) => {
-        if (oldPanel.id === id) {
-          oldPanel.hidden = false;
-        } else {
-          oldPanel.hidden = true;
-        }
-      });
+    tablist.addEventListener('change', (e) => {
+      const value = (e.target as HTMLSelectElement).value
+      e.preventDefault()
+      // get label of selected option
+      const selectedOption = tablist.options[tablist.selectedIndex]
+      this.changePreview(this, value, selectedOption.text)
+    })
+  }
 
-      if (syncPreview) {
-        SelectsPreview.#syncTabs(this, label);
+  changePreview(
+    newTab: SelectsPreview,
+    id: string,
+    label: string,
+      syncPreview = true,
+  ): void {
+    newTab.panels.forEach((oldPanel) => {
+      if (oldPanel.id === id) {
+        oldPanel.hidden = false
       }
-    }
-
-    static #syncTabs(emitter: SelectsPreview, label: string | null) {
-      const syncKey = emitter.#syncKey;
-      if (!syncKey || !label) return;
-      const syncedTabs = SelectsPreview.#syncedTabs.get(syncKey);
-      if (!syncedTabs) return;
-
-      for (const receiver of syncedTabs) {
-        if (receiver === emitter) continue;
-        // const labelIndex = receiver.panels.findIndex((tab) => tab.id === id);
-        // if (labelIndex === -1) continue;
-        // receiver.changePreview(receiver, id, false);
-        const select = receiver.querySelector<HTMLSelectElement>("select")!;
-        // get option by label text
-        const option = Array.from(select.options).find(
-          (option) => option.text === label
-        );
-        // change select value with option value
-        select.value = option?.value ?? "";
-        receiver.changePreview(receiver, option!.value, label, false);
+      else {
+        oldPanel.hidden = true
       }
+    })
+
+    if (syncPreview) {
+      SelectsPreview.#syncTabs(this, label)
     }
   }
 
-  customElements.define("ub-selects-preview", SelectsPreview);
+  static #syncTabs(emitter: SelectsPreview, label: string | null): void {
+    const syncKey = emitter.#syncKey
+    if (!syncKey || !label)
+      return
+    const syncedTabs = SelectsPreview.#syncedTabs.get(syncKey)
+    if (!syncedTabs)
+      return
+
+    for (const receiver of syncedTabs) {
+      if (receiver === emitter)
+        continue
+        // const labelIndex = receiver.panels.findIndex((tab) => tab.id === id);
+        // if (labelIndex === -1) continue;
+        // receiver.changePreview(receiver, id, false);
+      const select = receiver.querySelector<HTMLSelectElement>('select')!
+      // get option by label text
+      const option = Array.from(select.options).find(
+        option => option.text === label,
+      )
+      // change select value with option value
+      select.value = option?.value ?? ''
+      receiver.changePreview(receiver, option!.value, label, false)
+    }
+  }
+}
+
+customElements.define('ub-selects-preview', SelectsPreview)
 </script>

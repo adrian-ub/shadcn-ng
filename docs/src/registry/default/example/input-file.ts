@@ -1,6 +1,6 @@
-import { UbInputDirective } from '@/registry/default/ui/input.directive'
+import { UbInputDirective } from '@/registry/default/ui/input'
 
-import { UbLabelDirective } from '@/registry/default/ui/label.directive'
+import { UbLabelDirective } from '@/registry/default/ui/label'
 import { Component } from '@angular/core'
 
 @Component({

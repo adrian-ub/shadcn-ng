@@ -1,10 +1,11 @@
 import { readFileSync } from 'node:fs'
 import path, { basename } from 'node:path'
+import process from 'node:process'
 import { registry } from '@/registry/registry'
 import { styles } from '@/registry/styles'
 import type { RegistryEntry } from '@/registry/schema'
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<{ params: { style: 'default' | 'new-york', name: string }, props: { componentRegistry: { name: string, type: 'components:ui' | 'components:component' | 'components:example' | 'components:block' | 'components:chart', files: string[], description?: string | undefined, dependencies?: string[] | undefined, devDependencies?: string[] | undefined, registryDependencies?: string[] | undefined, source?: string | undefined, category?: string | undefined, subcategory?: string | undefined, chunks?: { name: string, description: string, file: string, code?: string | undefined, component?: any, container?: { className?: string | null | undefined } | undefined }[] | undefined } } }[]> {
   return registry
     .filter(item => item.type === 'components:ui')
     .flatMap((item) => {
@@ -31,7 +32,7 @@ export async function GET({
   props: {
     componentRegistry: RegistryEntry
   }
-}) {
+}): Promise<Response> {
   const { style } = params
   const { componentRegistry } = props
   const files = componentRegistry.files.map((file) => {

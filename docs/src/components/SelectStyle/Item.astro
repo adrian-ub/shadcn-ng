@@ -1,14 +1,14 @@
 ---
-import { SelectStyleItemTagname } from "./rehype-select-style";
+import { SelectStyleItemTagname } from './rehype-select-style'
 
 interface Props {
-  label: string;
+  label: string
 }
 
-const { label } = Astro.props;
+const { label } = Astro.props
 
 if (!label) {
-  throw new Error("Missing prop `label` on `<TabItem>` component.");
+  throw new Error('Missing prop `label` on `<TabItem>` component.')
 }
 ---
 

@@ -7,7 +7,7 @@ import {
   UbTableHeadDirective,
   UbTableHeaderDirective,
   UbTableRowDirective,
-} from '@/registry/new-york/ui/table.directive'
+} from '@/registry/new-york/ui/table'
 
 import { Component } from '@angular/core'
 

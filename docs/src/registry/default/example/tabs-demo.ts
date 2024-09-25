@@ -1,9 +1,9 @@
-import { UbButtonDirective } from '@/registry/default/ui/button.directive'
+import { UbButtonDirective } from '@/registry/default/ui/button'
 
-import { UbCardContentDirective, UbCardDescriptionDirective, UbCardDirective, UbCardFooterDirective, UbCardHeaderDirective, UbCardTitleDirective } from '@/registry/default/ui/card.directive'
-import { UbInputDirective } from '@/registry/default/ui/input.directive'
-import { UbLabelDirective } from '@/registry/default/ui/label.directive'
-import { UbTabsContentDirective, UbTabsDirective, UbTabsListDirective, UbTabsTriggerDirective } from '@/registry/default/ui/tabs.directive'
+import { UbCardContentDirective, UbCardDescriptionDirective, UbCardDirective, UbCardFooterDirective, UbCardHeaderDirective, UbCardTitleDirective } from '@/registry/default/ui/card'
+import { UbInputDirective } from '@/registry/default/ui/input'
+import { UbLabelDirective } from '@/registry/default/ui/label'
+import { UbTabsContentDirective, UbTabsDirective, UbTabsListDirective, UbTabsTriggerDirective } from '@/registry/default/ui/tabs'
 import { Component } from '@angular/core'
 
 @Component({

@@ -3,7 +3,7 @@ import {
   UbAlertDirective,
   UbAlertIconDirective,
   UbAlertTitleDirective,
-} from '@/registry/new-york/ui/alert.directive'
+} from '@/registry/new-york/ui/alert'
 import { Component } from '@angular/core'
 import { NgIconComponent, provideIcons } from '@ng-icons/core'
 

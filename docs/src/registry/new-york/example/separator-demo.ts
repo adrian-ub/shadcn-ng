@@ -1,4 +1,4 @@
-import { UbSeparatorDirective } from '@/registry/new-york/ui/separator.directive'
+import { UbSeparatorDirective } from '@/registry/new-york/ui/separator'
 
 import { Component } from '@angular/core'
 

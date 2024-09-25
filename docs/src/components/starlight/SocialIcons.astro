@@ -1,12 +1,11 @@
 ---
-import config from "virtual:starlight/user-config";
-import { Icon } from "@astrojs/starlight/components";
-import type { Props } from "@astrojs/starlight/props";
-import { buttonVariants } from "@/registry/new-york/ui/button.directive";
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/registry/new-york/ui/button'
+import { Icon } from '@astrojs/starlight/components'
+import config from 'virtual:starlight/user-config'
 
-type Platform = keyof NonNullable<typeof config.social>;
-type SocialConfig = NonNullable<NonNullable<typeof config.social>[Platform]>;
+type Platform = keyof NonNullable<typeof config.social>
+type SocialConfig = NonNullable<NonNullable<typeof config.social>[Platform]>
 const links = Object.entries(config.social || {}) as [Platform, SocialConfig][];
 ---
 
@@ -18,9 +17,9 @@ const links = Object.entries(config.social || {}) as [Platform, SocialConfig][];
           <div
             class={cn(
               buttonVariants({
-                variant: "ghost",
+                variant: 'ghost',
               }),
-              "h-8 w-8 px-0"
+              'h-8 w-8 px-0',
             )}
           >
             <Icon name={platform} />

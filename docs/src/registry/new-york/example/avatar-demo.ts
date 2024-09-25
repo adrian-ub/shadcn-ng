@@ -1,4 +1,4 @@
-import { UbAvatarDirective, UbAvatarFallbackDirective, UbAvatarImageDirective } from '@/registry/new-york/ui/avatar.directive'
+import { UbAvatarDirective, UbAvatarFallbackDirective, UbAvatarImageDirective } from '@/registry/new-york/ui/avatar'
 
 import { Component } from '@angular/core'
 

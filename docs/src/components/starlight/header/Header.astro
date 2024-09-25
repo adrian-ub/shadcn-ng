@@ -1,19 +1,19 @@
 ---
-import config from "virtual:starlight/user-config";
-import type { Props } from "@astrojs/starlight/props";
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro'
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro'
 
-import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
-import Search from "../Search.astro";
-import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
-import SocialIcons from "../SocialIcons.astro";
-import MainNav from "./MainNav.astro";
+import config from 'virtual:starlight/user-config'
+import type { Props } from '@astrojs/starlight/props'
+import Search from '../Search.astro'
+import SocialIcons from '../SocialIcons.astro'
+import MainNav from './MainNav.astro'
 
 /**
  * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
  */
-const shouldRenderSearch =
-  config.pagefind ||
-  config.components.Search !== "@astrojs/starlight/components/Search.astro";
+const shouldRenderSearch
+  = config.pagefind
+  || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
 <header

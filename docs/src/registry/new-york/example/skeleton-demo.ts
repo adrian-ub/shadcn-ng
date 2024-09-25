@@ -1,4 +1,4 @@
-import { UbSkeletonDirective } from '@/registry/new-york/ui/skeleton.directive'
+import { UbSkeletonDirective } from '@/registry/new-york/ui/skeleton'
 
 import { Component } from '@angular/core'
 

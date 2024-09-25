@@ -1565,7 +1565,7 @@ export const colorMapping = {
   },
 } as const
 
-export function colorsData() {
+export function colorsData(): Record<string, any> {
   const responseColorsData: Record<string, any> = {}
   for (const [color, value] of Object.entries(colors)) {
     if (typeof value === 'string') {

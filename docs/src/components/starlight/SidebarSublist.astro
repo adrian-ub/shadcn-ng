@@ -1,11 +1,11 @@
 ---
-import { cn } from "@/lib/utils";
-import type { SidebarEntry } from "../../utils/navigation";
-import { Badge } from "@astrojs/starlight/components";
+import { cn } from '@/lib/utils'
+import { Badge } from '@astrojs/starlight/components'
+import type { SidebarEntry } from '../../utils/navigation'
 
 interface Props {
-  sublist: SidebarEntry[];
-  nested?: boolean;
+  sublist: SidebarEntry[]
+  nested?: boolean
 }
 
 const { sublist } = Astro.props;
@@ -13,17 +13,18 @@ const { sublist } = Astro.props;
 
 <div class="w-full">
   {
-    sublist.map((entry) =>
-      entry.type === "link" ? (
+    sublist.map(entry =>
+      entry.type === 'link'
+? (
         <a
           href={entry.href}
           class:list={[
             entry.attrs.class,
             cn(
-              "group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline",
+              'group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline',
               entry.isCurrent
-                ? "font-medium text-foreground"
-                : "text-muted-foreground"
+                ? 'font-medium text-foreground'
+                : 'text-muted-foreground',
             ),
           ]}
           {...entry.attrs}
@@ -37,7 +38,8 @@ const { sublist } = Astro.props;
             />
           )}
         </a>
-      ) : (
+      )
+: (
         <div class="pb-4">
           <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
             {entry.label}
@@ -56,7 +58,7 @@ const { sublist } = Astro.props;
             </div>
           )}
         </div>
-      )
+      ),
     )
   }
 </div>

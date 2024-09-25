@@ -1,10 +1,11 @@
 ---
-import type { Props } from "@astrojs/starlight/props";
+import { cn } from '@/lib/utils'
 
-import { buttonVariants } from "@/registry/new-york/ui/button.directive";
-import { cn } from "@/lib/utils";
-import { PAGE_TITLE_ID } from "../../constants";
-const { data } = Astro.props.entry;
+import { buttonVariants } from '@/registry/new-york/ui/button'
+import type { Props } from '@astrojs/starlight/props'
+import { PAGE_TITLE_ID } from '../../constants'
+
+const { data } = Astro.props.entry
 const { title = data.title, tagline, actions = [] } = data.hero || {};
 ---
 
@@ -34,11 +35,11 @@ const { title = data.title, tagline, actions = [] } = data.hero || {};
             class={cn(
               buttonVariants({
                 variant:
-                  attrs.variant === "minimal" || attrs.variant === "primary"
-                    ? "default"
-                    : "ghost",
-                size: "sm",
-              })
+                  attrs.variant === 'minimal' || attrs.variant === 'primary'
+                    ? 'default'
+                    : 'ghost',
+                size: 'sm',
+              }),
             )}
             set:html={text}
           />

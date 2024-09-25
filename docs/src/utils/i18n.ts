@@ -17,18 +17,18 @@ const wellKnownRTL = ['ar', 'fa', 'he', 'prs', 'ps', 'syc', 'ug', 'ur']
 /**
  * Processes the Astro and Starlight i18n configurations to generate/update them accordingly:
  *
- * 	- If no Astro and Starlight i18n configurations are provided, the built-in default locale is
+ *  - If no Astro and Starlight i18n configurations are provided, the built-in default locale is
  * used in Starlight and the generated Astro i18n configuration will match it.
- * 	- If only a Starlight i18n configuration is provided, an equivalent Astro i18n configuration is
+ *  - If only a Starlight i18n configuration is provided, an equivalent Astro i18n configuration is
  * generated.
- * 	- If only an Astro i18n configuration is provided, an equivalent Starlight i18n configuration is
+ *  - If only an Astro i18n configuration is provided, an equivalent Starlight i18n configuration is
  * used.
- * 	- If both an Astro and Starlight i18n configurations are provided, an error is thrown.
+ *  - If both an Astro and Starlight i18n configurations are provided, an error is thrown.
  */
 export function processI18nConfig(
   starlightConfig: typeof StarlightConfig,
   astroI18nConfig: AstroConfig['i18n'],
-) {
+): { astroI18nConfig: { defaultLocale: string, locales: (string | { path: string, codes: [string, ...string[]] })[], routing: 'manual' | { prefixDefaultLocale: boolean, redirectToDefaultLocale: boolean, fallbackType: 'redirect' | 'rewrite' }, fallback?: Record<string, string> | undefined, domains?: Record<string, string> | undefined }, starlightConfig: typeof StarlightConfig } {
   // We don't know what to do if both an Astro and Starlight i18n configuration are provided.
   if (astroI18nConfig && !starlightConfig.isUsingBuiltInDefaultLocale) {
     throw new AstroError(
@@ -60,27 +60,28 @@ function getAstroI18nConfig(
 ): NonNullable<AstroConfig['i18n']> {
   return {
     defaultLocale:
-      config.defaultLocale.lang
-      ?? config.defaultLocale.locale
-      ?? BuiltInDefaultLocale.lang,
+            config.defaultLocale.lang
+            ?? config.defaultLocale.locale
+            ?? BuiltInDefaultLocale.lang,
     locales: config.locales
       ? Object.entries(config.locales).map(([locale, localeConfig]) => {
         return {
           codes: [localeConfig?.lang ?? locale],
           path:
-              locale === 'root'
-                ? (localeConfig?.lang ?? BuiltInDefaultLocale.lang)
-                : locale,
+                        locale === 'root'
+                          ? (localeConfig?.lang ?? BuiltInDefaultLocale.lang)
+                          : locale,
         }
       })
       : [config.defaultLocale.lang],
     routing: {
       prefixDefaultLocale:
-        // Sites with multiple languages without a root locale.
-        (config.isMultilingual && config.locales?.root === undefined)
-        // Sites with a single non-root language different from the built-in default locale.
-        || (!config.isMultilingual && config.locales !== undefined),
+                // Sites with multiple languages without a root locale.
+                (config.isMultilingual && config.locales?.root === undefined)
+                // Sites with a single non-root language different from the built-in default locale.
+                || (!config.isMultilingual && config.locales !== undefined),
       redirectToDefaultLocale: false,
+      fallbackType: 'redirect', // or 'rewrite' based on your requirement
     },
   }
 }
@@ -89,8 +90,8 @@ function getAstroI18nConfig(
 function getStarlightI18nConfig(
   astroI18nConfig: NonNullable<AstroConfig['i18n']>,
 ): Pick<
-  typeof StarlightConfig,
-  'isMultilingual' | 'locales' | 'defaultLocale'
+    typeof StarlightConfig,
+    'isMultilingual' | 'locales' | 'defaultLocale'
   > {
   if (astroI18nConfig.routing === 'manual') {
     throw new AstroError(
@@ -133,17 +134,17 @@ function getStarlightI18nConfig(
     defaultLocale: {
       ...inferStarlightLocaleFromAstroLocale(defaultAstroLocale),
       locale:
-        isMonolingualWithRootLocale || (isMultilingual && !prefixDefaultLocale)
-          ? undefined
-          : isAstroLocaleExtendedConfig(defaultAstroLocale)
-            ? defaultAstroLocale.codes[0]
-            : defaultAstroLocale,
+                isMonolingualWithRootLocale || (isMultilingual && !prefixDefaultLocale)
+                  ? undefined
+                  : isAstroLocaleExtendedConfig(defaultAstroLocale)
+                    ? defaultAstroLocale.codes[0]
+                    : defaultAstroLocale,
     },
   }
 }
 
 /** Infer Starlight locale informations based on a locale from an Astro i18n configuration. */
-function inferStarlightLocaleFromAstroLocale(astroLocale: AstroLocale) {
+function inferStarlightLocaleFromAstroLocale(astroLocale: AstroLocale): { lang: string, label: string, dir: 'rtl' | 'ltr' } {
   const lang = isAstroLocaleExtendedConfig(astroLocale)
     ? astroLocale.codes[0]
     : astroLocale
@@ -154,7 +155,7 @@ function inferStarlightLocaleFromAstroLocale(astroLocale: AstroLocale) {
 function isDefaultAstroLocale(
   astroI18nConfig: NonNullable<AstroConfig['i18n']>,
   locale: AstroLocale,
-) {
+): boolean {
   return (
     (isAstroLocaleExtendedConfig(locale) ? locale.path : locale)
     === astroI18nConfig.defaultLocale
@@ -172,7 +173,7 @@ function isAstroLocaleExtendedConfig(
 }
 
 /** Returns the locale informations such as a label and a direction based on a BCP-47 tag. */
-function getLocaleInfo(lang: string) {
+function getLocaleInfo(lang: string): { label: string, dir: 'rtl' | 'ltr' } {
   try {
     const locale = new Intl.Locale(lang)
     const label = new Intl.DisplayNames(locale, { type: 'language' }).of(lang)
@@ -183,7 +184,7 @@ function getLocaleInfo(lang: string) {
       dir: getLocaleDir(locale),
     }
   }
-  catch (error) {
+  catch {
     throw new AstroError(
       `Failed to get locale informations for the '${lang}' locale.`,
       'Make sure to provide a valid BCP-47 tags (e.g. en, ar, or zh-CN).',

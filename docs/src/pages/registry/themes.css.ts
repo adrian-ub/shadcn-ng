@@ -1,7 +1,7 @@
 import { themes } from '@/registry/themes'
 import template from 'lodash.template'
 
-export async function GET() {
+export async function GET(): Promise<Response> {
   const themeCSS = []
 
   const THEME_STYLES_WITH_VARIABLES = `

@@ -1,4 +1,4 @@
-import { UbButtonDirective } from '@/registry/default/ui/button.directive'
+import { UbButtonDirective } from '@/registry/default/ui/button'
 
 import { Component } from '@angular/core'
 import { NgIconComponent, provideIcons } from '@ng-icons/core'

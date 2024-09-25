@@ -1,4 +1,4 @@
-import { UbAccordionContentDirective, UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective } from '@/registry/default/ui/accordion.directive'
+import { UbAccordionContentDirective, UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective } from '@/registry/default/ui/accordion'
 
 import { Component } from '@angular/core'
 

@@ -1,4 +1,4 @@
-import { UbBadgeDirective } from '@/registry/default/ui/badge.directive'
+import { UbBadgeDirective } from '@/registry/default/ui/badge'
 
 import { Component } from '@angular/core'
 

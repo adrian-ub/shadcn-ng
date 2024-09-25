@@ -1,13 +1,14 @@
 ---
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import { styles } from '@/registry/styles'
-import { readFileSync, existsSync } from 'node:fs'
-
-import { Tabs, TabItem, Code } from '@astrojs/starlight/components'
-
-import { SelectStyleItem, SelectStyle, syncKey } from './SelectStyle'
-import { ComponentPeviewComponent } from './component-preview'
+import process from 'node:process'
 import { cn } from '@/lib/utils'
+
+import { styles } from '@/registry/styles'
+
+import { Code, TabItem, Tabs } from '@astrojs/starlight/components'
+import { ComponentPeviewComponent } from './component-preview'
+import { SelectStyle, SelectStyleItem, syncKey } from './SelectStyle'
 
 export interface Props {
   name: string
@@ -25,9 +26,10 @@ const components = await Promise.all(
       pathCode = `../registry/${style.name}/example/${name}.ts`
       code = readFileSync(`${filename}`)
         .toString()
-        .replace(/export\s+default\s+.*;\s*/, '')
+        .replace(/export\s+default\s+(?:\S.*)?;\s*/, '')
         .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
-    } else {
+    }
+ else {
       pathCode = ''
       code = null
     }
@@ -37,7 +39,7 @@ const components = await Promise.all(
       code,
       path: pathCode,
     }
-  })
+  }),
 )
 ---
 

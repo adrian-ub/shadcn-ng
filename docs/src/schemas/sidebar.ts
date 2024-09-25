@@ -28,7 +28,7 @@ const linkHTMLAttributesSchema = z.record(
 >
 export type LinkHTMLAttributes = z.infer<typeof linkHTMLAttributesSchema>
 
-export function SidebarLinkItemHTMLAttributesSchema() {
+export function SidebarLinkItemHTMLAttributesSchema(): z.ZodDefault<z.ZodType<Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children'>, z.ZodTypeDef, Omit<HTMLAttributes<'a'>, keyof AstroBuiltinAttributes | 'children'>>> {
   return linkHTMLAttributesSchema.default({})
 }
 
@@ -79,6 +79,18 @@ type ManualSidebarGroupOutput = z.output<typeof SidebarGroupSchema> & {
   >
 }
 
+const InternalSidebarLinkItemSchema = SidebarBaseSchema.partial({
+  label: true,
+}).extend({
+  /** The link to this item’s content. Must be a slug of a Content Collection entry. */
+  slug: z.string(),
+  /** HTML attributes to add to the link item. */
+  attrs: SidebarLinkItemHTMLAttributesSchema(),
+})
+const InternalSidebarLinkItemShorthandSchema = z
+  .string()
+  .transform(slug => InternalSidebarLinkItemSchema.parse({ slug }))
+
 const ManualSidebarGroupSchema: z.ZodType<
   ManualSidebarGroupOutput,
   z.ZodTypeDef,
@@ -98,17 +110,6 @@ const ManualSidebarGroupSchema: z.ZodType<
   ),
 }).strict()
 
-const InternalSidebarLinkItemSchema = SidebarBaseSchema.partial({
-  label: true,
-}).extend({
-  /** The link to this item’s content. Must be a slug of a Content Collection entry. */
-  slug: z.string(),
-  /** HTML attributes to add to the link item. */
-  attrs: SidebarLinkItemHTMLAttributesSchema(),
-})
-const InternalSidebarLinkItemShorthandSchema = z
-  .string()
-  .transform(slug => InternalSidebarLinkItemSchema.parse({ slug }))
 export type InternalSidebarLinkItem = z.output<
   typeof InternalSidebarLinkItemSchema
 >

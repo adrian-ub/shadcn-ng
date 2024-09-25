@@ -1,4 +1,4 @@
-import { UbBadgeDirective } from '@/registry/new-york/ui/badge.directive'
+import { UbBadgeDirective } from '@/registry/new-york/ui/badge'
 
 import { Component } from '@angular/core'
 

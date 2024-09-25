@@ -1,6 +1,6 @@
 ---
-import MobileMenuToggle from "./MobileMenuToggle.astro";
-import type { Props } from "@astrojs/starlight/props";
+import type { Props } from '@astrojs/starlight/props'
+import MobileMenuToggle from './MobileMenuToggle.astro'
 
 const { hasSidebar, labels } = Astro.props;
 ---
@@ -9,14 +9,15 @@ const { hasSidebar, labels } = Astro.props;
   <div class="relative flex min-h-screen flex-col bg-background">
     <slot name="header" />
     <div class="flex-1">
-      <div class={hasSidebar ? "" : "container relative"}>
+      <div class={hasSidebar ? '' : 'container relative'}>
         {
-          hasSidebar ? (
+          hasSidebar
+? (
             <div class="border-b">
               <div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
                 <nav
                   class="md:sticky md:top-14"
-                  aria-label={labels["sidebarNav.accessibleLabel"]}
+                  aria-label={labels['sidebarNav.accessibleLabel']}
                 >
                   <MobileMenuToggle {...Astro.props} />
                   <aside class="z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block sidebar-pane">
@@ -33,7 +34,8 @@ const { hasSidebar, labels } = Astro.props;
                 <slot />
               </div>
             </div>
-          ) : (
+          )
+: (
             <slot />
           )
         }

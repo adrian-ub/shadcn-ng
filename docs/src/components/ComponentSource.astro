@@ -1,11 +1,12 @@
 ---
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import { styles } from '@/registry/styles'
 import { ui } from '@/registry/ui'
-import { readFileSync } from 'node:fs'
 import { Code } from '@astrojs/starlight/components'
 
-import { SelectStyleItem, SelectStyle, syncKey } from './SelectStyle'
+import { SelectStyle, SelectStyleItem, syncKey } from './SelectStyle'
 
 export interface Props {
   name: string
@@ -13,20 +14,27 @@ export interface Props {
 
 const { name } = Astro.props
 
-const componentUi = ui.find((value) => value.name === name)
+const componentUi = ui.find(value => value.name === name)
 
 const allComponents = componentUi?.files.flatMap((file) => {
   return styles.map((style) => {
-    const filename = path.join(process.cwd(), 'src', 'registry', style.name, file)
+    const filename = path.join(
+      process.cwd(),
+      'src',
+      'registry',
+      style.name,
+      file,
+    )
 
     let code: string | null
 
     try {
       code = readFileSync(`${filename}`)
         .toString()
-        .replace(/export\s+default\s+.*;\s*/, '')
+        .replace(/export\s+default\s+(?:\S.*)?;\s*/, '')
         .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
-    } catch (error) {
+    }
+    catch {
       code = null
     }
 
@@ -35,9 +43,21 @@ const allComponents = componentUi?.files.flatMap((file) => {
       code,
     }
   })
-})
+});
 ---
 
 <SelectStyle syncKey={syncKey} hiddenSelect={true}>
-  {allComponents?.map(({ code, style }) => <SelectStyleItem label={style.label}>{code ? <Code code={code} lang="angular-ts" wrap={true} /> : <p>Not found</p>}</SelectStyleItem>)}
+  {
+    allComponents?.map(({ code, style }) => (
+      <SelectStyleItem label={style.label}>
+        {code
+? (
+          <Code code={code} lang="angular-ts" wrap={true} />
+        )
+: (
+          <p>Not found</p>
+        )}
+      </SelectStyleItem>
+    ))
+  }
 </SelectStyle>

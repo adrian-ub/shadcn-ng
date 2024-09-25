@@ -1,41 +1,41 @@
 ---
-import "@pagefind/default-ui/css/ui.css";
-import project from "virtual:starlight/project-context";
-import type { Props } from "@astrojs/starlight/props";
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/registry/new-york/ui/button'
+import project from 'virtual:starlight/project-context'
 
-import { buttonVariants } from "@/registry/new-york/ui/button.directive";
-import { cn } from "@/lib/utils";
+import type { Props } from '@astrojs/starlight/props'
+import '@pagefind/default-ui/css/ui.css'
 
-const { labels } = Astro.props;
+const { labels } = Astro.props
 
 const pagefindTranslations = {
-  placeholder: labels["search.label"],
+  placeholder: labels['search.label'],
   ...Object.fromEntries(
     Object.entries(labels)
-      .filter(([key]) => key.startsWith("pagefind."))
-      .map(([key, value]) => [key.replace("pagefind.", ""), value])
+      .filter(([key]) => key.startsWith('pagefind.'))
+      .map(([key, value]) => [key.replace('pagefind.', ''), value]),
   ),
 };
 ---
 
 <site-search
   data-translations={JSON.stringify(pagefindTranslations)}
-  data-strip-trailing-slash={project.trailingSlash === "never"}
+  data-strip-trailing-slash={project.trailingSlash === 'never'}
 >
   <button
     data-open-modal
     disabled
-    aria-label={labels["search.label"]}
+    aria-label={labels['search.label']}
     aria-keyshortcuts="Control+K"
     class={cn(
       buttonVariants({
-        variant: "outline",
+        variant: 'outline',
       }),
-      "relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64"
+      'relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64',
     )}
   >
     <span class="inline-flex" aria-hidden="true">
-      {labels["search.label"]}
+      {labels['search.label']}
     </span>
     <kbd
       class="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex"
@@ -44,23 +44,25 @@ const pagefindTranslations = {
     </kbd>
   </button>
 
-  <dialog style="padding:0" aria-label={labels["search.label"]}>
+  <dialog style="padding:0" aria-label={labels['search.label']}>
     <div class="dialog-frame sl-flex">
       {
         /* TODO: Make the layout of this button flexible to accommodate different word lengths. Currently hard-coded for English: “Cancel” */
       }
       <button data-close-modal class="sl-flex md:sl-hidden">
-        {labels["search.cancelLabel"]}
+        {labels['search.cancelLabel']}
       </button>
       {
-        import.meta.env.DEV ? (
+        import.meta.env.DEV
+? (
           <div
             style="margin: auto; text-align: center; white-space: pre-line;"
             dir="ltr"
           >
-            <p>{labels["search.devWarning"]}</p>
+            <p>{labels['search.devWarning']}</p>
           </div>
-        ) : (
+        )
+: (
           <div class="search-container">
             <div id="starlight__search" />
           </div>
@@ -78,114 +80,119 @@ const pagefindTranslations = {
    */
 }
 <script is:inline>
-  (() => {
-    const openBtn = document.querySelector("button[data-open-modal]");
-    const shortcut = openBtn?.querySelector("kbd");
-    if (!openBtn || !(shortcut instanceof HTMLElement)) return;
-    const platformKey = shortcut.querySelector("kbd");
-    if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
-      platformKey.textContent = "⌘";
-      openBtn.setAttribute("aria-keyshortcuts", "Meta+K");
-    }
-    shortcut.style.display = "";
-  })();
+(() => {
+  const openBtn = document.querySelector('button[data-open-modal]')
+  const shortcut = openBtn?.querySelector('kbd')
+  if (!openBtn || !(shortcut instanceof HTMLElement))
+    return
+  const platformKey = shortcut.querySelector('kbd')
+  if (platformKey && /Mac|iPhone|iPod|iPad/i.test(navigator.platform)) {
+    platformKey.textContent = '⌘'
+    openBtn.setAttribute('aria-keyshortcuts', 'Meta+K')
+  }
+  shortcut.style.display = ''
+})()
 </script>
 
 <script>
-  class SiteSearch extends HTMLElement {
-    constructor() {
-      super();
-      const openBtn = this.querySelector<HTMLButtonElement>(
-        "button[data-open-modal]"
-      )!;
-      const closeBtn = this.querySelector<HTMLButtonElement>(
-        "button[data-close-modal]"
-      )!;
-      const dialog = this.querySelector("dialog")!;
-      const dialogFrame = this.querySelector(".dialog-frame")!;
-
-      /** Close the modal if a user clicks on a link or outside of the modal. */
-      const onClick = (event: MouseEvent) => {
-        const isLink = "href" in (event.target || {});
-        if (
-          isLink ||
-          (document.body.contains(event.target as Node) &&
-            !dialogFrame.contains(event.target as Node))
-        ) {
-          closeModal();
-        }
-      };
-
-      const openModal = (event?: MouseEvent) => {
-        dialog.showModal();
-        document.body.toggleAttribute("data-search-modal-open", true);
-        this.querySelector("input")?.focus();
-        event?.stopPropagation();
-        window.addEventListener("click", onClick);
-      };
-
-      const closeModal = () => dialog.close();
-
-      openBtn.addEventListener("click", openModal);
-      openBtn.disabled = false;
-      closeBtn.addEventListener("click", closeModal);
-
-      dialog.addEventListener("close", () => {
-        document.body.toggleAttribute("data-search-modal-open", false);
-        window.removeEventListener("click", onClick);
-      });
-
-      // Listen for `ctrl + k` and `cmd + k` keyboard shortcuts.
-      window.addEventListener("keydown", (e) => {
-        if ((e.metaKey === true || e.ctrlKey === true) && e.key === "k") {
-          dialog.open ? closeModal() : openModal();
-          e.preventDefault();
-        }
-      });
-
-      let translations = {};
-      try {
-        translations = JSON.parse(this.dataset.translations || "{}");
-      } catch {}
-
-      const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
-      const stripTrailingSlash = (path: string) =>
-        path.replace(/(.)\/(#.*)?$/, "$1$2");
-      const formatURL = shouldStrip
-        ? stripTrailingSlash
-        : (path: string) => path;
-
-      window.addEventListener("DOMContentLoaded", () => {
-        if (import.meta.env.DEV) return;
-        const onIdle =
-          window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-        onIdle(async () => {
-          // @ts-expect-error — Missing types for @pagefind/default-ui package.
-          const { PagefindUI } = await import("@pagefind/default-ui");
-          new PagefindUI({
-            element: "#starlight__search",
-            baseUrl: import.meta.env.BASE_URL,
-            bundlePath:
-              import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
-            showImages: false,
-            translations,
-            showSubResults: true,
-            processResult: (result: {
-              url: string;
-              sub_results: Array<{ url: string }>;
-            }) => {
-              result.url = formatURL(result.url);
-              result.sub_results = result.sub_results.map((sub_result) => {
-                sub_result.url = formatURL(sub_result.url);
-                return sub_result;
-              });
-            },
-          });
-        });
-      });
+class SiteSearch extends HTMLElement {
+  constructor() {
+    super()
+    const openBtn = this.querySelector<HTMLButtonElement>(
+      'button[data-open-modal]',
+    )!
+    const closeBtn = this.querySelector<HTMLButtonElement>(
+      'button[data-close-modal]',
+    )!
+    const dialog = this.querySelector('dialog')!
+    const dialogFrame = this.querySelector('.dialog-frame')!
+    const closeModal = (): void => dialog.close()
+    /** Close the modal if a user clicks on a link or outside of the modal. */
+    const onClick = (event: MouseEvent): void => {
+      const isLink = 'href' in (event.target || {})
+      if (
+        isLink
+        || (document.body.contains(event.target as Node)
+        && !dialogFrame.contains(event.target as Node))
+      ) {
+        closeModal()
+      }
     }
+
+    const openModal = (event?: MouseEvent): void => {
+      dialog.showModal()
+      document.body.toggleAttribute('data-search-modal-open', true)
+      this.querySelector('input')?.focus()
+      event?.stopPropagation()
+      window.addEventListener('click', onClick)
+    }
+
+    openBtn.addEventListener('click', openModal)
+    openBtn.disabled = false
+    closeBtn.addEventListener('click', closeModal)
+
+    dialog.addEventListener('close', () => {
+      document.body.toggleAttribute('data-search-modal-open', false)
+      window.removeEventListener('click', onClick)
+    })
+
+    // Listen for `ctrl + k` and `cmd + k` keyboard shortcuts.
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
+        if (dialog.open) {
+          closeModal()
+        }
+        else {
+          openModal()
+        }
+        e.preventDefault()
+      }
+    })
+
+    let translations = {}
+    try {
+      translations = JSON.parse(this.dataset.translations || '{}')
+    }
+    catch {}
+
+    const shouldStrip = this.dataset.stripTrailingSlash !== undefined
+    const stripTrailingSlash = (path: string): string =>
+      path.replace(/(.)\/(#.*)?$/, '$1$2')
+    const formatURL = shouldStrip
+      ? stripTrailingSlash
+      : (path: string) => path
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (import.meta.env.DEV)
+        return
+      const onIdle
+        = window.requestIdleCallback || (cb => setTimeout(cb, 1))
+      onIdle(async () => {
+        // @ts-expect-error — Missing types for @pagefind/default-ui package.
+        const { PagefindUI } = await import('@pagefind/default-ui')
+        const _pagefindUI = new PagefindUI({
+          element: '#starlight__search',
+          baseUrl: import.meta.env.BASE_URL,
+          bundlePath: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/pagefind/`,
+          showImages: false,
+          translations,
+          showSubResults: true,
+          processResult: (result: {
+            url: string
+            sub_results: Array<{ url: string }>
+          }) => {
+            result.url = formatURL(result.url)
+            result.sub_results = result.sub_results.map((sub_result) => {
+              sub_result.url = formatURL(sub_result.url)
+              return sub_result
+            })
+          },
+        })
+      })
+    })
   }
-  customElements.define("site-search", SiteSearch);
+}
+customElements.define('site-search', SiteSearch)
 </script>
 
 <style>

@@ -1,9 +1,9 @@
-import { UbButtonDirective } from '@/registry/new-york/ui/button.directive'
+import { UbButtonDirective } from '@/registry/new-york/ui/button'
 
-import { UbCardContentDirective, UbCardDescriptionDirective, UbCardDirective, UbCardFooterDirective, UbCardHeaderDirective, UbCardTitleDirective } from '@/registry/new-york/ui/card.directive'
-import { UbInputDirective } from '@/registry/new-york/ui/input.directive'
-import { UbLabelDirective } from '@/registry/new-york/ui/label.directive'
-import { UbTabsContentDirective, UbTabsDirective, UbTabsListDirective, UbTabsTriggerDirective } from '@/registry/new-york/ui/tabs.directive'
+import { UbCardContentDirective, UbCardDescriptionDirective, UbCardDirective, UbCardFooterDirective, UbCardHeaderDirective, UbCardTitleDirective } from '@/registry/new-york/ui/card'
+import { UbInputDirective } from '@/registry/new-york/ui/input'
+import { UbLabelDirective } from '@/registry/new-york/ui/label'
+import { UbTabsContentDirective, UbTabsDirective, UbTabsListDirective, UbTabsTriggerDirective } from '@/registry/new-york/ui/tabs'
 import { Component } from '@angular/core'
 
 @Component({

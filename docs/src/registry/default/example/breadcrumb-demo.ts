@@ -6,7 +6,7 @@ import {
   UbBreadcrumbListDirective,
   UbBreadcrumbPageDirective,
   UbBreadcrumbSeparatorComponent,
-} from '@/registry/default/ui/breadcrumb.directive'
+} from '@/registry/default/ui/breadcrumb'
 
 import { Component } from '@angular/core'
 

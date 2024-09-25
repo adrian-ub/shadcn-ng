@@ -1,6 +1,6 @@
 import { availableColors, colorMapping, colorsData } from '@/registry/colors'
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<{ params: { theme: string } }[]> {
   const paths = availableColors.map(color => ({
     params: { theme: color },
   }))
@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   return paths
 }
 
-export async function GET({ params }: { params: { theme: string } }) {
+export async function GET({ params }: { params: { theme: string } }): Promise<Response> {
   const baseColor = params.theme
 
   const payload = {

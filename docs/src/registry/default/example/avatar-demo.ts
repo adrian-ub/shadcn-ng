@@ -1,4 +1,4 @@
-import { UbAvatarDirective, UbAvatarFallbackDirective, UbAvatarImageDirective } from '@/registry/default/ui/avatar.directive'
+import { UbAvatarDirective, UbAvatarFallbackDirective, UbAvatarImageDirective } from '@/registry/default/ui/avatar'
 
 import { Component } from '@angular/core'
 
