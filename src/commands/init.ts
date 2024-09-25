@@ -3,11 +3,11 @@ import path from 'node:path'
 import process from 'node:process'
 
 import { defineCommand } from 'citty'
+import { consola } from 'consola'
 import { execa } from 'execa'
 import template from 'lodash.template'
 import ora from 'ora'
 import pc from 'picocolors'
-import prompts from 'prompts'
 import { z } from 'zod'
 
 import {
@@ -123,70 +123,67 @@ export async function promptForConfig(
   const styles = await getRegistryStyles()
   const baseColors = await getRegistryBaseColors()
 
-  const options = await prompts([
-    {
-      type: 'select',
-      name: 'style',
-      message: `Which ${highlight('style')} would you like to use?`,
-      choices: styles.map((style: any) => ({
-        title: style.label,
-        value: style.name,
-      })),
-    },
-    {
-      type: 'select',
-      name: 'tailwindBaseColor',
-      message: `Which color would you like to use as ${highlight(
-        'base color',
-      )}?`,
-      choices: baseColors.map(color => ({
-        title: color.label,
-        value: color.name,
-      })),
-    },
-    {
-      type: 'text',
-      name: 'tailwindCss',
-      message: `Where is your ${highlight('global CSS')} file?`,
-      initial: defaultConfig?.tailwind.css ?? DEFAULT_TAILWIND_CSS,
-    },
-    {
-      type: 'toggle',
-      name: 'tailwindCssVariables',
-      message: `Would you like to use ${highlight(
-        'CSS variables',
-      )} for colors?`,
-      initial: defaultConfig?.tailwind.cssVariables ?? true,
-      active: 'yes',
-      inactive: 'no',
-    },
-    {
-      type: 'text',
-      name: 'tailwindPrefix',
-      message: `Are you using a custom ${highlight(
-        'tailwind prefix eg. tw-',
-      )}? (Leave blank if not)`,
-      initial: '',
-    },
-    {
-      type: 'text',
-      name: 'tailwindConfig',
-      message: `Where is your ${highlight('tailwind.config.js')} located?`,
-      initial: defaultConfig?.tailwind.config ?? DEFAULT_TAILWIND_CONFIG,
-    },
-    {
-      type: 'text',
-      name: 'components',
-      message: `Configure the import alias for ${highlight('components')}:`,
-      initial: defaultConfig?.aliases.components ?? DEFAULT_COMPONENTS,
-    },
-    {
-      type: 'text',
-      name: 'utils',
-      message: `Configure the import alias for ${highlight('utils')}:`,
-      initial: defaultConfig?.aliases.utils ?? DEFAULT_UTILS,
-    },
-  ])
+  const style = await consola.prompt(`Which ${highlight('style')} would you like to use?`, {
+    type: 'select',
+    options: styles.map(style => ({
+      label: style.label,
+      value: style.name,
+    })),
+  })
+
+  const tailwindBaseColor = await consola.prompt(`Which color would you like to use as ${highlight(
+    'base color',
+  )}?`, {
+    type: 'select',
+    options: baseColors.map(color => ({
+      label: color.label,
+      value: color.name,
+    })),
+  })
+
+  const tailwindCss = await consola.prompt(`Where is your ${highlight('global CSS')} file?`, {
+    type: 'text',
+    initial: defaultConfig?.tailwind.css ?? DEFAULT_TAILWIND_CSS,
+  })
+
+  const tailwindCssVariables = await consola.prompt(`Would you like to use ${highlight(
+    'CSS variables',
+  )} for colors?`, {
+    type: 'confirm',
+    initial: defaultConfig?.tailwind.cssVariables ?? true,
+  })
+
+  const tailwindPrefix = await consola.prompt(`Are you using a custom ${highlight(
+    'tailwind prefix eg. tw-',
+  )}? (Leave blank if not)`, {
+    type: 'text',
+  })
+
+  const tailwindConfig = await consola.prompt(`Where is your ${highlight('tailwind.config.js')} located?`, {
+    type: 'text',
+    initial: defaultConfig?.tailwind.config ?? DEFAULT_TAILWIND_CONFIG,
+  })
+
+  const components = await consola.prompt(`Configure the import alias for ${highlight('components')}:`, {
+    type: 'text',
+    initial: defaultConfig?.aliases.components ?? DEFAULT_COMPONENTS,
+  })
+
+  const utils = await consola.prompt(`Configure the import alias for ${highlight('utils')}:`, {
+    type: 'text',
+    initial: defaultConfig?.aliases.utils ?? DEFAULT_UTILS,
+  })
+
+  const options = {
+    style,
+    tailwindConfig,
+    tailwindCss,
+    tailwindBaseColor,
+    tailwindCssVariables,
+    tailwindPrefix,
+    components,
+    utils,
+  }
 
   const config = rawConfigSchema.parse({
     $schema: 'https://ui.adrianub.dev/schema.json',
@@ -205,12 +202,11 @@ export async function promptForConfig(
   })
 
   if (!skip) {
-    const { proceed } = await prompts({
+    const proceed = await consola.prompt(`Write configuration to ${highlight(
+      'components.json',
+    )}. Proceed?`, {
       type: 'confirm',
       name: 'proceed',
-      message: `Write configuration to ${highlight(
-        'components.json',
-      )}. Proceed?`,
       initial: true,
     })
 
@@ -243,41 +239,39 @@ export async function promptForMinimalConfig(
     const styles = await getRegistryStyles()
     const baseColors = await getRegistryBaseColors()
 
-    const options = await prompts([
-      {
-        type: 'select',
-        name: 'style',
-        message: `Which ${highlight('style')} would you like to use?`,
-        choices: styles.map((style: any) => ({
-          title: style.label,
-          value: style.name,
-        })),
-      },
-      {
-        type: 'select',
-        name: 'tailwindBaseColor',
-        message: `Which color would you like to use as ${highlight(
-          'base color',
-        )}?`,
-        choices: baseColors.map(color => ({
-          title: color.label,
-          value: color.name,
-        })),
-      },
-      {
-        type: 'toggle',
-        name: 'tailwindCssVariables',
-        message: `Would you like to use ${highlight(
-          'CSS variables',
-        )} for colors?`,
-        initial: defaultConfig?.tailwind.cssVariables,
-        active: 'yes',
-        inactive: 'no',
-      },
-    ])
+    const styleSelect = await consola.prompt(`Which ${highlight('style')} would you like to use?`, {
+      type: 'select',
+      options: styles.map((style: any) => ({
+        label: style.label,
+        value: style.name,
+      })),
+    })
 
-    style = options.style
-    baseColor = options.tailwindBaseColor
+    const tailwindBaseColor = await consola.prompt(`Which color would you like to use as ${highlight(
+      'base color',
+    )}?`, {
+      type: 'select',
+      options: baseColors.map(color => ({
+        label: color.label,
+        value: color.name,
+      })),
+    })
+
+    const tailwindCssVariables = await consola.prompt(`Would you like to use ${highlight(
+      'CSS variables',
+    )} for colors?`, {
+      type: 'confirm',
+      initial: defaultConfig?.tailwind.cssVariables ?? true,
+    })
+
+    const options = {
+      styleSelect,
+      tailwindBaseColor,
+      tailwindCssVariables,
+    }
+
+    style = options.styleSelect.value
+    baseColor = options.tailwindBaseColor.value
     cssVariables = options.tailwindCssVariables
   }
 

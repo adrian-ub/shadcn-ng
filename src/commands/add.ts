@@ -3,10 +3,10 @@ import path from 'node:path'
 import process from 'node:process'
 
 import { defineCommand } from 'citty'
+import { consola } from 'consola'
 import { execa } from 'execa'
 import ora from 'ora'
 import pc from 'picocolors'
-import prompts from 'prompts'
 import { z } from 'zod'
 
 import { getConfig } from '../utils/get-config'
@@ -36,11 +36,6 @@ export const add = defineCommand({
     description: 'add a component to your project',
   },
   args: {
-    components: {
-      type: 'positional',
-      description: 'the components to add',
-      required: true,
-    },
     yes: {
       type: 'boolean',
       description: 'skip confirmation prompt.',
@@ -102,19 +97,9 @@ export const add = defineCommand({
         ? registryIndex.map((entry: any) => entry.name)
         : options.components
       if (!options.components?.length && !options.all) {
-        const { components } = await prompts({
+        const components = await consola.prompt('Which components would you like to add?', {
           type: 'multiselect',
-          name: 'components',
-          message: 'Which components would you like to add?',
-          hint: 'Space to select. A to toggle all. Enter to submit.',
-          instructions: false,
-          choices: registryIndex.map((entry: any) => ({
-            title: entry.name,
-            value: entry.name,
-            selected: options.all
-              ? true
-              : options.components?.includes(entry.name),
-          })),
+          options: registryIndex.map(entry => entry.name),
         })
         selectedComponents = components
       }
@@ -134,10 +119,8 @@ export const add = defineCommand({
       }
 
       if (!options.yes) {
-        const { proceed } = await prompts({
+        const proceed = await consola.prompt(`Ready to install components and dependencies. Proceed?`, {
           type: 'confirm',
-          name: 'proceed',
-          message: `Ready to install components and dependencies. Proceed?`,
           initial: true,
         })
 
@@ -170,10 +153,8 @@ export const add = defineCommand({
         if (existingComponent.length && !options.overwrite) {
           if (selectedComponents.includes(item.name)) {
             spinner.stop()
-            const { overwrite } = await prompts({
+            const overwrite = await consola.prompt(`Component ${item.name} already exists. Would you like to overwrite?`, {
               type: 'confirm',
-              name: 'overwrite',
-              message: `Component ${item.name} already exists. Would you like to overwrite?`,
               initial: false,
             })
 
