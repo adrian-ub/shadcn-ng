@@ -13,7 +13,16 @@
     "url": "git+https://github.com/adrian-ub/shadcn-ng.git"
   },
   "bugs": "https://github.com/adrian-ub/shadcn-ng/issues",
-  "keywords": [],
+  "keywords": [
+    "components",
+    "ui",
+    "tailwind",
+    "radix-ui",
+    "shadcn",
+    "shadcn-ng",
+    "ng",
+    "angular"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
