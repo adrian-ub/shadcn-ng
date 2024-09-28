@@ -3,11 +3,11 @@ title: Angular
 description: Install and configure Angular.
 ---
 
-<Step>
+<Steps>
 
-<StepItem>
+<Step>
 ### Create project
-</StepItem>
+</Step>
 
 Start by creating a new App using the Angular CLI.
 
@@ -15,9 +15,9 @@ Start by creating a new App using the Angular CLI.
 ng new my-app
 ```
 
-<StepItem>
+<Step>
 ### Add Tailwind and its configuration
-</StepItem>
+</Step>
 
 Install `tailwindcss` and its peer dependencies, then generate your `tailwind.config.js` file:
 
@@ -27,9 +27,9 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init
 ```
 
-<StepItem>
+<Step>
 ### Edit tsconfig.json file
-</StepItem>
+</Step>
 
 ```json {3-6} showLineNumbers
 {
@@ -42,9 +42,9 @@ npx tailwindcss init
 }
 ```
 
-<StepItem>
+<Step>
 ### Run the CLI
-</StepItem>
+</Step>
 
 Run the `shadcn-ng` init command to setup your project:
 
@@ -52,9 +52,9 @@ Run the `shadcn-ng` init command to setup your project:
 npx shadcn-ng@latest init
 ```
 
-<StepItem>
+<Step>
 ### Configure components.json
-</StepItem>
+</Step>
 
 You will be asked a few questions to configure `components.json`:
 
@@ -68,9 +68,9 @@ Configure the import alias for components: › @/components
 Configure the import alias for utils: › @/lib/utils
 ```
 
-<StepItem>
+<Step>
 ### That's it
-</StepItem>
+</Step>
 
 You can now start adding components to your project.
 
@@ -92,4 +92,4 @@ import { UbButtonDirective } from "@/components/ui/button.directive";
 export class ButtonDemoComponent {}
 ```
 
-</Step>
+</Steps>

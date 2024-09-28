@@ -15,8 +15,8 @@ import ol from './ol.astro'
 import p from './p.astro'
 
 import pre from './pre.astro'
-import Step from './step.astro'
-import StepItem from './step-item.astro'
+import Step from './Step.astro'
+import Steps from './Steps.astro'
 import ul from './ul.astro'
 
 export const components = {
@@ -32,8 +32,8 @@ export const components = {
   ul,
   li,
   ol,
+  Steps,
   Step,
-  StepItem,
   LinkedCard,
   Tabs,
   TabsContent,
