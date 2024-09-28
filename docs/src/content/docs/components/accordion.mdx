@@ -1,0 +1,100 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+links:
+  doc: https://www.radix-ng.com/?path=/docs/primitives-accordion--docs
+---
+
+<ComponentPreview
+  name="accordion-demo"
+  class="[&_*_ub-select-content]:sm:max-w-[70%] [&_*_ub-select-content]:w-3/5"
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash frame="code"
+npx shadcn-ng@latest add accordion
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Step>
+
+<StepItem>Install the following dependencies:</StepItem>
+
+```bash
+npm install @ng-icons/core @ng-icons/lucide
+```
+
+<StepItem>Copy and paste the following code into your project.</StepItem>
+
+<ComponentSource name="accordion" />
+
+<StepItem>Update the import paths to match your project setup.</StepItem>
+
+<StepItem>Update `tailwind.config.js`</StepItem>
+
+Add the following animations to your `tailwind.config.js` file:
+
+```js {5-18}
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        "accordion-down": {
+            from: { height: "0" },
+            to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+            from: { height: "var(--radix-accordion-content-height)" },
+            to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
+  },
+}
+```
+
+</Step>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```ts
+import {
+    UbAccordionDirective,
+    UbAccordionItemDirective,
+    UbAccordionTriggerDirective,
+    UbAccordionContentDirective
+} from '@/components/ui/accordion.directive';
+```
+
+```html
+<div ubAccordion class="w-full" orientation="vertical">
+    <div ubAccordionItem value="item-1">
+        <ub-accordion-trigger>Is it accessible?</ub-accordion-trigger>
+        <div ubAccordionContent>
+            Yes. It adheres to the WAI-ARIA design pattern.
+        </div>
+    </div>
+</div>
+```

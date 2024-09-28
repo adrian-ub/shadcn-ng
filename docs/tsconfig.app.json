@@ -3,9 +3,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "target": "es2020",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "experimentalDecorators": true,
-    "baseUrl": "./",
     "module": "es2020",
     "moduleResolution": "node",
     "strict": true,
@@ -20,7 +22,15 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      },
+      {
+        "name": "@angular/language-service"
+      }
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -30,5 +40,7 @@
     "allowJs": false
   },
   "files": [],
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts"
+  ]
 }

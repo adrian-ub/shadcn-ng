@@ -1,13 +1,13 @@
 import { cn } from '@/lib/utils'
 
-import { computed, Directive, Input, input } from '@angular/core'
-
+import { booleanAttribute, computed, Directive, input } from '@angular/core'
 import {
   RdxTabsContentDirective,
   RdxTabsListDirective,
   RdxTabsRootDirective,
   RdxTabsTriggerDirective,
 } from '@radix-ng/primitives/tabs'
+import type { BooleanInput } from '@angular/cdk/coercion'
 
 @Directive({
   selector: '[ubTabs]',
@@ -15,12 +15,12 @@ import {
   hostDirectives: [
     {
       directive: RdxTabsRootDirective,
-      inputs: ['defaultValue: ubDefaultValue'],
+      inputs: ['defaultValue: defaultValue'],
     },
   ],
 })
 export class UbTabsDirective {
-  @Input() ubDefaultValue?: string
+  defaultValue = input<string>()
 }
 
 @Directive({
@@ -45,7 +45,7 @@ export class UbTabsListDirective {
   selector: '[ubTabsTrigger]',
   standalone: true,
   hostDirectives: [
-    { directive: RdxTabsTriggerDirective, inputs: ['value: value'] },
+    { directive: RdxTabsTriggerDirective, inputs: ['value: value', 'disabled: disabled'] },
   ],
   host: {
     '[class]': 'computedClass()',
@@ -53,6 +53,9 @@ export class UbTabsListDirective {
 })
 export class UbTabsTriggerDirective {
   readonly value = input.required<string>()
+  readonly disabled = input<boolean, BooleanInput>(false, {
+    transform: booleanAttribute,
+  })
 
   readonly class = input<string>()
   protected computedClass = computed(() =>

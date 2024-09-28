@@ -1,0 +1,40 @@
+---
+import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
+
+import { siteConfig } from '@/config/site'
+
+import RootLayout from '@/layouts/RootLayout.astro'
+
+import { buttonVariants } from '@/registry/new-york/ui/button'
+---
+
+<RootLayout>
+    <div class="container relative">
+        <PageHeader>
+            <PageHeaderHeading>Build your component library</PageHeaderHeading>
+            <PageHeaderDescription> Beautifully designed components that you can copy and paste into your apps. </PageHeaderDescription>
+
+            <PageActions>
+                <a
+                  href="/docs"
+                  class={buttonVariants({
+                        size: 'sm',
+                    })}
+                >
+                    Get Started
+                </a>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={siteConfig.links.github}
+                  class={buttonVariants({
+                        size: 'sm',
+                        variant: 'ghost',
+                    })}
+                >
+                    GitHub
+                </a>
+            </PageActions>
+        </PageHeader>
+    </div>
+</RootLayout>

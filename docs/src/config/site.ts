@@ -1,13 +1,13 @@
 export const siteConfig = {
-  name: 'shadcn-ng',
+  title: 'shadcn-gn',
   url: 'https://ui.adrianub.dev',
-  ogImage: 'https://ui.adrianub.dev/og.jpg',
-  description:
-    'Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.',
+  description: 'Beautifully designed components built with your choice of UI and CSS frameworks.',
   links: {
-    twitter: 'https://twitter.com/adrianub',
+    twitter: 'https://twitter.com/AdrianUB',
     github: 'https://github.com/adrian-ub/shadcn-ng',
+    shadcn: {
+      twitter: 'https://twitter.com/shadcn',
+      github: 'https://github.com/shadcn/ui',
+    },
   },
 }
-
-export type SiteConfig = typeof siteConfig

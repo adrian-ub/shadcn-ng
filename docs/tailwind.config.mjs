@@ -1,5 +1,3 @@
-import starlightPlugin from '@astrojs/starlight-tailwind'
-import colors from 'tailwindcss/colors'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 
 /** @type {import('tailwindcss').Config} */
@@ -18,7 +16,6 @@ export default {
     },
     extend: {
       colors: {
-        gray: colors.stone,
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -41,7 +38,6 @@ export default {
           foreground: 'hsl(var(--muted-foreground))',
         },
         accent: {
-          ...colors.neutral,
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
@@ -78,8 +74,5 @@ export default {
       },
     },
   },
-  corePlugins: {
-    preflight: true,
-  },
-  plugins: [starlightPlugin()],
+  plugins: [require('tailwindcss-animate')],
 }

@@ -1,0 +1,53 @@
+---
+title: Switch
+description: A control that allows the user to toggle between checked and not checked.
+links:
+  doc: https://www.radix-ng.com/?path=/docs/primitives-switch--docs
+---
+
+<ComponentPreview name="switch-demo" />
+
+## Installation
+
+<Tabs>
+
+<TabsList>
+
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash frame="code"
+npx shadcn-ng@latest add switch
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Step>
+
+<StepItem>Copy and paste the following code into your project.</StepItem>
+
+<ComponentSource name="switch" />
+
+<StepItem>Update the import paths to match your project setup.</StepItem>
+
+</Step>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```ts
+import { SwitchDirective } from '@/components/ui/switch.directive'
+```
+
+```html
+<button ubSwitch />
+```

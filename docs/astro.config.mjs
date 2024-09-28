@@ -1,97 +1,104 @@
 import angular from '@analogjs/astro-angular'
-import starlight from '@astrojs/starlight'
+import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import { transformerMetaHighlight } from '@shikijs/transformers'
 import { defineConfig } from 'astro/config'
-import AutoImport from 'astro-auto-import'
-import { siteConfig } from './src/config/site'
 
-import theme from './src/lib/highlighter-theme.json'
+import { visit } from 'unist-util-visit'
+import { siteConfig } from './src/config/site'
+import blackout from './theme/dark.json'
+
+// Función recursiva para extraer todos los valores de texto
+function extractText(node) {
+  if (node.type === 'text') {
+    return node.value
+  }
+  if (node.children) {
+    return node.children.map(extractText).join('')
+  }
+  return ''
+}
 
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.url,
+  trailingSlash: 'never',
   integrations: [
-    starlight({
-      title: siteConfig.name,
-      titleDelimiter: '-',
-      expressiveCode: {
-        themes: [theme],
-        styleOverrides: {
-          textMarkers: {
-            markHue: 'rgba(63,63,70,.5)',
-          },
-        },
-      },
-      logo: { src: './src/assets/logo.svg' },
-      favicon: '/favicon.ico',
-      social: {
-        'github': siteConfig.links.github,
-        'x.com': siteConfig.links.twitter,
-      },
-      sidebar: [
-        {
-          label: 'Getting Started',
-          items: [
-            {
-              label: 'Introduction',
-              slug: 'docs',
-            },
-            {
-              label: 'Installation',
-              slug: 'docs/installation',
-            },
-            {
-              label: 'components.json',
-              slug: 'docs/components-json',
-            },
-            {
-              label: 'Theming',
-              slug: 'docs/theming',
-            },
-            {
-              label: 'CLI',
-              slug: 'docs/cli',
-            },
-            {
-              label: 'Typography',
-              slug: 'docs/components/typography',
-            },
-          ],
-        },
-        {
-          label: 'Components',
-          autogenerate: {
-            directory: 'docs/components',
-          },
-        },
-      ],
-      customCss: ['./src/fonts/font-face.css', './src/tailwind.css'],
-      components: {
-        Header: './src/components/starlight/header/Header.astro',
-        SiteTitle: './src/components/starlight/SiteTitle.astro',
-        SocialIcons: './src/components/starlight/SocialIcons.astro',
-        Search: './src/components/starlight/Search.astro',
-        Hero: './src/components/starlight/Hero.astro',
-        ContentPanel: './src/components/starlight/ContentPanel.astro',
-        PageTitle: './src/components/starlight/PageTitle.astro',
-        MarkdownContent: './src/components/starlight/MarkdownContent.astro',
-        TwoColumnContent: './src/components/starlight/TwoColumnContent.astro',
-        Sidebar: './src/components/starlight/Sidebar.astro',
-        Pagination: './src/components/starlight/Pagination.astro',
-        MobileMenuToggle: './src/components/starlight/MobileMenuToggle.astro',
-        PageFrame: './src/components/starlight/PageFrame.astro',
-        PageSidebar: './src/components/starlight/PageSidebar.astro',
-      },
-    }),
-    AutoImport({
-      imports: [
-        '@/components/ComponentPreview.astro',
-        '@/components/ComponentSource.astro',
-      ],
-    }),
-    tailwind(),
+    mdx(),
     angular(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    sitemap({
+      serialize(item) {
+        if (item.url === siteConfig.url) {
+          item.changefreq = 'daily'
+          item.lastmod = new Date()
+          item.priority = 1
+        }
+        else {
+          item.changefreq = 'daily'
+          item.lastmod = new Date()
+          item.priority = 0.9
+        }
+        return item
+      },
+    }),
   ],
+  markdown: {
+    shikiConfig: {
+      theme: blackout,
+      transformers: [transformerMetaHighlight()],
+    },
+    rehypePlugins: [
+      () => (tree) => {
+        visit(tree, 'element', (node) => {
+          if (node.tagName !== 'pre')
+            return
+
+          const [codeEl] = node.children
+
+          if (codeEl.tagName !== 'code')
+            return
+
+          const rawString = extractText(codeEl)
+
+          node.properties = node.properties || {}
+          node.properties.rawString = rawString
+        })
+      },
+      () => (tree) => {
+        visit(tree, 'element', (node) => {
+          if (node.tagName !== 'pre')
+            return
+
+          const rawString = node.properties.rawString
+
+          // npm install.
+          if (rawString?.startsWith('npm install')) {
+            node.properties.npmCommand = rawString
+            node.properties.yarnCommand = rawString.replace('npm install', 'yarn add')
+            node.properties.pnpmCommand = rawString.replace('npm install', 'pnpm add')
+          }
+
+          // npx create.
+          if (rawString?.startsWith('npx create-')) {
+            node.properties.npmCommand = rawString
+            node.properties.yarnCommand = rawString.replace('npx create-', 'yarn create ')
+            node.properties.pnpmCommand = rawString.replace('npx create-', 'pnpm create ')
+          }
+
+          // npx.
+          if (rawString?.startsWith('npx') && !rawString.startsWith('npx create-')) {
+            node.properties.npmCommand = rawString
+            node.properties.yarnCommand = rawString
+            node.properties.pnpmCommand = rawString.replace('npx', 'pnpm dlx')
+          }
+        })
+      },
+    ],
+  },
   redirects: {
     '/docs/components': '/docs/components/accordion',
   },

@@ -3,7 +3,20 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      },
+      {
+        "name": "@angular/language-service"
+      }
+    ]
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }

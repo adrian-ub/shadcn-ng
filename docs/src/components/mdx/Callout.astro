@@ -1,0 +1,13 @@
+---
+import { cn } from '@/lib/utils'
+---
+
+<div
+  role="alert"
+  class={cn('[&>[ubAlertIcon]+div]:translate-y-[-3px] [&>[ubAlertIcon]]:absolute [&>[ubAlertIcon]]:left-4 [&>[ubAlertIcon]]:text-foreground [&>[ubAlertIcon]]:top-4 [&>[ubAlertIcon]~*]:pl-7 bg-background border p-4 relative rounded-lg text-foreground w-full', Astro.props.class)}
+>
+    {Astro.props.title && (
+        <h5 class="font-medium leading-none mb-1 tracking-tight">{Astro.props.title}</h5>
+    )}
+    <div class="text-sm [&_p]:leading-relaxed"><slot /></div>
+</div>
