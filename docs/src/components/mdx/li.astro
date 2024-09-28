@@ -1,7 +1,9 @@
 ---
-const props = Astro.props;
+import { cn } from '@/lib/utils'
+
+const { class: className, ...props } = Astro.props
 ---
 
-<li class="mt-2" {...props}>
+<li class={cn('mt-2', className)} {...props}>
     <slot />
 </li>

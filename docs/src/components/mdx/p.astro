@@ -1,7 +1,9 @@
 ---
-const props = Astro.props;
+import { cn } from '@/lib/utils'
+
+const { class: className, ...props } = Astro.props
 ---
 
-<p class="break-words leading-7 [&:not(:first-child)]:mt-6" {...props}>
+<p class={cn('leading-7 [&:not(:first-child)]:mt-6', className)} {...props}>
     <slot />
 </p>

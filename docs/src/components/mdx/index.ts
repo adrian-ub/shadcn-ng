@@ -2,6 +2,7 @@ import ComponentPreview from '../component-preview/ComponentPreview.astro'
 import ComponentSource from '../component-preview/ComponentSource.astro'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
 import a from './a.astro'
+import blockquote from './blockquote.astro'
 import Callout from './Callout.astro'
 import h1 from './h1.astro'
 import h2 from './h2.astro'
@@ -9,11 +10,12 @@ import h3 from './h3.astro'
 import h4 from './h4.astro'
 import h5 from './h5.astro'
 import h6 from './h6.astro'
+import hr from './hr.astro'
+import img from './img.astro'
 import li from './li.astro'
 import LinkedCard from './linked-card.astro'
 import ol from './ol.astro'
 import p from './p.astro'
-
 import pre from './pre.astro'
 import Step from './Step.astro'
 import Steps from './Steps.astro'
@@ -32,6 +34,9 @@ export const components = {
   ul,
   li,
   ol,
+  img,
+  hr,
+  blockquote,
   Steps,
   Step,
   LinkedCard,
