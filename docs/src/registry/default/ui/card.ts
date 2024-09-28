@@ -4,7 +4,7 @@ import { computed, Directive, input } from '@angular/core'
 
 @Directive({
   standalone: true,
-  selector: '[ubCard]',
+  selector: 'div[ubCard]',
   host: {
     '[class]': 'computedClass()',
   },
@@ -18,7 +18,7 @@ export class UbCardDirective {
 
 @Directive({
   standalone: true,
-  selector: '[ubCardHeader]',
+  selector: 'div[ubCardHeader]',
   host: {
     '[class]': 'computedClass()',
   },
@@ -32,7 +32,7 @@ export class UbCardHeaderDirective {
 
 @Directive({
   standalone: true,
-  selector: '[ubCardTitle]',
+  selector: 'h3[ubCardTitle]',
   host: {
     '[class]': 'computedClass()',
   },
@@ -46,7 +46,7 @@ export class UbCardTitleDirective {
 
 @Directive({
   standalone: true,
-  selector: '[ubCardDescription]',
+  selector: 'p[ubCardDescription]',
   host: {
     '[class]': 'computedClass()',
   },
@@ -60,7 +60,7 @@ export class UbCardDescriptionDirective {
 
 @Directive({
   standalone: true,
-  selector: '[ubCardContent]',
+  selector: 'div[ubCardContent]',
   host: {
     '[class]': 'computedClass()',
   },
@@ -72,7 +72,7 @@ export class UbCardContentDirective {
 
 @Directive({
   standalone: true,
-  selector: '[ubCardFooter]',
+  selector: 'div[ubCardFooter]',
   host: {
     '[class]': 'computedClass()',
   },

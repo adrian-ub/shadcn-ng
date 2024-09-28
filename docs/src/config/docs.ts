@@ -114,6 +114,11 @@ export const docsConfig: TDocsConfig = {
           items: [],
         },
         {
+          title: 'Card',
+          href: '/docs/components/card',
+          items: [],
+        },
+        {
           title: 'Input',
           href: '/docs/components/input',
           items: [],
