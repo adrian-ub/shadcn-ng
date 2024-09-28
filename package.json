@@ -87,7 +87,6 @@
     "@types/fs-extra": "^11.0.1",
     "@types/lodash.template": "^4.5.1",
     "@types/node": "^22.5.4",
-    "@types/prompts": "^2.4.2",
     "bumpp": "^9.5.2",
     "eslint": "^9.9.1",
     "esno": "^4.7.0",
