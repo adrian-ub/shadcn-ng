@@ -24,41 +24,26 @@
     "angular"
   ],
   "sideEffects": false,
-  "exports": {
-    ".": {
-      "types": "./dist/cli.d.ts",
-      "import": "./dist/cli.mjs",
-      "require": "./dist/cli.cjs"
-    }
-  },
-  "main": "./dist/cli.mjs",
-  "module": "./dist/cli.mjs",
-  "types": "./dist/cli.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./dist/cli.d.ts"
-      ]
-    }
-  },
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "bin": {
-    "shadcn-ng": "./dist/cli.mjs"
+    "shadcn-ng": "bin/shadcn-ng.mjs"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "unbuild",
-    "dev": "unbuild --stub",
+    "dev": "cross-env DEBUG=shadcn-ng:* esno src/cli.ts",
     "lint": "eslint .",
+    "prepare": "simple-git-hooks",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
+    "shadcn-ng": "esno src/cli.ts",
     "start": "esno src/cli.ts",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "prepare": "simple-git-hooks",
-    "shadcn-ng": "esno src/cli.ts"
+    "test": "unbuild && vitest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@antfu/ni": "^0.23.0",
@@ -83,11 +68,14 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.3.2",
     "@antfu/utils": "^0.7.10",
+    "@types/debug": "^4.1.12",
     "@types/diff": "^5.0.3",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash.template": "^4.5.1",
     "@types/node": "^22.5.4",
     "bumpp": "^9.5.2",
+    "cross-env": "^7.0.3",
+    "debug": "^4.3.7",
     "eslint": "^9.9.1",
     "esno": "^4.7.0",
     "lint-staged": "^15.2.10",
