@@ -2,13 +2,13 @@ import { existsSync, promises as fs } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
-import { defineCommand } from 'citty'
+import { Command } from 'commander'
 import { consola } from 'consola'
 import { execa } from 'execa'
 import ora from 'ora'
 import pc from 'picocolors'
-import { z } from 'zod'
 
+import { z } from 'zod'
 import { getConfig } from '../utils/get-config'
 import { getPackageManager } from '../utils/get-package-manager'
 import { handleError } from '../utils/handle-error'
@@ -31,47 +31,24 @@ const addOptionsSchema = z.object({
   path: z.string().optional(),
 })
 
-export const add = defineCommand({
-  meta: {
-    description: 'add a component to your project',
-  },
-  args: {
-    yes: {
-      type: 'boolean',
-      description: 'skip confirmation prompt.',
-      default: true,
-      alias: 'y',
-    },
-    overwrite: {
-      type: 'boolean',
-      description: 'overwrite existing files.',
-      default: false,
-      alias: 'o',
-    },
-    cwd: {
-      type: 'string',
-      description: 'the working directory. defaults to the current directory.',
-      default: process.cwd(),
-      alias: 'c',
-    },
-    all: {
-      type: 'boolean',
-      description: 'add all available components',
-      default: false,
-      alias: 'a',
-    },
-    path: {
-      type: 'string',
-      description: 'the path to add the component to.',
-      alias: 'p',
-    },
-  },
-  run: async ({ args: opts }) => {
-    const { _: components } = opts
+export const add = new Command()
+  .name('add')
+  .description('add a component to your project')
+  .argument('[components...]', 'the components to add')
+  .option('-y, --yes', 'skip confirmation prompt.', true)
+  .option('-o, --overwrite', 'overwrite existing files.', false)
+  .option(
+    '-c, --cwd <cwd>',
+    'the working directory. defaults to the current directory.',
+    process.cwd(),
+  )
+  .option('-a, --all', 'add all available components', false)
+  .option('-p, --path <path>', 'the path to add the component to.')
+  .action(async (components, opts) => {
     try {
       const options = addOptionsSchema.parse({
-        ...opts,
         components,
+        ...opts,
       })
 
       const cwd = path.resolve(options.cwd)
@@ -224,5 +201,4 @@ export const add = defineCommand({
     catch (error) {
       handleError(error)
     }
-  },
-})
+  })

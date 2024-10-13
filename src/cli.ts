@@ -1,7 +1,5 @@
-#!/usr/bin/env node
 import process from 'node:process'
-
-import { defineCommand, runMain } from 'citty'
+import { Command } from 'commander'
 
 import { description, name, version } from '../package.json'
 
@@ -12,17 +10,19 @@ import { init } from './commands/init'
 process.on('SIGINT', () => process.exit(0))
 process.on('SIGTERM', () => process.exit(0))
 
-const main = defineCommand({
-  meta: {
-    name,
-    version,
-    description,
-  },
-  subCommands: {
-    init,
-    add,
-    diff,
-  },
-})
+async function main(): Promise<void> {
+  const program = new Command()
+    .name(name)
+    .description(description)
+    .version(
+      version,
+      '-v, --version',
+      'display the version number',
+    )
 
-runMain(main)
+  program.addCommand(init).addCommand(add).addCommand(diff)
+
+  program.parse()
+}
+
+main()

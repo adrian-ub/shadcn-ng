@@ -14,9 +14,9 @@ importers:
       astro-eslint-parser:
         specifier: ^1.0.3
         version: 1.0.3(typescript@5.5.4)
-      citty:
-        specifier: ^0.1.6
-        version: 0.1.6
+      commander:
+        specifier: ^12.1.0
+        version: 12.1.0
       consola:
         specifier: ^3.2.3
         version: 3.2.3

@@ -2,11 +2,11 @@ import { existsSync, promises as fs } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
-import { defineCommand } from 'citty'
+import { Command } from 'commander'
 import { type Change, diffLines } from 'diff'
 import pc from 'picocolors'
-import { z } from 'zod'
 
+import { z } from 'zod'
 import { getConfig } from '../utils/get-config'
 import { handleError } from '../utils/handle-error'
 import { logger } from '../utils/logger'
@@ -27,32 +27,20 @@ const updateOptionsSchema = z.object({
   path: z.string().optional(),
 })
 
-export const diff = defineCommand({
-  meta: {
-    description: 'check for updates against the registry',
-  },
-  args: {
-    component: {
-      type: 'positional',
-      description: 'the component name',
-      required: false,
-    },
-    yes: {
-      type: 'boolean',
-      description: 'skip confirmation prompt.',
-      default: false,
-      alias: 'y',
-    },
-    cwd: {
-      type: 'string',
-      description: 'the working directory. defaults to the current directory.',
-      default: process.cwd(),
-      alias: 'c',
-    },
-  },
-  run: async ({ args: opts }) => {
+export const diff = new Command()
+  .name('diff')
+  .description('check for updates against the registry')
+  .argument('[component]', 'the component name')
+  .option('-y, --yes', 'skip confirmation prompt.', false)
+  .option(
+    '-c, --cwd <cwd>',
+    'the working directory. defaults to the current directory.',
+    process.cwd(),
+  )
+  .action(async (name, opts) => {
     try {
       const options = updateOptionsSchema.parse({
+        component: name,
         ...opts,
       })
 
@@ -149,8 +137,7 @@ export const diff = defineCommand({
     catch (error) {
       handleError(error)
     }
-  },
-})
+  })
 
 async function diffComponent(
   component: z.infer<typeof registryIndexSchema>[number],
