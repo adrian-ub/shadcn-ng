@@ -11,6 +11,9 @@ importers:
       '@antfu/ni':
         specifier: ^0.23.0
         version: 0.23.0
+      '@clack/prompts':
+        specifier: ^0.7.0
+        version: 0.7.0
       astro-eslint-parser:
         specifier: ^1.0.3
         version: 1.0.3(typescript@5.5.4)
