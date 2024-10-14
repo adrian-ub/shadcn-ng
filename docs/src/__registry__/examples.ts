@@ -16,11 +16,11 @@ for (const path in components) {
 
   examples[name][componentName] = {
     name: componentName,
-    type: 'components:example',
+    type: 'registry:example',
     registryDependencies: [name],
+    files: [path],
     component,
     source: '',
-    files: [path],
     category: 'undefined',
     subcategory: 'undefined',
     chunks: [],

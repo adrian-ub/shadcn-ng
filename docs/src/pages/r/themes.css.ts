@@ -1,11 +1,7 @@
-import { themes } from '@/registry/themes'
+import { baseColors } from '@/registry/registry-base-colors'
 import template from 'lodash.template'
 
-export async function GET(): Promise<Response> {
-  const themeCSS = []
-
-  const THEME_STYLES_WITH_VARIABLES = `
-.theme-<%- theme %> {
+const THEME_STYLES_WITH_VARIABLES = `.theme-<%- theme %> {
   --background: <%- colors.light["background"] %>;
   --foreground: <%- colors.light["foreground"] %>;
 
@@ -69,7 +65,9 @@ export async function GET(): Promise<Response> {
   --ring: <%- colors.dark["ring"] %>;
 }`
 
-  for (const theme of themes) {
+export async function GET(): Promise<Response> {
+  const themeCSS = []
+  for (const theme of baseColors) {
     themeCSS.push(
       template(THEME_STYLES_WITH_VARIABLES)({
         colors: theme.cssVars,
@@ -77,10 +75,12 @@ export async function GET(): Promise<Response> {
       }),
     )
   }
-
-  return new Response(themeCSS.join('\n'), {
-    headers: {
-      'Content-Type': 'text/css',
+  return new Response(
+    themeCSS.join('\n'),
+    {
+      headers: {
+        'Content-Type': 'text/css',
+      },
     },
-  })
+  )
 }

@@ -1,20 +1,17 @@
-import { availableColors, colorMapping, colorsData } from '@/registry/colors'
+import { availableColors, colorMapping, colorsData } from '@/registry/registry-colors'
 
 export async function getStaticPaths(): Promise<{ params: { theme: string } }[]> {
-  const paths = availableColors.map(color => ({
+  return availableColors.map(color => ({
     params: { theme: color },
   }))
-
-  return paths
 }
 
 export async function GET({ params }: { params: { theme: string } }): Promise<Response> {
   const baseColor = params.theme
-
-  const payload = {
+  const payload: Record<string, any> = {
     name: baseColor,
     label: baseColor.charAt(0).toUpperCase() + baseColor.slice(1),
-    cssVars: {} as { [key: string]: { [key: string]: string } },
+    cssVars: {},
   }
 
   for (const [mode, values] of Object.entries(colorMapping)) {
@@ -27,7 +24,7 @@ export async function GET({ params }: { params: { theme: string } }): Promise<Re
         const [resolvedBase, scale] = resolvedColor.split('-')
         const color = scale
           ? colorsData()[resolvedBase].find(
-            (item: { scale: number }) => item.scale === Number.parseInt(scale),
+            (item: any) => item.scale === Number.parseInt(scale),
           )
           : colorsData()[resolvedBase]
         if (color) {

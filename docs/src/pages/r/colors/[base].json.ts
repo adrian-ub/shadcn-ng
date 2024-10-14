@@ -1,4 +1,4 @@
-import { availableColors, colorMapping, colorsData } from '@/registry/colors'
+import { availableColors, colorMapping, colorsData } from '@/registry/registry-colors'
 import template from 'lodash.template'
 
 const BASE_STYLES = `@tailwind base;
@@ -77,11 +77,9 @@ const BASE_STYLES_WITH_VARIABLES = `@tailwind base;
 }`
 
 export async function getStaticPaths(): Promise<{ params: { base: string } }[]> {
-  const paths = availableColors.map(color => ({
+  return availableColors.map(color => ({
     params: { base: color },
   }))
-
-  return paths
 }
 
 export async function GET({ params }: { params: { base: string } }): Promise<Response> {
@@ -108,7 +106,7 @@ export async function GET({ params }: { params: { base: string } }): Promise<Res
         const [resolvedBase, scale] = resolvedColor.split('-')
         const color = scale
           ? colorsData()[resolvedBase].find(
-            (item: { scale: number }) => item.scale === Number.parseInt(scale),
+            (item: any) => item.scale === Number.parseInt(scale),
           )
           : colorsData()[resolvedBase]
         if (color) {
@@ -118,6 +116,7 @@ export async function GET({ params }: { params: { base: string } }): Promise<Res
     }
   }
 
+  // Build css vars.
   base.inlineColorsTemplate = template(BASE_STYLES)({})
   base.cssVarsTemplate = template(BASE_STYLES_WITH_VARIABLES)({
     colors: base.cssVars,
