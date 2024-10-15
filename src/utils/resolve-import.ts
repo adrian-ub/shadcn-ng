@@ -1,7 +1,4 @@
-import {
-  type ConfigLoaderSuccessResult,
-  createMatchPath,
-} from 'tsconfig-paths'
+import { type ConfigLoaderSuccessResult, createMatchPath } from 'tsconfig-paths'
 
 export async function resolveImport(
   importPath: string,

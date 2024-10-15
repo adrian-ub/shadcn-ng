@@ -1,7 +1,12 @@
+import process from 'node:process'
+
 import { detect } from '@antfu/ni'
 
 export async function getPackageManager(
   targetDir: string,
+  { withFallback }: { withFallback?: boolean } = {
+    withFallback: false,
+  },
 ): Promise<'yarn' | 'pnpm' | 'bun' | 'npm'> {
   const packageManager = await detect({ programmatic: true, cwd: targetDir })
 
@@ -12,5 +17,36 @@ export async function getPackageManager(
   if (packageManager === 'bun')
     return 'bun'
 
-  return packageManager ?? 'npm'
+  if (!withFallback) {
+    return packageManager ?? 'npm'
+  }
+
+  // Fallback to user agent if not detected.
+  const userAgent = process.env.npm_config_user_agent || ''
+
+  if (userAgent.startsWith('yarn')) {
+    return 'yarn'
+  }
+
+  if (userAgent.startsWith('pnpm')) {
+    return 'pnpm'
+  }
+
+  if (userAgent.startsWith('bun')) {
+    return 'bun'
+  }
+
+  return 'npm'
+}
+
+export async function getPackageRunner(cwd: string): Promise<'pnpm dlx' | 'bunx' | 'npx'> {
+  const packageManager = await getPackageManager(cwd)
+
+  if (packageManager === 'pnpm')
+    return 'pnpm dlx'
+
+  if (packageManager === 'bun')
+    return 'bunx'
+
+  return 'npx'
 }

@@ -1,176 +1,148 @@
-import { existsSync, promises as fs } from 'node:fs'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 
+import * as p from '@clack/prompts'
 import { Command } from 'commander'
-import { consola } from 'consola'
-import { execa } from 'execa'
-import template from 'lodash.template'
-import ora from 'ora'
-import pc from 'picocolors'
 
-import { z } from 'zod'
-import {
-  type Config,
-  DEFAULT_COMPONENTS,
-  DEFAULT_TAILWIND_CONFIG,
-  DEFAULT_TAILWIND_CSS,
-  DEFAULT_UTILS,
-  getConfig,
-  rawConfigSchema,
-  resolveConfigPaths,
-} from '../utils/get-config'
-import { getPackageManager } from '../utils/get-package-manager'
-import { getProjectConfig, preFlight } from '../utils/get-project-info'
+import { preFlightInit } from '../prefilghts/preflight-init'
+import { initOptionsSchema } from '../schemas/init'
+import { addComponents } from '../utils/add-components'
+import { createProject } from '../utils/create-project'
+import * as ERRORS from '../utils/errors'
+import { DEFAULT_COMPONENTS, DEFAULT_TAILWIND_CONFIG, DEFAULT_TAILWIND_CSS, DEFAULT_UTILS, getConfig, rawConfigSchema, resolveConfigPaths } from '../utils/get-config'
+import { getProjectConfig, getProjectInfo } from '../utils/get-project-info'
 import { handleError } from '../utils/handle-error'
-import { logger } from '../utils/logger'
-import {
-  getRegistryBaseColor,
-  getRegistryBaseColors,
-  getRegistryStyles,
-} from '../utils/registry'
 
-import * as templates from '../utils/templates'
-import { applyPrefixesCss } from '../utils/transformers/transform-tw-prefix'
+import { highlighter } from '../utils/highlighter'
+import { getRegistryBaseColors, getRegistryStyles } from '../utils/registry'
+import { updateTailwindContent } from '../utils/updaters/update-tailwind-content'
+import type { InitOptions } from '../schemas/init'
+import type { Config } from '../utils/get-config'
 
-const PROJECT_DEPENDENCIES = [
-  'tailwindcss-animate',
-  'class-variance-authority',
-  'clsx',
-  'tailwind-merge',
-]
+async function promptForMinimalConfig(defaultConfig: Config, opts: InitOptions): Promise<Omit<Config, 'resolvedPaths'>> {
+  let style = defaultConfig.style
+  let baseColor = defaultConfig.tailwind.baseColor
+  let cssVariables = defaultConfig.tailwind.cssVariables
 
-const initOptionsSchema = z.object({
-  cwd: z.string(),
-  yes: z.boolean(),
-  defaults: z.boolean(),
-})
+  if (!opts.defaults) {
+    const [styles, baseColors] = await Promise.all([
+      getRegistryStyles(),
+      getRegistryBaseColors(),
+    ])
 
-export const init = new Command()
-  .name('init')
-  .description('initialize your project and install dependencies')
-  .option('-y, --yes', 'skip confirmation prompt.', false)
-  .option('-d, --defaults,', 'use default configuration.', false)
-  .option(
-    '-c, --cwd <cwd>',
-    'the working directory. defaults to the current directory.',
-    process.cwd(),
-  )
-  .action(async (opts) => {
-    try {
-      const options = initOptionsSchema.parse(opts)
-      const cwd = path.resolve(options.cwd)
-
-      // Ensure target directory exists.
-      if (!existsSync(cwd)) {
-        logger.error(`The path ${cwd} does not exist. Please try again.`)
+    const options = await p.group({
+      style: () => p.select({
+        message: `Which ${highlighter.info('style')} would you like to use?`,
+        options: styles.map(style => ({
+          value: style.name,
+          label: style.label,
+        })),
+        initialValue: styles.find(s => s.name === style)?.name,
+      }),
+      tailwindBaseColor: () => p.select({
+        message: `Which color would you like to use as the ${highlighter.info(
+          'base color',
+        )}?`,
+        options: baseColors.map(color => ({
+          label: color.label,
+          value: color.name,
+        })),
+        initialValue: '',
+      }),
+      tailwindCssVariables: () => p.confirm({
+        message: `Would you like to use ${highlighter.info(
+          'CSS variables',
+        )} for theming?`,
+        initialValue: defaultConfig?.tailwind.cssVariables,
+      }),
+    }, {
+      onCancel: () => {
         process.exit(1)
-      }
+      },
+    })
 
-      preFlight(cwd)
-
-      const projectConfig = await getProjectConfig(cwd)
-      if (projectConfig) {
-        const config = await promptForMinimalConfig(
-          cwd,
-          projectConfig,
-          opts.defaults,
-        )
-        await runInit(cwd, config)
-      }
-      else {
-        // Read config.
-        const existingConfig = await getConfig(cwd)
-        const config = await promptForConfig(cwd, existingConfig, options.yes)
-        await runInit(cwd, config)
-      }
-
-      logger.info('')
-      logger.info(
-        `${pc.green(
-          'Success!',
-        )} Project initialization completed. You may now add components.`,
-      )
-      logger.info('')
-    }
-    catch (error) {
-      handleError(error)
-    }
-  })
-
-export async function promptForConfig(
-  cwd: string,
-  defaultConfig: Config | null = null,
-  skip = false,
-): Promise<{ style: string, tailwind: { config: string, css: string, baseColor: string, cssVariables: boolean, prefix?: string | undefined }, aliases: { components: string, utils: string, ui?: string | undefined }, resolvedPaths: { components: string, utils: string, ui: string, tailwindConfig: string, tailwindCss: string }, $schema?: string | undefined }> {
-  const highlight = (text: string): string => pc.cyan(text)
-
-  const styles = await getRegistryStyles()
-  const baseColors = await getRegistryBaseColors()
-
-  const style = await consola.prompt(`Which ${highlight('style')} would you like to use?`, {
-    type: 'select',
-    options: styles.map(style => ({
-      label: style.label,
-      value: style.name,
-    })),
-  })
-
-  const tailwindBaseColor = await consola.prompt(`Which color would you like to use as ${highlight(
-    'base color',
-  )}?`, {
-    type: 'select',
-    options: baseColors.map(color => ({
-      label: color.label,
-      value: color.name,
-    })),
-  })
-
-  const tailwindCss = await consola.prompt(`Where is your ${highlight('global CSS')} file?`, {
-    type: 'text',
-    initial: defaultConfig?.tailwind.css ?? DEFAULT_TAILWIND_CSS,
-  })
-
-  const tailwindCssVariables = await consola.prompt(`Would you like to use ${highlight(
-    'CSS variables',
-  )} for colors?`, {
-    type: 'confirm',
-    initial: defaultConfig?.tailwind.cssVariables ?? true,
-  })
-
-  const tailwindPrefix = await consola.prompt(`Are you using a custom ${highlight(
-    'tailwind prefix eg. tw-',
-  )}? (Leave blank if not)`, {
-    type: 'text',
-  })
-
-  const tailwindConfig = await consola.prompt(`Where is your ${highlight('tailwind.config.js')} located?`, {
-    type: 'text',
-    initial: defaultConfig?.tailwind.config ?? DEFAULT_TAILWIND_CONFIG,
-  })
-
-  const components = await consola.prompt(`Configure the import alias for ${highlight('components')}:`, {
-    type: 'text',
-    initial: defaultConfig?.aliases.components ?? DEFAULT_COMPONENTS,
-  })
-
-  const utils = await consola.prompt(`Configure the import alias for ${highlight('utils')}:`, {
-    type: 'text',
-    initial: defaultConfig?.aliases.utils ?? DEFAULT_UTILS,
-  })
-
-  const options = {
-    style,
-    tailwindConfig,
-    tailwindCss,
-    tailwindBaseColor,
-    tailwindCssVariables,
-    tailwindPrefix,
-    components,
-    utils,
+    style = options.style
+    baseColor = options.tailwindBaseColor
+    cssVariables = options.tailwindCssVariables
   }
 
-  const config = rawConfigSchema.parse({
+  return rawConfigSchema.parse({
+    $schema: defaultConfig?.$schema,
+    style,
+    tailwind: {
+      ...defaultConfig?.tailwind,
+      config: path.basename(defaultConfig?.tailwind?.config, baseColor),
+      cssVariables,
+    },
+    aliases: defaultConfig?.aliases,
+  })
+}
+
+async function promptForConfig(defaultConfig: Config | null = null): Promise<Omit<Config, 'resolvedPaths'>> {
+  const [styles, baseColors] = await Promise.all([
+    getRegistryStyles(),
+    getRegistryBaseColors(),
+  ])
+
+  const options = await p.group({
+    style: () => p.select({
+      message: `Which ${highlighter.info('style')} would you like to use?`,
+      options: styles.map(style => ({
+        label: style.label,
+        value: style.name,
+      })),
+      initialValue: '',
+    }),
+    tailwindBaseColor: () => p.select({
+      message: `Which color would you like to use as the ${highlighter.info(
+        'base color',
+      )}?`,
+      options: baseColors.map(color => ({
+        label: color.label,
+        value: color.name,
+      })),
+      initialValue: '',
+    }),
+    tailwindCss: () => p.text({
+      message: `Where is your ${highlighter.info('global CSS')} file?`,
+      initialValue: defaultConfig?.tailwind.css ?? DEFAULT_TAILWIND_CSS,
+    }),
+    tailwindCssVariables: () => p.confirm({
+      message: `Would you like to use ${highlighter.info(
+        'CSS variables',
+      )} for theming?`,
+      initialValue: defaultConfig?.tailwind.cssVariables ?? true,
+    }),
+    tailwindPrefix: () => p.text({
+      message: `Are you using a custom ${highlighter.info(
+        'tailwind prefix eg. tw-',
+      )}? (Leave blank if not)`,
+      initialValue: '',
+    }),
+    tailwindConfig: () => p.text({
+      message: `Where is your ${highlighter.info(
+        'tailwind.config.js',
+      )} located?`,
+      initialValue: defaultConfig?.tailwind.config ?? DEFAULT_TAILWIND_CONFIG,
+    }),
+    components: () => p.text({
+      message: `Configure the import alias for ${highlighter.info(
+        'components',
+      )}:`,
+      initialValue: defaultConfig?.aliases.components ?? DEFAULT_COMPONENTS,
+    }),
+    utils: () => p.text({
+      message: `Configure the import alias for ${highlighter.info('utils')}:`,
+      initialValue: defaultConfig?.aliases.utils ?? DEFAULT_UTILS,
+    }),
+  }, {
+    onCancel: () => {
+      process.exit(1)
+    },
+  })
+
+  return rawConfigSchema.parse({
     $schema: 'https://ui.adrianub.dev/schema.json',
     style: options.style,
     tailwind: {
@@ -183,16 +155,86 @@ export async function promptForConfig(
     aliases: {
       utils: options.utils,
       components: options.components,
+      // TODO: fix this.
+      lib: options.components.replace(/\/components$/, 'lib'),
     },
   })
+}
 
-  if (!skip) {
-    const proceed = await consola.prompt(`Write configuration to ${highlight(
-      'components.json',
-    )}. Proceed?`, {
-      type: 'confirm',
-      name: 'proceed',
-      initial: true,
+export const init = new Command()
+  .name('init')
+  .description('initialize your project and install dependencies')
+  .argument(
+    '[components...]',
+    'the components to add or a url to the component.',
+  )
+  .option('-y, --yes', 'skip confirmation prompt.', true)
+  .option('-d, --defaults,', 'use default configuration.', false)
+  .option('-f, --force', 'force overwrite of existing configuration.', false)
+  .option(
+    '-c, --cwd <cwd>',
+    'the working directory. defaults to the current directory.',
+    process.cwd(),
+  )
+  .option('-s, --silent', 'mute output.', false)
+  .action(async (components, opts) => {
+    try {
+      const options = initOptionsSchema.parse({
+        ...opts,
+        cwd: path.resolve(opts.cwd),
+        isNewProject: false,
+        components,
+      })
+
+      await runInit(options)
+    }
+    catch (error) {
+      handleError(error)
+    }
+  })
+
+// eslint-disable-next-line ts/explicit-function-return-type
+export async function runInit(
+  options: InitOptions & {
+    skipPreflight?: boolean
+  },
+) {
+  let projectInfo
+  if (!options.skipPreflight) {
+    const preflight = await preFlightInit(options)
+    if (preflight.errors[ERRORS.MISSING_DIR_OR_EMPTY_PROJECT]) {
+      const { projectPath } = await createProject(options)
+      if (!projectPath) {
+        process.exit(1)
+      }
+      options.cwd = projectPath
+      options.isNewProject = true
+    }
+    projectInfo = preflight.projectInfo
+  }
+  else {
+    projectInfo = await getProjectInfo(options.cwd)
+  }
+
+  const projectConfig = await getProjectConfig(options.cwd, projectInfo)
+
+  const config = projectConfig
+    ? await promptForMinimalConfig(projectConfig, options)
+    : await promptForConfig(await getConfig(options.cwd))
+
+  if (!options.yes) {
+    const { proceed } = await p.group({
+      proceed: () =>
+        p.confirm({
+          message: `Write configuration to ${highlighter.info(
+            'components.json',
+          )}. Proceed?`,
+          initialValue: true,
+        }),
+    }, {
+      onCancel: () => {
+        process.exit(1)
+      },
     })
 
     if (!proceed) {
@@ -200,174 +242,32 @@ export async function promptForConfig(
     }
   }
 
-  // Write to file.
-  logger.info('')
-  const spinner = ora(`Writing components.json...`).start()
-  const targetPath = path.resolve(cwd, 'components.json')
+  const componentSpinner = p.spinner()
+  componentSpinner.start(`Writing components.json.`)
+  const targetPath = path.resolve(options.cwd, 'components.json')
   await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8')
-  spinner.succeed()
+  componentSpinner.stop(`Wrote components.json.`)
 
-  return await resolveConfigPaths(cwd, config)
-}
+  const fullConfig = await resolveConfigPaths(options.cwd, config)
+  const components = ['index', ...(options.components || [])]
 
-export async function promptForMinimalConfig(
-  cwd: string,
-  defaultConfig: Config,
-  defaults = false,
-): Promise<{ style: string, tailwind: { config: string, css: string, baseColor: string, cssVariables: boolean, prefix?: string | undefined }, aliases: { components: string, utils: string, ui?: string | undefined }, resolvedPaths: { components: string, utils: string, ui: string, tailwindConfig: string, tailwindCss: string }, $schema?: string | undefined }> {
-  const highlight = (text: string): string => pc.cyan(text)
-  let style = defaultConfig.style
-  let baseColor = defaultConfig.tailwind.baseColor
-  let cssVariables = defaultConfig.tailwind.cssVariables
-
-  if (!defaults) {
-    const styles = await getRegistryStyles()
-    const baseColors = await getRegistryBaseColors()
-
-    const styleSelect = await consola.prompt(`Which ${highlight('style')} would you like to use?`, {
-      type: 'select',
-      options: styles.map((style: any) => ({
-        label: style.label,
-        value: style.name,
-      })),
-    })
-
-    const tailwindBaseColor = await consola.prompt(`Which color would you like to use as ${highlight(
-      'base color',
-    )}?`, {
-      type: 'select',
-      options: baseColors.map(color => ({
-        label: color.label,
-        value: color.name,
-      })),
-    })
-
-    const tailwindCssVariables = await consola.prompt(`Would you like to use ${highlight(
-      'CSS variables',
-    )} for colors?`, {
-      type: 'confirm',
-      initial: defaultConfig?.tailwind.cssVariables ?? true,
-    })
-
-    const options = {
-      styleSelect,
-      tailwindBaseColor,
-      tailwindCssVariables,
-    }
-
-    style = options.styleSelect.value
-    baseColor = options.tailwindBaseColor.value
-    cssVariables = options.tailwindCssVariables
-  }
-
-  const config = rawConfigSchema.parse({
-    $schema: defaultConfig?.$schema,
-    style,
-    tailwind: {
-      ...defaultConfig?.tailwind,
-      baseColor,
-      cssVariables,
-    },
-    aliases: defaultConfig?.aliases,
+  await addComponents(components, fullConfig, {
+    // Init will always overwrite files.
+    overwrite: true,
+    silent: options.silent,
+    isNewProject:
+      options.isNewProject || projectInfo?.framework.name === 'angular',
   })
 
-  // Write to file.
-  logger.info('')
-  const spinner = ora(`Writing components.json...`).start()
-  const targetPath = path.resolve(cwd, 'components.json')
-  await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8')
-  spinner.succeed()
-
-  return await resolveConfigPaths(cwd, config)
-}
-
-export async function runInit(cwd: string, config: Config): Promise<void> {
-  const spinner = ora(`Initializing project...`)?.start()
-
-  // Ensure all resolved paths directories exist.
-  for (const [key, resolvedPath] of Object.entries(config.resolvedPaths)) {
-    // Determine if the path is a file or directory.
-    // TODO: is there a better way to do this?
-    let dirname = path.extname(resolvedPath)
-      ? path.dirname(resolvedPath)
-      : resolvedPath
-
-    // If the utils alias is set to something like "@/lib/utils",
-    // assume this is a file and remove the "utils" file name.
-    // TODO: In future releases we should add support for individual utils.
-    if (key === 'utils' && resolvedPath.endsWith('/utils')) {
-      // Remove /utils at the end.
-      dirname = dirname.replace(/\/utils$/, '')
-    }
-
-    if (!existsSync(dirname)) {
-      await fs.mkdir(dirname, { recursive: true })
-    }
-  }
-
-  //   const extension = "ts";
-
-  const tailwindConfigExtension = path.extname(
-    config.resolvedPaths.tailwindConfig,
-  )
-
-  let tailwindConfigTemplate: string
-  if (tailwindConfigExtension === '.ts') {
-    tailwindConfigTemplate = config.tailwind.cssVariables
-      ? templates.TAILWIND_CONFIG_TS_WITH_VARIABLES
-      : templates.TAILWIND_CONFIG_TS
-  }
-  else {
-    tailwindConfigTemplate = config.tailwind.cssVariables
-      ? templates.TAILWIND_CONFIG_WITH_VARIABLES
-      : templates.TAILWIND_CONFIG
-  }
-
-  // Write tailwind config.
-  await fs.writeFile(
-    config.resolvedPaths.tailwindConfig,
-    template(tailwindConfigTemplate)({
-      prefix: config.tailwind.prefix,
-    }),
-    'utf8',
-  )
-
-  // Write css file.
-  const baseColor = await getRegistryBaseColor(config.tailwind.baseColor)
-  if (baseColor) {
-    await fs.writeFile(
-      config.resolvedPaths.tailwindCss,
-      config.tailwind.cssVariables
-        ? config.tailwind.prefix
-          ? applyPrefixesCss(baseColor.cssVarsTemplate, config.tailwind.prefix)
-          : baseColor.cssVarsTemplate
-        : baseColor.inlineColorsTemplate,
-      'utf8',
+  if (options.isNewProject) {
+    await updateTailwindContent(
+      ['./src/**/*.{html,ts}'],
+      fullConfig,
+      {
+        silent: options.silent,
+      },
     )
   }
 
-  // Write cn file.
-  await fs.writeFile(
-    `${config.resolvedPaths.utils}.ts`,
-    templates.UTILS,
-    'utf8',
-  )
-
-  spinner?.succeed()
-
-  // Install dependencies.
-  const dependenciesSpinner = ora(`Installing dependencies...`)?.start()
-  const packageManager = await getPackageManager(cwd)
-
-  // TODO: add support for other icon libraries.
-  const deps = [...PROJECT_DEPENDENCIES]
-
-  await execa(
-    packageManager,
-    [packageManager === 'npm' ? 'install' : 'add', ...deps],
-    {
-      cwd,
-    },
-  )
-  dependenciesSpinner?.succeed()
+  return fullConfig
 }

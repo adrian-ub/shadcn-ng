@@ -1,27 +1,16 @@
-import type { Transformer } from '../transformers'
+import type { Transformer } from '.'
+import type { Config } from '../get-config'
 
 export const transformImport: Transformer = async ({ sourceFile, config }) => {
   const importDeclarations = sourceFile.getImportDeclarations()
 
   for (const importDeclaration of importDeclarations) {
-    const moduleSpecifier = importDeclaration.getModuleSpecifierValue()
+    const moduleSpecifier = updateImportAliases(
+      importDeclaration.getModuleSpecifierValue(),
+      config,
+    )
 
-    // Replace @/registry/[style] with the components alias.
-    if (moduleSpecifier.startsWith('@/registry/')) {
-      if (config.aliases.ui) {
-        importDeclaration.setModuleSpecifier(
-          moduleSpecifier.replace(/^@\/registry\/[^/]+\/ui/, config.aliases.ui),
-        )
-      }
-      else {
-        importDeclaration.setModuleSpecifier(
-          moduleSpecifier.replace(
-            /^@\/registry\/[^/]+/,
-            config.aliases.components,
-          ),
-        )
-      }
-    }
+    importDeclaration.setModuleSpecifier(moduleSpecifier)
 
     // Replace `import { cn } from "@/lib/utils"`
     if (moduleSpecifier === '@/lib/utils') {
@@ -36,4 +25,47 @@ export const transformImport: Transformer = async ({ sourceFile, config }) => {
   }
 
   return sourceFile
+}
+
+function updateImportAliases(moduleSpecifier: string, config: Config): string {
+  // Not a local import.
+  if (!moduleSpecifier.startsWith('@/')) {
+    return moduleSpecifier
+  }
+
+  // Not a registry import.
+  if (!moduleSpecifier.startsWith('@/registry/')) {
+    // We fix the alias an return.
+    const alias = config.aliases.components.charAt(0)
+    return moduleSpecifier.replace(/^@\//, `${alias}/`)
+  }
+
+  if (moduleSpecifier.match(/^@\/registry\/(.+)\/ui/)) {
+    return moduleSpecifier.replace(
+      /^@\/registry\/(.+)\/ui/,
+      config.aliases.ui ?? `${config.aliases.components}/ui`,
+    )
+  }
+
+  if (
+    config.aliases.components
+    && moduleSpecifier.match(/^@\/registry\/(.+)\/components/)
+  ) {
+    return moduleSpecifier.replace(
+      /^@\/registry\/(.+)\/components/,
+      config.aliases.components,
+    )
+  }
+
+  if (config.aliases.lib && moduleSpecifier.match(/^@\/registry\/(.+)\/lib/)) {
+    return moduleSpecifier.replace(
+      /^@\/registry\/(.+)\/lib/,
+      config.aliases.lib,
+    )
+  }
+
+  return moduleSpecifier.replace(
+    /^@\/registry\/[^/]+/,
+    config.aliases.components,
+  )
 }

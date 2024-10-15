@@ -1,15 +1,13 @@
-import { promises as fs } from 'node:fs'
+import fs from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { Project, ScriptKind, type SourceFile } from 'ts-morph'
 import type { z } from 'zod'
-
-import { transformCssVars } from '../transformers/transform-css-vars'
-import { transformImport } from '../transformers/transform-import'
+import { transformCssVars } from './transform-css-vars'
+import { transformImport } from './transform-import'
 import { transformTwPrefixes } from './transform-tw-prefix'
 import type { Config } from '../get-config'
-
 import type { registryBaseColorSchema } from '../registry/schema'
 
 export interface TransformOpts {
@@ -25,29 +23,32 @@ export type Transformer<Output = SourceFile> = (
   }
 ) => Promise<Output>
 
-const transformers: Transformer[] = [
-  transformImport,
-  transformCssVars,
-  transformTwPrefixes,
-]
-
 const project = new Project({
   compilerOptions: {},
 })
 
 async function createTempSourceFile(filename: string): Promise<string> {
-  const dir = await fs.mkdtemp(path.join(tmpdir(), 'shadcn-'))
+  const dir = fs.mkdtempSync(path.join(tmpdir(), 'shadcn-'))
   return path.join(dir, filename)
 }
 
-export async function transform(opts: TransformOpts): Promise<string> {
+export async function transform(
+  opts: TransformOpts,
+  transformers: Transformer[] = [
+    transformImport,
+    transformCssVars,
+    transformTwPrefixes,
+  ],
+): Promise<string> {
   const tempFile = await createTempSourceFile(opts.filename)
+
   const sourceFile = project.createSourceFile(tempFile, opts.raw, {
-    scriptKind: ScriptKind.TSX,
+    scriptKind: ScriptKind.TS,
   })
 
   for (const transformer of transformers) {
     transformer({ sourceFile, ...opts })
   }
-  return sourceFile.getFullText()
+
+  return sourceFile.getText()
 }

@@ -1,8 +1,8 @@
 import { SyntaxKind } from 'ts-morph'
-import type { z } from 'zod'
 
+import type { z } from 'zod'
+import type { Transformer } from '.'
 import type { registryBaseColorSchema } from '../registry/schema'
-import type { Transformer } from '../transformers'
 
 export const transformCssVars: Transformer = async ({
   sourceFile,
@@ -28,6 +28,7 @@ export const transformCssVars: Transformer = async ({
   return sourceFile
 }
 
+// Splits a className into variant-name-alpha.
 // eg. hover:bg-primary-100 -> [hover, bg-primary, 100]
 export function splitClassName(className: string): (string | null)[] {
   if (!className.includes('/') && !className.includes(':')) {
