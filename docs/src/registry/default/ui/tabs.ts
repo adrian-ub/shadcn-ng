@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 
-import { computed, Directive, Input, input } from '@angular/core'
+import { computed, Directive, input } from '@angular/core'
 
 import {
   RdxTabsContentDirective,
@@ -20,7 +20,7 @@ import {
   ],
 })
 export class UbTabsDirective {
-  @Input() defaultValue?: string
+  defaultValue = input<string>()
 }
 
 @Directive({
