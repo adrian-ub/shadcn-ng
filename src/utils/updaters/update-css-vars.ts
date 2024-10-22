@@ -1,4 +1,4 @@
-import fs from 'node:fs/promises'
+import { promises as fs } from 'node:fs'
 import path from 'node:path'
 
 import * as p from '@clack/prompts'
@@ -38,7 +38,6 @@ export async function updateCssVars(
     config.resolvedPaths.cwd,
     cssFilepath,
   )
-
   const cssVarsSpinner = p.spinner()
   cssVarsSpinner.start(`Updating ${highlighter.info(cssFilepathRelative)}`)
 

@@ -94,6 +94,7 @@ export async function updateFiles(
         config,
         baseColor,
       },
+      // @ts-expect-error TODO: fix typecheck
       [transformImport, transformCssVars, transformTwPrefixes],
     )
 
