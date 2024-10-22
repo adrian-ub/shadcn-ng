@@ -29,4 +29,73 @@ export const ui: Registry = [
       },
     },
   },
+  {
+    name: 'alert',
+    type: 'registry:ui',
+    files: ['ui/alert.ts'],
+  },
+  {
+    name: 'avatar',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: ['ui/avatar.ts'],
+  },
+  {
+    name: 'badge',
+    type: 'registry:ui',
+    files: ['ui/badge.ts'],
+  },
+  {
+    name: 'breadcrumb',
+    type: 'registry:ui',
+    files: ['ui/breadcrumb.ts'],
+  },
+  {
+    name: 'button',
+    type: 'registry:ui',
+    files: ['ui/button.ts'],
+  },
+  {
+    name: 'card',
+    type: 'registry:ui',
+    files: ['ui/card.ts'],
+  },
+  {
+    name: 'input',
+    type: 'registry:ui',
+    files: ['ui/input.ts'],
+  },
+  {
+    name: 'label',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: ['ui/label.ts'],
+  },
+  {
+    name: 'separator',
+    type: 'registry:ui',
+    files: ['ui/separator.ts'],
+  },
+  {
+    name: 'skeleton',
+    type: 'registry:ui',
+    files: ['ui/skeleton.ts'],
+  },
+  {
+    name: 'switch',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: ['ui/switch.ts'],
+  },
+  {
+    name: 'table',
+    type: 'registry:ui',
+    files: ['ui/table.ts'],
+  },
+  {
+    name: 'tabs',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: ['ui/tabs.ts'],
+  },
 ]
