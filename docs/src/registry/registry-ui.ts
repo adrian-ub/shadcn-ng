@@ -61,6 +61,12 @@ export const ui: Registry = [
     files: ['ui/card.ts'],
   },
   {
+    name: 'collapsible',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: ['ui/collapsible.ts'],
+  },
+  {
     name: 'input',
     type: 'registry:ui',
     files: ['ui/input.ts'],

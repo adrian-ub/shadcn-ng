@@ -119,6 +119,11 @@ export const docsConfig: TDocsConfig = {
           items: [],
         },
         {
+          title: 'Collapsible',
+          href: '/docs/components/collapsible',
+          items: [],
+        },
+        {
           title: 'Input',
           href: '/docs/components/input',
           items: [],
