@@ -7,7 +7,6 @@ import { defineConfig } from 'astro/config'
 
 import { visit } from 'unist-util-visit'
 import { siteConfig } from './src/config/site'
-import blackout from './theme/dark.json'
 
 // Función recursiva para extraer todos los valores de texto
 function extractText(node) {
@@ -48,7 +47,7 @@ export default defineConfig({
   ],
   markdown: {
     shikiConfig: {
-      theme: blackout,
+      theme: 'github-dark-default',
       transformers: [transformerMetaHighlight()],
     },
     rehypePlugins: [
