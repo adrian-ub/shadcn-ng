@@ -74,11 +74,18 @@ export const docsConfig: TDocsConfig = {
     },
     {
       title: 'Installation',
-      items: [{
-        title: 'Angular',
-        href: '/docs/installation/angular',
-        items: [],
-      }],
+      items: [
+        {
+          title: 'Angular',
+          href: '/docs/installation/angular',
+          items: [],
+        },
+        {
+          title: 'Manual',
+          href: '/docs/installation/manual',
+          items: [],
+        },
+      ],
     },
     {
       title: 'Components',
