@@ -1,148 +1,153 @@
 ---
 export interface Props {
-    defaultValue?: string
-    syncKey?: string
-    hideSelect?: boolean
+  defaultValue?: string
+  syncKey?: string
+  hideSelect?: boolean
 }
 
 const { hideSelect } = Astro.props
 ---
 
-<ub-select defaultValue={Astro.props.defaultValue} syncKey={Astro.props.syncKey} hideSelect={Astro.props.hideSelect || false}>
-    {
-        !hideSelect && (
-            <div class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative rounded-md border">
-                <div class="flex items-center justify-between p-4">
-                    <select class="flex items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>option]:line-clamp-1 h-7 w-[145px] text-xs"></select>
-                </div>
-                <div class="w-full">
-                    <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
-                        <slot />
-                    </div>
-                </div>
-            </div>
-        )
-    }
+<ub-select
+  defaultValue={Astro.props.defaultValue}
+  syncKey={Astro.props.syncKey}
+  hideSelect={Astro.props.hideSelect || false}
+>
+  {
+    !hideSelect && (
+      <div class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative rounded-md border">
+        <div class="flex items-center justify-between p-4">
+          <select class="flex items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>option]:line-clamp-1 h-7 w-[145px] text-xs">
+            <span />
+          </select>
+        </div>
+        <div class="w-full">
+          <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
+            <slot />
+          </div>
+        </div>
+      </div>
+    )
+  }
 
-    {hideSelect && <slot />}
+  {hideSelect && <slot />}
 </ub-select>
 
 <style>
-    ub-select {
-        display: block;
-        margin-bottom: 1em;
-    }
-    ub-select-content {
-        display: none;
-    }
-    ub-select-content[data-state='active'] {
-        display: block;
-    }
+  ub-select {
+    display: block;
+    margin-bottom: 1em;
+  }
+  ub-select-content {
+    display: none;
+  }
+  ub-select-content[data-state='active'] {
+    display: block;
+  }
 </style>
 
 <script>
-interface SelectRegistry {
-  [key: string]: UbSelect[]
-}
+  interface SelectRegistry {
+    [key: string]: UbSelect[]
+  }
 
-const selectRegistry: SelectRegistry = {}
+  const selectRegistry: SelectRegistry = {}
 
-class UbSelect extends HTMLElement {
-  defaultValue!: string | null
-  syncKey!: string | null
-  hideSelect!: boolean
-  selectElement!: HTMLSelectElement | null
-  contents!: NodeListOf<HTMLElement>
-  activeTab!: string
+  class UbSelect extends HTMLElement {
+    defaultValue!: string | null
+    syncKey!: string | null
+    hideSelect!: boolean
+    selectElement!: HTMLSelectElement | null
+    contents!: NodeListOf<HTMLElement>
+    activeTab!: string
 
-  constructor() {
-    super()
-    this.attachShadow({ mode: 'open' })
-    this.shadowRoot!.innerHTML = `
+    constructor() {
+      super()
+      this.attachShadow({ mode: 'open' })
+      this.shadowRoot!.innerHTML = `
       <slot></slot>
     `
-  }
+    }
 
-  connectedCallback(): void {
-    this.defaultValue = this.getAttribute('defaultValue')
-    this.syncKey = this.getAttribute('syncKey')
-    this.hideSelect = this.hasAttribute('hideSelect')
-    this.selectElement = this.querySelector('select')
-    this.contents = this.querySelectorAll('ub-select-content')
-    this.activeTab = this.defaultValue || this.contents[0].getAttribute('value')!
+    connectedCallback(): void {
+      this.defaultValue = this.getAttribute('defaultValue')
+      this.syncKey = this.getAttribute('syncKey')
+      this.hideSelect = this.hasAttribute('hideSelect')
+      this.selectElement = this.querySelector('select')
+      this.contents = this.querySelectorAll('ub-select-content')
+      this.activeTab = this.defaultValue || this.contents[0].getAttribute('value')!
 
-    if (this.selectElement) {
-      this.populateSelect()
-      this.selectElement.addEventListener('change', () => {
-        this.activeTab = this.selectElement!.value
-        this.updateTabs()
-        this.syncTabs()
-      })
+      if (this.selectElement) {
+        this.populateSelect()
+        this.selectElement.addEventListener('change', () => {
+          this.activeTab = this.selectElement!.value
+          this.updateTabs()
+          this.syncTabs()
+        })
 
-      if (this.hideSelect) {
-        this.selectElement.style.display = 'none'
+        if (this.hideSelect) {
+          this.selectElement.style.display = 'none'
+        }
+      }
+
+      this.updateTabs()
+
+      if (this.syncKey) {
+        if (!selectRegistry[this.syncKey]) {
+          selectRegistry[this.syncKey] = []
+        }
+        selectRegistry[this.syncKey].push(this)
       }
     }
 
-    this.updateTabs()
-
-    if (this.syncKey) {
-      if (!selectRegistry[this.syncKey]) {
-        selectRegistry[this.syncKey] = []
+    populateSelect(): void {
+      if (this.selectElement) {
+        this.contents.forEach((content) => {
+          const option = document.createElement('option')
+          option.value = content.getAttribute('value')!
+          option.textContent = content.getAttribute('label') || content.getAttribute('value')
+          this.selectElement!.appendChild(option)
+        })
+        this.selectElement.value = this.activeTab
       }
-      selectRegistry[this.syncKey].push(this)
     }
-  }
 
-  populateSelect(): void {
-    if (this.selectElement) {
+    updateTabs(): void {
       this.contents.forEach((content) => {
-        const option = document.createElement('option')
-        option.value = content.getAttribute('value')!
-        option.textContent = content.getAttribute('label') || content.getAttribute('value')
-        this.selectElement!.appendChild(option)
-      })
-      this.selectElement.value = this.activeTab
-    }
-  }
-
-  updateTabs(): void {
-    this.contents.forEach((content) => {
-      if (content.getAttribute('value') === this.activeTab) {
-        content.setAttribute('data-state', 'active')
-        content.style.display = 'block'
-      }
-      else {
+        if (content.getAttribute('value') === this.activeTab) {
+          content.setAttribute('data-state', 'active')
+          content.style.display = 'block'
+          return
+        }
         content.removeAttribute('data-state')
         content.style.display = 'none'
-      }
-    })
-  }
-
-  syncTabs(): void {
-    if (this.syncKey) {
-      const syncedSelects = selectRegistry[this.syncKey]
-      syncedSelects.forEach((select) => {
-        if (select !== this) {
-          select.activeTab = this.activeTab
-          if (select.selectElement) {
-            select.selectElement.value = this.activeTab
-          }
-          select.updateTabs()
-        }
       })
     }
-  }
-}
 
-class UbSelectContent extends HTMLElement {
-  constructor() {
-    super()
-    this.attachShadow({ mode: 'open' })
-    this.shadowRoot!.innerHTML = `<slot></slot>`
+    syncTabs(): void {
+      if (this.syncKey) {
+        const syncedSelects = selectRegistry[this.syncKey]
+        syncedSelects.forEach((select) => {
+          if (select !== this) {
+            select.activeTab = this.activeTab
+            if (select.selectElement) {
+              select.selectElement.value = this.activeTab
+            }
+            select.updateTabs()
+          }
+        })
+      }
+    }
   }
-}
 
-customElements.define('ub-select', UbSelect)
-customElements.define('ub-select-content', UbSelectContent)
+  class UbSelectContent extends HTMLElement {
+    constructor() {
+      super()
+      this.attachShadow({ mode: 'open' })
+      this.shadowRoot!.innerHTML = `<slot></slot>`
+    }
+  }
+
+  customElements.define('ub-select', UbSelect)
+  customElements.define('ub-select-content', UbSelectContent)
 </script>

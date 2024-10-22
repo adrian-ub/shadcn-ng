@@ -4,21 +4,39 @@ import { CopyButton } from '../copy-button'
 // import PackageManagerCopyButton from "../package-manager-copy-button";
 
 type Props = {
-    rawString: string
-    npmCommand: string
-    yarnCommand: string
-    pnpmCommand: string
-    withMeta: boolean
-    class?: string
+  rawString: string
+  npmCommand: string
+  yarnCommand: string
+  pnpmCommand: string
+  withMeta: boolean
+  class?: string
 }
 
 const { rawString, npmCommand, pnpmCommand, yarnCommand, withMeta, class: className, ...rest } = Astro.props
 ---
 
 <div class="relative">
-    <pre class={cn('mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4', className)} {...rest}><slot /></pre>
+  <pre
+    class={cn(
+      'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4',
+      className,
+    )}
+    {...rest}><slot /></pre>
 
-    {rawString && !npmCommand ? <CopyButton {...{ rawString, withMeta, class: cn('absolute right-4 top-4', withMeta && 'top-16') }} client:visible /> : null}
+  {
+    rawString && !npmCommand ? (
+      <CopyButton
+        {...{ rawString, withMeta, class: cn('absolute right-4 top-4', withMeta && 'top-16') }}
+        client:visible
+      />
+    ) : null
+  }
 
-    {npmCommand && yarnCommand && pnpmCommand ? (<div>{/* <PackageManagerCopyButton npmCommand={npmCommand} yarnCommand={yarnCommand} pnpmCommand={pnpmCommand} /> */}</div>) : null}
+  {
+    npmCommand && yarnCommand && pnpmCommand ? (
+      <div>
+        {/* <PackageManagerCopyButton npmCommand={npmCommand} yarnCommand={yarnCommand} pnpmCommand={pnpmCommand} /> */}
+      </div>
+    ) : null
+  }
 </div>

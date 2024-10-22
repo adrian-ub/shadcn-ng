@@ -4,13 +4,18 @@ import { Code as CodeAstro } from 'astro/components'
 import { CopyButton } from '../copy-button'
 
 export interface Props {
-    code: string
+  code: string
 }
 
 const { code } = Astro.props
 ---
 
 <div data-raw-code class="relative">
-    <CodeAstro code={code} lang="ts" theme="github-dark-default" class="mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4" />
-    <CopyButton client:load {...{ rawString: code, withMeta: false }} />
+  <CodeAstro
+    code={code}
+    lang="ts"
+    theme="github-dark-default"
+    class="mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4"
+  />
+  <CopyButton client:load {...{ rawString: code, withMeta: false }} />
 </div>

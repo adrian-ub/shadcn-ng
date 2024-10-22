@@ -10,52 +10,60 @@ import { CopyButton } from '../copy-button'
 import { Select, SelectContent, syncKey } from './select'
 
 export interface Props {
-    name: string
+  name: string
 }
 
 const { name } = Astro.props
 
-const componentUi = ui.find(value => value.name === name)
+const componentUi = ui.find((value) => value.name === name)
 
 const allComponents = componentUi?.files?.flatMap((file) => {
-    return styles.map((style) => {
-        const filename = path.join(process.cwd(), 'src', 'registry', style.name, typeof file === 'string' ? file : file.path)
+  return styles.map((style) => {
+    const filename = path.join(
+      process.cwd(),
+      'src',
+      'registry',
+      style.name,
+      typeof file === 'string' ? file : file.path,
+    )
 
-        let code: string | null
+    let code: string | null
 
-        try {
-            code = readFileSync(`${filename}`)
-                .toString()
-                .replace(/export\s+default\s+(?:\S.*)?;\s*/, '')
-                .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
-        }
- catch {
-            code = null
-        }
+    try {
+      code = readFileSync(`${filename}`)
+        .toString()
+        .replace(/export\s+default\s+(?:\S.*)?;\s*/, '')
+        .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
+    } catch {
+      code = null
+    }
 
-        return {
-            style,
-            code,
-        }
-    })
+    return {
+      style,
+      code,
+    }
+  })
 })
 ---
 
 <Select syncKey={syncKey} hideSelect={true}>
-    {
-        allComponents?.map(({ code, style }) => (
-            <SelectContent label={style.label} value={style.name}>
-                {code
-? (
-                    <div class="relative">
-                        <CodeAstro code={code} lang="ts" theme="github-dark-default" class="mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4" />
-                        <CopyButton client:load {...{ rawString: code, withMeta: false }} />
-                    </div>
-                )
-: (
-                    <p>Not found</p>
-                )}
-            </SelectContent>
-        ))
-    }
+  {
+    allComponents?.map(({ code, style }) => (
+      <SelectContent label={style.label} value={style.name}>
+        {code ? (
+          <div class="relative">
+            <CodeAstro
+              code={code}
+              lang="ts"
+              theme="github-dark-default"
+              class="mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4"
+            />
+            <CopyButton client:load {...{ rawString: code, withMeta: false }} />
+          </div>
+        ) : (
+          <p>Not found</p>
+        )}
+      </SelectContent>
+    ))
+  }
 </Select>

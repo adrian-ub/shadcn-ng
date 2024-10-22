@@ -14,77 +14,74 @@ import RawCode from './RawCode.astro'
 import { Select, SelectContent, syncKey } from './select'
 
 export interface Props {
-    name: string
-    class?: string
+  name: string
+  class?: string
 }
 const { name } = Astro.props
 
 const sortedStyleByNewYork = styles.toSorted((a, b) => (a.name === 'new-york' ? -1 : b.name === 'new-york' ? 1 : 0))
 
 const components = await Promise.all(
-    [...sortedStyleByNewYork].map(async (style) => {
-        const filename = path.join(process.cwd(), 'src', 'registry', style.name, 'example', `${name}.ts`)
-        let pathCode: string
-        let code: string | null
+  [...sortedStyleByNewYork].map(async (style) => {
+    const filename = path.join(process.cwd(), 'src', 'registry', style.name, 'example', `${name}.ts`)
+    let pathCode: string
+    let code: string | null
 
-        if (existsSync(filename)) {
-            pathCode = `../registry/${style.name}/example/${name}.ts`
-            code = readFileSync(`${filename}`)
-                .toString()
-                .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
-                .replace(/export\s+default\s+(?:\S.*)?\s*/, '')
-        }
- else {
-            pathCode = ''
-            code = null
-        }
+    if (existsSync(filename)) {
+      pathCode = `../registry/${style.name}/example/${name}.ts`
+      code = readFileSync(`${filename}`)
+        .toString()
+        .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
+        .replace(/export\s+default\s+(?:\S.*)?\s*/, '')
+    } else {
+      pathCode = ''
+      code = null
+    }
 
-        return {
-            style,
-            code,
-            pathCode,
-        }
-    }),
+    return {
+      style,
+      code,
+      pathCode,
+    }
+  }),
 )
 ---
 
 <div class={cn('group relative my-4 flex flex-col space-y-2', Astro.props.class)}>
-    <Tabs>
-        <TabsList>
-            <TabsTrigger value="Preview">Preview</TabsTrigger>
-            <TabsTrigger value="Code">Code</TabsTrigger>
-        </TabsList>
+  <Tabs>
+    <TabsList>
+      <TabsTrigger value="Preview">Preview</TabsTrigger>
+      <TabsTrigger value="Code">Code</TabsTrigger>
+    </TabsList>
 
-        <TabsContent value="Preview">
-            <Select syncKey={syncKey}>
-                {
-                    components.map(({ style, pathCode, code }) => (
-                        <SelectContent label={style.label} value={style.name}>
-                            {pathCode
-? (
-                                <div>
-                                    <CopyButton client:load {...{ rawString: code, withMeta: false }} />
-                                    <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: style.name }} />
-                                </div>
-                            )
-: (
-                                <p>Not found</p>
-                            )}
-                        </SelectContent>
-                    ))
-                }
-            </Select>
-        </TabsContent>
-        <TabsContent value="Code">
-            <Select syncKey={syncKey} hideSelect={true}>
-                {
-                    components.map(({ style, code }) => (
-                        <SelectContent label={style.label} value={style.name}>
-                            {code ? <RawCode code={code} /> : <p>Not found</p>}
-                        </SelectContent>
-                    ))
-                }
-            </Select>
-        </TabsContent>
-    </Tabs>
+    <TabsContent value="Preview">
+      <Select syncKey={syncKey}>
+        {
+          components.map(({ style, pathCode, code }) => (
+            <SelectContent label={style.label} value={style.name}>
+              {pathCode ? (
+                <div>
+                  <CopyButton client:load {...{ rawString: code, withMeta: false }} />
+                  <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: style.name }} />
+                </div>
+              ) : (
+                <p>Not found</p>
+              )}
+            </SelectContent>
+          ))
+        }
+      </Select>
+    </TabsContent>
+    <TabsContent value="Code">
+      <Select syncKey={syncKey} hideSelect={true}>
+        {
+          components.map(({ style, code }) => (
+            <SelectContent label={style.label} value={style.name}>
+              {code ? <RawCode code={code} /> : <p>Not found</p>}
+            </SelectContent>
+          ))
+        }
+      </Select>
+    </TabsContent>
+  </Tabs>
 </div>

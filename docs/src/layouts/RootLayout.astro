@@ -7,95 +7,94 @@ import { siteConfig } from '@/config/site'
 import './main.css'
 
 type Props = {
-    title?: string
-    description?: string
-    url?: string
+  title?: string
+  description?: string
+  url?: string
 }
 
 const { title, description, url } = Astro.props
 ---
 
 <script is:inline>
-    // eslint-disable-next-line ts/explicit-function-return-type
-    function getThemePreference() {
-      if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-        return localStorage.getItem('theme')
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  // eslint-disable-next-line ts/explicit-function-return-type
+  function getThemePreference() {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme')
     }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
 
-    // eslint-disable-next-line ts/explicit-function-return-type
-    function setColorMode() {
-      const isDark = getThemePreference() === 'dark'
-      document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
-    }
+  // eslint-disable-next-line ts/explicit-function-return-type
+  function setColorMode() {
+    const isDark = getThemePreference() === 'dark'
+    document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
+  }
 
-    if (typeof localStorage !== 'undefined') {
-      const observer = new MutationObserver(() => {
-        const isDark = document.documentElement.classList.contains('dark')
-        localStorage.setItem('theme', isDark ? 'dark' : 'light')
-      })
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class'],
-      })
-    }
+  if (typeof localStorage !== 'undefined') {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains('dark')
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    })
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+  }
 
-    setColorMode()
+  setColorMode()
 
-    document.addEventListener('astro:after-swap', setColorMode)
+  document.addEventListener('astro:after-swap', setColorMode)
 </script>
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title>{title ?? siteConfig.title}</title>
-        <meta name="description" content={description || siteConfig.description} />
+    <title>{title ?? siteConfig.title}</title>
+    <meta name="description" content={description || siteConfig.description} />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title || siteConfig.title} />
-        <meta name="twitter:description" content={description || siteConfig.description} />
-        <meta name="twitter:image" content="https://ui.adrianub.dev/og.jpg" />
-        <meta name="twitter:image:alt" content={title || siteConfig.title} />
-        <meta name="twitter:creator" content="@AdrianUB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title || siteConfig.title} />
+    <meta name="twitter:description" content={description || siteConfig.description} />
+    <meta name="twitter:image" content="https://ui.adrianub.dev/og.jpg" />
+    <meta name="twitter:image:alt" content={title || siteConfig.title} />
+    <meta name="twitter:creator" content="@AdrianUB" />
 
-        <meta property="og:title" content={title || siteConfig.title} />
-        <meta property="og:description" content={title || siteConfig.description} />
-        <meta property="og:url" content={url || siteConfig.url} />
-        <meta property="og:site_name" content={title || siteConfig.title} />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://ui.adrianub.dev/og.jpg" />
-        <meta property="og:alt" content={title || siteConfig.title} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+    <meta property="og:title" content={title || siteConfig.title} />
+    <meta property="og:description" content={title || siteConfig.description} />
+    <meta property="og:url" content={url || siteConfig.url} />
+    <meta property="og:site_name" content={title || siteConfig.title} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://ui.adrianub.dev/og.jpg" />
+    <meta property="og:alt" content={title || siteConfig.title} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-        <meta property="canonical" content={url || siteConfig.url} />
+    <meta property="canonical" content={url || siteConfig.url} />
 
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
 
-        <link rel="sitemap" href="/sitemap-index.xml" />
-        <link rel="preload" href="/fonts/GeistVariableVF.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" href="/fonts/GeistVariableVF.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
-        <style type="text/css">
-            @font-face {
-                font-family: 'Geist Sans Variable';
-                src: url('/fonts/GeistVariableVF.woff2') format('woff2');
-                font-display: swap;
-            }
-        </style>
-
-    </head>
-    <body>
-        <div class="min-h-screen bg-background font-sans antialiased">
-            <Header />
-            <div class="flex-1">
-                <slot />
-            </div>
-            <Footer />
-        </div>
-    </body>
+    <style type="text/css">
+      @font-face {
+        font-family: 'Geist Sans Variable';
+        src: url('/fonts/GeistVariableVF.woff2') format('woff2');
+        font-display: swap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background font-sans antialiased">
+      <Header />
+      <div class="flex-1">
+        <slot />
+      </div>
+      <Footer />
+    </div>
+  </body>
 </html>

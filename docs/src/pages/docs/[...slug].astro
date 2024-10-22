@@ -5,11 +5,11 @@ import { getCollection } from 'astro:content'
 import type { InferGetStaticPropsType } from 'astro'
 
 export async function getStaticPaths() {
-    const docsEntries = await getCollection('docs')
-    return docsEntries.map(entry => ({
-        params: { slug: entry.slug === 'index' ? '/' : entry.slug },
-        props: { entry },
-    }))
+  const docsEntries = await getCollection('docs')
+  return docsEntries.map((entry) => ({
+    params: { slug: entry.slug === 'index' ? '/' : entry.slug },
+    props: { entry },
+  }))
 }
 
 export type Props = InferGetStaticPropsType<typeof getStaticPaths>
@@ -19,5 +19,5 @@ const { Content } = await entry.render()
 ---
 
 <DocsLayout {entry}>
-    <Content components={components} />
+  <Content components={components} />
 </DocsLayout>
