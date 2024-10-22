@@ -47,6 +47,8 @@
     "@angular/platform-browser-dynamic": "^18.2.8",
     "@angular/platform-server": "^18.2.8",
     "@shikijs/transformers": "^1.20.0",
+    "@types/lodash.template": "^4.5.3",
+    "lodash.template": "^4.5.0",
     "typescript": "~5.5.0"
   }
 }
