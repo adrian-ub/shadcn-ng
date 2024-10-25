@@ -1,5 +1,5 @@
 export const siteConfig = {
-  title: 'shadcn-gn',
+  title: 'shadcn-ng',
   url: 'https://ui.adrianub.dev',
   description: 'Beautifully designed components built with your choice of UI and CSS frameworks.',
   links: {

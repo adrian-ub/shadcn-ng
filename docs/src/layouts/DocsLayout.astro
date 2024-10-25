@@ -19,7 +19,11 @@ const { headings } = await entry.render()
 const { pathname } = Astro.url
 ---
 
-<RootLayout title={entry.data.title} description={entry.data.description} url={siteConfig.url + Astro.url.pathname}>
+<RootLayout
+  title={entry.data.title + ' - ' + siteConfig.title}
+  description={entry.data.description}
+  url={siteConfig.url + Astro.url.pathname}
+>
   <div class="border-b">
     <div
       class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"
