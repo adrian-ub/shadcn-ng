@@ -88,6 +88,12 @@ export const ui: Registry = [
     files: ['ui/skeleton.ts'],
   },
   {
+    name: 'sonner',
+    type: 'registry:ui',
+    dependencies: ['ngx-sonner'],
+    files: ['ui/sonner.ts'],
+  },
+  {
     name: 'switch',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],
