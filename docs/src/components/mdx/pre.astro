@@ -1,7 +1,6 @@
 ---
 import { cn } from '@/lib/utils'
 import { CopyButton, CopyNpmCommandButtonComponent } from '../copy-button'
-// import PackageManagerCopyButton from "../package-manager-copy-button";
 
 type Props = {
   __rawString__: string
@@ -10,7 +9,7 @@ type Props = {
   __pnpmCommand__: string
   __bunCommand__: string
   __withMeta__: boolean
-  class?: string
+  className?: string
 }
 
 const {
@@ -20,47 +19,42 @@ const {
   __yarnCommand__,
   __bunCommand__,
   __withMeta__,
-  class: className,
+  className,
   ...rest
 } = Astro.props
 ---
 
-<div class="relative">
-  <pre
-    class={cn(
-      'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4',
-      className,
-    )}
-    {...rest}><slot /></pre>
+<pre
+  class={cn('mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900', className)}
+  {...rest}><slot /></pre>
 
-  {
-    __rawString__ && !__npmCommand__ ? (
-      <CopyButton
-        {...{
-          rawString: __rawString__,
-          withMeta: __withMeta__,
-          class: cn('absolute right-4 top-4', __withMeta__ && 'top-16'),
-        }}
-        client:visible
-      />
-    ) : null
-  }
+{
+  __rawString__ && !__npmCommand__ ? (
+    <CopyButton
+      {...{
+        rawString: __rawString__,
+        withMeta: __withMeta__,
+        class: cn('absolute right-4 top-4', __withMeta__ && 'top-16'),
+      }}
+      client:visible
+    />
+  ) : null
+}
 
-  {
-    __npmCommand__ && __yarnCommand__ && __pnpmCommand__ && __bunCommand__ ? (
-      <CopyNpmCommandButtonComponent
-        {...{
-          commands: {
-            __npmCommand__,
-            __yarnCommand__,
-            __pnpmCommand__,
-            __bunCommand__,
-          },
-          withMeta: __withMeta__,
-          class: cn('absolute right-4 top-4', __withMeta__ && 'top-16'),
-        }}
-        client:visible
-      />
-    ) : null
-  }
-</div>
+{
+  __npmCommand__ && __yarnCommand__ && __pnpmCommand__ && __bunCommand__ ? (
+    <CopyNpmCommandButtonComponent
+      {...{
+        commands: {
+          __npmCommand__,
+          __yarnCommand__,
+          __pnpmCommand__,
+          __bunCommand__,
+        },
+        withMeta: __withMeta__,
+        class: cn('absolute right-4 top-4', __withMeta__ && 'top-16'),
+      }}
+      client:visible
+    />
+  ) : null
+}

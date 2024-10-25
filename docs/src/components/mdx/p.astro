@@ -1,7 +1,7 @@
 ---
 import { cn } from '@/lib/utils'
 
-const { class: className, ...props } = Astro.props
+const { className, ...props } = Astro.props
 ---
 
 <p class={cn('leading-7 [&:not(:first-child)]:mt-6', className)} {...props}>

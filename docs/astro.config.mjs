@@ -12,14 +12,27 @@ import { visit } from 'unist-util-visit'
 import { rehypeNpmCommand } from './plugins/rehype-npm-command'
 import { siteConfig } from './src/config/site'
 
-function extractText(node) {
-  if (node.type === 'text') {
-    return node.value
-  }
-  if (node.children) {
-    return node.children.map(extractText).join('')
-  }
-  return ''
+/** @type {import('rehype-pretty-code').Options} */
+const optionsRehypePrettyCode = {
+  theme: 'github-dark',
+  getHighlighter,
+  onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and allow empty
+    // lines to be copy/pasted
+    if (node.children.length === 0) {
+      node.children = [{ type: 'text', value: ' ' }]
+    }
+  },
+  onVisitHighlightedLine(node) {
+    node.properties.className = [
+      ...(node.properties.className ?? []),
+      'line--highlighted',
+    ]
+  },
+  onVisitHighlightedChars(node) {
+    node.properties.className = ['word--highlighted']
+    node.tagName = 'span'
+  },
 }
 
 // https://astro.build/config
@@ -53,29 +66,6 @@ export default defineConfig({
     remarkPlugins: [codeImport],
     rehypePlugins: [
       rehypeSlug,
-      [
-        rehypePrettyCode,
-        {
-          theme: 'github-dark',
-          getHighlighter,
-          onVisitLine(node) {
-            // Prevent lines from collapsing in `display: grid` mode, and allow empty
-            // lines to be copy/pasted
-            if (node.children.length === 0) {
-              node.children = [{ type: 'text', value: ' ' }]
-            }
-          },
-          onVisitHighlightedLine(node) {
-            node.properties.className = [
-              ...(node.properties.className ?? []),
-              'line--highlighted',
-            ]
-          },
-          onVisitHighlightedWord(node) {
-            node.properties.className = ['word--highlighted']
-          },
-        },
-      ],
       () => (tree) => {
         visit(tree, (node) => {
           if (node?.type === 'element' && node?.tagName === 'pre') {
@@ -94,16 +84,20 @@ export default defineConfig({
               }
             }
 
-            const rawString = extractText(codeEl)
-            node.properties = node.properties || {}
-            node.properties.__rawString__ = rawString
+            node.__rawString__ = codeEl.children?.[0].value
+            node.__src__ = node.properties?.__src__
+            node.__style__ = node.properties?.__style__
           }
         })
       },
+      [
+        rehypePrettyCode,
+        optionsRehypePrettyCode,
+      ],
       () => (tree) => {
         visit(tree, (node) => {
-          if (node?.type === 'element' && node?.tagName === 'div') {
-            if (!('data-rehype-pretty-code-fragment' in node.properties)) {
+          if (node?.type === 'element' && node?.tagName === 'figure') {
+            if (!('data-rehype-pretty-code-figure' in node.properties)) {
               return
             }
 
@@ -113,7 +107,8 @@ export default defineConfig({
             }
 
             preElement.properties.__withMeta__
-              = node.children.at(0).tagName === 'div'
+              = node.children.at(0).tagName === 'figcaption'
+
             preElement.properties.__rawString__ = node.__rawString__
 
             if (node.__src__) {
