@@ -101,6 +101,12 @@ export const docsConfig: TDocsConfig = {
           items: [],
         },
         {
+          title: 'Aspect Ratio',
+          href: '/docs/components/aspect-ratio',
+          items: [],
+          label: 'New',
+        },
+        {
           title: 'Avatar',
           href: '/docs/components/avatar',
           items: [],

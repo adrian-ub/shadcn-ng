@@ -35,6 +35,12 @@ export const ui: Registry = [
     files: ['ui/alert.ts'],
   },
   {
+    name: 'aspect-ratio',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: ['ui/aspect-ratio.ts'],
+  },
+  {
     name: 'avatar',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],

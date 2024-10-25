@@ -25,7 +25,7 @@
     "@ng-icons/core": "^29.5.0",
     "@ng-icons/lucide": "^29.5.0",
     "@ng-icons/radix-icons": "^29.5.0",
-    "@radix-ng/primitives": "^0.13.0",
+    "@radix-ng/primitives": "^0.15.0",
     "astro": "^4.16.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
