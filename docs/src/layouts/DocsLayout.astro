@@ -9,6 +9,8 @@ import { siteConfig } from '@/config/site'
 import { badgeVariants } from '@/registry/new-york/ui/badge'
 import type { CollectionEntry } from 'astro:content'
 import RootLayout from './RootLayout.astro'
+import { getTableOfContents } from '@/lib/toc'
+import { cn } from '@/lib/utils'
 
 export type Props = {
   entry: CollectionEntry<'docs'>
@@ -17,6 +19,8 @@ export type Props = {
 const { entry } = Astro.props
 const { headings } = await entry.render()
 const { pathname } = Astro.url
+
+const toc = await getTableOfContents(entry.body)
 ---
 
 <RootLayout
@@ -73,12 +77,15 @@ const { pathname } = Astro.url
                     href={entry.data.links.doc}
                     target="_blank"
                     rel="noreferrer"
-                    class={badgeVariants({
-                      variant: 'secondary',
-                    })}
+                    class={cn(
+                      badgeVariants({
+                        variant: 'secondary',
+                      }),
+                      'gap-1',
+                    )}
                   >
                     Docs
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-3 w-3" viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24">
                       <path
                         fill="none"
                         stroke="currentColor"
@@ -95,12 +102,15 @@ const { pathname } = Astro.url
                     href={entry.data.links.api}
                     target="_blank"
                     rel="noreferrer"
-                    class={badgeVariants({
-                      variant: 'secondary',
-                    })}
+                    class={cn(
+                      badgeVariants({
+                        variant: 'secondary',
+                      }),
+                      'gap-1',
+                    )}
                   >
-                    API Reference{' '}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-3 w-3" viewBox="0 0 24 24">
+                    API Reference
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24">
                       <path
                         fill="none"
                         stroke="currentColor"
@@ -116,15 +126,17 @@ const { pathname } = Astro.url
             ) : null
           }
           <div class="pb-12 pt-8">
-            <slot />
+            <div class="mdx">
+              <slot />
+            </div>
           </div>
           <PageNavigation />
         </div>
 
         <div class="hidden text-sm xl:block">
-          <div class="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] overflow-hidden pt-6">
+          <div class="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] overflow-hidden pt-4">
             <div class="h-full pb-10">
-              <Toc data={headings} />
+              <Toc toc={toc} />
             </div>
           </div>
         </div>

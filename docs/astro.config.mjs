@@ -2,13 +2,16 @@ import angular from '@analogjs/astro-angular'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import { transformerMetaHighlight } from '@shikijs/transformers'
+import { getHighlighter } from '@shikijs/compat'
 import { defineConfig } from 'astro/config'
-
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import { rehypePrettyCode } from 'rehype-pretty-code'
+import rehypeSlug from 'rehype-slug'
+import { codeImport } from 'remark-code-import'
 import { visit } from 'unist-util-visit'
+import { rehypeNpmCommand } from './plugins/rehype-npm-command'
 import { siteConfig } from './src/config/site'
 
-// Función recursiva para extraer todos los valores de texto
 function extractText(node) {
   if (node.type === 'text') {
     return node.value
@@ -46,56 +49,97 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    shikiConfig: {
-      theme: 'github-dark',
-      transformers: [transformerMetaHighlight()],
-    },
+    syntaxHighlight: false,
+    remarkPlugins: [codeImport],
     rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypePrettyCode,
+        {
+          theme: 'github-dark',
+          getHighlighter,
+          onVisitLine(node) {
+            // Prevent lines from collapsing in `display: grid` mode, and allow empty
+            // lines to be copy/pasted
+            if (node.children.length === 0) {
+              node.children = [{ type: 'text', value: ' ' }]
+            }
+          },
+          onVisitHighlightedLine(node) {
+            node.properties.className = [
+              ...(node.properties.className ?? []),
+              'line--highlighted',
+            ]
+          },
+          onVisitHighlightedWord(node) {
+            node.properties.className = ['word--highlighted']
+          },
+        },
+      ],
       () => (tree) => {
-        visit(tree, 'element', (node) => {
-          if (node.tagName !== 'pre')
-            return
+        visit(tree, (node) => {
+          if (node?.type === 'element' && node?.tagName === 'pre') {
+            const [codeEl] = node.children
+            if (codeEl.tagName !== 'code') {
+              return
+            }
 
-          const [codeEl] = node.children
+            if (codeEl.data?.meta) {
+              // Extract event from meta and pass it down the tree.
+              const regex = /event="([^"]*)"/
+              const match = codeEl.data?.meta.match(regex)
+              if (match) {
+                node.__event__ = match ? match[1] : null
+                codeEl.data.meta = codeEl.data.meta.replace(regex, '')
+              }
+            }
 
-          if (codeEl.tagName !== 'code')
-            return
-
-          const rawString = extractText(codeEl)
-
-          node.properties = node.properties || {}
-          node.properties.rawString = rawString
+            const rawString = extractText(codeEl)
+            node.properties = node.properties || {}
+            node.properties.__rawString__ = rawString
+          }
         })
       },
       () => (tree) => {
-        visit(tree, 'element', (node) => {
-          if (node.tagName !== 'pre')
-            return
+        visit(tree, (node) => {
+          if (node?.type === 'element' && node?.tagName === 'div') {
+            if (!('data-rehype-pretty-code-fragment' in node.properties)) {
+              return
+            }
 
-          const rawString = node.properties.rawString
+            const preElement = node.children.at(-1)
+            if (preElement.tagName !== 'pre') {
+              return
+            }
 
-          // npm install.
-          if (rawString?.startsWith('npm install')) {
-            node.properties.npmCommand = rawString
-            node.properties.yarnCommand = rawString.replace('npm install', 'yarn add')
-            node.properties.pnpmCommand = rawString.replace('npm install', 'pnpm add')
-          }
+            preElement.properties.__withMeta__
+              = node.children.at(0).tagName === 'div'
+            preElement.properties.__rawString__ = node.__rawString__
 
-          // npx create.
-          if (rawString?.startsWith('npx create-')) {
-            node.properties.npmCommand = rawString
-            node.properties.yarnCommand = rawString.replace('npx create-', 'yarn create ')
-            node.properties.pnpmCommand = rawString.replace('npx create-', 'pnpm create ')
-          }
+            if (node.__src__) {
+              preElement.properties.__src__ = node.__src__
+            }
 
-          // npx.
-          if (rawString?.startsWith('npx') && !rawString.startsWith('npx create-')) {
-            node.properties.npmCommand = rawString
-            node.properties.yarnCommand = rawString
-            node.properties.pnpmCommand = rawString.replace('npx', 'pnpm dlx')
+            if (node.__event__) {
+              preElement.properties.__event__ = node.__event__
+            }
+
+            if (node.__style__) {
+              preElement.properties.__style__ = node.__style__
+            }
           }
         })
       },
+      rehypeNpmCommand,
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ['subheading-anchor'],
+            ariaLabel: 'Link to section',
+          },
+        },
+      ],
     ],
   },
   redirects: {

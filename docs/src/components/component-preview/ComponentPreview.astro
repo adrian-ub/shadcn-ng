@@ -17,7 +17,7 @@ export interface Props {
   name: string
   class?: string
 }
-const { name } = Astro.props
+const { name, class: className, ...rest } = Astro.props
 
 const sortedStyleByNewYork = styles.toSorted((a, b) => (a.name === 'new-york' ? -1 : b.name === 'new-york' ? 1 : 0))
 
@@ -47,7 +47,7 @@ const components = await Promise.all(
 )
 ---
 
-<div class={cn('group relative my-4 flex flex-col space-y-2', Astro.props.class)}>
+<div class={cn('group relative my-4 flex flex-col space-y-2', className)} {...rest}>
   <Tabs>
     <TabsList>
       <TabsTrigger value="Preview">Preview</TabsTrigger>
