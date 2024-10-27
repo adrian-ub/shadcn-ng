@@ -1,7 +1,7 @@
 import process from 'node:process'
-import { registry } from '@/registry'
-import { type Style, styles } from '@/registry/registry-styles'
-import { type Registry, registrySchema } from '@/registry/schema'
+import { registry } from '../registry'
+import { type Style, styles } from '../registry/registry-styles'
+import { type Registry, registrySchema } from '../registry/schema'
 
 export const Index: Record<Style['name'], any> = {
   'default': {},

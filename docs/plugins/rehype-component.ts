@@ -4,7 +4,7 @@ import process from 'node:process'
 import { u } from 'unist-builder'
 import { visit } from 'unist-util-visit'
 
-// import { Index } from '../src/__registry__'
+import { Index } from '../src/__registry__'
 import { styles } from '../src/registry/registry-styles'
 import type { UnistNode, UnistTree } from '../types/unist'
 
@@ -21,9 +21,9 @@ export function rehypeComponent() {
 
       if (node.name === 'ComponentSource') {
         const name = getNodeAttributeByName(node, 'name')?.value as string
-        // const fileName = getNodeAttributeByName(node, 'fileName')?.value as
-        //   | string
-        //   | undefined
+        const fileName = getNodeAttributeByName(node, 'fileName')?.value as
+          | string
+          | undefined
 
         if (!name && !srcPath) {
           return null
@@ -37,20 +37,14 @@ export function rehypeComponent() {
               src = srcPath
             }
             else {
-              src = ''
-              // const component = Index[style.name][name]
-              // src = fileName
-              //   ? component.files.find((file: string) => {
-              //     return (
-              //       file.endsWith(`${fileName}.tsx`)
-              //       || file.endsWith(`${fileName}.ts`)
-              //     )
-              //   }) || component.files[0]
-              //   : component.files[0]
+              const component = Index[style.name][name]
+              src = fileName
+                ? component.files.find((file: string) => file.endsWith(`${fileName}.ts`)) || component.files[0]
+                : component.files[0]
             }
 
             // Read the source file.
-            const filePath = path.join(process.cwd(), src)
+            const filePath = path.join(process.cwd(), 'src', src)
             let source = fs.readFileSync(filePath, 'utf8')
 
             // Replace imports.
@@ -81,7 +75,7 @@ export function rehypeComponent() {
                   u('element', {
                     tagName: 'code',
                     properties: {
-                      className: ['language-tsx'],
+                      className: ['language-angular-ts'],
                     },
                     children: [
                       {
@@ -109,12 +103,11 @@ export function rehypeComponent() {
 
         try {
           for (const style of styles) {
-            // const component = Index[style.name][name]
-            // const src = component.files[0]
-            const src = ''
+            const component = Index[style.name][name]
+            const src = component.files[0]
 
             // Read the source file.
-            const filePath = path.join(process.cwd(), src)
+            const filePath = path.join(process.cwd(), 'src', src)
             let source = fs.readFileSync(filePath, 'utf8')
 
             // Replace imports.
@@ -135,7 +128,7 @@ export function rehypeComponent() {
                   u('element', {
                     tagName: 'code',
                     properties: {
-                      className: ['language-tsx'],
+                      className: ['language-angular-ts'],
                     },
                     children: [
                       {

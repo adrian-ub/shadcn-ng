@@ -1,3 +1,6 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import angular from '@analogjs/astro-angular'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
@@ -9,6 +12,8 @@ import { rehypePrettyCode } from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import { codeImport } from 'remark-code-import'
 import { visit } from 'unist-util-visit'
+
+import { rehypeComponent } from './plugins/rehype-component'
 import { rehypeNpmCommand } from './plugins/rehype-npm-command'
 import { siteConfig } from './src/config/site'
 
@@ -34,6 +39,9 @@ const optionsRehypePrettyCode = {
     node.tagName = 'span'
   },
 }
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 // https://astro.build/config
 export default defineConfig({
@@ -66,6 +74,7 @@ export default defineConfig({
     remarkPlugins: [codeImport],
     rehypePlugins: [
       rehypeSlug,
+      rehypeComponent,
       () => (tree) => {
         visit(tree, (node) => {
           if (node?.type === 'element' && node?.tagName === 'pre') {
@@ -158,6 +167,11 @@ export default defineConfig({
         '@ng-icons/core',
         '@ng-icons/lucide',
       ],
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
     },
   },
 })
