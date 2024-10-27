@@ -2,6 +2,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import angular from '@analogjs/astro-angular'
+import alpinejs from '@astrojs/alpinejs'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
@@ -11,10 +12,11 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { rehypePrettyCode } from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import { codeImport } from 'remark-code-import'
-import { visit } from 'unist-util-visit'
 
+import { visit } from 'unist-util-visit'
 import { rehypeComponent } from './plugins/rehype-component'
 import { rehypeNpmCommand } from './plugins/rehype-npm-command'
+
 import { siteConfig } from './src/config/site'
 
 /** @type {import('rehype-pretty-code').Options} */
@@ -47,28 +49,23 @@ const __dirname = path.dirname(__filename)
 export default defineConfig({
   site: siteConfig.url,
   trailingSlash: 'never',
-  integrations: [
-    mdx(),
-    angular(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    sitemap({
-      serialize(item) {
-        if (item.url === siteConfig.url) {
-          item.changefreq = 'daily'
-          item.lastmod = new Date()
-          item.priority = 1
-        }
-        else {
-          item.changefreq = 'daily'
-          item.lastmod = new Date()
-          item.priority = 0.9
-        }
-        return item
-      },
-    }),
-  ],
+  integrations: [mdx(), angular(), tailwind({
+    applyBaseStyles: false,
+  }), sitemap({
+    serialize(item) {
+      if (item.url === siteConfig.url) {
+        item.changefreq = 'daily'
+        item.lastmod = new Date()
+        item.priority = 1
+      }
+      else {
+        item.changefreq = 'daily'
+        item.lastmod = new Date()
+        item.priority = 0.9
+      }
+      return item
+    },
+  }), alpinejs()],
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [codeImport],
