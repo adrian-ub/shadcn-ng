@@ -8,6 +8,10 @@ export interface Props {
 }
 
 const { value, class: className } = Astro.props
+
+function escapeValue(value: string) {
+  return value.replace(/`/g, '\\`').replace(/\n/g, '\\n').replace(/\$\{/g, '\\${')
+}
 ---
 
 <button
@@ -22,7 +26,7 @@ const { value, class: className } = Astro.props
     }),
   )}
   x-data={`{
-  copyText: \`${value.replace(/`/g, '\\`')}\`,
+  copyText: \`${escapeValue(value)}\`,
   copyNotification: false,
   copyToClipboard() {
     navigator.clipboard.writeText(this.copyText);
