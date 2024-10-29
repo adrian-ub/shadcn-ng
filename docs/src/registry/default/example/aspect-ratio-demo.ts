@@ -1,12 +1,20 @@
 import { UbAspectRatioDirective } from '@/registry/default/ui/aspect-ratio'
 
-import { NgOptimizedImage } from '@angular/common'
+import { IMAGE_LOADER, type ImageLoaderConfig, NgOptimizedImage } from '@angular/common'
 import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
   selector: 'aspect-ratio-demo-default',
   imports: [UbAspectRatioDirective, NgOptimizedImage],
+  providers: [
+    {
+      provide: IMAGE_LOADER,
+      useValue: (config: ImageLoaderConfig) => {
+        return `${config?.src}?w=${config?.width}`
+      },
+    },
+  ],
   template: `
   <div class="w-96">
     <div ubAspectRatio [ratio]="16 / 9" class="bg-muted">
@@ -18,6 +26,7 @@ import { Component } from '@angular/core'
           ngSrcset="640w, 750w, 828w, 1080w, 1200w, 1920w, 2048w, 3840w"
           sizes="100vw"
           style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
+          priority
         />
     </div>
   </div>
