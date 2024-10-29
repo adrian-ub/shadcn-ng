@@ -5,9 +5,11 @@ import process from 'node:process'
 import { styles } from '@/registry/registry-styles'
 import { ui } from '@/registry/registry-ui'
 import { Code as CodeAstro } from 'astro/components'
-import { CopyButton } from '../copy-button'
+
+import CopyButton from '../CopyButton.astro'
 
 import { Select, SelectContent, syncKey } from './select'
+import { cn } from '@/lib/utils'
 
 export interface Props {
   name: string
@@ -58,7 +60,7 @@ const allComponents = componentUi?.files?.flatMap((file) => {
               theme="github-dark"
               class="mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4"
             />
-            <CopyButton client:load {...{ rawString: code, withMeta: false }} />
+            <CopyButton value={code} class={cn('absolute right-4 top-4')} />
           </div>
         ) : (
           <p>Not found</p>

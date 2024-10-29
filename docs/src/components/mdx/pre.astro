@@ -1,6 +1,7 @@
 ---
 import { cn } from '@/lib/utils'
-import { CopyButton, CopyNpmCommandButtonComponent } from '../copy-button'
+import CopyNpmButton from '../CopyNpmButton.astro'
+import CopyButton from '../CopyButton.astro'
 
 type Props = {
   __rawString__: string
@@ -30,31 +31,20 @@ const {
 
 {
   __rawString__ && !__npmCommand__ ? (
-    <CopyButton
-      {...{
-        rawString: __rawString__,
-        withMeta: __withMeta__,
-        class: cn('absolute right-4 top-4', __withMeta__ && 'top-16'),
-      }}
-      client:visible
-    />
+    <CopyButton value={__rawString__} class={cn('absolute right-4 top-4', __withMeta__ && 'top-16')} />
   ) : null
 }
 
 {
   __npmCommand__ && __yarnCommand__ && __pnpmCommand__ && __bunCommand__ ? (
-    <CopyNpmCommandButtonComponent
-      {...{
-        commands: {
-          __npmCommand__,
-          __yarnCommand__,
-          __pnpmCommand__,
-          __bunCommand__,
-        },
-        withMeta: __withMeta__,
-        class: cn('absolute right-4 top-4', __withMeta__ && 'top-16'),
+    <CopyNpmButton
+      commands={{
+        __npmCommand__,
+        __yarnCommand__,
+        __pnpmCommand__,
+        __bunCommand__,
       }}
-      client:visible
+      class={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
     />
   ) : null
 }

@@ -5,7 +5,7 @@ import process from 'node:process'
 import { cn } from '@/lib/utils'
 import { styles } from '@/registry/registry-styles'
 
-import { CopyButton } from '../copy-button'
+import CopyButton from '../CopyButton.astro'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
 
@@ -61,7 +61,7 @@ const components = await Promise.all(
             <SelectContent label={style.label} value={style.name}>
               {pathCode ? (
                 <div>
-                  <CopyButton client:load {...{ rawString: code, withMeta: false }} />
+                  <CopyButton value={code ?? ''} class={cn('absolute right-4 top-4')} />
                   <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: style.name }} />
                 </div>
               ) : (
