@@ -7,16 +7,19 @@ import { styles } from '@/registry/registry-styles'
 
 import CopyButton from '../CopyButton.astro'
 
+import StyleSwitcher from '../StyleSwitcher.astro'
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
 
 import { ComponentPeviewComponent } from './component-preview'
-import { Select, SelectContent, syncKey } from './select'
+import ComponentSource from './ComponentSource.astro'
 
 export interface Props {
   name: string
   class?: string
+  align?: string
 }
-const { name, class: className, ...rest } = Astro.props
+const { name, class: className, align = 'center', ...rest } = Astro.props
 
 const sortedStyleByNewYork = styles.toSorted((a, b) => (a.name === 'new-york' ? -1 : b.name === 'new-york' ? 1 : 0))
 
@@ -46,40 +49,56 @@ const components = await Promise.all(
 )
 ---
 
-<div class={cn('group relative my-4 flex flex-col space-y-2', className)} {...rest}>
-  <Tabs>
-    <TabsList>
-      <TabsTrigger value="Preview">Preview</TabsTrigger>
-      <TabsTrigger value="Code">Code</TabsTrigger>
-    </TabsList>
+<div x-data class={cn('group relative my-4 flex flex-col space-y-2', className)} {...rest}>
+  <Tabs class="relative mr-auto w-full">
+    <div class="flex items-center justify-between pb-3">
+      <TabsList class="w-full justify-start rounded-none border-b bg-transparent p-0">
+        <TabsTrigger value="Preview">Preview</TabsTrigger>
+        <TabsTrigger value="Code">Code</TabsTrigger>
+      </TabsList>
+    </div>
 
-    <TabsContent value="Preview">
-      <Select syncKey={syncKey}>
+    <TabsContent value="Preview" class="relative rounded-md border">
+      <div class="flex items-center justify-between p-4">
+        <StyleSwitcher />
+      </div>
+      <div
+        class={cn('preview flex min-h-[350px] w-full justify-center p-10', {
+          'items-center': align === 'center',
+          'items-start': align === 'start',
+          'items-end': align === 'end',
+        })}
+      >
         {
           components.map(({ style, pathCode, code }) => (
-            <SelectContent label={style.label} value={style.name}>
+            <div x-show={`$store.style === '${style.name}'`}>
               {pathCode ? (
-                <div>
+                <>
                   <CopyButton value={code ?? ''} class={cn('absolute right-4 top-4')} />
                   <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: style.name }} />
-                </div>
+                </>
               ) : (
-                <p>Not found</p>
+                <p class="text-sm text-muted-foreground">
+                  Component{' '}
+                  <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">{name}</code>
+                  {' not found in registry.'}
+                </p>
               )}
-            </SelectContent>
+            </div>
           ))
         }
-      </Select>
+      </div>
     </TabsContent>
+
     <TabsContent value="Code">
-      <Select syncKey={syncKey} hideSelect={true}>
-        <SelectContent label={styles[0].label} value={styles[0].name}>
-          <slot name="new-york"> <p>Not found</p> </slot>
-        </SelectContent>
-        <SelectContent label={styles[1].label} value={styles[1].name}>
-          <slot name="default"> <p>Not found</p> </slot>
-        </SelectContent>
-      </Select>
+      <div class="flex flex-col space-y-4">
+        <div class="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[350px] [&_pre]:overflow-auto">
+          <ComponentSource>
+            <slot name="new-york" slot="new-york"> <p>Not found</p> </slot>
+            <slot name="default" slot="default"> <p>Not found</p> </slot>
+          </ComponentSource>
+        </div>
+      </div>
     </TabsContent>
   </Tabs>
 </div>

@@ -1,14 +1,9 @@
----
-import { styles } from '@/registry/registry-styles'
-
-import { Select, SelectContent, syncKey } from './select'
----
-
-<Select syncKey={syncKey} hideSelect={true}>
-  <SelectContent label={styles[0].label} value={styles[0].name}>
+<div x-data>
+  <template x-if="$store.style === 'new-york'">
     <slot name="new-york"><p>Not found</p></slot>
-  </SelectContent>
-  <SelectContent label={styles[1].label} value={styles[1].name}>
+  </template>
+
+  <template x-if="$store.style === 'default'">
     <slot name="default"> <p>Not found</p></slot>
-  </SelectContent>
-</Select>
+  </template>
+</div>
