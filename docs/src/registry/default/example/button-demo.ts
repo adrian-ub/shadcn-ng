@@ -8,6 +8,4 @@ import { Component } from '@angular/core'
   imports: [UbButtonDirective],
   template: `<button ubButton>Button</button>`,
 })
-export class ButtonDemoDefault { }
-
-export default ButtonDemoDefault
+export default class ButtonDemoDefault { }

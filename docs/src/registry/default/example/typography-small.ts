@@ -7,6 +7,4 @@ import { Component } from '@angular/core'
     <small class="text-sm font-medium leading-none">Email address</small>
   `,
 })
-export class TypographySmallDefault { }
-
-export default TypographySmallDefault
+export default class TypographySmallDefault { }

@@ -9,6 +9,4 @@ import { Component } from '@angular/core'
     </h1>
   `,
 })
-export class TypographyH1Default { }
-
-export default TypographyH1Default
+export default class TypographyH1Default { }

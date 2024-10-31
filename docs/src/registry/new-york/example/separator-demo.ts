@@ -25,6 +25,4 @@ import { Component } from '@angular/core'
     </div>
   `,
 })
-export class SeparatorNewYork { }
-
-export default SeparatorNewYork
+export default class SeparatorNewYork { }

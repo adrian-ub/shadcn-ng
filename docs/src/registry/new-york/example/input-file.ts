@@ -14,6 +14,4 @@ import { Component } from '@angular/core'
     </div>
   `,
 })
-export class InputFileNewYork { }
-
-export default InputFileNewYork
+export default class InputFileNewYork { }

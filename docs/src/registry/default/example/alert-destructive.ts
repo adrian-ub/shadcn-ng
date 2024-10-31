@@ -30,6 +30,4 @@ import { lucideTerminal } from '@ng-icons/lucide'
     </div>
   `,
 })
-export class AlertDestructiveDefault { }
-
-export default AlertDestructiveDefault
+export default class AlertDestructiveDefault { }

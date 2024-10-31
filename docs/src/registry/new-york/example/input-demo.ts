@@ -8,6 +8,4 @@ import { Component } from '@angular/core'
   imports: [UbInputDirective],
   template: ` <input ubInput type="text" placeholder="Email" /> `,
 })
-export class InputDemoNewYork { }
-
-export default InputDemoNewYork
+export default class InputDemoNewYork { }

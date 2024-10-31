@@ -9,6 +9,4 @@ import { Component } from '@angular/core'
     </code>
   `,
 })
-export class TypographyInlineCodeDefault { }
-
-export default TypographyInlineCodeDefault
+export default class TypographyInlineCodeDefault { }

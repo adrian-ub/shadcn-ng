@@ -32,6 +32,4 @@ import { Component } from '@angular/core'
   </div>
   `,
 })
-export class AspectRatioDemoDefault { }
-
-export default AspectRatioDemoDefault
+export default class AspectRatioDemoDefault { }

@@ -16,6 +16,4 @@ import { Component } from '@angular/core'
     </div>
     `,
 })
-export class SekeletonDemoDefault { }
-
-export default SekeletonDemoDefault
+export default class SekeletonDemoDefault { }

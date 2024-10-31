@@ -84,6 +84,4 @@ import { Component } from '@angular/core'
     </div>
     `,
 })
-export class TabsDemoDefault { }
-
-export default TabsDemoDefault
+export default class TabsDemoDefault { }

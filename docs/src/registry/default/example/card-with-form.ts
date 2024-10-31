@@ -54,6 +54,4 @@ import { Component } from '@angular/core'
     </div>
  `,
 })
-export class CardWithFormDefault { }
-
-export default CardWithFormDefault
+export default class CardWithFormDefault { }

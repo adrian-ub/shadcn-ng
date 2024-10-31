@@ -10,6 +10,4 @@ import { Component } from '@angular/core'
     </p>
   `,
 })
-export class TypographyLeadNewYork { }
-
-export default TypographyLeadNewYork
+export default class TypographyLeadNewYork { }

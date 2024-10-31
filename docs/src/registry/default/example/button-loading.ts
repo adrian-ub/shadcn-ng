@@ -16,6 +16,4 @@ import { radixReload } from '@ng-icons/radix-icons'
     </button>
     `,
 })
-export class ButtonLoadingDefault { }
-
-export default ButtonLoadingDefault
+export default class ButtonLoadingDefault { }

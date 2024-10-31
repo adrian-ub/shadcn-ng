@@ -13,7 +13,7 @@ import { toast } from 'ngx-sonner'
     <button ubButton variant="outline" (click)="onClick()">Show Toast</button>
   `,
 })
-export class SonnerDemoNewYork {
+export default class SonnerDemoNewYork {
   protected onClick(): void {
     toast('Event has been created', {
       description: 'Sunday, December 03, 2023 at 9:00 AM',
@@ -25,5 +25,3 @@ export class SonnerDemoNewYork {
     })
   }
 }
-
-export default SonnerDemoNewYork

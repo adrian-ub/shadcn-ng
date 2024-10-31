@@ -84,6 +84,4 @@ import { Component } from '@angular/core'
     </div>
     `,
 })
-export class TabsDemoNewYork { }
-
-export default TabsDemoNewYork
+export default class TabsDemoNewYork { }

@@ -11,6 +11,4 @@ import { Component } from '@angular/core'
     </ul>
   `,
 })
-export class TypographyListDefault { }
-
-export default TypographyListDefault
+export default class TypographyListDefault { }

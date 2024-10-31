@@ -38,7 +38,4 @@ import { radixCaretSort } from '@ng-icons/radix-icons'
   </div>
   `,
 })
-
-export class CollapSibleDemoDefault { }
-
-export default CollapSibleDemoDefault
+export default class CollapSibleDemoDefault { }

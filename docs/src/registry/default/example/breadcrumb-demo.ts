@@ -44,6 +44,4 @@ import { Component } from '@angular/core'
     </nav>
   `,
 })
-export class BreadcrumbDemoDefault { }
-
-export default BreadcrumbDemoDefault
+export default class BreadcrumbDemoDefault { }

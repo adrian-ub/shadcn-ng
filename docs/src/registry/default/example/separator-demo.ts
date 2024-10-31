@@ -26,6 +26,4 @@ import { Component } from '@angular/core'
 
     `,
 })
-export class SeparatorDemoDefault { }
-
-export default SeparatorDemoDefault
+export default class SeparatorDemoDefault { }

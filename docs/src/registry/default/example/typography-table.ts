@@ -62,6 +62,4 @@ import { Component } from '@angular/core'
     </div>
   `,
 })
-export class TypographyTableDefault { }
-
-export default TypographyTableDefault
+export default class TypographyTableDefault { }

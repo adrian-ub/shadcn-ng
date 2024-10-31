@@ -16,6 +16,4 @@ import { radixEnvelopeOpen } from '@ng-icons/radix-icons'
     </button>
     `,
 })
-export class ButtonWithIconNewYork { }
-
-export default ButtonWithIconNewYork
+export default class ButtonWithIconNewYork { }

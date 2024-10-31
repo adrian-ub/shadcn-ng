@@ -13,6 +13,4 @@ import { Component } from '@angular/core'
     </span>
     `,
 })
-export class AvatarDemoNewYork { }
-
-export default AvatarDemoNewYork
+export default class AvatarDemoNewYork { }

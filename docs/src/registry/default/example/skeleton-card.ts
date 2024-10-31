@@ -16,6 +16,4 @@ import { Component } from '@angular/core'
     </div>
     `,
 })
-export class SekeletonCardDefault { }
-
-export default SekeletonCardDefault
+export default class SekeletonCardDefault { }

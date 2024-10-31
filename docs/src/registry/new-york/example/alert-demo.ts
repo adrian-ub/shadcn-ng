@@ -30,6 +30,4 @@ import { lucideRocket } from '@ng-icons/lucide'
     </div>
   `,
 })
-export class AlertDemoNewYork { }
-
-export default AlertDemoNewYork
+export default class AlertDemoNewYork { }

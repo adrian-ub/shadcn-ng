@@ -67,7 +67,7 @@ import { Component } from '@angular/core'
     </table>
   `,
 })
-export class TableDemoNewYork {
+export default class TableDemoNewYork {
   invoices = [
     {
       invoice: 'INV001',
@@ -113,5 +113,3 @@ export class TableDemoNewYork {
     },
   ]
 }
-
-export default TableDemoNewYork

@@ -14,6 +14,4 @@ import { Component } from '@angular/core'
     </div>
     `,
 })
-export class SwitchDemoDefault { }
-
-export default SwitchDemoDefault
+export default class SwitchDemoDefault { }

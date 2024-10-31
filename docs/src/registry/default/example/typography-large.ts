@@ -7,6 +7,4 @@ import { Component } from '@angular/core'
     <div class="text-lg font-semibold">Are you absolutely sure?</div>
   `,
 })
-export class TypographyLargeDefault { }
-
-export default TypographyLargeDefault
+export default class TypographyLargeDefault { }

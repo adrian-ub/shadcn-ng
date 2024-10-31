@@ -10,6 +10,4 @@ import { Component } from '@angular/core'
     </p>
     `,
 })
-export class TypographyPNewYork { }
-
-export default TypographyPNewYork
+export default class TypographyPNewYork { }

@@ -16,6 +16,4 @@ import { Component } from '@angular/core'
     </div>
     `,
 })
-export class SekeletonCardNewYork { }
-
-export default SekeletonCardNewYork
+export default class SekeletonCardNewYork { }

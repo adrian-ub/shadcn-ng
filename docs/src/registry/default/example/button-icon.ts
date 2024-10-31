@@ -16,6 +16,4 @@ import { lucideChevronRight } from '@ng-icons/lucide'
     </button>
     `,
 })
-export class ButtonIconDefault { }
-
-export default ButtonIconDefault
+export default class ButtonIconDefault { }

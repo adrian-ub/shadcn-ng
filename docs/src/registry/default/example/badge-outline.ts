@@ -8,6 +8,4 @@ import { Component } from '@angular/core'
   imports: [UbBadgeDirective],
   template: `<div ubBadge variant="outline">Badge</div>`,
 })
-export class BadgeOutlineDefault { }
-
-export default BadgeOutlineDefault
+export default class BadgeOutlineDefault { }

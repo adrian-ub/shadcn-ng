@@ -141,6 +141,4 @@ import { Component } from '@angular/core'
     </div>
   `,
 })
-export class TypographyDemoNewYork { }
-
-export default TypographyDemoNewYork
+export default class TypographyDemoNewYork { }

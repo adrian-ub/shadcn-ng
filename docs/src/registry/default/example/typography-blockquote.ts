@@ -10,6 +10,4 @@ import { Component } from '@angular/core'
     </blockquote>
   `,
 })
-export class TypographyBlockquoteDefault { }
-
-export default TypographyBlockquoteDefault
+export default class TypographyBlockquoteDefault { }

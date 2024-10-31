@@ -14,6 +14,4 @@ import { Component } from '@angular/core'
     </div>
   `,
 })
-export class InputFileDefault { }
-
-export default InputFileDefault
+export default class InputFileDefault { }
