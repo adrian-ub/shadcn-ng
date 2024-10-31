@@ -53,12 +53,20 @@ const components = await Promise.all(
   <Tabs class="relative mr-auto w-full">
     <div class="flex items-center justify-between pb-3">
       <TabsList class="w-full justify-start rounded-none border-b bg-transparent p-0">
-        <TabsTrigger value="Preview">Preview</TabsTrigger>
-        <TabsTrigger value="Code">Code</TabsTrigger>
+        <TabsTrigger
+          class="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+        >
+          Preview
+        </TabsTrigger>
+        <TabsTrigger
+          class="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+        >
+          Code
+        </TabsTrigger>
       </TabsList>
     </div>
 
-    <TabsContent value="Preview" class="relative rounded-md border">
+    <TabsContent class="relative rounded-md border">
       <div class="flex items-center justify-between p-4">
         <StyleSwitcher />
       </div>
@@ -90,7 +98,7 @@ const components = await Promise.all(
       </div>
     </TabsContent>
 
-    <TabsContent value="Code">
+    <TabsContent>
       <div class="flex flex-col space-y-4">
         <div class="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[350px] [&_pre]:overflow-auto">
           <ComponentSource>

@@ -2,20 +2,17 @@
 import { cn } from '@/lib/utils'
 
 export interface Props {
-  value: string
   class?: string
 }
-
-const { value } = Astro.props
 ---
 
-<ub-tabs-content
-  {value}
+<div
+  :id="$id(tabId + '-content')"
+  x-show="tabContentActive($el)"
   class={cn(
     'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-    'relative [&_h3.font-heading]:text-base [&_h3.font-heading]:font-semibold',
     Astro.props.class,
   )}
 >
   <slot />
-</ub-tabs-content>
+</div>

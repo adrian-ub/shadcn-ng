@@ -2,91 +2,25 @@
 import { cn } from '@/lib/utils'
 
 export interface Props {
-  defaultValue?: string
   class?: string
 }
-const { defaultValue } = Astro.props
 ---
 
-<ub-tabs {defaultValue}>
-  <div class={cn('relative mt-6 w-full', Astro.props.class)}>
-    <slot />
-  </div>
-</ub-tabs>
-
-<script>
-  class UbTabs extends HTMLElement {
-    defaultValue!: string | null
-    triggers!: NodeListOf<HTMLElement>
-    contents!: NodeListOf<HTMLElement>
-    activeTab!: string
-
-    constructor() {
-      super()
-      this.attachShadow({ mode: 'open' })
-      this.shadowRoot!.innerHTML = `<slot></slot>`
+<div
+  class={cn(Astro.props.class)}
+  x-data="{
+    tabSelected: 1,
+    tabId: $id('tabs'),
+    tabButtonClicked(tabButton){
+      this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+    },
+    tabButtonActive(tabButton) {
+      return this.tabSelected == tabButton.id.replace(this.tabId + '-', '');
+    },
+    tabContentActive(tabContent){
+      return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
     }
-
-    connectedCallback(): void {
-      this.defaultValue = this.getAttribute('defaultValue')
-      this.triggers = this.querySelectorAll('ub-tabs-trigger')
-      this.contents = this.querySelectorAll('ub-tabs-content')
-      this.activeTab = this.defaultValue || this.triggers[0].getAttribute('value')!
-      this.updateTabs()
-      this.triggers.forEach((trigger) => {
-        trigger.addEventListener('click', () => {
-          this.activeTab = trigger.getAttribute('value')!
-          this.updateTabs()
-        })
-      })
-    }
-
-    updateTabs(): void {
-      this.triggers.forEach((trigger) => {
-        if (trigger.getAttribute('value') === this.activeTab) {
-          trigger.setAttribute('data-state', 'active')
-          return
-        }
-        trigger.removeAttribute('data-state')
-      })
-      this.contents.forEach((content) => {
-        if (content.getAttribute('value') === this.activeTab) {
-          content.setAttribute('data-state', 'active')
-          content.style.display = 'block'
-          return
-        }
-        content.removeAttribute('data-state')
-        content.style.display = 'none'
-      })
-    }
-  }
-
-  class UbTabsList extends HTMLElement {
-    constructor() {
-      super()
-      this.attachShadow({ mode: 'open' })
-      this.shadowRoot!.innerHTML = `<slot></slot>`
-    }
-  }
-
-  class UbTabsTrigger extends HTMLElement {
-    constructor() {
-      super()
-      this.attachShadow({ mode: 'open' })
-      this.shadowRoot!.innerHTML = `<slot></slot>`
-    }
-  }
-
-  class UbTabsContent extends HTMLElement {
-    constructor() {
-      super()
-      this.attachShadow({ mode: 'open' })
-      this.shadowRoot!.innerHTML = `<slot></slot>`
-    }
-  }
-
-  customElements.define('ub-tabs', UbTabs)
-  customElements.define('ub-tabs-list', UbTabsList)
-  customElements.define('ub-tabs-trigger', UbTabsTrigger)
-  customElements.define('ub-tabs-content', UbTabsContent)
-</script>
+  }"
+>
+  <slot />
+</div>

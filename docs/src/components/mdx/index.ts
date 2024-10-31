@@ -1,6 +1,5 @@
 import ComponentPreview from '../component-preview/ComponentPreview.astro'
 import ComponentSource from '../component-preview/ComponentSource.astro'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
 import a from './a.astro'
 import blockquote from './blockquote.astro'
 import Callout from './Callout.astro'
@@ -20,6 +19,10 @@ import p from './p.astro'
 import pre from './pre.astro'
 import Step from './Step.astro'
 import Steps from './Steps.astro'
+import Tabs from './Tabs.astro'
+import TabsContent from './TabsContent.astro'
+import TabsList from './TabsList.astro'
+import TabsTrigger from './TabsTrigger.astro'
 import ul from './ul.astro'
 
 export const components = {
