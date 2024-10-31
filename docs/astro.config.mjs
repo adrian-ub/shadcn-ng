@@ -93,6 +93,7 @@ export default defineConfig({
             node.__rawString__ = codeEl.children?.[0].value
             node.__src__ = node.properties?.__src__
             node.__style__ = node.properties?.__style__
+            node.slot = node.properties?.slot
           }
         })
       },
@@ -127,6 +128,10 @@ export default defineConfig({
 
             if (node.__style__) {
               preElement.properties.__style__ = node.__style__
+            }
+
+            if (node.slot) {
+              preElement.properties.slot = node.slot
             }
           }
         })

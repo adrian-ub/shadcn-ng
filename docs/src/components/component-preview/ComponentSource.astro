@@ -1,71 +1,14 @@
 ---
-import { readFileSync } from 'node:fs'
-import path from 'node:path'
-import process from 'node:process'
 import { styles } from '@/registry/registry-styles'
-import { ui } from '@/registry/registry-ui'
-import { Code as CodeAstro } from 'astro/components'
-
-import CopyButton from '../CopyButton.astro'
 
 import { Select, SelectContent, syncKey } from './select'
-import { cn } from '@/lib/utils'
-
-export interface Props {
-  name: string
-}
-
-const { name } = Astro.props
-
-const componentUi = ui.find((value) => value.name === name)
-
-const allComponents = componentUi?.files?.flatMap((file) => {
-  return styles.map((style) => {
-    const filename = path.join(
-      process.cwd(),
-      'src',
-      'registry',
-      style.name,
-      typeof file === 'string' ? file : file.path,
-    )
-
-    let code: string | null
-
-    try {
-      code = readFileSync(`${filename}`)
-        .toString()
-        .replace(/export\s+default\s+(?:\S.*)?;\s*/, '')
-        .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
-    } catch {
-      code = null
-    }
-
-    return {
-      style,
-      code,
-    }
-  })
-})
 ---
 
 <Select syncKey={syncKey} hideSelect={true}>
-  {
-    allComponents?.map(({ code, style }) => (
-      <SelectContent label={style.label} value={style.name}>
-        {code ? (
-          <div class="relative">
-            <CodeAstro
-              code={code}
-              lang="angular-ts"
-              theme="github-dark"
-              class="mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900 px-4"
-            />
-            <CopyButton value={code} class={cn('absolute right-4 top-4')} />
-          </div>
-        ) : (
-          <p>Not found</p>
-        )}
-      </SelectContent>
-    ))
-  }
+  <SelectContent label={styles[0].label} value={styles[0].name}>
+    <slot name="new-york"><p>Not found</p></slot>
+  </SelectContent>
+  <SelectContent label={styles[1].label} value={styles[1].name}>
+    <slot name="default"> <p>Not found</p></slot>
+  </SelectContent>
 </Select>

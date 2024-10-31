@@ -63,6 +63,7 @@ export function rehypeComponent() {
                 properties: {
                   __src__: src,
                   __style__: style.name,
+                  slot: style.name,
                 },
                 attributes: [
                   {
@@ -123,6 +124,7 @@ export function rehypeComponent() {
                 tagName: 'pre',
                 properties: {
                   __src__: src,
+                  slot: style.name,
                 },
                 children: [
                   u('element', {

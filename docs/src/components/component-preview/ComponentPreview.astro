@@ -10,7 +10,6 @@ import CopyButton from '../CopyButton.astro'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
 
 import { ComponentPeviewComponent } from './component-preview'
-import RawCode from './RawCode.astro'
 import { Select, SelectContent, syncKey } from './select'
 
 export interface Props {
@@ -74,13 +73,12 @@ const components = await Promise.all(
     </TabsContent>
     <TabsContent value="Code">
       <Select syncKey={syncKey} hideSelect={true}>
-        {
-          components.map(({ style, code }) => (
-            <SelectContent label={style.label} value={style.name}>
-              {code ? <RawCode code={code} /> : <p>Not found</p>}
-            </SelectContent>
-          ))
-        }
+        <SelectContent label={styles[0].label} value={styles[0].name}>
+          <slot name="new-york"> <p>Not found</p> </slot>
+        </SelectContent>
+        <SelectContent label={styles[1].label} value={styles[1].name}>
+          <slot name="default"> <p>Not found</p> </slot>
+        </SelectContent>
       </Select>
     </TabsContent>
   </Tabs>
