@@ -126,6 +126,9 @@ importers:
 
   docs:
     dependencies:
+      '@alpinejs/focus':
+        specifier: ^3.14.3
+        version: 3.14.3
       '@analogjs/astro-angular':
         specifier: ^1.9.0
         version: 1.9.0(gic5oijsnuuyr6bfgpy7e3plve)
@@ -259,6 +262,9 @@ importers:
       '@shikijs/transformers':
         specifier: ^1.20.0
         version: 1.22.1
+      '@types/alpinejs__focus':
+        specifier: ^3.13.4
+        version: 3.13.4
       '@types/lodash.template':
         specifier: ^4.5.3
         version: 4.5.3
@@ -280,6 +286,9 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+  '@alpinejs/focus@3.14.3':
+    resolution: {integrity: sha512-ZBL6HziMXhQIuta3PQjpYaMb5Ro9VPqh0mkP+d1uefJnhliBMWUfQXOnobV/0zJUB9pDxzd78diDX3ywewoJ3g==}
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -2497,6 +2506,9 @@ packages:
   '@types/alpinejs@3.13.10':
     resolution: {integrity: sha512-ah53tF6mWuuwerpDE7EHwbZErNDJQlsLISPqJhYj2RZ9nuTYbRknSkqebUd3igkhLIZKkPa7IiXjSn9qsU9O2w==}
 
+  '@types/alpinejs__focus@3.13.4':
+    resolution: {integrity: sha512-g7pQNxST7palODhfg6DJoKWS59pD8EK1wNjkJydBP2u8LntlO8oD4f2uj6Ywh2CL/olM/bPSyYxwr+WQQPlphg==}
+
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
 
@@ -4205,6 +4217,9 @@ packages:
   flattie@1.1.1:
     resolution: {integrity: sha512-9UbaD6XdAL97+k/n+N7JwX46K/M6Zc6KcFYskrYL8wbBV/Uyk0CTAMY0VT+qiK5PM7AIc9aTWYtq65U7T+aCNQ==}
     engines: {node: '>=8'}
+
+  focus-trap@6.9.4:
+    resolution: {integrity: sha512-v2NTsZe2FF59Y+sDykKY+XjqZ0cPfhq/hikWVL88BqLivnNiEffAsac6rP6H45ff9wG9LL5ToiDqrLEP9GX9mw==}
 
   follow-redirects@1.15.9:
     resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
@@ -6866,6 +6881,9 @@ packages:
     resolution: {integrity: sha512-7gr8p9TQP6RAHusBOSLs46F4564ZrjV8xFmw5zCmgmhGUcw2hxsShhJ6CEiHQMgPDwAQ1fWHPM0ypc4RMAig4A==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
+  tabbable@5.3.3:
+    resolution: {integrity: sha512-QD9qKY3StfbZqWOPLp0++pOrAVb/HbUi5xCc8cUo4XjP19808oaMiDzn0leBY5mCespIBM0CIZePzZjgzR83kA==}
+
   tailwind-merge@2.5.2:
     resolution: {integrity: sha512-kjEBm+pvD+6eAwzJL2Bi+02/9LFLal1Gs61+QB7HvTfQQ0aXwC5LGT8PEt1gS0CWKktKe6ysPTAy3cBC5MeiIg==}
 
@@ -7700,6 +7718,11 @@ packages:
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
+
+  '@alpinejs/focus@3.14.3':
+    dependencies:
+      focus-trap: 6.9.4
+      tabbable: 5.3.3
 
   '@ampproject/remapping@2.3.0':
     dependencies:
@@ -10147,6 +10170,10 @@ snapshots:
 
   '@types/alpinejs@3.13.10': {}
 
+  '@types/alpinejs__focus@3.13.4':
+    dependencies:
+      '@types/alpinejs': 3.13.10
+
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.26.2
@@ -12365,6 +12392,10 @@ snapshots:
   flatted@3.3.1: {}
 
   flattie@1.1.1: {}
+
+  focus-trap@6.9.4:
+    dependencies:
+      tabbable: 5.3.3
 
   follow-redirects@1.15.9(debug@4.3.7):
     optionalDependencies:
@@ -15629,6 +15660,8 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.1.1
       tslib: 2.8.0
+
+  tabbable@5.3.3: {}
 
   tailwind-merge@2.5.2: {}
 

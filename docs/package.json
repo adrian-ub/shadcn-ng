@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@alpinejs/focus": "^3.14.3",
     "@analogjs/astro-angular": "^1.9.0",
     "@angular/animations": "^18.2.9",
     "@angular/cdk": "^18.2.10",
@@ -57,6 +58,7 @@
     "@angular/platform-browser-dynamic": "^18.2.9",
     "@angular/platform-server": "^18.2.9",
     "@shikijs/transformers": "^1.20.0",
+    "@types/alpinejs__focus": "^3.13.4",
     "@types/lodash.template": "^4.5.3",
     "lodash.template": "^4.5.0",
     "mdast-util-toc": "^7.1.0",

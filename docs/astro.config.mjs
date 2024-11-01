@@ -49,23 +49,29 @@ const __dirname = path.dirname(__filename)
 export default defineConfig({
   site: siteConfig.url,
   trailingSlash: 'never',
-  integrations: [mdx(), angular(), tailwind({
-    applyBaseStyles: false,
-  }), sitemap({
-    serialize(item) {
-      if (item.url === siteConfig.url) {
-        item.changefreq = 'daily'
-        item.lastmod = new Date()
-        item.priority = 1
-      }
-      else {
-        item.changefreq = 'daily'
-        item.lastmod = new Date()
-        item.priority = 0.9
-      }
-      return item
-    },
-  }), alpinejs()],
+  integrations: [
+    mdx(),
+    angular(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    sitemap({
+      serialize(item) {
+        if (item.url === siteConfig.url) {
+          item.changefreq = 'daily'
+          item.lastmod = new Date()
+          item.priority = 1
+        }
+        else {
+          item.changefreq = 'daily'
+          item.lastmod = new Date()
+          item.priority = 0.9
+        }
+        return item
+      },
+    }),
+    alpinejs({ entrypoint: '/src/entrypoints/alpine' }),
+  ],
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [codeImport],
