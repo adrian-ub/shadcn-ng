@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6" {...Astro.props}>
+---
+import { cn } from '@/lib/utils'
+
+const { class: className, ...rest } = Astro.props
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class={cn('h-6 w-6', className)} {...rest}>
   <rect width="256" height="256" fill="none"></rect>
   <line
     x1="208"

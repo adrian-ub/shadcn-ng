@@ -3,6 +3,7 @@ import { siteConfig } from '@/config/site'
 import { buttonVariants } from '@/registry/new-york/ui/button'
 
 import Navbar from './Navbar.astro'
+import MobileNavbar from './MobileNavbar.astro'
 
 const { pathname } = Astro.url
 ---
@@ -12,7 +13,7 @@ const { pathname } = Astro.url
 >
   <div class="container md:px-8 px-4 flex h-14 max-w-screen-2xl items-center">
     <Navbar pathname={pathname} />
-    <!-- <MobileNavbar pathname={pathname} /> -->
+    <MobileNavbar pathname={pathname} />
     <div class="flex flex-1 items-center justify-end space-x-2">
       <div class="w-full flex-1 md:w-auto md:flex-none">
         <!-- <CommandMenu /> -->
