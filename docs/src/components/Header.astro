@@ -5,6 +5,7 @@ import { buttonVariants } from '@/registry/new-york/ui/button'
 import Navbar from './Navbar.astro'
 import MobileNavbar from './MobileNavbar.astro'
 import CommandMenu from './CommandMenu.astro'
+import ModeToggle from './ModeToggle.astro'
 
 const { pathname } = Astro.url
 ---
@@ -61,6 +62,6 @@ const { pathname } = Astro.url
         </a>
       </div>
     </div>
-    <!-- <ModeToggle /> -->
+    <ModeToggle />
   </div>
 </header>
