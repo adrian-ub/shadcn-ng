@@ -12,7 +12,6 @@ import StyleSwitcher from '../StyleSwitcher.astro'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
 
 import { ComponentPeviewComponent } from './component-preview'
-import ComponentSource from './ComponentSource.astro'
 
 export interface Props {
   name: string
@@ -100,11 +99,13 @@ const components = await Promise.all(
 
     <TabsContent>
       <div class="flex flex-col space-y-4">
-        <div class="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[350px] [&_pre]:overflow-auto">
-          <ComponentSource>
+        <div class="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[410px] [&_pre]:overflow-auto">
+          <template x-if="$store.style === 'new-york'">
             <slot name="new-york" slot="new-york"> <p>Not found</p> </slot>
+          </template>
+          <template x-if="$store.style === 'default'">
             <slot name="default" slot="default"> <p>Not found</p> </slot>
-          </ComponentSource>
+          </template>
         </div>
       </div>
     </TabsContent>
