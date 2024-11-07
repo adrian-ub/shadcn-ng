@@ -38,6 +38,9 @@
         },
         "ui": {
           "type": "string"
+        },
+        "lib": {
+          "type": "string"
         }
       },
       "required": ["utils", "components"]
