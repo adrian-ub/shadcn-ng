@@ -1,9 +1,28 @@
 ---
-import Footer from '@/components/Footer.astro'
-import Header from '@/components/Header.astro'
+import SiteFooter from '@/components/SiteFooter.astro'
+import SiteHeader from '@/components/SiteHeader.astro'
 import StyleWrapper from '@/components/StyleWrapper.astro'
 
 import { siteConfig } from '@/config/site'
+
+import '@fontsource/geist-mono/100.css'
+import '@fontsource/geist-mono/200.css'
+import '@fontsource/geist-mono/300.css'
+import '@fontsource/geist-mono/400.css'
+import '@fontsource/geist-mono/500.css'
+import '@fontsource/geist-mono/600.css'
+import '@fontsource/geist-mono/700.css'
+import '@fontsource/geist-mono/800.css'
+import '@fontsource/geist-mono/900.css'
+import '@fontsource/geist-sans/100.css'
+import '@fontsource/geist-sans/200.css'
+import '@fontsource/geist-sans/300.css'
+import '@fontsource/geist-sans/400.css'
+import '@fontsource/geist-sans/500.css'
+import '@fontsource/geist-sans/600.css'
+import '@fontsource/geist-sans/700.css'
+import '@fontsource/geist-sans/800.css'
+import '@fontsource/geist-sans/900.css'
 
 import './main.css'
 import './mdx.css'
@@ -80,23 +99,22 @@ const { title, description, url } = Astro.props
     <meta name="generator" content={Astro.generator} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="preload" href="/fonts/GeistVariableVF.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-
-    <style type="text/css">
-      @font-face {
-        font-family: 'Geist Sans Variable';
-        src: url('/fonts/GeistVariableVF.woff2') format('woff2');
-        font-display: swap;
-      }
-    </style>
   </head>
-  <body>
-    <div class="min-h-screen bg-background font-sans antialiased">
-      <Header />
-      <div class="flex-1">
-        <slot />
+  <body class="min-h-screen bg-background font-sans antialiased">
+    <div>
+      <div class="relative flex min-h-screen flex-col bg-background">
+        <div class="border-border/40 dark:border-border">
+          <div
+            class="mx-auto w-full border-border/40 dark:border-border min-[1800px]:max-w-[1536px] min-[1800px]:border-x"
+          >
+            <SiteHeader />
+            <main class="flex-1">
+              <slot />
+            </main>
+            <SiteFooter />
+          </div>
+        </div>
       </div>
-      <Footer />
     </div>
     <StyleWrapper />
   </body>

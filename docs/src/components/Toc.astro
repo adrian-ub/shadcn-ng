@@ -47,8 +47,14 @@ const { toc } = Astro.props
 </script>
 
 <aside class="space-y-2">
-  <p class="font-medium">On This Page</p>
-  <ul class="m-0 list-none">
-    <Tree tree={toc} />
-  </ul>
+  {
+    toc.items?.length && (
+      <>
+        <p class="font-medium">On This Page</p>
+        <ul class="m-0 list-none">
+          <Tree tree={toc} />
+        </ul>
+      </>
+    )
+  }
 </aside>

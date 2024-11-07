@@ -24,6 +24,8 @@
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.2",
     "@astrojs/ts-plugin": "^1.10.4",
+    "@fontsource/geist-mono": "^5.1.0",
+    "@fontsource/geist-sans": "^5.1.0",
     "@ng-icons/core": "^29.5.0",
     "@ng-icons/lucide": "^29.5.0",
     "@ng-icons/radix-icons": "^29.5.0",

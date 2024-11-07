@@ -1,4 +1,5 @@
 ---
+import Announcement from '@/components/Announcement.astro'
 import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 
 import { siteConfig } from '@/config/site'
@@ -9,11 +10,12 @@ import { buttonVariants } from '@/registry/new-york/ui/button'
 ---
 
 <RootLayout>
-  <div class="container relative">
+  <div class="relative">
     <PageHeader>
+      <Announcement />
       <PageHeaderHeading>Build your component library</PageHeaderHeading>
       <PageHeaderDescription>
-        Beautifully designed components that you can copy and paste into your apps.
+        Beautifully designed components that you can copy and paste into your apps. Made with Tailwind CSS. Open source.
       </PageHeaderDescription>
 
       <PageActions>

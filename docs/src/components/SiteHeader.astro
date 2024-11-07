@@ -2,30 +2,34 @@
 import { siteConfig } from '@/config/site'
 import { buttonVariants } from '@/registry/new-york/ui/button'
 
-import Navbar from './Navbar.astro'
-import MobileNavbar from './MobileNavbar.astro'
+import MainNav from './MainNav.astro'
+import MobileNav from './MobileNav.astro'
 import CommandMenu from './CommandMenu.astro'
-import ModeToggle from './ModeToggle.astro'
+import ModeSwitcher from './ModeSwitcher.astro'
+import { cn } from '@/lib/utils'
 
 const { pathname } = Astro.url
 ---
 
 <header
-  class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+  class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border"
 >
-  <div class="container md:px-8 px-4 flex h-14 max-w-screen-2xl items-center">
-    <Navbar pathname={pathname} />
-    <MobileNavbar pathname={pathname} />
-    <div class="flex flex-1 items-center justify-end space-x-2">
+  <div class="flex h-14 items-center px-4">
+    <MainNav pathname={pathname} />
+    <MobileNav pathname={pathname} />
+    <div class="flex flex-1 items-center justify-between gap-2 md:justify-end">
       <div class="w-full flex-1 md:w-auto md:flex-none">
         <CommandMenu />
       </div>
-      <div class="flex items-center">
+      <div class="flex items-center gap-0.5">
         <a
-          class={buttonVariants({
-            variant: 'ghost',
-            size: 'icon',
-          })}
+          class={cn(
+            buttonVariants({
+              variant: 'ghost',
+              size: 'icon',
+            }),
+            'h-8 w-8 px-0',
+          )}
           href={siteConfig.links.github}
           target="_blank"
           rel="noreferrer"
@@ -38,30 +42,8 @@ const { pathname } = Astro.url
           </svg>
           <span class="sr-only">GitHub</span>
         </a>
-        <a
-          class={buttonVariants({
-            variant: 'ghost',
-            size: 'icon',
-          })}
-          href={siteConfig.links.twitter}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <svg
-            class="h-3 w-3 fill-current"
-            height="23"
-            viewBox="0 0 1200 1227"
-            width="23"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
-            ></path>
-          </svg>
-          <span class="sr-only">Twitter</span>
-        </a>
       </div>
     </div>
-    <ModeToggle />
+    <ModeSwitcher />
   </div>
 </header>
