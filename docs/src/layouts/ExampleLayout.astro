@@ -1,24 +1,22 @@
 ---
+import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
 import Announcement from '@/components/Announcement.astro'
 import ExamplesNav from '@/components/ExamplesNav.astro'
-import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
-
+import { buttonVariants } from '@/registry/new-york/ui/button'
 import { siteConfig } from '@/config/site'
 
-import RootLayout from '@/layouts/RootLayout.astro'
-
-import { buttonVariants } from '@/registry/new-york/ui/button'
-
-import { ExampleAuthenticationComponent } from './examples/authentication/_authentication'
+import RootLayout from './RootLayout.astro'
 ---
 
 <RootLayout>
   <div class="relative">
     <PageHeader>
       <Announcement />
-      <PageHeaderHeading>Build your component library</PageHeaderHeading>
+      <PageHeaderHeading class="hidden md:block"> Check out some examples </PageHeaderHeading>
+      <PageHeaderHeading class="md:hidden"> Examples </PageHeaderHeading>
       <PageHeaderDescription>
-        Beautifully designed components that you can copy and paste into your apps. Made with Tailwind CSS. Open source.
+        Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your
+        own.
       </PageHeaderDescription>
 
       <PageActions>
@@ -43,12 +41,12 @@ import { ExampleAuthenticationComponent } from './examples/authentication/_authe
         </a>
       </PageActions>
     </PageHeader>
-    <div class="container py-6">
-      <ExamplesNav class="[&>a:first-child]:text-primary" />
 
-      <section class="hidden md:block [&>div]:p-0">
+    <div class="container py-6">
+      <section>
+        <ExamplesNav />
         <div class="overflow-hidden rounded-[0.5rem] border bg-background shadow">
-          <ExampleAuthenticationComponent client:load />
+          <slot />
         </div>
       </section>
     </div>
