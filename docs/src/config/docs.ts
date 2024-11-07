@@ -32,6 +32,10 @@ export const docsConfig: TDocsConfig = {
       title: 'Examples',
       href: '/examples/authentication',
     },
+    {
+      title: 'Colors',
+      href: '/colors',
+    },
   ],
   sidebarNav: [
     {
