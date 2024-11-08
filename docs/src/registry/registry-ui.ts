@@ -73,6 +73,12 @@ export const ui: Registry = [
     files: ['ui/collapsible.ts'],
   },
   {
+    name: 'dialog',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives', '@ng-icons/core', '@ng-icons/lucide'],
+    files: ['ui/dialog.ts'],
+  },
+  {
     name: 'input',
     type: 'registry:ui',
     files: ['ui/input.ts'],

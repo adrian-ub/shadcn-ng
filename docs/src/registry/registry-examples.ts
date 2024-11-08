@@ -128,6 +128,12 @@ export const examples: Registry = [
     files: ['example/collapsible-demo.ts'],
   },
   {
+    name: 'dialog-demo',
+    type: 'registry:example',
+    registryDependencies: ['dialog'],
+    files: ['example/dialog-demo.ts'],
+  },
+  {
     name: 'input-demo',
     type: 'registry:example',
     registryDependencies: ['input'],

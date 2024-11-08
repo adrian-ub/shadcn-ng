@@ -112,7 +112,6 @@ export const docsConfig: TDocsConfig = {
           title: 'Aspect Ratio',
           href: '/docs/components/aspect-ratio',
           items: [],
-          label: 'New',
         },
         {
           title: 'Avatar',
@@ -145,6 +144,12 @@ export const docsConfig: TDocsConfig = {
           items: [],
         },
         {
+          title: 'Dialog',
+          href: '/docs/components/dialog',
+          label: 'New',
+          items: [],
+        },
+        {
           title: 'Input',
           href: '/docs/components/input',
           items: [],
@@ -163,7 +168,6 @@ export const docsConfig: TDocsConfig = {
           title: 'Sonner',
           href: '/docs/components/sonner',
           items: [],
-          label: 'New',
         },
         {
           title: 'Switch',

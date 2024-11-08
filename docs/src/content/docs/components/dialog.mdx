@@ -1,0 +1,78 @@
+---
+title: Dialog
+description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
+links:
+  doc: https://www.radix-ng.com/primitives/components/dialog
+  api: https://www.radix-ng.com/primitives/components/dialog#api-reference
+---
+
+<ComponentPreview
+  name="dialog-demo"
+  description="A dialog for editing profile details."
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ng@latest add dialog
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @radix-ng/primitives @ng-icons/core @ng-icons/lucide
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="dialog" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```ts
+import {
+  UbDialogContentDirective,
+  UbDialogDescriptionDirective,
+  UbDialogFooterDirective,
+  UbDialogHeaderDirective,
+  UbDialogTitleDirective,
+  UbDialogTriggerDirective,
+} from '@/components/ui/dialog'
+```
+
+```html
+<button ubButton variant="outline" [ubDialogTrigger]="dialog">Open</button>
+
+<ng-template #dialog>
+  <div ubDialogContent>
+    <div ubDialogHeader>
+      <h2 ubDialogTitle>Are you absolutely sure?</h2>
+      <p ubDialogDescription>
+        This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+      </p>
+    </div>
+  </div>
+</ng-template>
+```
