@@ -12,12 +12,11 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { rehypePrettyCode } from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import { codeImport } from 'remark-code-import'
-
 import { visit } from 'unist-util-visit'
-import { rehypeComponent } from './plugins/rehype-component'
-import { rehypeNpmCommand } from './plugins/rehype-npm-command'
 
 import { siteConfig } from './src/config/site'
+import { rehypeComponent } from './src/plugins/rehype-component'
+import { rehypeNpmCommand } from './src/plugins/rehype-npm-command'
 
 /** @type {import('rehype-pretty-code').Options} */
 const optionsRehypePrettyCode = {

@@ -4,8 +4,8 @@ export const ui: Registry = [
   {
     name: 'accordion',
     type: 'registry:ui',
-    dependencies: ['@ng-icons/core', '@ng-icons/lucide', '@radix-ng/primitives'],
-    files: ['ui/accordion.ts'],
+    dependencies: ['@radix-ng/primitives'],
+    files: [{ path: 'ui/accordion.ts', type: 'registry:ui' }],
     tailwind: {
       config: {
         theme: {
@@ -32,94 +32,94 @@ export const ui: Registry = [
   {
     name: 'alert',
     type: 'registry:ui',
-    files: ['ui/alert.ts'],
+    files: [{ path: 'ui/alert.ts', type: 'registry:ui' }],
   },
   {
     name: 'aspect-ratio',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],
-    files: ['ui/aspect-ratio.ts'],
+    files: [{ path: 'ui/aspect-ratio.ts', type: 'registry:ui' }],
   },
   {
     name: 'avatar',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],
-    files: ['ui/avatar.ts'],
+    files: [{ path: 'ui/avatar.ts', type: 'registry:ui' }],
   },
   {
     name: 'badge',
     type: 'registry:ui',
-    files: ['ui/badge.ts'],
+    files: [{ path: 'ui/badge.ts', type: 'registry:ui' }],
   },
   {
     name: 'breadcrumb',
     type: 'registry:ui',
-    files: ['ui/breadcrumb.ts'],
+    files: [{ path: 'ui/breadcrumb.ts', type: 'registry:ui' }],
   },
   {
     name: 'button',
     type: 'registry:ui',
-    files: ['ui/button.ts'],
+    files: [{ path: 'ui/button.ts', type: 'registry:ui' }],
   },
   {
     name: 'card',
     type: 'registry:ui',
-    files: ['ui/card.ts'],
+    files: [{ path: 'ui/card.ts', type: 'registry:ui' }],
   },
   {
     name: 'collapsible',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],
-    files: ['ui/collapsible.ts'],
+    files: [{ path: 'ui/collapsible.ts', type: 'registry:ui' }],
   },
   {
     name: 'dialog',
     type: 'registry:ui',
-    dependencies: ['@radix-ng/primitives', '@ng-icons/core', '@ng-icons/lucide'],
-    files: ['ui/dialog.ts'],
+    dependencies: ['@radix-ng/primitives'],
+    files: [{ path: 'ui/dialog.ts', type: 'registry:ui' }],
   },
   {
     name: 'input',
     type: 'registry:ui',
-    files: ['ui/input.ts'],
+    files: [{ path: 'ui/input.ts', type: 'registry:ui' }],
   },
   {
     name: 'label',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],
-    files: ['ui/label.ts'],
+    files: [{ path: 'ui/label.ts', type: 'registry:ui' }],
   },
   {
     name: 'separator',
     type: 'registry:ui',
-    files: ['ui/separator.ts'],
+    files: [{ path: 'ui/separator.ts', type: 'registry:ui' }],
   },
   {
     name: 'skeleton',
     type: 'registry:ui',
-    files: ['ui/skeleton.ts'],
+    files: [{ path: 'ui/skeleton.ts', type: 'registry:ui' }],
   },
   {
     name: 'sonner',
     type: 'registry:ui',
     dependencies: ['ngx-sonner'],
-    files: ['ui/sonner.ts'],
+    files: [{ path: 'ui/sonner.ts', type: 'registry:ui' }],
   },
   {
     name: 'switch',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],
-    files: ['ui/switch.ts'],
+    files: [{ path: 'ui/switch.ts', type: 'registry:ui' }],
   },
   {
     name: 'table',
     type: 'registry:ui',
-    files: ['ui/table.ts'],
+    files: [{ path: 'ui/table.ts', type: 'registry:ui' }],
   },
   {
     name: 'tabs',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],
-    files: ['ui/tabs.ts'],
+    files: [{ path: 'ui/tabs.ts', type: 'registry:ui' }],
   },
 ]

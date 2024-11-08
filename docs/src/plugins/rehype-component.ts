@@ -4,9 +4,9 @@ import process from 'node:process'
 import { u } from 'unist-builder'
 import { visit } from 'unist-util-visit'
 
-import { Index } from '../src/__registry__'
-import { styles } from '../src/registry/registry-styles'
-import type { UnistNode, UnistTree } from '../types/unist'
+import { Index } from '../__registry__'
+import { styles } from '../registry/registry-styles'
+import type { UnistNode, UnistTree } from '../../types/unist'
 
 export function rehypeComponent() {
   return async (tree: UnistTree) => {
