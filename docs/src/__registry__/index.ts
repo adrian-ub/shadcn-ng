@@ -3,6 +3,8 @@ import { registry } from '../registry'
 import { type Style, styles } from '../registry/registry-styles'
 import { type Registry, registrySchema } from '../registry/schema'
 
+const components = import.meta.glob(`../registry/**/**/*.ts`)
+
 export const Index: Record<Style['name'], any> = {
   'default': {},
   'new-york': {},
@@ -45,13 +47,15 @@ async function buildRegistry(registry: Registry): Promise<void> {
         }
       }
 
+      const component = components[componentPath]
+
       Index[style.name][item.name] = {
         name: item.name,
         description: item.description ?? '',
         type: item.type,
         registryDependencies: item.registryDependencies ?? [],
         files: resolveFiles.map(file => file),
-        component: () => import(/* @vite-ignore */componentPath),
+        component,
         source: sourceFilename,
         category: item.category ?? '',
         chunks: chunks.map(chunk => ({
