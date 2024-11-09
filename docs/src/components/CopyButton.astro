@@ -1,13 +1,14 @@
 ---
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/registry/new-york/ui/button'
+import { buttonVariants, type ButtonVariant } from '@/registry/new-york/ui/button'
 
 export interface Props {
   class: string
   value: string
+  variant?: ButtonVariant
 }
 
-const { value, class: className } = Astro.props
+const { value, class: className, variant = 'ghost' } = Astro.props
 
 function escapeValue(value: string) {
   return value.replace(/`/g, '\\`').replace(/\n/g, '\\n').replace(/\$\{/g, '\\${')
@@ -17,7 +18,7 @@ function escapeValue(value: string) {
 <button
   class={cn(
     buttonVariants({
-      variant: 'ghost',
+      variant,
       size: 'icon',
       class: cn(
         'relative z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 [&_svg]:h-3 [&_svg]:w-3',
