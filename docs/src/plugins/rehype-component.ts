@@ -8,6 +8,21 @@ import { Index } from '../__registry__'
 import { styles } from '../registry/registry-styles'
 import type { UnistNode, UnistTree } from '../../types/unist'
 
+function toCamelCase(str: string): string {
+  return str
+    .split(/[-_]/)
+    .map((word, index) => {
+      if (index === 0) {
+        return word
+      }
+      return (
+        word.charAt(0).toUpperCase()
+        + word.slice(1)
+      )
+    })
+    .join('')
+}
+
 export function rehypeComponent() {
   return async (tree: UnistTree) => {
     visit(tree, (node: UnistNode) => {
@@ -55,6 +70,7 @@ export function rehypeComponent() {
               '@/components/',
             )
             source = source.replaceAll('export default', 'export')
+            source = source.replace(/selector: '\[([^\]]+)\]'/, 'selector: \'$1\'')
 
             // Add code as children so that rehype can take over at build time.
             node.children?.push(
@@ -117,6 +133,13 @@ export function rehypeComponent() {
               '@/components/',
             )
             source = source.replaceAll('export default', 'export')
+            source = source.replace(/selector: '\[([^\]]+)\]'/, 'selector: \'$1\'')
+
+            node.attributes?.push({
+              type: 'mdxJsxAttribute',
+              name: toCamelCase(`code-${style.name}`),
+              value: source,
+            })
 
             // Add code as children so that rehype can take over at build time.
             node.children?.push(

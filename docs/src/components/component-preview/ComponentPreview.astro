@@ -1,7 +1,4 @@
 ---
-import { existsSync, readFileSync } from 'node:fs'
-import path from 'node:path'
-import process from 'node:process'
 import { cn } from '@/lib/utils'
 import { styles } from '@/registry/registry-styles'
 
@@ -17,35 +14,10 @@ export interface Props {
   name: string
   class?: string
   align?: string
+  codeNewYork: string
+  codeDefault: string
 }
-const { name, class: className, align = 'center', ...rest } = Astro.props
-
-const sortedStyleByNewYork = styles.toSorted((a, b) => (a.name === 'new-york' ? -1 : b.name === 'new-york' ? 1 : 0))
-
-const components = await Promise.all(
-  [...sortedStyleByNewYork].map(async (style) => {
-    const filename = path.join(process.cwd(), 'src', 'registry', style.name, 'example', `${name}.ts`)
-    let pathCode: string
-    let code: string | null
-
-    if (existsSync(filename)) {
-      pathCode = `../registry/${style.name}/example/${name}.ts`
-      code = readFileSync(`${filename}`)
-        .toString()
-        .replace(/@\/registry\/.*\/ui/g, '@/components/ui')
-        .replace(/export\s+default\s+(?:\S.*)?\s*/, '')
-    } else {
-      pathCode = ''
-      code = null
-    }
-
-    return {
-      style,
-      code,
-      pathCode,
-    }
-  }),
-)
+const { name, class: className, align = 'center', codeDefault, codeNewYork, ...rest } = Astro.props
 ---
 
 <div x-data class={cn('group relative my-4 flex flex-col space-y-2', className)} {...rest}>
@@ -69,35 +41,34 @@ const components = await Promise.all(
       <div class="flex items-center justify-between p-4">
         <StyleSwitcher />
         <div class="flex items-center gap-2">
-          {
-            components.map(({ style, code }) => (
-              <template x-if={`$store.style == '${style.name}'`}>
-                {code && (
-                  <CopyButton
-                    variant="outline"
-                    value={code}
-                    class="h-7 w-7 text-foreground opacity-100 hover:bg-muted hover:text-foreground [&_svg]:h-3.5 [&_svg]:w-3.5"
-                  />
-                )}
-              </template>
-            ))
-          }
+          <template x-if={`$store.style == 'new-york'`}>
+            {
+              codeNewYork && (
+                <CopyButton
+                  variant="outline"
+                  value={codeNewYork}
+                  class="h-7 w-7 text-foreground opacity-100 hover:bg-muted hover:text-foreground [&_svg]:h-3.5 [&_svg]:w-3.5"
+                />
+              )
+            }
+          </template>
+          <template x-if={`$store.style == 'default'`}>
+            {
+              codeDefault && (
+                <CopyButton
+                  variant="outline"
+                  value={codeDefault}
+                  class="h-7 w-7 text-foreground opacity-100 hover:bg-muted hover:text-foreground [&_svg]:h-3.5 [&_svg]:w-3.5"
+                />
+              )
+            }
+          </template>
         </div>
       </div>
       {
-        components.map(({ style, pathCode }) => (
-          <div x-show={`$store.style === '${style.name}'`}>
-            {pathCode ? (
-              <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: style.name, align }} />
-            ) : (
-              <div class="flex min-h-[350px] w-full justify-center p-10 items-center">
-                <p class="text-sm text-muted-foreground">
-                  Component{' '}
-                  <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">{name}</code>
-                  {' not found in registry.'}
-                </p>
-              </div>
-            )}
+        styles.map(({ name: styleName }) => (
+          <div x-show={`$store.style === '${styleName}'`}>
+            <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: styleName, align }} />
           </div>
         ))
       }
