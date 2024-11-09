@@ -152,6 +152,12 @@ export const examples: Registry = [
     files: ['example/input-file.ts'],
   },
   {
+    name: 'progress-demo',
+    type: 'registry:example',
+    registryDependencies: ['progress'],
+    files: ['example/progress-demo.ts'],
+  },
+  {
     name: 'separator-demo',
     type: 'registry:example',
     registryDependencies: ['separator'],

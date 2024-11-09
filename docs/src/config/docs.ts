@@ -155,6 +155,12 @@ export const docsConfig: TDocsConfig = {
           items: [],
         },
         {
+          title: 'Progress',
+          href: '/docs/components/progress',
+          label: 'New',
+          items: [],
+        },
+        {
           title: 'Separator',
           href: '/docs/components/separator',
           items: [],

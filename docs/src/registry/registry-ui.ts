@@ -90,6 +90,12 @@ export const ui: Registry = [
     files: [{ path: 'ui/label.ts', type: 'registry:ui' }],
   },
   {
+    name: 'progress',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: [{ path: 'ui/progress.ts', type: 'registry:ui' }],
+  },
+  {
     name: 'separator',
     type: 'registry:ui',
     files: [{ path: 'ui/separator.ts', type: 'registry:ui' }],
