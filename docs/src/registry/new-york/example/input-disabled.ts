@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'input-disabled-new-york',
+  selector: '[input-disabled-new-york]',
   imports: [UbInputDirective],
   template: ` <input disabled ubInput type="text" placeholder="Email" /> `,
 })

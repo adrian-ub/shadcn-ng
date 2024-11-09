@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'typography-demo-default',
+  selector: '[typography-demo-default]',
   template: `
     <div>
       <h1

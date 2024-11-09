@@ -11,7 +11,7 @@ import { lucideRocket } from '@ng-icons/lucide'
 
 @Component({
   standalone: true,
-  selector: 'alert-demo-new-york',
+  selector: '[alert-demo-new-york]',
   imports: [
     NgIconComponent,
     UbAlertDirective,

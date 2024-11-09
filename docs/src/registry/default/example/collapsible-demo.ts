@@ -9,7 +9,7 @@ import { radixCaretSort } from '@ng-icons/radix-icons'
 
 @Component({
   standalone: true,
-  selector: 'collapsible-demo-default',
+  selector: '[collapsible-demo-default]',
   imports: [UbCollapsible, UbCollapsibleContent, UbCollapsibleTrigger, UbButtonDirective, NgIconComponent],
   viewProviders: [provideIcons({ radixCaretSort })],
   template: `

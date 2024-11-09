@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'skeleton-demo-new-york',
+  selector: '[skeleton-demo-new-york]',
   imports: [UbSkeletonDirective],
   template: `
     <div class="flex items-center space-x-4">

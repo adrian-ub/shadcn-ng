@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'typography-table-new-york',
+  selector: '[typography-table-new-york]',
   template: `
     <div class="my-6 w-full overflow-y-auto">
       <table class="w-full">

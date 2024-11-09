@@ -14,7 +14,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'dialog-demo-default',
+  selector: '[dialog-demo-default]',
   imports: [
     UbDialogTriggerDirective,
     UbDialogContentDirective,

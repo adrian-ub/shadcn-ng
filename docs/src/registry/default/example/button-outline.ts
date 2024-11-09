@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'button-outline-default',
+  selector: '[button-outline-default]',
   imports: [UbButtonDirective],
   template: `<button ubButton variant="outline">Button</button>`,
 })

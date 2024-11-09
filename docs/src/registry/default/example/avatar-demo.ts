@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'avatar-demo-default',
+  selector: '[avatar-demo-default]',
   imports: [UbAvatarDirective, UbAvatarImageDirective, UbAvatarFallbackDirective],
   template: `
     <span ubAvatar>

@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'separator-demo-new-york',
+  selector: '[separator-demo-new-york]',
   imports: [UbSeparatorDirective],
   template: `
     <div>

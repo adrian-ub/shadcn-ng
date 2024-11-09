@@ -7,7 +7,7 @@ import { radixReload } from '@ng-icons/radix-icons'
 
 @Component({
   standalone: true,
-  selector: 'button-loading-default',
+  selector: '[button-loading-default]',
   imports: [UbButtonDirective, NgIconComponent],
   viewProviders: [provideIcons({ radixReload })],
   template: `

@@ -13,7 +13,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'table-demo-default',
+  selector: '[table-demo-default]',
   imports: [
     UbTableDirective,
     UbTableCaptionDirective,

@@ -12,7 +12,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'breadcrumb-demo-default',
+  selector: '[breadcrumb-demo-default]',
   imports: [
     UbBreadcrumbDirective,
     UbBreadcrumbListDirective,

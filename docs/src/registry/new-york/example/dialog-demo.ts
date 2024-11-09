@@ -14,7 +14,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'dialog-demo-new-york',
+  selector: '[dialog-demo-new-york]',
   imports: [
     UbDialogTriggerDirective,
     UbDialogContentDirective,

@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'skeleton-card-default',
+  selector: '[skeleton-card-default]',
   imports: [UbSkeletonDirective],
   template: `
     <div class="flex flex-col space-y-3">

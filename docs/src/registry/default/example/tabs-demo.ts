@@ -8,7 +8,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'tabs-demo-default',
+  selector: '[tabs-demo-default]',
   imports: [
     UbTabsDirective,
     UbTabsListDirective,
@@ -37,8 +37,8 @@ import { Component } from '@angular/core'
         <section ubTabsContent value="account">
             <div ubCard>
                 <div ubCardHeader>
-                    <h5 ubCardTitle>Account</h5>
-                    <div ubCardDescription>Make changes to your account here. Click save when you're done.</div>
+                    <h3 ubCardTitle>Account</h3>
+                    <p ubCardDescription>Make changes to your account here. Click save when you're done.</p>
                 </div>
 
                 <div ubCardContent class="space-y-2">

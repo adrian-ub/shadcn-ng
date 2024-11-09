@@ -5,7 +5,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'input-file-default',
+  selector: '[input-file-default]',
   imports: [UbInputDirective, UbLabelDirective],
   template: `
     <div class="grid w-full max-w-sm items-center gap-1.5">

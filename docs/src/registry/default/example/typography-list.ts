@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'typography-list-default',
+  selector: '[typography-list-default]',
   template: `
     <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
       <li>1st level of puns: 5 gold coins</li>

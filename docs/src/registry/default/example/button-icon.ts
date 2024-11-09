@@ -7,7 +7,7 @@ import { lucideChevronRight } from '@ng-icons/lucide'
 
 @Component({
   standalone: true,
-  selector: 'button-icon-default',
+  selector: '[button-icon-default]',
   imports: [UbButtonDirective, NgIconComponent],
   viewProviders: [provideIcons({ lucideChevronRight })],
   template: `

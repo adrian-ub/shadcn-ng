@@ -5,12 +5,12 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'switch-demo-new-york',
+  selector: '[switch-demo-new-york]',
   imports: [SwitchDirective, UbLabelDirective],
   template: `
     <div class="flex items-center space-x-2">
         <button ubSwitch id="airplane-mode"></button>
-        <label for="airplane-mode">Airplane Mode</label>
+        <label for="airplane-mode" ubLabel>Airplane Mode</label>
     </div>
     `,
 })

@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'button-destructive-new-york',
+  selector: '[button-destructive-new-york]',
   imports: [UbButtonDirective],
   template: `<button ubButton variant="destructive">Button</button>`,
 })

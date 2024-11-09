@@ -11,7 +11,7 @@ import { lucideTerminal } from '@ng-icons/lucide'
 
 @Component({
   standalone: true,
-  selector: 'alert-demo-default',
+  selector: '[alert-demo-default]',
   imports: [
     NgIconComponent,
     UbAlertDirective,

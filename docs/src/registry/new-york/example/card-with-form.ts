@@ -14,6 +14,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
+  selector: '[card-with-form-new-york]',
   imports: [
     UbCardDirective,
     UbCardHeaderDirective,
@@ -26,7 +27,6 @@ import { Component } from '@angular/core'
     UbLabelDirective,
     UbButtonDirective,
   ],
-  selector: 'card-with-form-new-york',
   template: `
     <div ubCard class="w-[350px]">
         <div ubCardHeader>

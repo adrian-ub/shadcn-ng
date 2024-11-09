@@ -6,7 +6,7 @@ import { toast } from 'ngx-sonner'
 
 @Component({
   standalone: true,
-  selector: 'sonner-demo-default',
+  selector: '[sonner-demo-default]',
   imports: [ToasterComponent, UbButtonDirective],
   template: `
     <ub-toaster />

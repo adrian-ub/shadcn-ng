@@ -5,7 +5,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'aspect-ratio-demo-new-york',
+  selector: '[aspect-ratio-demo-new-york]',
   imports: [UbAspectRatioDirective, NgOptimizedImage],
   providers: [
     {
@@ -16,7 +16,6 @@ import { Component } from '@angular/core'
     },
   ],
   template: `
-  <div class="w-96">
     <div ubAspectRatio [ratio]="16 / 9" class="bg-muted">
         <img
           ngSrc="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd"
@@ -29,7 +28,6 @@ import { Component } from '@angular/core'
           priority
         />
     </div>
-  </div>
   `,
 })
 export default class AspectRatioDemoNewYork { }

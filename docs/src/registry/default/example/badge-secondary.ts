@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'badge-secondary-default',
+  selector: '[badge-secondary-default]',
   imports: [UbBadgeDirective],
   template: `<div ubBadge variant="secondary">Badge</div>`,
 })

@@ -7,7 +7,7 @@ import { radixEnvelopeOpen } from '@ng-icons/radix-icons'
 
 @Component({
   standalone: true,
-  selector: 'button-with-icon-new-york',
+  selector: '[button-with-icon-new-york]',
   imports: [UbButtonDirective, NgIconComponent],
   viewProviders: [provideIcons({ radixEnvelopeOpen })],
   template: `

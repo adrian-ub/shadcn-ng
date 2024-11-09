@@ -5,7 +5,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'aspect-ratio-demo-default',
+  selector: '[aspect-ratio-demo-default]',
   imports: [UbAspectRatioDirective, NgOptimizedImage],
   providers: [
     {

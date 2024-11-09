@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
 
 @Component({
   standalone: true,
-  selector: 'accordion-demo-new-york',
+  selector: '[accordion-demo-new-york]',
   imports: [UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective, UbAccordionContentDirective],
   template: `
     <div ubAccordion class="w-full" orientation="vertical">
