@@ -200,6 +200,12 @@ export const examples: Registry = [
     files: ['example/tabs-demo.ts'],
   },
   {
+    name: 'toggle-demo',
+    type: 'registry:example',
+    registryDependencies: ['toggle'],
+    files: ['example/toggle-demo.ts'],
+  },
+  {
     name: 'typography-blockquote',
     type: 'registry:example',
     files: ['example/typography-blockquote.ts'],

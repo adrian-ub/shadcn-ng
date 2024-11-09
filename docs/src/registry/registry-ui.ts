@@ -128,4 +128,10 @@ export const ui: Registry = [
     dependencies: ['@radix-ng/primitives'],
     files: [{ path: 'ui/tabs.ts', type: 'registry:ui' }],
   },
+  {
+    name: 'toggle',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: [{ path: 'ui/toggle.ts', type: 'registry:ui' }],
+  },
 ]

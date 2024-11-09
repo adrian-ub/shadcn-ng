@@ -190,6 +190,12 @@ export const docsConfig: TDocsConfig = {
           href: '/docs/components/tabs',
           items: [],
         },
+        {
+          title: 'Toggle',
+          href: '/docs/components/toggle',
+          label: 'New',
+          items: [],
+        },
       ],
     },
   ],
