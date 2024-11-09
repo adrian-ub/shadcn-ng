@@ -68,33 +68,39 @@ const components = await Promise.all(
     <TabsContent class="relative rounded-md border">
       <div class="flex items-center justify-between p-4">
         <StyleSwitcher />
+        <div class="flex items-center gap-2">
+          {
+            components.map(({ style, code }) => (
+              <template x-if={`$store.style == '${style.name}'`}>
+                {code && (
+                  <CopyButton
+                    variant="outline"
+                    value={code}
+                    class="h-7 w-7 text-foreground opacity-100 hover:bg-muted hover:text-foreground [&_svg]:h-3.5 [&_svg]:w-3.5"
+                  />
+                )}
+              </template>
+            ))
+          }
+        </div>
       </div>
-      <div
-        class={cn('preview flex min-h-[350px] w-full justify-center p-10', {
-          'items-center': align === 'center',
-          'items-start': align === 'start',
-          'items-end': align === 'end',
-        })}
-      >
-        {
-          components.map(({ style, pathCode, code }) => (
-            <div x-show={`$store.style === '${style.name}'`}>
-              {pathCode ? (
-                <>
-                  <CopyButton value={code ?? ''} class={cn('absolute right-4 top-4')} />
-                  <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: style.name }} />
-                </>
-              ) : (
+      {
+        components.map(({ style, pathCode }) => (
+          <div x-show={`$store.style === '${style.name}'`}>
+            {pathCode ? (
+              <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: style.name, align }} />
+            ) : (
+              <div class="flex min-h-[350px] w-full justify-center p-10 items-center">
                 <p class="text-sm text-muted-foreground">
                   Component{' '}
                   <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">{name}</code>
                   {' not found in registry.'}
                 </p>
-              )}
-            </div>
-          ))
-        }
-      </div>
+              </div>
+            )}
+          </div>
+        ))
+      }
     </TabsContent>
 
     <TabsContent>
