@@ -191,6 +191,12 @@ export const docsConfig: TDocsConfig = {
           items: [],
         },
         {
+          title: 'Textarea',
+          href: '/docs/components/textarea',
+          label: 'New',
+          items: [],
+        },
+        {
           title: 'Toggle',
           href: '/docs/components/toggle',
           label: 'New',

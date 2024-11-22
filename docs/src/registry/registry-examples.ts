@@ -206,6 +206,32 @@ export const examples: Registry = [
     files: ['example/toggle-demo.ts'],
   },
   {
+    name: 'textarea-demo',
+    type: 'registry:example',
+    registryDependencies: ['textarea'],
+    files: ['example/textarea-demo.ts'],
+  },
+  {
+    name: 'textarea-disabled',
+    type: 'registry:example',
+    files: ['example/textarea-disabled.ts'],
+  },
+  {
+    name: 'textarea-with-button',
+    type: 'registry:example',
+    files: ['example/textarea-with-button.ts'],
+  },
+  {
+    name: 'textarea-with-label',
+    type: 'registry:example',
+    files: ['example/textarea-with-label.ts'],
+  },
+  {
+    name: 'textarea-with-text',
+    type: 'registry:example',
+    files: ['example/textarea-with-text.ts'],
+  },
+  {
     name: 'typography-blockquote',
     type: 'registry:example',
     files: ['example/typography-blockquote.ts'],

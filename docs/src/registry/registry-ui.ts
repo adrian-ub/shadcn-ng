@@ -129,6 +129,11 @@ export const ui: Registry = [
     files: [{ path: 'ui/tabs.ts', type: 'registry:ui' }],
   },
   {
+    name: 'textarea',
+    type: 'registry:ui',
+    files: [{ path: 'ui/textarea.ts', type: 'registry:ui' }],
+  },
+  {
     name: 'toggle',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],
