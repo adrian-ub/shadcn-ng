@@ -36,8 +36,8 @@ export const buttonVariants = cva(
 
 type ButtonProps = VariantProps<typeof buttonVariants>
 
-export type ButtonSize = NonNullable<ButtonProps['size']>
-export type ButtonVariant = NonNullable<ButtonProps['variant']>
+export type UbButtonSize = NonNullable<ButtonProps['size']>
+export type UbButtonVariant = NonNullable<ButtonProps['variant']>
 
 @Directive({
   selector: '[ubButton]',
@@ -49,9 +49,9 @@ export type ButtonVariant = NonNullable<ButtonProps['variant']>
 export class UbButtonDirective {
   readonly class = input<string>()
 
-  readonly variant = input<ButtonVariant>('default')
+  readonly variant = input<UbButtonVariant>('default')
 
-  readonly size = input<ButtonSize>('default')
+  readonly size = input<UbButtonSize>('default')
 
   protected computedClass = computed(() =>
     cn(

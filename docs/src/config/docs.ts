@@ -146,7 +146,6 @@ export const docsConfig: TDocsConfig = {
         {
           title: 'Dialog',
           href: '/docs/components/dialog',
-          label: 'New',
           items: [],
         },
         {
@@ -155,9 +154,14 @@ export const docsConfig: TDocsConfig = {
           items: [],
         },
         {
+          title: 'Pagination',
+          href: '/docs/components/pagination',
+          label: 'New',
+          items: [],
+        },
+        {
           title: 'Progress',
           href: '/docs/components/progress',
-          label: 'New',
           items: [],
         },
         {
@@ -193,13 +197,11 @@ export const docsConfig: TDocsConfig = {
         {
           title: 'Textarea',
           href: '/docs/components/textarea',
-          label: 'New',
           items: [],
         },
         {
           title: 'Toggle',
           href: '/docs/components/toggle',
-          label: 'New',
           items: [],
         },
       ],

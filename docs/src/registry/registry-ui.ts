@@ -90,6 +90,11 @@ export const ui: Registry = [
     files: [{ path: 'ui/label.ts', type: 'registry:ui' }],
   },
   {
+    name: 'pagination',
+    type: 'registry:ui',
+    files: [{ path: 'ui/pagination.ts', type: 'registry:ui' }],
+  },
+  {
     name: 'progress',
     type: 'registry:ui',
     dependencies: ['@radix-ng/primitives'],

@@ -152,6 +152,12 @@ export const examples: Registry = [
     files: ['example/input-file.ts'],
   },
   {
+    name: 'pagination-demo',
+    type: 'registry:example',
+    registryDependencies: ['pagination'],
+    files: ['example/pagination-demo.ts'],
+  },
+  {
     name: 'progress-demo',
     type: 'registry:example',
     registryDependencies: ['progress'],
