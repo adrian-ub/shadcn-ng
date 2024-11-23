@@ -1,17 +1,3 @@
-import { promises as fs } from 'node:fs'
-import { tmpdir } from 'node:os'
-import path from 'node:path'
-
-import * as p from '@clack/prompts'
-import deepmerge from 'deepmerge'
-import objectToString from 'stringify-object'
-import {
-  Project,
-  QuoteKind,
-  ScriptKind,
-  SyntaxKind,
-} from 'ts-morph'
-
 import type { Config as TailwindConfig } from 'tailwindcss'
 import type {
   ObjectLiteralExpression,
@@ -21,10 +7,24 @@ import type {
 } from 'ts-morph'
 import type { z } from 'zod'
 
-import { highlighter } from '../highlighter'
-
 import type { Config } from '../get-config'
 import type { registryItemTailwindSchema } from '../registry/schema'
+import { promises as fs } from 'node:fs'
+import { tmpdir } from 'node:os'
+
+import path from 'node:path'
+import * as p from '@clack/prompts'
+import deepmerge from 'deepmerge'
+
+import objectToString from 'stringify-object'
+
+import {
+  Project,
+  QuoteKind,
+  ScriptKind,
+  SyntaxKind,
+} from 'ts-morph'
+import { highlighter } from '../highlighter'
 
 export type UpdaterTailwindConfig = Omit<TailwindConfig, 'plugins'> & {
   // We only want string plugins for now.

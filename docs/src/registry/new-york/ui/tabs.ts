@@ -1,5 +1,6 @@
-import { cn } from '@/lib/utils'
+import type { BooleanInput } from '@angular/cdk/coercion'
 
+import { cn } from '@/lib/utils'
 import { booleanAttribute, computed, Directive, input } from '@angular/core'
 import {
   RdxTabsContentDirective,
@@ -7,7 +8,6 @@ import {
   RdxTabsRootDirective,
   RdxTabsTriggerDirective,
 } from '@radix-ng/primitives/tabs'
-import type { BooleanInput } from '@angular/cdk/coercion'
 
 @Directive({
   selector: '[ubTabs]',

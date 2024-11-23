@@ -1,13 +1,13 @@
+import type { AddOptions } from '../schemas/add'
 import fs from 'node:fs'
 import path from 'node:path'
+
 import process from 'node:process'
 
 import * as p from '@clack/prompts'
-
 import * as ERRORS from '../utils/errors'
 import { getConfig } from '../utils/get-config'
 import { highlighter } from '../utils/highlighter'
-import type { AddOptions } from '../schemas/add'
 
 export async function preFlightAdd(options: AddOptions): Promise<{ errors: Record<string, boolean>, config: any | null }> {
   const errors: Record<string, boolean> = {}

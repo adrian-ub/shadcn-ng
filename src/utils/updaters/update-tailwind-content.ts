@@ -1,14 +1,14 @@
+import type { ObjectLiteralExpression } from 'ts-morph'
+import type { Config } from '../get-config'
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
 import * as p from '@clack/prompts'
 import { SyntaxKind } from 'ts-morph'
-import type { ObjectLiteralExpression } from 'ts-morph'
 import { highlighter } from '../highlighter'
 import {
   _createSourceFile,
   _getQuoteChar,
 } from '../updaters/update-tailwind-config'
-import type { Config } from '../get-config'
 
 export async function updateTailwindContent(
   content: string[],

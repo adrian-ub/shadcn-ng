@@ -1,8 +1,8 @@
-import { installPackage } from '@antfu/install-pkg'
-import * as p from '@clack/prompts'
-
 import type { Config } from '../get-config'
 import type { RegistryItem } from '../registry/schema'
+
+import { installPackage } from '@antfu/install-pkg'
+import * as p from '@clack/prompts'
 
 export async function updateDependencies(
   dependencies: RegistryItem['dependencies'],

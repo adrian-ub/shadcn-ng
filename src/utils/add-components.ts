@@ -1,12 +1,12 @@
-import * as p from '@clack/prompts'
+import type { Config } from './get-config'
 
+import * as p from '@clack/prompts'
 import { handleError } from './handle-error'
 import { registryResolveItemsTree } from './registry'
 import { updateCssVars } from './updaters/update-css-vars'
 import { updateDependencies } from './updaters/update-dependencies'
 import { updateFiles } from './updaters/update-files'
 import { updateTailwindConfig } from './updaters/update-tailwind-config'
-import type { Config } from './get-config'
 
 export async function addComponents(
   components: string[],

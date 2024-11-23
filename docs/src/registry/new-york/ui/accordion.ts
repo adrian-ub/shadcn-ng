@@ -1,9 +1,10 @@
+import type { ClassValue } from 'clsx'
 import { cn } from '@/lib/utils'
+
 import { Component, computed, Directive, input } from '@angular/core'
-
 import { NgIconComponent, provideIcons } from '@ng-icons/core'
-import { lucideChevronDown } from '@ng-icons/lucide'
 
+import { lucideChevronDown } from '@ng-icons/lucide'
 import {
   RdxAccordionContentDirective,
   RdxAccordionHeaderDirective,
@@ -11,7 +12,6 @@ import {
   RdxAccordionRootDirective,
   RdxAccordionTriggerDirective,
 } from '@radix-ng/primitives/accordion'
-import type { ClassValue } from 'clsx'
 
 @Directive({
   standalone: true,

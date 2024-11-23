@@ -1,14 +1,14 @@
+import type { z } from 'zod'
+import type { Config } from '../get-config'
+import type { registryBaseColorSchema } from '../registry/schema'
+
 import fs from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
-
 import { Project, ScriptKind, type SourceFile } from 'ts-morph'
-import type { z } from 'zod'
 import { transformCssVars } from './transform-css-vars'
 import { transformImport } from './transform-import'
 import { transformTwPrefixes } from './transform-tw-prefix'
-import type { Config } from '../get-config'
-import type { registryBaseColorSchema } from '../registry/schema'
 
 export interface TransformOpts {
   filename: string

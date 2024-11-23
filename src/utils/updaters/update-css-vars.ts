@@ -1,16 +1,16 @@
-import { promises as fs } from 'node:fs'
-import path from 'node:path'
-
-import * as p from '@clack/prompts'
-import postcss from 'postcss'
-import AtRule from 'postcss/lib/at-rule'
 import type Root from 'postcss/lib/root'
 import type Rule from 'postcss/lib/rule'
-import type { z } from 'zod'
 
-import { highlighter } from '../highlighter'
+import type { z } from 'zod'
 import type { Config } from '../get-config'
 import type { registryItemCssVarsSchema } from '../registry/schema'
+import { promises as fs } from 'node:fs'
+import path from 'node:path'
+import * as p from '@clack/prompts'
+
+import postcss from 'postcss'
+import AtRule from 'postcss/lib/at-rule'
+import { highlighter } from '../highlighter'
 
 export async function updateCssVars(
   cssVars: z.infer<typeof registryItemCssVarsSchema> | undefined,
@@ -231,7 +231,7 @@ function cleanupDefaultNextStylesPlugin(): postcss.Plugin {
               && node.prop === 'background'
               // This is only going to run on create project, so all good.
               && (node.value.startsWith('linear-gradient')
-              || node.value === 'var(--background)')
+                || node.value === 'var(--background)')
             )
           })
           ?.remove()

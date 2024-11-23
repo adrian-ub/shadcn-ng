@@ -1,12 +1,13 @@
+import type { UnistNode, UnistTree } from '../../types/unist'
+
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { u } from 'unist-builder'
-import { visit } from 'unist-util-visit'
 
+import { visit } from 'unist-util-visit'
 import { Index } from '../__registry__'
 import { styles } from '../registry/registry-styles'
-import type { UnistNode, UnistTree } from '../../types/unist'
 
 function toCamelCase(str: string): string {
   return str

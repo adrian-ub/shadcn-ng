@@ -1,21 +1,21 @@
+import type { Change } from 'diff'
+import type { z } from 'zod'
+import type { Config } from '../utils/get-config'
+
+import type { registryIndexSchema } from '../utils/registry/schema'
 import fs, { existsSync } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-
 import * as p from '@clack/prompts'
+
 import { Command } from 'commander'
 import { diffLines } from 'diff'
-import type { Change } from 'diff'
-import type { z } from 'zod'
-
 import { updateOptionsSchema } from '../schemas/diff'
 import { getConfig } from '../utils/get-config'
 import { handleError } from '../utils/handle-error'
 import { highlighter } from '../utils/highlighter'
 import { fetchTree, getItemTargetPath, getRegistryBaseColor, getRegistryIndex } from '../utils/registry'
 import { transform } from '../utils/transformers'
-import type { Config } from '../utils/get-config'
-import type { registryIndexSchema } from '../utils/registry/schema'
 
 export const diff = new Command()
   .name('diff')

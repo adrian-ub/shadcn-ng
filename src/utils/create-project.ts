@@ -1,16 +1,16 @@
+import type { InitOptions } from '../schemas/init'
 import fs from 'node:fs/promises'
+
 import path from 'node:path'
 
 import process from 'node:process'
-
 import { installPackage } from '@antfu/install-pkg'
-import * as p from '@clack/prompts'
 
+import * as p from '@clack/prompts'
 import { execa } from 'execa'
 import { getPackageManager } from './get-package-manager'
 import { highlighter } from './highlighter'
 import { loadTsConfig } from './load-tsconfig'
-import type { InitOptions } from '../schemas/init'
 
 export async function createProject(
   options: Pick<InitOptions, 'cwd' | 'force'>,

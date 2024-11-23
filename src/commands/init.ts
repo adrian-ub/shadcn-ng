@@ -1,24 +1,24 @@
+import type { InitOptions } from '../schemas/init'
+import type { Config } from '../utils/get-config'
 import fs from 'node:fs/promises'
+
 import path from 'node:path'
 import process from 'node:process'
 
 import * as p from '@clack/prompts'
 import { Command } from 'commander'
-
 import { preFlightInit } from '../prefilghts/preflight-init'
 import { initOptionsSchema } from '../schemas/init'
 import { addComponents } from '../utils/add-components'
 import { createProject } from '../utils/create-project'
 import * as ERRORS from '../utils/errors'
 import { DEFAULT_COMPONENTS, DEFAULT_TAILWIND_CONFIG, DEFAULT_TAILWIND_CSS, DEFAULT_UTILS, getConfig, rawConfigSchema, resolveConfigPaths } from '../utils/get-config'
+
 import { getProjectConfig, getProjectInfo } from '../utils/get-project-info'
 import { handleError } from '../utils/handle-error'
-
 import { highlighter } from '../utils/highlighter'
 import { getRegistryBaseColors, getRegistryStyles } from '../utils/registry'
 import { updateTailwindContent } from '../utils/updaters/update-tailwind-content'
-import type { InitOptions } from '../schemas/init'
-import type { Config } from '../utils/get-config'
 
 async function promptForMinimalConfig(defaultConfig: Config, opts: InitOptions): Promise<Omit<Config, 'resolvedPaths'>> {
   let style = defaultConfig.style

@@ -1,10 +1,11 @@
+import type { AddOptions } from '../schemas/add'
 import path from 'node:path'
-import process from 'node:process'
 
+import process from 'node:process'
 import * as p from '@clack/prompts'
 import { Command } from 'commander'
-import { z } from 'zod'
 
+import { z } from 'zod'
 import { preFlightAdd } from '../prefilghts/preflight-add'
 import { addOptionsSchema } from '../schemas/add'
 import { addComponents } from '../utils/add-components'
@@ -13,9 +14,8 @@ import * as ERRORS from '../utils/errors'
 import { handleError } from '../utils/handle-error'
 import { highlighter } from '../utils/highlighter'
 import { getRegistryIndex } from '../utils/registry'
-import { runInit } from './init'
 
-import type { AddOptions } from '../schemas/add'
+import { runInit } from './init'
 
 export const add = new Command()
   .name('add')

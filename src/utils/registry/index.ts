@@ -1,6 +1,10 @@
+import type { Config } from '../../utils/get-config'
+import type {
+  registryItemFileSchema,
+} from '../../utils/registry/schema'
+
 import path from 'node:path'
 import process from 'node:process'
-
 import deepmerge from 'deepmerge'
 import { HttpsProxyAgent } from 'https-proxy-agent'
 import fetch from 'node-fetch'
@@ -15,10 +19,6 @@ import {
   stylesSchema,
 } from '../../utils/registry/schema'
 import { buildTailwindThemeColorsFromCssVars } from '../../utils/updaters/update-tailwind-config'
-import type { Config } from '../../utils/get-config'
-import type {
-  registryItemFileSchema,
-} from '../../utils/registry/schema'
 
 const REGISTRY_URL = process.env.REGISTRY_URL ?? 'https://ui.adrianub.dev/r'
 

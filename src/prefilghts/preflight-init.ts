@@ -1,15 +1,15 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import process from 'node:process'
-
-import * as p from '@clack/prompts'
-
-import * as ERRORS from '../utils/errors'
-import { getProjectInfo } from '../utils/get-project-info'
-import { highlighter } from '../utils/highlighter'
-
 import type { InitOptions } from '../schemas/init'
 import type { ProjectInfo } from '../utils/get-project-info'
+import fs from 'node:fs'
+
+import path from 'node:path'
+
+import process from 'node:process'
+import * as p from '@clack/prompts'
+import * as ERRORS from '../utils/errors'
+
+import { getProjectInfo } from '../utils/get-project-info'
+import { highlighter } from '../utils/highlighter'
 
 export async function preFlightInit(
   options: InitOptions,
@@ -43,8 +43,8 @@ export async function preFlightInit(
         options.cwd,
       )}.
    To start over, remove the ${highlighter.info(
-    'components.json',
-  )} file and run ${highlighter.info('init')} again.`,
+      'components.json',
+    )} file and run ${highlighter.info('init')} again.`,
       3,
     )
     process.exit(1)

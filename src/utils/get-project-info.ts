@@ -1,19 +1,19 @@
-import fs from 'node:fs/promises'
-import path from 'node:path'
-
-import fg from 'fast-glob'
-import { loadConfig as loadTsConfig } from 'tsconfig-paths'
-import { loadConfig } from 'unconfig'
-
-import { FRAMEWORKS } from './frameworks'
-import {
-  getConfig,
-  resolveConfigPaths,
-} from './get-config'
 import type { Framework } from './frameworks'
 import type {
   Config,
   RawConfig,
+} from './get-config'
+
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import fg from 'fast-glob'
+
+import { loadConfig as loadTsConfig } from 'tsconfig-paths'
+import { loadConfig } from 'unconfig'
+import { FRAMEWORKS } from './frameworks'
+import {
+  getConfig,
+  resolveConfigPaths,
 } from './get-config'
 
 export interface ProjectInfo {

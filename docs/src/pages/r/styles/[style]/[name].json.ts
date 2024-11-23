@@ -1,3 +1,5 @@
+import type { z } from 'astro/zod'
+
 import fs from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -7,7 +9,6 @@ import { registry } from '@/registry'
 import { styles } from '@/registry/registry-styles'
 import { type RegistryEntry, registryEntrySchema, type registryItemTypeSchema } from '@/registry/schema'
 import { Project, ScriptKind } from 'ts-morph'
-import type { z } from 'astro/zod'
 
 const project = new Project({
   compilerOptions: {},

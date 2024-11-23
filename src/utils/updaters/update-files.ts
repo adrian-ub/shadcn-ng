@@ -1,6 +1,8 @@
+import type { Config } from '../get-config'
+import type { RegistryItem } from '../registry/schema'
+
 import fs from 'node:fs'
 import path, { basename } from 'node:path'
-
 import * as p from '@clack/prompts'
 import { highlighter } from '../highlighter'
 import { getRegistryBaseColor, getRegistryItemFileTargetPath } from '../registry'
@@ -8,8 +10,6 @@ import { transform } from '../transformers'
 import { transformImport } from '../transformers/transform-import'
 import { transformTwPrefixes } from '../transformers/transform-tw-prefix'
 import { transformCssVars } from './update-css-vars'
-import type { Config } from '../get-config'
-import type { RegistryItem } from '../registry/schema'
 
 export function resolveTargetDir(
   config: Config,

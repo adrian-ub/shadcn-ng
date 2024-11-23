@@ -80,6 +80,7 @@ try {
     process.exit(1)
   }
 
+  // eslint-disable-next-line adrianub/no-top-level-await
   await buildRegistry(result.data)
 }
 catch (error) {
