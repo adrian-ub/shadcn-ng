@@ -149,6 +149,12 @@ export const docsConfig: TDocsConfig = {
           items: [],
         },
         {
+          title: 'Dropdown Menu',
+          href: '/docs/components/dropdown-menu',
+          items: [],
+          label: 'New',
+        },
+        {
           title: 'Input',
           href: '/docs/components/input',
           items: [],

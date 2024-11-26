@@ -134,6 +134,24 @@ export const examples: Registry = [
     files: ['example/dialog-demo.ts'],
   },
   {
+    name: 'dropdown-menu-checkboxes',
+    type: 'registry:example',
+    registryDependencies: ['dropdown-menu'],
+    files: ['example/dropdown-menu-checkboxes.ts'],
+  },
+  {
+    name: 'dropdown-menu-demo',
+    type: 'registry:example',
+    registryDependencies: ['dropdown-menu'],
+    files: ['example/dropdown-menu-demo.ts'],
+  },
+  {
+    name: 'dropdown-menu-radio-group',
+    type: 'registry:example',
+    registryDependencies: ['dropdown-menu'],
+    files: ['example/dropdown-menu-radio-group.ts'],
+  },
+  {
     name: 'input-demo',
     type: 'registry:example',
     registryDependencies: ['input'],

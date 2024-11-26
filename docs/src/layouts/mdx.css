@@ -1,3 +1,5 @@
+@import '@angular/cdk/overlay-prebuilt.css';
+
 [data-theme='light'] {
   display: block;
 }

@@ -79,6 +79,12 @@ export const ui: Registry = [
     files: [{ path: 'ui/dialog.ts', type: 'registry:ui' }],
   },
   {
+    name: 'dropdown-menu',
+    type: 'registry:ui',
+    dependencies: ['@radix-ng/primitives'],
+    files: [{ path: 'ui/dropdown-menu.ts', type: 'registry:ui' }],
+  },
+  {
     name: 'input',
     type: 'registry:ui',
     files: [{ path: 'ui/input.ts', type: 'registry:ui' }],
