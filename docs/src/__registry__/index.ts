@@ -1,7 +1,9 @@
+import type { Style } from '../registry/registry-styles'
+import type { Registry } from '../registry/schema'
 import process from 'node:process'
 import { registry } from '../registry'
-import { type Style, styles } from '../registry/registry-styles'
-import { type Registry, registrySchema } from '../registry/schema'
+import { styles } from '../registry/registry-styles'
+import { registrySchema } from '../registry/schema'
 
 const components = import.meta.glob(`../registry/**/**/*.ts`)
 
@@ -80,7 +82,7 @@ try {
     process.exit(1)
   }
 
-  // eslint-disable-next-line adrianub/no-top-level-await
+  // eslint-disable-next-line antfu/no-top-level-await
   await buildRegistry(result.data)
 }
 catch (error) {

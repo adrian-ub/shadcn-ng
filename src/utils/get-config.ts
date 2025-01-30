@@ -82,18 +82,18 @@ export async function resolveConfigPaths(cwd: string, config: RawConfig): Promis
       ui: config.aliases.ui
         ? await resolveImport(config.aliases.ui, tsConfig)
         : path.resolve(
-          (await resolveImport(config.aliases.components, tsConfig))
-          ?? cwd,
-          'ui',
-        ),
+            (await resolveImport(config.aliases.components, tsConfig))
+            ?? cwd,
+            'ui',
+          ),
       // TODO: Make this configurable.
       // For now, we assume the lib directories are one level up from the components directory.
       lib: config.aliases.lib
         ? await resolveImport(config.aliases.lib, tsConfig)
         : path.resolve(
-          (await resolveImport(config.aliases.utils, tsConfig)) ?? cwd,
-          '..',
-        ),
+            (await resolveImport(config.aliases.utils, tsConfig)) ?? cwd,
+            '..',
+          ),
     },
   })
 }

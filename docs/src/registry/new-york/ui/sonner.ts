@@ -1,5 +1,6 @@
+import type { ToasterProps } from 'ngx-sonner'
 import { booleanAttribute, Component, input, numberAttribute } from '@angular/core'
-import { NgxSonnerToaster, type ToasterProps } from 'ngx-sonner'
+import { NgxSonnerToaster } from 'ngx-sonner'
 
 @Component({
   standalone: true,

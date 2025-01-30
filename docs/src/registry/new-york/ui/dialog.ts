@@ -1,11 +1,13 @@
+import type { TemplateRef } from '@angular/core'
+import type { RdxDialogConfig } from '@radix-ng/primitives/dialog'
 import { cn } from '@/lib/utils'
-import { Component, computed, Directive, effect, inject, input, type TemplateRef } from '@angular/core'
+import { Component, computed, Directive, effect, inject, input } from '@angular/core'
 import { NgIconComponent, provideIcons } from '@ng-icons/core'
-import { lucideX } from '@ng-icons/lucide'
 
+import { lucideX } from '@ng-icons/lucide'
 import {
   RdxDialogCloseDirective,
-  type RdxDialogConfig,
+
   RdxDialogContentDirective,
   RdxDialogDescriptionDirective,
   RdxDialogTitleDirective,

@@ -1,13 +1,14 @@
-import type { z } from 'astro/zod'
+import type { RegistryEntry, registryItemTypeSchema } from '@/registry/schema'
 
+import type { z } from 'astro/zod'
 import fs from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
-import process from 'node:process'
 
+import process from 'node:process'
 import { registry } from '@/registry'
 import { styles } from '@/registry/registry-styles'
-import { type RegistryEntry, registryEntrySchema, type registryItemTypeSchema } from '@/registry/schema'
+import { registryEntrySchema } from '@/registry/schema'
 import { Project, ScriptKind } from 'ts-morph'
 
 const project = new Project({

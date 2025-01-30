@@ -1,5 +1,6 @@
+import type { Style } from '@/registry/registry-styles'
 import type { RegistryEntry } from '@/registry/schema'
-import { type Style, styles } from '@/registry/registry-styles'
+import { styles } from '@/registry/registry-styles'
 
 export async function getStaticPaths(): Promise<{ params: { style: string } }[]> {
   return styles.map(style => ({

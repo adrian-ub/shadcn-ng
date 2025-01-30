@@ -1,6 +1,7 @@
-import { UbAspectRatioDirective } from '@/registry/default/ui/aspect-ratio'
+import type { ImageLoaderConfig } from '@angular/common'
 
-import { IMAGE_LOADER, type ImageLoaderConfig, NgOptimizedImage } from '@angular/common'
+import { UbAspectRatioDirective } from '@/registry/default/ui/aspect-ratio'
+import { IMAGE_LOADER, NgOptimizedImage } from '@angular/common'
 import { Component } from '@angular/core'
 
 @Component({

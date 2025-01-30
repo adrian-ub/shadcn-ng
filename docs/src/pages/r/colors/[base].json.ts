@@ -106,8 +106,8 @@ export async function GET({ params }: { params: { base: string } }): Promise<Res
         const [resolvedBase, scale] = resolvedColor.split('-')
         const color = scale
           ? colorsData()[resolvedBase].find(
-            (item: any) => item.scale === Number.parseInt(scale),
-          )
+              (item: any) => item.scale === Number.parseInt(scale),
+            )
           : colorsData()[resolvedBase]
         if (color) {
           base.cssVars[mode][key] = color.hslChannel
