@@ -14,7 +14,7 @@ const { pathname } = Astro.url
 {
   tree?.items?.length && level < 3 && (
     <ul class={cn('m-0 list-none', { 'pl-4': level !== 1 })}>
-      {tree.items.map((item, index) => {
+      {tree.items.map((item) => {
         return (
           <li class={cn('mt-0 pt-2')}>
             <a

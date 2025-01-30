@@ -1,6 +1,5 @@
-import type { RegistryEntry, registryItemTypeSchema } from '@/registry/schema'
+import type { RegistryEntry } from '@/registry/schema'
 
-import type { z } from 'astro/zod'
 import fs from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -15,7 +14,7 @@ const project = new Project({
   compilerOptions: {},
 })
 
-const REGISTRY_INDEX_WHITELIST: z.infer<typeof registryItemTypeSchema>[] = [
+const REGISTRY_INDEX_WHITELIST = [
   'registry:ui',
   'registry:lib',
   'registry:theme',
