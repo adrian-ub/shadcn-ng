@@ -43,11 +43,12 @@ export class UbAccordionItemDirective {
 @Component({
   standalone: true,
   selector: '[ubAccordionTrigger], ub-accordion-trigger',
-  imports: [RdxAccordionHeaderDirective, RdxAccordionTriggerDirective, NgIconComponent],
+  imports: [RdxAccordionHeaderDirective, NgIconComponent],
+  hostDirectives: [RdxAccordionTriggerDirective],
   viewProviders: [provideIcons({ lucideChevronDown })],
   template: `
     <h3 rdxAccordionHeader class="flex">
-        <button rdxAccordionTrigger [className]="computedClass()">
+        <button [class]="computedClass()">
             <ng-content></ng-content>
             <ng-icon name="lucideChevronDown" class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"></ng-icon>
         </button>
