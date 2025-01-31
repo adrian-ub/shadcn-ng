@@ -1,22 +1,36 @@
 ---
-title: Introduction
-description: Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
+title: Welcome to Starlight
+description: Get started building your docs site with Starlight.
+template: splash
+hero:
+  tagline: Congrats on setting up a new Starlight project!
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: Example Guide
+      link: /guides/example/
+      icon: right-arrow
+    - text: Read the Starlight docs
+      link: https://starlight.astro.build
+      icon: external
+      variant: minimal
 ---
 
-An unofficial, community-led [Angular](https://angular.dev) port of [shadcn/ui](https://ui.shadcn.com).
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-This is **NOT** a component library. It's a collection of re-usable components that you can copy and paste into your apps.
+## Next steps
 
-**What do you mean by not a component library?**
-
-I mean you do not install it as a dependency. It is not available or distributed via npm.
-
-Pick the components you need. Copy and paste the code into your project and customize to your needs. The code is yours.
-
-_Use this as a reference to build your own component libraries._
-
-import { Faq } from '@/components/faq.ts'
-
-## FAQ
-
-<Faq client:load />
+<CardGrid stagger>
+	<Card title="Update content" icon="pencil">
+		Edit `src/content/docs/index.mdx` to see this page change.
+	</Card>
+	<Card title="Add new content" icon="add-document">
+		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	</Card>
+	<Card title="Configure your site" icon="setting">
+		Edit your `sidebar` and other config in `astro.config.mjs`.
+	</Card>
+	<Card title="Read the docs" icon="open-book">
+		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	</Card>
+</CardGrid>

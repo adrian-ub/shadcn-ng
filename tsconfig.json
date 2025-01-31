@@ -11,6 +11,5 @@
     "esModuleInterop": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
-  },
-  "exclude": ["docs"]
+  }
 }

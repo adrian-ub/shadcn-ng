@@ -5,15 +5,6 @@ export default defineBuildConfig({
     'src/index',
     'src/cli',
   ],
-  rollup: {
-    inlineDependencies: true,
-    commonjs: {
-      requireReturnsDefault: 'auto',
-    },
-    dts: {
-      respectExternal: false,
-    },
-  },
-  clean: true,
   declaration: true,
+  clean: true,
 })

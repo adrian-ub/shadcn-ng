@@ -2,7 +2,7 @@
   "name": "shadcn-ng",
   "type": "module",
   "version": "0.2.0",
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.15.4",
   "description": "Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.",
   "author": "Adrián UB",
   "license": "MIT",
@@ -24,9 +24,20 @@
     "angular"
   ],
   "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
   "bin": {
     "shadcn-ng": "bin/shadcn-ng.mjs"
   },
@@ -35,59 +46,29 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "dev": "cross-env REGISTRY_URL=http://localhost:4321/r esno src/cli.ts",
-    "docs": "nr -C docs dev",
-    "docs:build": "nr -C docs build",
+    "dev": "unbuild --stub",
     "lint": "eslint .",
-    "prepare": "simple-git-hooks",
     "prepublishOnly": "nr build",
-    "release": "bumpp && npm publish",
-    "shadcn-ng": "esno src/cli.ts",
-    "start": "esno src/cli.ts",
-    "test": "unbuild && vitest",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@antfu/install-pkg": "^0.4.1",
-    "@antfu/ni": "^0.23.0",
-    "@clack/prompts": "^0.7.0",
-    "astro-eslint-parser": "^1.0.3",
-    "commander": "^12.1.0",
-    "deepmerge": "^4.3.1",
-    "diff": "^5.1.0",
-    "eslint-plugin-astro": "^1.2.4",
-    "execa": "^7.0.0",
-    "fast-glob": "^3.3.2",
-    "https-proxy-agent": "^6.2.0",
-    "node-fetch": "^3.3.0",
-    "picocolors": "^1.1.0",
-    "stringify-object": "^5.0.0",
-    "ts-morph": "^18.0.0",
-    "tsconfig-paths": "^4.2.0",
-    "unconfig": "^0.6.0",
-    "zod": "^3.20.2"
+    "release": "bumpp && pnpm publish",
+    "start": "tsx src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@adrianub/eslint-config": "^0.1.0",
-    "@prettier/plugin-xml": "^3.4.1",
-    "@types/diff": "^5.0.3",
-    "@types/node": "^22.5.4",
-    "@types/stringify-object": "^4.0.5",
-    "bumpp": "^9.5.2",
-    "cross-env": "^7.0.3",
-    "eslint": "^9.10.0",
-    "eslint-plugin-format": "^0.1.2",
-    "esno": "^4.7.0",
-    "lint-staged": "^15.2.10",
-    "pnpm": "^9.9.0",
-    "postcss": "^8.4.47",
-    "prettier-plugin-astro": "^0.14.1",
+    "@antfu/ni": "^23.3.1",
+    "@types/node": "^22.10.6",
+    "bumpp": "^9.10.1",
+    "eslint": "^9.18.0",
+    "lint-staged": "^15.3.0",
+    "pnpm": "^9.15.4",
     "simple-git-hooks": "^2.11.1",
-    "tailwindcss": "^3.4.13",
-    "typescript": "^5.5.4",
-    "unbuild": "^2.0.0",
-    "vite": "^5.4.3",
-    "vitest": "^2.0.5"
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "unbuild": "^3.3.1",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
