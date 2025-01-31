@@ -47,7 +47,7 @@ export class UbAccordionItemDirective {
   hostDirectives: [RdxAccordionTriggerDirective],
   viewProviders: [provideIcons({ lucideChevronDown })],
   template: `
-    <h3 rdxAccordionHeader class="flex">
+    <h3 rdxAccordionHeader class="flex group">
         <button [className]="computedClass()">
             <ng-content></ng-content>
             <ng-icon name="lucideChevronDown" class="h-4 w-4 shrink-0 transition-transform duration-200"></ng-icon>
@@ -58,7 +58,7 @@ export class UbAccordionItemDirective {
 export class UbAccordionTriggerDirective {
   class = input<ClassValue>()
   computedClass = computed(() => {
-    return cn('flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>ng-icon]:rotate-180', this.class())
+    return cn('flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline group-data-[state=open]:[&>*>svg]:rotate-180', this.class())
   })
 }
 
