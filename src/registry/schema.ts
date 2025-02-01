@@ -117,7 +117,7 @@ export const RegistryResolvedItemsTreeSchema = v.pick(
 
 export const RawConfigSchema = v.object({
   $schema: v.optional(v.string()),
-  style: v.string(),
+  style: v.picklist(['default', 'new-york']),
   tailwind: v.object({
     config: v.optional(v.string()),
     css: v.string(),
