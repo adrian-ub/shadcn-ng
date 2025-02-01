@@ -31,7 +31,7 @@ export const RegistryItemFileSchema = v.variant('type', [
       v.excludes('registry:file'),
       v.excludes('registry:page'),
     ),
-    target: v.string(),
+    target: v.optional(v.string()),
   }),
 ])
 

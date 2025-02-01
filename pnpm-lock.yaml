@@ -69,9 +69,15 @@ importers:
       '@astrojs/starlight':
         specifier: ^0.31.1
         version: 0.31.1(astro@5.2.1(@types/node@22.10.6)(jiti@2.4.2)(rollup@4.30.1)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.6.1))
+      '@valibot/to-json-schema':
+        specifier: 1.0.0-beta.5
+        version: 1.0.0-beta.5(valibot@1.0.0-beta.14(typescript@5.7.3))
       astro:
         specifier: ^5.1.5
         version: 5.2.1(@types/node@22.10.6)(jiti@2.4.2)(rollup@4.30.1)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.6.1)
+      shadcn-ng:
+        specifier: workspace:*
+        version: link:..
       sharp:
         specifier: ^0.32.5
         version: 0.32.6
@@ -1311,6 +1317,11 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+
+  '@valibot/to-json-schema@1.0.0-beta.5':
+    resolution: {integrity: sha512-8aI2sG98gWS+6YuIL3OMkg60sImhICPdZIFCV1XDyX8k6UOCX+MgXaeR3f2fDShuNXYHV46vcjWRpov8ojzDNw==}
+    peerDependencies:
+      valibot: ^1.0.0 || ^1.0.0-beta.5 || ^1.0.0-rc
 
   '@vitest/eslint-plugin@1.1.25':
     resolution: {integrity: sha512-u8DpDnMbPcqBmJOB4PeEtn6q7vKmLVTLFMpzoxSAo0hjYdl4iYSHRleqwPQo0ywc7UV0S6RKIahYRQ3BnZdMVw==}
@@ -5470,6 +5481,10 @@ snapshots:
       eslint-visitor-keys: 4.2.0
 
   '@ungap/structured-clone@1.3.0': {}
+
+  '@valibot/to-json-schema@1.0.0-beta.5(valibot@1.0.0-beta.14(typescript@5.7.3))':
+    dependencies:
+      valibot: 1.0.0-beta.14(typescript@5.7.3)
 
   '@vitest/eslint-plugin@1.1.25(@typescript-eslint/utils@8.22.0(eslint@9.18.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.18.0(jiti@2.4.2))(typescript@5.7.3)(vitest@2.1.8(@types/node@22.10.6))':
     dependencies:
