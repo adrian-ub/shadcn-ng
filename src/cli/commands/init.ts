@@ -10,6 +10,7 @@ import pkgJson from '../../../package.json'
 import { handleError } from '../../utils/handle-error'
 import { InitSchema } from '../schemas/init'
 import { runInit } from '../stages/run-init'
+import { header } from '../utils/header'
 
 export const init = new Command()
   .name('init')
@@ -27,6 +28,7 @@ export const init = new Command()
   .option('-d, --defaults,', 'use default configuration.', false)
   .option('-y, --yes', 'skip confirmation prompt.', true)
   .action(async (components, opts) => {
+    header()
     try {
       const options = v.parse(InitSchema, {
         ...opts,
