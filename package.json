@@ -52,15 +52,26 @@
     "prepublishOnly": "nr build",
     "release": "bumpp && pnpm publish",
     "start": "tsx src/index.ts",
+    "start:cli": "tsx src/cli.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
+    "@antfu/install-pkg": "^1.0.0",
     "@clack/prompts": "^0.9.1",
+    "commander": "^13.1.0",
     "deepmerge": "^4.3.1",
+    "fast-glob": "^3.3.3",
     "https-proxy-agent": "^7.0.6",
+    "local-pkg": "^1.0.0",
     "node-fetch": "^3.3.2",
+    "package-manager-detector": "^0.2.9",
+    "picocolors": "^1.1.1",
+    "tinyexec": "^0.3.2",
+    "tsconfck": "^3.1.4",
+    "tsconfig-paths": "^4.2.0",
+    "unconfig": "^0.6.1",
     "valibot": "1.0.0-beta.14"
   },
   "devDependencies": {
