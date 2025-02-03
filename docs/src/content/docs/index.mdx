@@ -1,36 +1,17 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Build your component library
+description: Beautifully designed components that you can copy and paste into your apps. Made with Tailwind CSS. Open source.
 template: splash
+head:
+  - tag: title
+    content: shadcn-ng
 hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
+  title: Build your component library
+  tagline: Beautifully designed components that you can copy and paste into your apps. Made with Tailwind CSS. Open source.
   actions:
-    - text: Example Guide
-      link: /guides/example/
-      icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: Get Started
+      link: /docs/
+    - text: GitHub
+      link: https://github.com/adrian-ub/shadcn-ng
       variant: minimal
 ---
-
-import { Card, CardGrid } from '@astrojs/starlight/components';
-
-## Next steps
-
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>

@@ -1,26 +1,61 @@
-import starlight from '@astrojs/starlight'
 // @ts-check
+import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
+
+import starlightThemeBlack from 'starlight-theme-black'
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'My Docs',
+      title: 'shadcn-ng',
+      plugins: [
+        starlightThemeBlack({
+          navLinks: [
+            {
+              label: 'Docs',
+              link: '/docs',
+            },
+          ],
+        }),
+      ],
+      logo: {
+        src: './src/assets/logo.svg',
+      },
+      titleDelimiter: '-',
       social: {
-        github: 'https://github.com/withastro/starlight',
+        github: 'https://github.com/adrian-ub/shadcn-ng',
       },
       sidebar: [
         {
-          label: 'Guides',
+          label: 'Getting Started',
           items: [
-            // Each item here is one entry in the navigation menu.
-            { label: 'Example Guide', slug: 'guides/example' },
+            {
+              label: 'Introduction',
+              slug: 'docs',
+            },
+            {
+              label: 'Installation',
+              slug: 'docs/installation',
+            },
           ],
         },
         {
-          label: 'Reference',
-          autogenerate: { directory: 'reference' },
+          label: 'Installation',
+          items: [
+            {
+              label: 'Angular',
+              slug: 'docs/installation/angular',
+            },
+            {
+              label: 'Vite',
+              slug: 'docs/installation/vite',
+            },
+            {
+              label: 'Manual',
+              slug: 'docs/installation/manual',
+            },
+          ],
         },
       ],
     }),
