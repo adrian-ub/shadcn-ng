@@ -13,12 +13,13 @@ import { RawConfigSchema } from '../../registry/schema'
 import { getRegistryBaseColors, getRegistryStyles } from '../registry'
 import { cancelProcess, verifyIsCancelPrompt } from '../utils/cancel-process'
 import { ERRORS } from '../utils/errors'
+import { addComponents } from './add-components'
 import { createProject } from './create-project'
-import { $schema, DEFAULT_COMPONENTS, DEFAULT_TAILWIND_CSS, DEFAULT_UTILS, getConfig } from './get-config'
+import { $schema, DEFAULT_COMPONENTS, DEFAULT_TAILWIND_CSS, DEFAULT_UTILS, getConfig, resolveConfigPaths } from './get-config'
 import { getProjectConfig } from './get-project-info'
 import { preFlightInit } from './preflight-init'
 
-export async function runInit(options: InitOptions): Promise<void> {
+export async function runInit(options: InitOptions): Promise<Config> {
   const preflight = await preFlightInit(options)
 
   if (preflight.errors[ERRORS.MISSING_DIR_OR_EMPTY_PROJECT]) {
@@ -53,6 +54,15 @@ export async function runInit(options: InitOptions): Promise<void> {
   const targetPath = path.resolve(options.cwd, 'components.json')
   await fs.writeFile(targetPath, JSON.stringify(config, null, 2), 'utf8')
   p.log.success(`${c.blue('components.json')} configuration written.`)
+
+  const fullConfig = await resolveConfigPaths(options.cwd, config)
+  const components = ['index', ...(options.components || [])]
+  await addComponents(components, fullConfig, {
+    // Init will always overwrite files.
+    overwrite: true,
+  })
+
+  return fullConfig
 }
 
 async function promptForMinimalConfig(

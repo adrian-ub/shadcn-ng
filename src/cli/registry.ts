@@ -6,4 +6,6 @@ const REGISTRY_URL = process.env.REGISTRY_URL ?? 'https://ui.adrianub.dev/r'
 export const {
   getRegistryStyles,
   getRegistryBaseColors,
+  registryResolveItemsTree,
+  getRegistryBaseColor,
 } = buildRegistry(REGISTRY_URL)
