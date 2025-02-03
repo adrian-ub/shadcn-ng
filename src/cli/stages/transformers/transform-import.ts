@@ -4,6 +4,7 @@ import type { Config } from '../../../registry'
 
 const COMMON_CN_IMPORTS = {
   '~/lib/utils': /^~\/lib\/utils/,
+  '@/lib/utils': /^@\/lib\/utils/,
 }
 
 export const transformImport: Transformer = async ({
@@ -20,7 +21,7 @@ export const transformImport: Transformer = async ({
 
     importDeclaration.setModuleSpecifier(moduleSpecifier)
 
-    // Replace `import { cn } from "@/lib/utils"`
+    // Replace `import { cn } from "~/lib/utils"` or `import { cn } from "@/lib/utils"`
     if (COMMON_CN_IMPORTS[moduleSpecifier as keyof typeof COMMON_CN_IMPORTS]) {
       const namedImports = importDeclaration.getNamedImports()
       const cnImport = namedImports.find(i => i.getName() === 'cn')
@@ -45,53 +46,53 @@ function updateImportAliases(
   config: Config,
 ): string {
   // Not a local import.
-  if (!moduleSpecifier.startsWith('~/')) {
+  if (!moduleSpecifier.match(/^[@~]\//)) {
     return moduleSpecifier
   }
 
   // Not a registry import.
-  if (!moduleSpecifier.startsWith('~/registry/')) {
+  if (!moduleSpecifier.match(/^[@~]\/registry\//)) {
     // We fix the alias and return.
     const alias = config.aliases.components.split('/')[0]
-    return moduleSpecifier.replace(/^~\//, `${alias}/`)
+    return moduleSpecifier.replace(/^[@~]\//, `${alias}/`)
   }
 
-  if (moduleSpecifier.match(/^~\/registry\/(.+)\/ui/)) {
+  if (moduleSpecifier.match(/^[@~]\/registry\/(.+)\/ui/)) {
     return moduleSpecifier.replace(
-      /^~\/registry\/(.+)\/ui/,
+      /^[@~]\/registry\/(.+)\/ui/,
       config.aliases.ui ?? `${config.aliases.components}/ui`,
     )
   }
 
   if (
     config.aliases.components
-    && moduleSpecifier.match(/^~\/registry\/(.+)\/components/)
+    && moduleSpecifier.match(/^[@~]\/registry\/(.+)\/components/)
   ) {
     return moduleSpecifier.replace(
-      /^~\/registry\/(.+)\/components/,
+      /^[@~]\/registry\/(.+)\/components/,
       config.aliases.components,
     )
   }
 
-  if (config.aliases.lib && moduleSpecifier.match(/^~\/registry\/(.+)\/lib/)) {
+  if (config.aliases.lib && moduleSpecifier.match(/^[@~]\/registry\/(.+)\/lib/)) {
     return moduleSpecifier.replace(
-      /^~\/registry\/(.+)\/lib/,
+      /^[@~]\/registry\/(.+)\/lib/,
       config.aliases.lib,
     )
   }
 
   if (
     config.aliases.services
-    && moduleSpecifier.match(/^~\/registry\/(.+)\/services/)
+    && moduleSpecifier.match(/^[@~]\/registry\/(.+)\/services/)
   ) {
     return moduleSpecifier.replace(
-      /^~\/registry\/(.+)\/services/,
+      /^[@~]\/registry\/(.+)\/services/,
       config.aliases.services,
     )
   }
 
   return moduleSpecifier.replace(
-    /^@\/registry\/[^/]+/,
+    /^[@~]\/registry\/[^/]+/,
     config.aliases.components,
   )
 }
