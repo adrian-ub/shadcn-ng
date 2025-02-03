@@ -8,4 +8,5 @@ export const {
   getRegistryBaseColors,
   registryResolveItemsTree,
   getRegistryBaseColor,
+  getRegistryIndex,
 } = buildRegistry(REGISTRY_URL)
