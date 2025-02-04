@@ -40,11 +40,11 @@ export async function getProjectInfo(cwd: string): Promise<ProjectInfo | null> {
     loadConfig({
       sources: [
         {
-          files: 'angular',
-          extensions: ['json'],
+          files: 'vite.config',
         },
         {
-          files: 'vite.config',
+          files: 'angular',
+          extensions: ['json'],
         },
       ],
       cwd,
@@ -107,7 +107,7 @@ export async function getTailwindVersion(
   cwd: string,
 ): Promise<TailwindVersion> {
   const tailwindPackageInfo = await getPackageInfo('tailwindcss', {
-    paths: [cwd],
+    paths: [`${cwd}/node_modules`, cwd],
   })
 
   if (!tailwindPackageInfo || !tailwindPackageInfo.version)
@@ -134,7 +134,7 @@ export async function getTailwindConfigFile(cwd: string): Promise<string | null>
     cwd,
   })
 
-  return sources[0] || null
+  return sources[0] ? path.relative(cwd, sources[0]) : null
 }
 
 export async function getTsConfigAliasPrefix(cwd: string): Promise<string | null> {
