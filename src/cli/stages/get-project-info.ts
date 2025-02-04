@@ -111,7 +111,7 @@ export async function getTailwindVersion(
   })
 
   if (!tailwindPackageInfo || !tailwindPackageInfo.version)
-    throw new Error('Tailwind CSS not installed')
+    return null
 
   if (
     /^(?:\^|~)?3(?:\.\d+)*(?:-.*)?$/.test(
