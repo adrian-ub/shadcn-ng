@@ -20,6 +20,9 @@ importers:
       deepmerge:
         specifier: ^4.3.1
         version: 4.3.1
+      diff:
+        specifier: ^7.0.0
+        version: 7.0.0
       fast-glob:
         specifier: ^3.3.3
         version: 3.3.3
@@ -72,6 +75,9 @@ importers:
       '@antfu/ni':
         specifier: ^23.3.1
         version: 23.3.1
+      '@types/diff':
+        specifier: ^7.0.1
+        version: 7.0.1
       '@types/node':
         specifier: ^22.10.6
         version: 22.13.0
@@ -1340,6 +1346,9 @@ packages:
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
 
+  '@types/diff@7.0.1':
+    resolution: {integrity: sha512-R/BHQFripuhW6XPXy05hIvXJQdQ4540KnTvEFHSLjXfHYM41liOLKgIJEyYYiQe796xpaMHfe4Uj/p7Uvng2vA==}
+
   '@types/doctrine@0.0.9':
     resolution: {integrity: sha512-eOIHzCUSH7SMfonMG1LsC2f8vxBFtho6NGBznK41R84YzPuvSBzrhEps33IsQiOW9+VL6NQ9DbjQJznk/S4uRA==}
 
@@ -2009,6 +2018,10 @@ packages:
 
   diff@5.2.0:
     resolution: {integrity: sha512-uIFDxqpRZGZ6ThOk84hEfqWoHx2devRFvpTZcTHur85vImfaxUbTW9Ryh4CpCuDnToOP1CEtXKIgytHBPVff5A==}
+    engines: {node: '>=0.3.1'}
+
+  diff@7.0.0:
+    resolution: {integrity: sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw==}
     engines: {node: '>=0.3.1'}
 
   direction@2.0.1:
@@ -5668,6 +5681,8 @@ snapshots:
     dependencies:
       '@types/ms': 2.1.0
 
+  '@types/diff@7.0.1': {}
+
   '@types/doctrine@0.0.9': {}
 
   '@types/eslint@9.6.1':
@@ -6473,6 +6488,8 @@ snapshots:
       dequal: 2.0.3
 
   diff@5.2.0: {}
+
+  diff@7.0.0: {}
 
   direction@2.0.1: {}
 

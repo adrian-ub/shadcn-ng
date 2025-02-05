@@ -9,4 +9,6 @@ export const {
   registryResolveItemsTree,
   getRegistryBaseColor,
   getRegistryIndex,
+  fetchTree,
+  getItemTargetPath,
 } = buildRegistry(REGISTRY_URL)
