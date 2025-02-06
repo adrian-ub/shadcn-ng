@@ -8,6 +8,7 @@ import { loadConfig } from 'unconfig'
 import * as v from 'valibot'
 
 import { ConfigSchema, RawConfigSchema } from '../../registry/schema'
+import { getProjectInfo } from './get-project-info'
 import { resolveImport } from './resolve-import'
 
 export const DEFAULT_STYLE = 'default'
@@ -105,4 +106,9 @@ export async function resolveConfigPaths(cwd: string, config: RawConfig): Promis
           ),
     },
   })
+}
+
+export async function getTargetStyleFromConfig(cwd: string): Promise<'default' | 'new-york-v4'> {
+  const projectInfo = await getProjectInfo(cwd)
+  return projectInfo?.tailwindVersion === 'v4' ? 'new-york-v4' : 'default'
 }

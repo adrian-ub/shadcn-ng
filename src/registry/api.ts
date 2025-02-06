@@ -8,6 +8,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent'
 import fetch from 'node-fetch'
 import * as v from 'valibot'
 
+import { getTargetStyleFromConfig } from '../cli/stages/get-config'
 import { handleError } from '../utils/handle-error'
 import { buildTailwindThemeColorsFromCssVars } from '../utils/updaters/update-tailwind-config'
 import { IconsSchema, RegistryBaseColorSchema, RegistryIndexSchema, RegistryItemSchema, RegistryResolvedItemsTreeSchema, StylesSchema } from './schema'
@@ -329,10 +330,14 @@ async function resolveRegistryDependencies(
   const visited = new Set<string>()
   const payload: string[] = []
 
+  const style = config.resolvedPaths?.cwd
+    ? await getTargetStyleFromConfig(config.resolvedPaths.cwd)
+    : config.style
+
   async function resolveDependencies(itemUrl: string): Promise<void> {
     const url = getRegistryUrl(
       urlRegistry,
-      isUrl(itemUrl) ? itemUrl : `styles/${config.style}/${itemUrl}.json`,
+      isUrl(itemUrl) ? itemUrl : `styles/${style}/${itemUrl}.json`,
     )
 
     if (visited.has(url)) {
