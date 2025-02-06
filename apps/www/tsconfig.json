@@ -5,6 +5,12 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "shadcn-ng": [
+        "../../src/index.ts"
+      ],
+      "shadcn-ng/registry": [
+        "../../src/registry.ts"
       ]
     },
     "plugins": [

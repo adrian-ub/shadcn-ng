@@ -213,9 +213,6 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
-      shadcn-ng:
-        specifier: workspace:*
-        version: link:../..
       shiki:
         specifier: ^2.3.2
         version: 2.3.2
