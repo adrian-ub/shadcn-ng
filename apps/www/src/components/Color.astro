@@ -1,0 +1,74 @@
+---
+import { type Color } from '@/lib/colors'
+
+export interface Props {
+  color: Color
+}
+const { color } = Astro.props
+---
+
+<button
+  x-data=`{
+    color: ${JSON.stringify(color)},
+    copyNotification: false,
+    copyToClipboard() {
+      const copyText = this.color[$store.format];
+      navigator.clipboard.writeText(copyText);
+      this.copyNotification = true;
+      let that = this;
+      setTimeout(function(){
+        that.copyNotification = false;
+      }, 2000);
+    }
+  }`
+  @click="copyToClipboard();"
+  class="group relative flex aspect-[3/1] w-full flex-1 flex-col gap-2 text-[--text] sm:aspect-[2/3] sm:h-auto sm:w-auto [&>svg]:absolute [&>svg]:right-4 [&>svg]:top-4 [&>svg]:h-3.5 [&>svg]:w-3.5 [&>svg]:opacity-0 [&>svg]:transition-opacity"
+  style={{ '--bg': `hsl(${color.hsl})`, '--text': color.foreground }}
+>
+  <svg
+    x-show="!copyNotification"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="lucide lucide-clipboard group-hover:opacity-100"
+  >
+    <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+  </svg>
+
+  <svg
+    x-show="copyNotification"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="lucide lucide-check group-hover:opacity-100"
+  >
+    <path d="M20 6 9 17l-5-5"></path>
+  </svg>
+
+  <div class="w-full flex-1 rounded-md bg-[--bg] md:rounded-lg"></div>
+  <div class="flex w-full flex-col items-center justify-center gap-1">
+    <span
+      class="hidden font-mono text-xs tabular-nums text-muted-foreground transition-colors group-hover:text-foreground lg:flex"
+    >
+      {color.class}
+    </span>
+    <span
+      class="font-mono text-xs tabular-nums text-muted-foreground transition-colors group-hover:text-foreground lg:hidden"
+    >
+      {color.scale}
+    </span>
+  </div>
+</button>

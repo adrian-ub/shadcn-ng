@@ -1,0 +1,54 @@
+---
+import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
+import Announcement from '@/components/Announcement.astro'
+import ExamplesNav from '@/components/ExamplesNav.astro'
+import { buttonVariants } from '@/registry/new-york/ui/button'
+import { siteConfig } from '@/config/site'
+
+import RootLayout from './RootLayout.astro'
+---
+
+<RootLayout>
+  <div class="relative">
+    <PageHeader>
+      <Announcement />
+      <PageHeaderHeading class="hidden md:block"> Check out some examples </PageHeaderHeading>
+      <PageHeaderHeading class="md:hidden"> Examples </PageHeaderHeading>
+      <PageHeaderDescription>
+        Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your
+        own.
+      </PageHeaderDescription>
+
+      <PageActions>
+        <a
+          href="/docs"
+          class={buttonVariants({
+            size: 'sm',
+          })}
+        >
+          Get Started
+        </a>
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href={siteConfig.links.github}
+          class={buttonVariants({
+            size: 'sm',
+            variant: 'ghost',
+          })}
+        >
+          GitHub
+        </a>
+      </PageActions>
+    </PageHeader>
+
+    <div class="container py-6">
+      <section>
+        <ExamplesNav />
+        <div class="overflow-hidden rounded-[0.5rem] border bg-background shadow">
+          <slot />
+        </div>
+      </section>
+    </div>
+  </div>
+</RootLayout>

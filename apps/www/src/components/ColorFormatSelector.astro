@@ -1,0 +1,186 @@
+---
+import { getColorFormat, type Color } from '@/lib/colors'
+import { cn } from '@/lib/utils'
+
+export interface Props {
+  class?: string
+  color: Color
+}
+
+const { color, class: className } = Astro.props
+
+const formats = getColorFormat(color)
+
+const options = Object.entries(formats).map(([format, title]) => ({ value: format, title, format }))
+---
+
+<div
+  class="relative w-64"
+  x-data=`{
+  selectOpen: false,
+  selectedItem: $store.format,
+  selectableItems: ${JSON.stringify(options)},
+  selectableItemActive: null,
+  selectId: $id('select'),
+  selectKeydownValue: '',
+  selectKeydownTimeout: 1000,
+  selectKeydownClearTimeout: null,
+  selectDropdownPosition: 'bottom',
+  selectableItemIsActive(item) {
+    return this.selectableItemActive == item.value;
+  },
+  selectableItemActiveNext(){
+    let index = this.selectableItems.map(a=>a.value).indexOf(this.selectableItemActive);
+    if(index < this.selectableItems.length-1){
+      this.selectableItemActive = this.selectableItems[index+1].value;
+      this.selectScrollToActiveItem();
+    }
+  },
+  selectableItemActivePrevious(){
+    let index = this.selectableItems.map(a=>a.value).indexOf(this.selectableItemActive);
+    if(index > 0){
+      this.selectableItemActive = this.selectableItems[index-1].value;
+      this.selectScrollToActiveItem();
+    }
+  },
+  selectScrollToActiveItem(){
+    if(this.selectableItemActive){
+      activeElement = document.getElementById(this.selectableItemActive + '-' + this.selectId)
+      newScrollPos = (activeElement.offsetTop + activeElement.offsetHeight) - this.$refs.selectableItemsList.offsetHeight;
+      if(newScrollPos > 0){
+        this.$refs.selectableItemsList.scrollTop=newScrollPos;
+      } else {
+        this.$refs.selectableItemsList.scrollTop=0;
+      }
+    }
+  },
+  selectKeydown(event){
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+
+      this.selectKeydownValue += event.key;
+      selectedItemBestMatch = this.selectItemsFindBestMatch();
+      if(selectedItemBestMatch){
+        if(this.selectOpen){
+          this.selectableItemActive = selectedItemBestMatch;
+          this.selectScrollToActiveItem();
+        } else {
+          this.selectedItem = this.selectableItemActive = selectedItemBestMatch;
+        }
+      }
+
+      if(this.selectKeydownValue != ''){
+        clearTimeout(this.selectKeydownClearTimeout);
+        this.selectKeydownClearTimeout = setTimeout(() => {
+          this.selectKeydownValue = '';
+        }, this.selectKeydownTimeout);
+      }
+    }
+  },
+  selectItemsFindBestMatch(){
+    typedValue = this.selectKeydownValue.toLowerCase();
+    var bestMatch = null;
+    var bestMatchIndex = -1;
+    for (var i = 0; i < this.selectableItems.length; i++) {
+      var title = this.selectableItems[i].title.toLowerCase();
+      var index = title.indexOf(typedValue);
+      if (index > -1 && (bestMatchIndex == -1 || index < bestMatchIndex) && !this.selectableItems[i].disabled) {
+        bestMatch = this.selectableItems[i].value;
+        bestMatchIndex = index;
+      }
+    }
+    return bestMatch;
+  },
+  selectPositionUpdate(){
+    selectDropdownBottomPos = this.$refs.selectButton.getBoundingClientRect().top + this.$refs.selectButton.offsetHeight + parseInt(window.getComputedStyle(this.$refs.selectableItemsList).maxHeight);
+    if(window.innerHeight < selectDropdownBottomPos){
+      this.selectDropdownPosition = 'top';
+    } else {
+      this.selectDropdownPosition = 'bottom';
+    }
+  }
+}`
+  x-init="
+  $watch('selectOpen', function(){
+      if(!selectedItem){
+        selectableItemActive=selectableItems[0].value;
+      } else {
+        selectableItemActive=selectedItem;
+      }
+      setTimeout(function(){
+        selectScrollToActiveItem();
+      }, 10);
+      selectPositionUpdate();
+      window.addEventListener('resize', (event) => { selectPositionUpdate(); });
+  });
+"
+  x-effect="selectedItem = $store.format;"
+  @keydown.escape="if(selectOpen){ selectOpen=false; }"
+  @keydown.down="if(selectOpen){ selectableItemActiveNext(); } else { selectOpen=true; } event.preventDefault();"
+  @keydown.up="if(selectOpen){ selectableItemActivePrevious(); } else { selectOpen=true; } event.preventDefault();"
+  @keydown.enter="$store.format=selectableItemActive; selectOpen=false;"
+  @keydown="selectKeydown($event);"
+>
+  <button
+    x-ref="selectButton"
+    @click="selectOpen=!selectOpen"
+    class={cn(
+      'flex items-center justify-between whitespace-nowrap border border-input bg-transparent px-3 py-2 shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 h-7 w-auto gap-1.5 rounded-lg pr-2 text-xs',
+      className,
+    )}
+  >
+    <span class="font-medium">Format: </span>
+    <span class="font-mono text-xs text-muted-foreground" x-text="selectedItem ? selectedItem : 'Select Item'"> </span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6"></path>
+    </svg>
+  </button>
+
+  <ul
+    x-show="selectOpen"
+    x-ref="selectableItemsList"
+    @click.away="selectOpen = false"
+    x-transition:enter="transition ease-out duration-50"
+    x-transition:enter-start="opacity-0 -translate-y-1"
+    x-transition:enter-end="opacity-100"
+    :class="{ 'bottom-0 mb-10' : selectDropdownPosition == 'top', 'top-7 mt-10' : selectDropdownPosition == 'bottom' }"
+    class="absolute z-50 w-full py-1 mt-1 overflow-auto text-sm bg-popover text-popover-foreground rounded-md shadow-md max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none"
+    x-cloak
+  >
+    <template x-for="item in selectableItems" :key="item.value">
+      <li
+        @click="$store.format=item.value; selectOpen=false; $refs.selectButton.focus();"
+        :id="item.value + '-' + selectId"
+        :data-disabled="item.disabled"
+        :class="{ 'bg-accent text-accent-foreground' : selectableItemIsActive(item), '' : !selectableItemIsActive(item) }"
+        @mousemove="selectableItemActive=item.value"
+        class="relative flex w-full cursor-default select-none items-center py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground gap-2 rounded-lg [&>span]:flex [&>span]:items-center [&>span]:gap-2"
+      >
+        <svg
+          x-show="selectedItem==item.value"
+          class="absolute right-2 flex h-3.5 w-3.5 items-center justify-center"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg
+        >
+        <span class="font-medium" x-text="item.format"></span>
+        <span class="font-mono text-xs text-muted-foreground" x-text="item.title"></span>
+      </li>
+    </template>
+  </ul>
+</div>

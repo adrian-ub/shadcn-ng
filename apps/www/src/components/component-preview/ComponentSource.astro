@@ -1,0 +1,36 @@
+---
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/registry/new-york/ui/button'
+---
+
+<div x-data="{ expand:false }">
+  <div class="relative overflow-hidden" :class="expand ? 'max-h-full': 'max-h-24'">
+    <div
+      class="[&_pre]:my-0 [&_pre]:max-h-[650px] [&_pre]:pb-[100px]"
+      :class="expand ? '[&_pre]:overflow-auto]' : '[&_pre]:overflow-hidden' "
+    >
+      <template x-if="$store.style === 'new-york'">
+        <slot name="new-york"><p>Not found</p></slot>
+      </template>
+
+      <template x-if="$store.style === 'default'">
+        <slot name="default"> <p>Not found</p></slot>
+      </template>
+    </div>
+    <div
+      class="absolute flex items-center justify-center bg-gradient-to-b from-zinc-700/30 to-zinc-950/90 p-2"
+      :class="expand ? 'inset-x-0 bottom-0 h-12' : 'inset-0'"
+    >
+      <button
+        @click="expand = !expand"
+        class={cn(
+          buttonVariants({
+            variant: 'secondary',
+          }),
+          'h-8 text-xs absolute left-1/2 -translate-x-1/2 transform',
+        )}
+        :class="expand ? 'bottom-4' : 'bottom-0'"
+        x-text="expand ? 'Collapse' : 'Expand'"></button>
+    </div>
+  </div>
+</div>

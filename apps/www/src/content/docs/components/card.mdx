@@ -1,0 +1,67 @@
+---
+title: Card
+description: Displays a card with header, content, and footer.
+---
+
+<ComponentPreview name="card-with-form" description="A card with a form" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ng@latest add card
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="card" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```ts
+import {
+  UbCardContentDirective,
+  UbCardDescriptionDirective,
+  UbCardDirective,
+  UbCardFooterDirective,
+  UbCardHeaderDirective,
+  UbCardTitleDirective,
+} from '@/components/ui/card'
+```
+
+```html
+ <div ubCard>
+    <div ubCardHeader>
+        <h3 ubCardTitle>Card Title</h3>
+        <p ubCardDescription>Card Description</p>
+    </div>
+    <div ubCardContent>
+       <p>Card Content</p>
+    </div>
+    <div ubCardFooter>
+        <p>Card Footer</p>
+    </div>
+</div>
+```

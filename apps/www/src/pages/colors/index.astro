@@ -1,0 +1,47 @@
+---
+import Announcement from '@/components/Announcement.astro'
+import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
+import RootLayout from '@/layouts/RootLayout.astro'
+import { buttonVariants } from '@/registry/new-york/ui/button'
+
+import Colors from './_colors.astro'
+import { siteConfig } from '@/config/site'
+---
+
+<RootLayout title={'Tailwind Colors - ' + siteConfig.title} description="All colors in all formats.">
+  <div class="relative">
+    <PageHeader>
+      <Announcement />
+      <PageHeaderHeading>Tailwind Colors</PageHeaderHeading>
+      <PageHeaderDescription> Tailwind CSS colors in HSL, RGB, and HEX formats. </PageHeaderDescription>
+
+      <PageActions>
+        <a
+          href="#colors"
+          class={buttonVariants({
+            size: 'sm',
+          })}
+        >
+          Browse Colors
+        </a>
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="/docs/theming"
+          class={buttonVariants({
+            size: 'sm',
+            variant: 'ghost',
+          })}
+        >
+          Documentation
+        </a>
+      </PageActions>
+    </PageHeader>
+
+    <div class="container py-6">
+      <section id="colors" class="scroll-mt-20">
+        <Colors />
+      </section>
+    </div>
+  </div>
+</RootLayout>

@@ -1,0 +1,70 @@
+---
+title: Collapsible
+description: An interactive component which expands/collapses a panel.
+links:
+  doc: https://www.radix-ng.com/primitives/components/collapsible
+  api: https://www.radix-ng.com/primitives/components/collapsible#api-reference
+---
+
+<ComponentPreview
+  name="collapsible-demo"
+  description="A collapsible component."
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ng@latest add collapsible
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @radix-ng/primitives
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="collapsible" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```ts
+import {
+  UbCollapsible,
+  UbCollapsibleContent,
+  UbCollapsibleTrigger
+} from '@/components/ui/collapsible'
+```
+
+```html
+<div ubCollapsible>
+  <button ubCollapsibleTrigger>Can I use this in my project?</button>
+  <div ubCollapsibleContent>
+    Yes. Free to use for personal and commercial projects. No attribution
+    required.
+  </div>
+</div>
+```

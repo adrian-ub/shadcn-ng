@@ -1,0 +1,23 @@
+---
+import { components } from '@/components/mdx'
+import DocsLayout from '@/layouts/DocsLayout.astro'
+import { getCollection } from 'astro:content'
+import type { InferGetStaticPropsType } from 'astro'
+
+export async function getStaticPaths() {
+  const docsEntries = await getCollection('docs')
+  return docsEntries.map((entry) => ({
+    params: { slug: entry.slug === 'index' ? '/' : entry.slug },
+    props: { entry },
+  }))
+}
+
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+const { entry } = Astro.props
+const { Content } = await entry.render()
+---
+
+<DocsLayout {entry}>
+  <Content components={components} />
+</DocsLayout>
