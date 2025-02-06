@@ -177,9 +177,6 @@ importers:
       '@radix-ng/primitives':
         specifier: ^0.29.0
         version: 0.29.0(@angular/cdk@19.1.3(@angular/common@19.1.4(@angular/core@19.1.4(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.4(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.1.4(rxjs@7.8.1)(zone.js@0.15.0))
-      '@shikijs/compat':
-        specifier: ^2.2.0
-        version: 2.3.2
       '@types/alpinejs':
         specifier: ^3.13.11
         version: 3.13.11
@@ -219,6 +216,9 @@ importers:
       shadcn-ng:
         specifier: workspace:*
         version: link:../..
+      shiki:
+        specifier: ^2.3.2
+        version: 2.3.2
       tailwind-merge:
         specifier: ^3.0.1
         version: 3.0.1
@@ -2713,9 +2713,6 @@ packages:
   '@schematics/angular@19.1.6':
     resolution: {integrity: sha512-TxFp6iHBqXcuyZIW84HA4z3XkAMz3wTw46K3GNhzyfhFTFD0YD+DtaR3MfQ+vcj3YUYu9j44zrB9nchzugR9Ew==}
     engines: {node: ^18.19.1 || ^20.11.1 || >=22.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
-
-  '@shikijs/compat@2.3.2':
-    resolution: {integrity: sha512-ZCL3mv51EO3yCPV4YuwjoRMFQQIb4g+NHuNNZ8CNaHR4m5pkYMs0tSFkzSgYtuSJ8AqX+pubFZ2iXMZa7iqJkQ==}
 
   '@shikijs/core@1.29.2':
     resolution: {integrity: sha512-vju0lY9r27jJfOY4Z7+Rt/nIOjzJpZ3y+nYpqtUZInVoXQ/TJZcfGnNOGnKjFdVZb8qexiCuSlZRKcGfhhTTZQ==}
@@ -10559,16 +10556,6 @@ snapshots:
       jsonc-parser: 3.3.1
     transitivePeerDependencies:
       - chokidar
-
-  '@shikijs/compat@2.3.2':
-    dependencies:
-      '@shikijs/core': 2.3.2
-      '@shikijs/langs': 2.3.2
-      '@shikijs/themes': 2.3.2
-      '@shikijs/transformers': 2.3.2
-      '@shikijs/types': 2.3.2
-      '@shikijs/vscode-textmate': 10.0.1
-      shiki: 2.3.2
 
   '@shikijs/core@1.29.2':
     dependencies:

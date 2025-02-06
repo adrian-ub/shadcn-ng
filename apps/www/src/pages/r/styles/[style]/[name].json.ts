@@ -3,12 +3,13 @@ import type { RegistryEntry } from '@/registry/schema'
 import fs from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
-
 import process from 'node:process'
+
 import { registry } from '@/registry'
 import { styles } from '@/registry/registry-styles'
 import { registryEntrySchema } from '@/registry/schema'
 import { Project, ScriptKind } from 'ts-morph'
+import * as v from 'valibot'
 
 const project = new Project({
   compilerOptions: {},
@@ -97,23 +98,22 @@ export async function GET({
     )
   }
 
-  const payload = registryEntrySchema
-    .omit({
-      source: true,
-      category: true,
-      subcategory: true,
-      chunks: true,
-    })
-    .safeParse({
+  const payload = v.safeParse(
+    v.omit(
+      registryEntrySchema,
+      ['source', 'category', 'subcategory', 'chunks', 'files'],
+    ),
+    {
       ...item,
       files,
-    })
+    },
+  )
 
   if (!payload.success) {
     return new Response()
   }
 
   return new Response(
-    JSON.stringify(payload.data, null, 2),
+    JSON.stringify(payload.output, null, 2),
   )
 }

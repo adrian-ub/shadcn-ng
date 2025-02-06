@@ -6,12 +6,12 @@ import alpinejs from '@astrojs/alpinejs'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import { getHighlighter } from '@shikijs/compat'
 import { defineConfig } from 'astro/config'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { rehypePrettyCode } from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import { codeImport } from 'remark-code-import'
+import { createHighlighter } from 'shiki'
 import { visit } from 'unist-util-visit'
 
 import { siteConfig } from './src/config/site'
@@ -21,7 +21,7 @@ import { rehypeNpmCommand } from './src/plugins/rehype-npm-command'
 /** @type {import('rehype-pretty-code').Options} */
 const optionsRehypePrettyCode = {
   theme: 'github-dark',
-  getHighlighter,
+  getHighlighter: createHighlighter,
   onVisitLine(node) {
     // Prevent lines from collapsing in `display: grid` mode, and allow empty
     // lines to be copy/pasted

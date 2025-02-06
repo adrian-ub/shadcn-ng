@@ -1,6 +1,9 @@
 import type { Style } from '../registry/registry-styles'
 import type { Registry } from '../registry/schema'
 import process from 'node:process'
+
+import * as v from 'valibot'
+
 import { registry } from '../registry'
 import { styles } from '../registry/registry-styles'
 import { registrySchema } from '../registry/schema'
@@ -75,15 +78,15 @@ async function buildRegistry(registry: Registry): Promise<void> {
 }
 
 try {
-  const result = registrySchema.safeParse(registry)
+  const result = v.safeParse(registrySchema, registry)
 
   if (!result.success) {
-    console.error(result.error)
+    console.error(result.issues.map(issue => issue.message).join('\n'))
     process.exit(1)
   }
 
   // eslint-disable-next-line antfu/no-top-level-await
-  await buildRegistry(result.data)
+  await buildRegistry(result.output)
 }
 catch (error) {
   console.error(error)
