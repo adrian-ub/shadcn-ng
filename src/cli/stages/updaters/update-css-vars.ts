@@ -86,7 +86,8 @@ export async function transformCssVars(
     from: undefined,
   })
 
-  let output = result.css.replace(/\/\* ---break--- \*\//g, '')
+  let output = result.css
+  output = output.replace(/\/\* ---break--- \*\//g, '')
 
   if (options.tailwindVersion === 'v4') {
     output = output.replace(/(\n\s*\n)+/g, '\n\n')
@@ -144,7 +145,7 @@ function addOrUpdateVars(
     (node): node is Rule => node.type === 'rule' && node.selector === selector,
   )
 
-  if (!ruleNode) {
+  if (!ruleNode && Object.keys(vars).length > 0) {
     if (Object.keys(vars).length > 0) {
       ruleNode = postcss.rule({
         selector,
@@ -570,7 +571,7 @@ function updateBaseLayerPlugin(): { postcssPlugin: string, Once: (root: Root) =>
     postcssPlugin: 'update-base-layer',
     Once(root: Root) {
       const requiredRules = [
-        { selector: '*', apply: 'border-border' },
+        { selector: '*', apply: 'border-border outline-ring/50' },
         { selector: 'body', apply: 'bg-background text-foreground' },
       ]
 

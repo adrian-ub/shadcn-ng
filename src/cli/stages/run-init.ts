@@ -16,7 +16,7 @@ import { ERRORS } from '../utils/errors'
 import { addComponents } from './add-components'
 import { createProject } from './create-project'
 import { $schema, DEFAULT_COMPONENTS, DEFAULT_TAILWIND_CSS, DEFAULT_UTILS, getConfig, resolveConfigPaths } from './get-config'
-import { getProjectConfig } from './get-project-info'
+import { getProjectConfig, getProjectTailwindVersionFromConfig } from './get-project-info'
 import { preFlightInit } from './preflight-init'
 
 export async function runInit(options: InitOptions): Promise<Config> {
@@ -74,21 +74,29 @@ async function promptForMinimalConfig(
   let cssVariables = defaultConfig.tailwind.cssVariables
 
   if (!opts.defaults) {
-    const [styles, baseColors] = await Promise.all([
+    const [styles, baseColors, tailwindVersion] = await Promise.all([
       getRegistryStyles(),
       getRegistryBaseColors(),
+      getProjectTailwindVersionFromConfig(defaultConfig),
     ])
 
     const options = await p.group(
       {
-        style: () => p.select({
-          message: `Which ${c.blue('style')} would you like to use?`,
-          options: styles.map(style => ({
-            label: style.label,
-            value: style.name,
-          })),
-          initialValue: style,
-        }),
+        style: () => {
+          if (tailwindVersion === 'v4') {
+            return Promise.resolve(null)
+          }
+
+          return p.select({
+            message: `Which ${c.blue('style')} would you like to use?`,
+            options: styles.map(style => ({
+              label: style.label,
+              value: style.name,
+              hint: style.name === 'new-york' ? 'Recommended' : undefined,
+            })),
+            initialValue: style,
+          })
+        },
         tailwindBaseColor: () => p.select({
           message: `Which color would you like to use as the ${c.blue(
             'base color',
@@ -110,7 +118,7 @@ async function promptForMinimalConfig(
       },
     )
 
-    style = options.style
+    style = options.style ?? 'new-york'
     baseColor = options.tailwindBaseColor
     cssVariables = options.tailwindCssVariables
   }

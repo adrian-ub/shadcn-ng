@@ -9,6 +9,7 @@ import fetch from 'node-fetch'
 import * as v from 'valibot'
 
 import { getTargetStyleFromConfig } from '../cli/stages/get-config'
+import { getProjectTailwindVersionFromConfig } from '../cli/stages/get-project-info'
 import { handleError } from '../utils/handle-error'
 import { buildTailwindThemeColorsFromCssVars } from '../utils/updaters/update-tailwind-config'
 import { IconsSchema, RegistryBaseColorSchema, RegistryIndexSchema, RegistryItemSchema, RegistryResolvedItemsTreeSchema, StylesSchema } from './schema'
@@ -370,7 +371,10 @@ async function resolveRegistryDependencies(
 }
 
 async function registryGetTheme(urlRegistry: string, name: string, config: Config): Promise<v.InferOutput<typeof RegistryItemSchema> | null> {
-  const baseColor = await getRegistryBaseColor(urlRegistry, name)
+  const [baseColor, tailwindVersion] = await Promise.all([
+    getRegistryBaseColor(urlRegistry, name),
+    getProjectTailwindVersionFromConfig(config),
+  ])
   if (!baseColor) {
     return null
   }
@@ -415,6 +419,11 @@ async function registryGetTheme(urlRegistry: string, name: string, config: Confi
         ...theme.cssVars.dark,
       },
     }
+  }
+
+  // Update theme to be v4 compatible.
+  if (tailwindVersion === 'v4') {
+    theme.cssVars.light.radius = '0.6rem'
   }
 
   return theme
