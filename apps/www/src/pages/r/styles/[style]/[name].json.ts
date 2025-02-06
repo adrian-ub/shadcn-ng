@@ -1,4 +1,4 @@
-import type { RegistryEntry } from '@/registry/schema'
+import type { RegistryItem } from 'shadcn-ng/registry'
 
 import fs from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -7,7 +7,7 @@ import process from 'node:process'
 
 import { registry } from '@/registry'
 import { styles } from '@/registry/registry-styles'
-import { registryEntrySchema } from '@/registry/schema'
+import { RegistryItemSchema } from 'shadcn-ng/registry'
 import { Project, ScriptKind } from 'ts-morph'
 import * as v from 'valibot'
 
@@ -22,8 +22,8 @@ const REGISTRY_INDEX_WHITELIST = [
   'registry:block',
 ]
 
-export async function getStaticPaths(): Promise<{ params: { style: string, name: string }, props: { item: RegistryEntry } }[]> {
-  return registry
+export async function getStaticPaths(): Promise<{ params: { style: string, name: string }, props: { item: RegistryItem } }[]> {
+  return registry.items
     .filter(item => REGISTRY_INDEX_WHITELIST.includes(item.type))
     .flatMap((item) => {
       return styles.map(style => ({
@@ -52,7 +52,7 @@ export async function GET({
     name: string
   }
   props: {
-    item: RegistryEntry
+    item: RegistryItem
   }
 }): Promise<Response> {
   const { style } = params
@@ -99,10 +99,7 @@ export async function GET({
   }
 
   const payload = v.safeParse(
-    v.omit(
-      registryEntrySchema,
-      ['source', 'category', 'subcategory', 'chunks', 'files'],
-    ),
+    RegistryItemSchema,
     {
       ...item,
       files,
@@ -113,7 +110,13 @@ export async function GET({
     return new Response()
   }
 
+  const response = {
+    $schema: 'https://ui.adrianub.dev/schema/registry-item.json',
+    author: 'Adrián UB (https://ui.adrianub.dev)',
+    ...payload.output,
+  }
+
   return new Response(
-    JSON.stringify(payload.output, null, 2),
+    JSON.stringify(response, null, 2),
   )
 }

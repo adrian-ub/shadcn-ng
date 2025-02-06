@@ -1,5 +1,5 @@
 import type { Style } from '@/registry/registry-styles'
-import type { RegistryEntry } from '@/registry/schema'
+import type { RegistryItem } from 'shadcn-ng/registry'
 import { styles } from '@/registry/registry-styles'
 
 export async function getStaticPaths(): Promise<{ params: { style: string } }[]> {
@@ -28,7 +28,7 @@ export async function GET({ props: { style } }: {
     style: Style
   }
 }): Promise<Response> {
-  const payload: RegistryEntry = {
+  const payload: RegistryItem = {
     name: style.name,
     type: 'registry:style',
     dependencies,

@@ -1,12 +1,12 @@
+import type { Registry } from '../../../../src/registry'
 import type { Style } from '../registry/registry-styles'
-import type { Registry } from '../registry/schema'
 import process from 'node:process'
 
 import * as v from 'valibot'
 
+import { RegistrySchema } from '../../../../src/registry'
 import { registry } from '../registry'
 import { styles } from '../registry/registry-styles'
-import { registrySchema } from '../registry/schema'
 
 const components = import.meta.glob(`../registry/**/**/*.ts`)
 
@@ -17,7 +17,7 @@ export const Index: Record<Style['name'], any> = {
 
 async function buildRegistry(registry: Registry): Promise<void> {
   for (const style of styles) {
-    for (const item of registry) {
+    for (const item of registry.items) {
       const resolveFiles = item.files?.map(file => `registry/${style.name}/${typeof file === 'string' ? file : file.path
       }`)
 
@@ -62,7 +62,6 @@ async function buildRegistry(registry: Registry): Promise<void> {
         files: resolveFiles.map(file => file),
         component,
         source: sourceFilename,
-        category: item.category ?? '',
         chunks: chunks.map(chunk => ({
           name: chunk.name,
           description: chunk.description ?? 'No description',
@@ -78,7 +77,7 @@ async function buildRegistry(registry: Registry): Promise<void> {
 }
 
 try {
-  const result = v.safeParse(registrySchema, registry)
+  const result = v.safeParse(RegistrySchema, registry)
 
   if (!result.success) {
     console.error(result.issues.map(issue => issue.message).join('\n'))

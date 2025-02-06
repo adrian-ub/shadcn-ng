@@ -1,5 +1,4 @@
 import type { Style } from '@/registry/registry-styles'
-import { Index } from '@/__registry__'
 import { cn } from '@/lib/utils'
 import { AsyncPipe, NgComponentOutlet } from '@angular/common'
 import { Component, computed, input } from '@angular/core'
@@ -10,8 +9,9 @@ import { Component, computed, input } from '@angular/core'
   imports: [NgComponentOutlet, AsyncPipe],
   template: `
   @let componentRender = this.component() | async;
+
     <div [class]="computedClass()">
-      @if(this.existComponent && (!componentRender || !componentRender.default)) {
+      @if(this.existComponent && (!componentRender || !componentRender?.default)) {
           <div>Loading...</div>
       }
       @else if (!this.existComponent) {
@@ -22,7 +22,7 @@ import { Component, computed, input } from '@angular/core'
         </div>
       }
       @else {
-        <ng-container *ngComponentOutlet="componentRender.default"  />
+        <ng-container *ngComponentOutlet="componentRender!.default"  />
       }
     </div>
     `,
@@ -39,13 +39,18 @@ export class ComponentPeviewComponent {
     '[&>div]:items-end': this.align() === 'end',
   }))
 
-  component = computed(async () => {
+  component = computed(() => {
     if (!this.styleName() || !this.nameExample()) {
       return null
     }
+    const registry = import.meta.glob<{ default: any }>(`../../registry/**/**/*.ts`)
+
+    const componentPath = Object.keys(registry).find(key => key.includes(this.styleName()!) && key.includes(this.nameExample()!))
+
+    const component = registry[componentPath!]()
 
     try {
-      return await Index[this.styleName()!][this.nameExample()!].component()
+      return component
     }
     catch {
       this.existComponent = false

@@ -1,7 +1,7 @@
 import { registry } from '@/registry'
 
 export async function GET(): Promise<Response> {
-  const items = registry
+  const items = registry.items
     .filter(item => ['registry:ui'].includes(item.type))
     .map((item) => {
       return {
