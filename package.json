@@ -56,9 +56,11 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks",
-    "docs": "nr -C apps/www dev",
-    "predocs:build": "nr build",
-    "docs:build": "nr -C apps/www build"
+    "www:dev": "nr -C apps/www dev",
+    "www:build": "nr -C apps/www build",
+    "v4:dev": "nr -C apps/v4 dev",
+    "v4:build": "nr -C apps/v4 build",
+    "v4:registry:build": "nr -C apps/v4 registry:build"
   },
   "dependencies": {
     "@antfu/install-pkg": "^1.0.0",
