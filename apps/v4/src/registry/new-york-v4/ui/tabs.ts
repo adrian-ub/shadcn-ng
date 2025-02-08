@@ -12,15 +12,19 @@ import { cn } from '~/lib/utils'
 @Directive({
   selector: '[ubTabs]',
   standalone: true,
+  host: {
+    '[class]': 'computedClass()',
+  },
   hostDirectives: [
     {
       directive: RdxTabsRootDirective,
-      inputs: ['defaultValue: defaultValue'],
+      inputs: ['defaultValue'],
     },
   ],
 })
 export class UbTabsDirective {
-  defaultValue = input<string>()
+  class = input<string>()
+  computedClass = computed(() => cn('flex flex-col gap-2', this.class()))
 }
 
 @Directive({
@@ -35,7 +39,7 @@ export class UbTabsListDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
     cn(
-      'inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground',
+      'bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-1',
       this.class(),
     ),
   )
@@ -60,7 +64,7 @@ export class UbTabsTriggerDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
     cn(
-      'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm',
+      'data-[state=active]:bg-background data-[state=active]:text-foreground ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 inline-flex items-center justify-center gap-2 rounded-md px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-4 focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 aria-invalid:focus-visible:ring-0 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
       this.class(),
     ),
   )
@@ -82,7 +86,7 @@ export class UbTabsContentDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
     cn(
-      'mt-2 ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      'ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 flex-1 transition-[color,box-shadow] focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0',
       this.class(),
     ),
   )

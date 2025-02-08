@@ -1,13 +1,18 @@
-import { computed, Directive, input } from '@angular/core'
+import { Component, computed, Directive, input } from '@angular/core'
 
 import { cn } from '~/lib/utils'
 
-@Directive({
-  selector: 'table[ubTable]',
+@Component({
+  selector: '[ubTable]',
   standalone: true,
   host: {
-    '[class]': 'computedClass()',
+    class: 'relative w-full overflow-auto',
   },
+  template: `
+  <table [class]="computedClass()">
+    <ng-content />
+  </table>
+`,
 })
 export class UbTableDirective {
   readonly class = input<string>('')
@@ -52,7 +57,7 @@ export class UbTableBodyDirective {
 export class UbTableFooterDirective {
   readonly class = input<string>('')
   protected computedClass = computed(() =>
-    cn('border-t bg-muted/50 font-medium last:[&>tr]:border-b-0', this.class()),
+    cn('bg-muted/50 border-t font-medium [&>tr]:last:border-b-0', this.class()),
   )
 }
 
@@ -67,7 +72,7 @@ export class UbTableRowDirective {
   readonly class = input<string>('')
   protected computedClass = computed(() =>
     cn(
-      'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
+      'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
       this.class(),
     ),
   )
@@ -84,7 +89,7 @@ export class UbTableHeadDirective {
   readonly class = input<string>('')
   protected computedClass = computed(() =>
     cn(
-      'h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+      'text-muted-foreground h-10 px-2 text-left align-middle font-medium [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
       this.class(),
     ),
   )
@@ -117,6 +122,6 @@ export class UbTableCellDirective {
 export class UbTableCaptionDirective {
   readonly class = input<string>('')
   protected computedClass = computed(() =>
-    cn('mt-4 text-sm text-muted-foreground', this.class()),
+    cn('text-muted-foreground mt-4 text-sm', this.class()),
   )
 }

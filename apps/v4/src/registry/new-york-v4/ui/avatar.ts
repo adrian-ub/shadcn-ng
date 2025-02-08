@@ -15,7 +15,7 @@ export class UbAvatarDirective {
   readonly class = input<string>()
 
   readonly computedClass = computed(() => {
-    return cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', this.class())
+    return cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', this.class())
   })
 }
 
@@ -31,7 +31,7 @@ export class UbAvatarImageDirective {
   readonly class = input<string>()
 
   readonly computedClass = computed(() => {
-    return cn('aspect-square h-full w-full', this.class())
+    return cn('aspect-square size-full', this.class())
   })
 }
 
@@ -47,6 +47,6 @@ export class UbAvatarFallbackDirective {
   readonly class = input<string>()
 
   readonly computedClass = computed(() => {
-    return cn('flex h-full w-full items-center justify-center rounded-full bg-muted', this.class())
+    return cn('bg-muted flex size-full items-center justify-center rounded-full', this.class())
   })
 }

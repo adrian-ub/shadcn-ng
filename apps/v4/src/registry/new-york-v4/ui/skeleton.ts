@@ -12,6 +12,6 @@ import { cn } from '~/lib/utils'
 export class UbSkeletonDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
-    cn('animate-pulse rounded-md bg-primary/10', this.class()),
+    cn('bg-primary/10 animate-pulse rounded-md', this.class()),
   )
 }

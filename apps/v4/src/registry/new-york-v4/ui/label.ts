@@ -1,13 +1,8 @@
 import { computed, Directive, input } from '@angular/core'
 
 import { RdxLabelDirective } from '@radix-ng/primitives/label'
-import { cva } from 'class-variance-authority'
 
 import { cn } from '~/lib/utils'
-
-const labelVariants = cva(
-  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-)
 
 @Directive({
   selector: '[ubLabel]',
@@ -24,5 +19,5 @@ const labelVariants = cva(
 })
 export class UbLabelDirective {
   readonly class = input<string>('')
-  protected computedClass = computed(() => cn(labelVariants(), this.class()))
+  protected computedClass = computed(() => cn('text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50', this.class()))
 }

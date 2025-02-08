@@ -12,7 +12,7 @@ import { cn } from '~/lib/utils'
 export class UbCardDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
-    cn('rounded-xl border bg-card text-card-foreground shadow-sm', this.class()),
+    cn('bg-card text-card-foreground rounded-xl border shadow-sm', this.class()),
   )
 }
 
@@ -26,7 +26,7 @@ export class UbCardDirective {
 export class UbCardHeaderDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
-    cn('flex flex-col space-y-1.5 p-6', this.class()),
+    cn('flex flex-col gap-1.5 p-6', this.class()),
   )
 }
 
@@ -40,7 +40,7 @@ export class UbCardHeaderDirective {
 export class UbCardTitleDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
-    cn('font-semibold leading-none tracking-tight', this.class()),
+    cn('leading-none font-semibold tracking-tight', this.class()),
   )
 }
 
@@ -54,7 +54,7 @@ export class UbCardTitleDirective {
 export class UbCardDescriptionDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
-    cn('text-sm text-muted-foreground', this.class()),
+    cn('text-muted-foreground text-sm', this.class()),
   )
 }
 

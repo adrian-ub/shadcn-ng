@@ -34,14 +34,8 @@ export class UbPaginationContentDirective {
 @Directive({
   standalone: true,
   selector: 'li[ubPaginationItem]',
-  host: {
-    '[class]': 'computedClass()',
-  },
 })
-export class UbPaginationItemDirective {
-  class = input<string>()
-  computedClass = computed(() => cn('', this.class()))
-}
+export class UbPaginationItemDirective {}
 
 @Directive({
   standalone: true,
@@ -75,13 +69,13 @@ export class UbPaginationLinkDirective {
   },
   providers: [provideIcons({ lucideChevronLeft })],
   template: `
-  <ng-icon name="lucideChevronLeft" class="w-4 h-4"></ng-icon>
-  <span>Previous</span>
+  <ng-icon name="lucideChevronLeft"></ng-icon>
+  <span class="hidden sm:block">Previous</span>
   `,
 })
 export class UbPaginationPreviousDirective {
   class = input<string>()
-  computedClass = computed(() => cn('gap-1 pl-2.5', this.class()))
+  computedClass = computed(() => cn('gap-1 px-2.5 sm:pl-2.5', this.class()))
   protected size = input<UbButtonSize>('default')
   private ubPaginationLinkDirective = inject(UbPaginationLinkDirective, { host: true })
 
@@ -101,13 +95,13 @@ export class UbPaginationPreviousDirective {
     'aria-label': 'Go to next page',
   },
   template: `
-  <span>Next</span>
-  <ng-icon name="lucideChevronRight" class="w-4 h-4"></ng-icon>
+  <span class="hidden sm:block">Next</span>
+  <ng-icon name="lucideChevronRight"></ng-icon>
   `,
 })
 export class UbPaginationNextDirective {
   class = input<string>()
-  computedClass = computed(() => cn('gap-1 pr-2.5', this.class()))
+  computedClass = computed(() => cn('gap-1 px-2.5 sm:pr-2.5', this.class()))
   protected size = input<UbButtonSize>('default')
   private ubPaginationLinkDirective = inject(UbPaginationLinkDirective, { host: true })
 
@@ -126,12 +120,12 @@ export class UbPaginationNextDirective {
     aria-hidden="true"
     [class]="computedClass()"
   >
-    <ng-icon name="lucideEllipsis" class="w-4 h-4"></ng-icon>
+    <ng-icon name="lucideEllipsis" class="size-4"></ng-icon>
     <span class="sr-only">More pages</span>
   </span>
   `,
 })
 export class UbPaginationEllipsisComponent {
   class = input<string>()
-  computedClass = computed(() => cn('flex h-9 w-9 items-center justify-center', this.class()))
+  computedClass = computed(() => cn('flex size-9 items-center justify-center', this.class()))
 }

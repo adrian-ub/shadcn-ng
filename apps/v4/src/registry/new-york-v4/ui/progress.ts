@@ -17,7 +17,7 @@ import { cn } from '~/lib/utils'
     },
   ],
   template: `
-    <div rdxProgressIndicator class="h-full w-full flex-1 bg-primary transition-all" [style.transform]="'translateX(-' + (100 - (progress() || 0)) + '%)'"></div>
+    <div rdxProgressIndicator class="bg-primary h-full w-full flex-1 transition-all" [style.transform]="'translateX(-' + (100 - (progress() || 0)) + '%)'"></div>
   `,
 })
 export class ProgressDirective {
@@ -26,5 +26,5 @@ export class ProgressDirective {
   })
 
   class = input<string>()
-  computedClass = computed(() => cn('relative h-2 w-full overflow-hidden rounded-full bg-primary/20', this.class()))
+  computedClass = computed(() => cn('bg-primary/20 relative h-2 w-full overflow-hidden rounded-full', this.class()))
 }

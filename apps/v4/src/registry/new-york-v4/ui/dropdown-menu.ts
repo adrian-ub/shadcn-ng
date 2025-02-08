@@ -55,8 +55,7 @@ export class UbDropdownMenuTriggerDirective { }
 export class UbDropdownMenuContentDirective {
   class = input<string>()
   computedClass = computed(() => cn(
-    'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md',
-    'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+    'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-md',
     this.class(),
   ))
 }
@@ -82,7 +81,7 @@ export class UbDropdownMenuItemDirective {
   })
 
   computedClass = computed(() => cn(
-    'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-hidden transition-colors focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
+    'focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*=\'text-\'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
     this.inset() && 'pl-8',
     this.class(),
   ))
@@ -94,6 +93,7 @@ export class UbDropdownMenuItemDirective {
   hostDirectives: [RdxDropdownMenuLabelDirective],
   host: {
     '[class]': 'computedClass()',
+    '[attr.data-inset]': 'inset()',
   },
 })
 export class UbDropdownMenuLabelDirective {
@@ -103,8 +103,7 @@ export class UbDropdownMenuLabelDirective {
   })
 
   computedClass = computed(() => cn(
-    'px-2 py-1.5 text-sm font-semibold',
-    this.inset() && 'pl-8',
+    'px-2 py-1.5 text-sm font-semibold data-[inset]:pl-8',
     this.class(),
   ))
 }
@@ -119,7 +118,7 @@ export class UbDropdownMenuLabelDirective {
 })
 export class UbDropdownMenuSeparator {
   class = input<string>()
-  computedClass = computed(() => cn('-mx-1 my-1 h-px bg-muted', this.class()))
+  computedClass = computed(() => cn('bg-border -mx-1 my-1 h-px', this.class()))
 }
 
 @Directive({
@@ -138,7 +137,7 @@ export class UbDropdownMenuGroupDirective { }
 })
 export class UbDropdownMenuShortcutDirective {
   class = input<string>()
-  computedClass = computed(() => cn('ml-auto text-xs tracking-widest opacity-60', this.class()))
+  computedClass = computed(() => cn('text-muted-foreground ml-auto text-xs tracking-widest', this.class()))
 }
 
 @Directive({
@@ -150,14 +149,8 @@ export class UbDropdownMenuShortcutDirective {
       inputs: ['closeOnEscape', 'onEscapeKeyDown'],
     },
   ],
-  host: {
-    '[class]': 'computedClass()',
-  },
 })
-export class UbDropdownMenuSubContentDirective {
-  class = input<string>()
-  computedClass = computed(() => cn('z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2', this.class()))
-}
+export class UbDropdownMenuSubContentDirective {}
 
 @Component({
   standalone: true,
@@ -181,6 +174,7 @@ export class UbDropdownMenuSubContentDirective {
   ],
   host: {
     '[class]': 'computedClass()',
+    '[attr.data-inset]': 'inset()',
   },
   template: `
   <ng-content />
@@ -193,7 +187,7 @@ export class UbDropdownMenuSubTrigger {
     transform: booleanAttribute,
   })
 
-  computedClass = computed(() => cn('flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-hidden focus:bg-accent data-[state=open]:bg-accent [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0', this.inset() && 'pl-8', this.class()))
+  computedClass = computed(() => cn('focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground flex cursor-default items-center rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[inset]:pl-8', this.class()))
 }
 
 @Component({
@@ -212,15 +206,15 @@ export class UbDropdownMenuSubTrigger {
     '[class]': 'computedClass()',
   },
   template: `
-  <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-    <ng-icon name="radixCheck" class="h-4 w-4" rdxDropdownMenuItemIndicator />
+  <span class="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
+    <ng-icon name="radixCheck" class="size-4" rdxDropdownMenuItemIndicator />
   </span>
   <ng-content></ng-content>
   `,
 })
 export class UbDropdownMenuCheckboxItemDirective {
   class = input<string>()
-  computedClass = computed(() => cn('relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-hidden transition-colors focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50', this.class(),
+  computedClass = computed(() => cn('focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4', this.class(),
   ))
 }
 
@@ -239,15 +233,15 @@ export class UbDropdownMenuCheckboxItemDirective {
     '[class]': 'computedClass()',
   },
   template: `
-  <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-    <ng-icon name="radixCircle" class="h-2 w-2 fill-current" rdxDropdownMenuItemIndicator />
+  <span class="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
+    <ng-icon name="radixCircle" class="size-2 fill-current" rdxDropdownMenuItemIndicator />
   </span>
   <ng-content></ng-content>
   `,
 })
 export class UbDropdownMenuRadioItemDirective {
   class = input<string>()
-  computedClass = computed(() => cn('relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-hidden transition-colors focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50', this.class(),
+  computedClass = computed(() => cn('focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4', this.class(),
   ))
 }
 

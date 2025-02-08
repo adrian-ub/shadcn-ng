@@ -26,7 +26,7 @@ export class UbBreadcrumbListDirective {
 
   protected computedClass = computed(() =>
     cn(
-      'flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5',
+      'text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5',
       this.class(),
     ),
   )
@@ -58,7 +58,7 @@ export class UbBreadcrumbLinkDirective {
   readonly class = input<string>()
 
   protected computedClass = computed(() =>
-    cn('transition-colors hover:text-foreground', this.class()),
+    cn('hover:text-foreground transition-colors', this.class()),
   )
 }
 
@@ -76,7 +76,7 @@ export class UbBreadcrumbPageDirective {
   readonly class = input<string>()
 
   protected computedClass = computed(() =>
-    cn('font-normal text-foreground', this.class()),
+    cn('text-foreground font-normal', this.class()),
   )
 }
 
@@ -88,7 +88,7 @@ export class UbBreadcrumbPageDirective {
   template: `
     <span #ref><ng-content></ng-content></span>
     @if (ref.children.length == 0) {
-      <ng-icon name="radixChevronRight" size="16" class="flex h-3.5" />
+      <ng-icon name="radixChevronRight" />
     }
   `,
   host: {
@@ -101,7 +101,7 @@ export class UbBreadcrumbSeparatorComponent {
   readonly class = input<string>()
 
   protected computedClass = computed(() =>
-    cn('[&>svg]:size-3.5', this.class()),
+    cn('[&>*>svg]:size-3.5', this.class()),
   )
 }
 
@@ -111,7 +111,7 @@ export class UbBreadcrumbSeparatorComponent {
   imports: [NgIconComponent],
   viewProviders: [provideIcons({ radixDotsHorizontal })],
   template: `
-    <ng-icon name="radixDotsHorizontal" class="h-4 w-4" />
+    <ng-icon name="radixDotsHorizontal" class="size-4" />
     <span class="sr-only">More</span>
   `,
   host: {
@@ -124,6 +124,6 @@ export class UbBreadcrumbEllipsisComponent {
   readonly class = input<string>()
 
   protected computedClass = computed(() =>
-    cn('flex h-9 w-9 items-center justify-center', this.class()),
+    cn('flex size-9 items-center justify-center', this.class()),
   )
 }

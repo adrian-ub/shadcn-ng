@@ -1,21 +1,28 @@
 import { computed, Directive, input } from '@angular/core'
+
+import { RdxSeparatorRootDirective } from '@radix-ng/primitives/separator'
+
 import { cn } from '~/lib/utils'
 
 @Directive({
   standalone: true,
   selector: '[ubSeperator]',
+  hostDirectives: [
+    {
+      directive: RdxSeparatorRootDirective,
+      inputs: ['orientation', 'decorative'],
+    },
+  ],
   host: {
     '[class]': 'computedClass()',
   },
 })
 export class UbSeparatorDirective {
   readonly class = input<string>()
-  readonly orientation = input<'horizontal' | 'vertical'>('horizontal')
 
   protected computedClass = computed(() =>
     cn(
-      'shrink-0 bg-border',
-      this.orientation() === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+      'bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px',
       this.class(),
     ),
   )
