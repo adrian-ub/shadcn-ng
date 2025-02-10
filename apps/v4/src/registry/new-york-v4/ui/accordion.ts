@@ -16,6 +16,9 @@ import { cn } from '~/lib/utils'
 @Directive({
   standalone: true,
   selector: '[ubAccordion]',
+  host: {
+    'data-slot': 'accordion',
+  },
   hostDirectives: [RdxAccordionRootDirective],
 })
 export class UbAccordionDirective { }
@@ -31,6 +34,7 @@ export class UbAccordionDirective { }
   ],
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'accordion-item',
   },
 })
 export class UbAccordionItemDirective {
@@ -48,7 +52,7 @@ export class UbAccordionItemDirective {
   viewProviders: [provideIcons({ lucideChevronDown })],
   template: `
     <h3 rdxAccordionHeader class="flex group">
-        <button [class]="computedClass()">
+        <button [class]="computedClass()" data-slot="accordion-trigger">
             <ng-content></ng-content>
             <ng-icon name="lucideChevronDown" class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200"></ng-icon>
         </button>
@@ -67,8 +71,9 @@ export class UbAccordionTriggerDirective {
   selector: '[ubAccordionContent], ub-accordion-content',
   hostDirectives: [RdxAccordionContentDirective],
   host: {
-    class:
-            'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm',
+    'class':
+      'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm',
+    'data-slot': 'accordion-content',
   },
   template: `
         <div [className]="computedClass()">

@@ -18,7 +18,7 @@ import { UbButtonDirective } from '~/registry/new-york-v4/ui/button'
 
 @Component({
   standalone: true,
-  selector: '[alert-demo-new-york]',
+  selector: 'AlertDemo',
   imports: [
     NgIconComponent,
     UbAlertDirective,
@@ -117,4 +117,4 @@ import { UbButtonDirective } from '~/registry/new-york-v4/ui/button'
   </div>
   `,
 })
-export default class AlertDemoNewYork { }
+export default class AlertDemo { }

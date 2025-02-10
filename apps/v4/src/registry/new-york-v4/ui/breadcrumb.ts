@@ -9,7 +9,8 @@ import { cn } from '~/lib/utils'
   selector: 'nav[ubBreadcrumb]',
   standalone: true,
   host: {
-    '[attr.aria-label]': '"breadcrumb"',
+    'aria-label': 'breadcrumb',
+    'data-slot': 'breadcrumb',
   },
 })
 export class UbBreadcrumbDirective {}
@@ -19,6 +20,7 @@ export class UbBreadcrumbDirective {}
   standalone: true,
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'breadcrumb-list',
   },
 })
 export class UbBreadcrumbListDirective {
@@ -37,6 +39,7 @@ export class UbBreadcrumbListDirective {
   standalone: true,
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'breadcrumb-item',
   },
 })
 export class UbBreadcrumbItemDirective {
@@ -52,6 +55,7 @@ export class UbBreadcrumbItemDirective {
   standalone: true,
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'breadcrumb-link',
   },
 })
 export class UbBreadcrumbLinkDirective {
@@ -67,9 +71,10 @@ export class UbBreadcrumbLinkDirective {
   standalone: true,
   host: {
     'role': 'link',
-    '[attr.aria-disabled]': 'true',
-    '[attr.aria-current]': '"page"',
+    'aria-disabled': 'true',
+    'aria-current': 'page',
     '[class]': 'computedClass()',
+    'data-slot': 'breadcrumb-page',
   },
 })
 export class UbBreadcrumbPageDirective {
@@ -93,8 +98,9 @@ export class UbBreadcrumbPageDirective {
   `,
   host: {
     'role': 'presentation',
-    '[attr.aria-hidden]': 'true',
+    'aria-hidden': 'true',
     '[class]': 'computedClass()',
+    'data-slot': 'breadcrumb-separator',
   },
 })
 export class UbBreadcrumbSeparatorComponent {
@@ -116,8 +122,9 @@ export class UbBreadcrumbSeparatorComponent {
   `,
   host: {
     'role': 'presentation',
-    '[attr.aria-hidden]': 'true',
+    'aria-hidden': 'true',
     '[class]': 'computedClass()',
+    'data-slot': 'breadcrumb-ellipsis',
   },
 })
 export class UbBreadcrumbEllipsisComponent {

@@ -34,6 +34,7 @@ export type UbBadgeVariant = NonNullable<BadgeProps['variant']>
   standalone: true,
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'badge',
   },
 })
 export class UbBadgeDirective {

@@ -4,7 +4,7 @@ import { UbAccordionContentDirective, UbAccordionDirective, UbAccordionItemDirec
 
 @Component({
   standalone: true,
-  selector: '[accordion-demo-new-york]',
+  selector: 'AccordionDemo',
   imports: [UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective, UbAccordionContentDirective],
   template: `
   <div class="grid w-full max-w-xl gap-4">
@@ -69,4 +69,4 @@ import { UbAccordionContentDirective, UbAccordionDirective, UbAccordionItemDirec
   </div>
     `,
 })
-export default class AccordionDemoNewYork { }
+export default class AccordionDemo { }

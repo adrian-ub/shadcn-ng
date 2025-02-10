@@ -34,5 +34,17 @@ export default class HomePage {
         name: 'aspect-ratio',
         componentName: 'aspect-ratio-demo',
       },
+      {
+        name: 'avatar',
+        componentName: 'avatar-demo',
+      },
+      {
+        name: 'badge',
+        componentName: 'badge-demo',
+      },
+      {
+        name: 'breadcrumb',
+        componentName: 'breadcrumb-demo',
+      },
     ]
 }

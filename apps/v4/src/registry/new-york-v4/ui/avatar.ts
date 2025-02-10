@@ -9,6 +9,7 @@ import { cn } from '~/lib/utils'
   hostDirectives: [RdxAvatarRootDirective],
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'avatar',
   },
 })
 export class UbAvatarDirective {
@@ -22,9 +23,15 @@ export class UbAvatarDirective {
 @Directive({
   standalone: true,
   selector: 'img[ubAvatarImage]',
-  hostDirectives: [RdxAvatarImageDirective],
+  hostDirectives: [
+    {
+      directive: RdxAvatarImageDirective,
+      inputs: ['src'],
+    },
+  ],
   host: {
     '[class]': 'computedClass()',
+    'data-slt': 'avatar-image',
   },
 })
 export class UbAvatarImageDirective {
@@ -41,6 +48,7 @@ export class UbAvatarImageDirective {
   hostDirectives: [RdxAvatarFallbackDirective],
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'avatar-fallback',
   },
 })
 export class UbAvatarFallbackDirective {

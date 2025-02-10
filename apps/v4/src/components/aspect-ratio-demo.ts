@@ -6,7 +6,7 @@ import { UbAspectRatioDirective } from '~/registry/new-york-v4/ui/aspect-ratio'
 
 @Component({
   standalone: true,
-  selector: '[aspect-ratio-demo-new-york]',
+  selector: 'AspectRatioDemo',
   imports: [UbAspectRatioDirective, NgOptimizedImage],
   providers: [
     {
@@ -49,4 +49,4 @@ import { UbAspectRatioDirective } from '~/registry/new-york-v4/ui/aspect-ratio'
   </div>
   `,
 })
-export default class AspectRatioDemoNewYork { }
+export default class AspectRatioDemo { }

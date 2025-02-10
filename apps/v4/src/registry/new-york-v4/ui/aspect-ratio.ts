@@ -11,5 +11,8 @@ import { RdxAspectRatioDirective } from '@radix-ng/primitives/aspect-ratio'
       inputs: ['ratio'],
     },
   ],
+  host: {
+    'data-slot': 'aspect-ratio',
+  },
 })
 export class UbAspectRatioDirective { }

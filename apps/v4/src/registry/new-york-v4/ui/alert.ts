@@ -30,6 +30,7 @@ type UbAlertVariant = NonNullable<AlertProps['variant']>
   host: {
     'role': 'alert',
     '[class]': 'computedClass()',
+    'data-slot': 'alert',
   },
 })
 export class UbAlertDirective {
@@ -42,16 +43,11 @@ export class UbAlertDirective {
 }
 
 @Directive({
-  standalone: true,
-  selector: '[ubAlertIcon]',
-})
-export class UbAlertIconDirective {}
-
-@Directive({
   selector: 'h5[ubAlertTitle]',
   standalone: true,
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'alert-title',
   },
 })
 export class UbAlertTitleDirective {
@@ -67,6 +63,7 @@ export class UbAlertTitleDirective {
   standalone: true,
   host: {
     '[class]': 'computedClass()',
+    'data-slot': 'alert-description',
   },
 })
 export class UbAlertDescriptionDirective {
