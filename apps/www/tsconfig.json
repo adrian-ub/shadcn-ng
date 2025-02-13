@@ -1,0 +1,28 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "shadcn-ng": [
+        "../../src/index.ts"
+      ],
+      "shadcn-ng/registry": [
+        "../../src/registry.ts"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      },
+      {
+        "name": "@angular/language-service"
+      }
+    ]
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "sonner",
+  "type": "registry:ui",
+  "dependencies": [
+    "ngx-sonner"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york-v4/ui/sonner.ts",
+      "content": "import type { ToasterProps } from 'ngx-sonner'\nimport { booleanAttribute, Component, input, numberAttribute } from '@angular/core'\nimport { NgxSonnerToaster } from 'ngx-sonner'\n\n@Component({\n  standalone: true,\n  selector: 'ub-toaster',\n  imports: [NgxSonnerToaster],\n  template: `\n    <ngx-sonner-toaster\n      class=\"toaster group\"\n      [invert]=\"invert()\"\n      [theme]=\"theme()\"\n      [position]=\"position()\"\n      [hotKey]=\"hotKey()\"\n      [richColors]=\"richColors()\"\n      [expand]=\"expand()\"\n      [duration]=\"duration()\"\n      [visibleToasts]=\"visibleToasts()\"\n      [closeButton]=\"closeButton()\"\n      [toastOptions]=\"toastOptions()\"\n      [offset]=\"offset()\"\n      [dir]=\"dir()\"\n      [class]=\"_class()\"\n      [style]=\"_style()\"\n    />\n  `,\n})\nexport class ToasterComponent {\n  invert = input<ToasterProps['invert'], boolean | string>(false, {\n    transform: booleanAttribute,\n  })\n\n  theme = input<ToasterProps['theme']>('system')\n  position = input<ToasterProps['position']>('bottom-right')\n  hotKey = input<ToasterProps['hotkey']>(['altKey', 'KeyT'])\n  richColors = input<ToasterProps['richColors'], boolean | string>(false, {\n    transform: booleanAttribute,\n  })\n\n  expand = input<ToasterProps['expand'], boolean | string>(false, {\n    transform: booleanAttribute,\n  })\n\n  duration = input<ToasterProps['duration'], number | string>(4000, {\n    transform: numberAttribute,\n  })\n\n  visibleToasts = input<ToasterProps['visibleToasts'], number | string>(\n    3,\n    { transform: numberAttribute },\n  )\n\n  closeButton = input<ToasterProps['closeButton'], boolean | string>(false, {\n    transform: booleanAttribute,\n  })\n\n  toastOptions = input<ToasterProps['toastOptions']>({\n    classes: {\n      toast:\n        'group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg',\n      description: 'group-[.toast]:text-muted-foreground',\n      actionButton:\n        'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground',\n      cancelButton:\n        'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground',\n    },\n  })\n\n  offset = input<ToasterProps['offset']>(null)\n  dir = input<ToasterProps['dir']>('auto')\n  _class = input('', { alias: 'class' })\n  _style = input<Record<string, string>>({}, { alias: 'style' })\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

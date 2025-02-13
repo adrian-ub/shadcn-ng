@@ -1,0 +1,41 @@
+---
+import { docsConfig } from '@/config/docs'
+import { cn } from '@/lib/utils'
+
+const { pathname } = Astro.props
+---
+
+<div class="w-full">
+  {
+    docsConfig.sidebarNav.map((item) => (
+      <div class="pb-4">
+        <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
+          {item.title}
+          {item.label && <span class={cn('ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline')}>{item.label}</span>}
+        </h4>
+        <div class="grid grid-flow-row auto-rows-max gap-0.5 text-sm">
+          {item.items.map((subItem) =>
+            subItem.href && !subItem.disabled ? (
+              <a
+                href={subItem.href}
+                class={cn(
+                  'group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline',
+                  subItem.disabled && 'cursor-not-allowed opacity-60',
+                  pathname === subItem.href ? 'underline' : ''
+                )}
+              >
+                {subItem.title}
+                {subItem.label && <span class={cn('ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline')}>{subItem.label}</span>}
+              </a>
+            ) : (
+              <span class={cn('flex w-full cursor-not-allowed items-center rounded-md p-2 text-muted-foreground hover:underline', subItem.disabled && 'cursor-not-allowed opacity-60')}>
+                {subItem.title}
+                {subItem.label && <span class={cn('ml-2 rounded-md bg-muted px-1.5 py-0.5 text-xs leading-none text-muted-foreground no-underline group-hover:no-underline')}>{subItem.label}</span>}
+              </span>
+            )
+          )}
+        </div>
+      </div>
+    ))
+  }
+</div>
