@@ -71,6 +71,7 @@ export const docsConfig: TDocsConfig = {
         {
           title: 'CLI',
           href: '/docs/cli',
+          label: 'Updated',
           items: [],
         },
         {
@@ -152,7 +153,6 @@ export const docsConfig: TDocsConfig = {
           title: 'Dropdown Menu',
           href: '/docs/components/dropdown-menu',
           items: [],
-          label: 'New',
         },
         {
           title: 'Input',
@@ -162,7 +162,6 @@ export const docsConfig: TDocsConfig = {
         {
           title: 'Pagination',
           href: '/docs/components/pagination',
-          label: 'New',
           items: [],
         },
         {
@@ -208,6 +207,37 @@ export const docsConfig: TDocsConfig = {
         {
           title: 'Toggle',
           href: '/docs/components/toggle',
+          items: [],
+        },
+      ],
+    },
+    {
+      title: 'Registry',
+      label: 'New',
+      items: [
+        {
+          title: 'Introduction',
+          href: '/docs/registry',
+          items: [],
+        },
+        {
+          title: 'Getting Started',
+          href: '/docs/registry/getting-started',
+          items: [],
+        },
+        {
+          title: 'FAQ',
+          href: '/docs/registry/faq',
+          items: [],
+        },
+        {
+          title: 'registry.json',
+          href: '/docs/registry/registry-json',
+          items: [],
+        },
+        {
+          title: 'registry-item.json',
+          href: '/docs/registry/registry-item-json',
           items: [],
         },
       ],
