@@ -3,7 +3,7 @@ import { defineBuildConfig } from 'unbuild'
 export default defineBuildConfig({
   entries: [
     'src/index',
-    'src/cli',
+    { input: 'src/cli/index', name: 'cli' },
     'src/registry',
   ],
   declaration: true,
