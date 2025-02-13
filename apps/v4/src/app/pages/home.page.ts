@@ -46,5 +46,9 @@ export default class HomePage {
         name: 'breadcrumb',
         componentName: 'breadcrumb-demo',
       },
+      {
+        name: 'button',
+        componentName: 'button-demo',
+      },
     ]
 }
