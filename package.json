@@ -90,7 +90,7 @@
     "@types/diff": "^7.0.1",
     "@types/node": "^22.10.6",
     "@types/stringify-object": "^4.0.5",
-    "bumpp": "^9.10.1",
+    "bumpp": "^10.0.3",
     "cross-env": "^7.0.3",
     "eslint": "^9.18.0",
     "lint-staged": "^15.3.0",
