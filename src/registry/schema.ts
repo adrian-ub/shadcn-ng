@@ -64,6 +64,7 @@ export const RegistryItemSchema = v.object({
   cssVars: v.optional(RegistryItemCssVarsSchema),
   meta: v.optional(v.record(v.string(), v.any())),
   docs: v.optional(v.string()),
+  categories: v.optional(v.array(v.string())),
 })
 
 export type RegistryItem = v.InferOutput<typeof RegistryItemSchema>
