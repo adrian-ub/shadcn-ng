@@ -100,6 +100,12 @@ export const RegistryBaseColorSchema = v.object({
     light: v.record(v.string(), v.string()),
     dark: v.record(v.string(), v.string()),
   }),
+  cssVarsV4: v.optional(
+    v.object({
+      light: v.record(v.string(), v.string()),
+      dark: v.record(v.string(), v.string()),
+    }),
+  ),
   inlineColorsTemplate: v.string(),
   cssVarsTemplate: v.string(),
 })

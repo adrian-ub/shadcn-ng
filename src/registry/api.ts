@@ -434,8 +434,17 @@ async function registryGetTheme(urlRegistry: string, name: string, config: Confi
   }
 
   // Update theme to be v4 compatible.
-  if (tailwindVersion === 'v4') {
-    theme.cssVars.light.radius = '0.6rem'
+  if (tailwindVersion === 'v4' && baseColor.cssVarsV4) {
+    theme.cssVars = {
+      light: {
+        ...theme.cssVars.light,
+        ...baseColor.cssVarsV4.light,
+      },
+      dark: {
+        ...theme.cssVars.dark,
+        ...baseColor.cssVarsV4.dark,
+      },
+    }
   }
 
   return theme

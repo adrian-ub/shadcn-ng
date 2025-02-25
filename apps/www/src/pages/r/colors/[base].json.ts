@@ -1,3 +1,4 @@
+import { baseColorsV4 } from '@/registry/registry-base-colors'
 import { availableColors, colorMapping, colorsData } from '@/registry/registry-colors'
 import template from 'lodash.template'
 
@@ -115,6 +116,9 @@ export async function GET({ params }: { params: { base: string } }): Promise<Res
       }
     }
   }
+
+  // Add v4 css vars.
+  base.cssVarsV4 = baseColorsV4[baseColor as keyof typeof baseColorsV4]
 
   // Build css vars.
   base.inlineColorsTemplate = template(BASE_STYLES)({})

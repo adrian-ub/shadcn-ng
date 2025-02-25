@@ -105,7 +105,7 @@ export class UbDialogFooterDirective {
 })
 export class UbDialogTitleDirective {
   class = input<string>()
-  computedClass = computed(() => cn('text-lg leading-none font-semibold tracking-tight', this.class()))
+  computedClass = computed(() => cn('text-lg leading-none font-semibold', this.class()))
 }
 
 @Directive({

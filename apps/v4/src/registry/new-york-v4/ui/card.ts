@@ -40,7 +40,7 @@ export class UbCardHeaderDirective {
 export class UbCardTitleDirective {
   readonly class = input<string>()
   protected computedClass = computed(() =>
-    cn('leading-none font-semibold tracking-tight', this.class()),
+    cn('leading-none font-semibold', this.class()),
   )
 }
 
