@@ -16,7 +16,7 @@ import { parse } from 'tsconfck'
 import { cancelProcess } from '../utils/cancel-process'
 import { angularCreateVersion, tailwindPostcssVersion, tailwindV4Version } from '../utils/constants'
 
-export async function createProject(options: InitOptions): Promise<{ projectPath: string }> {
+export async function createProject(options: Pick<InitOptions, 'cwd' | 'force' | 'components'>): Promise<{ projectPath: string }> {
   let projectName: string = 'my-app'
   if (!options.force) {
     const { name } = await p.group({

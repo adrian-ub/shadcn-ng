@@ -106,12 +106,6 @@ async function promptForMinimalConfig(
             value: color.name,
           })),
         }),
-        tailwindCssVariables: () => p.confirm({
-          message: `Would you like to use ${c.blue(
-            'CSS variables',
-          )} for theming?`,
-          initialValue: defaultConfig?.tailwind.cssVariables,
-        }),
       },
       {
         onCancel: () => cancelProcess(),
@@ -120,7 +114,7 @@ async function promptForMinimalConfig(
 
     style = options.style ?? 'new-york'
     baseColor = options.tailwindBaseColor
-    cssVariables = options.tailwindCssVariables
+    cssVariables = opts.cssVariables
   }
 
   return v.parse(RawConfigSchema, {

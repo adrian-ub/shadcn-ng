@@ -27,6 +27,8 @@ export const init = new Command()
   .option('-f, --force', 'force overwrite of existing configuration.', false)
   .option('-d, --defaults,', 'use default configuration.', false)
   .option('-y, --yes', 'skip confirmation prompt.', true)
+  .option('--css-variables', 'use css variables for theming.', true)
+  .option('--no-css-variables', 'do not use css variables for theming.')
   .action(async (components, opts) => {
     header()
     try {

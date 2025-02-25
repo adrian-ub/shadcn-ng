@@ -59,6 +59,7 @@ export async function runAdd(options: AddOptions): Promise<void> {
       force: true,
       defaults: false,
       components: [],
+      cssVariables: options.cssVariables,
     })
   }
 
@@ -67,8 +68,6 @@ export async function runAdd(options: AddOptions): Promise<void> {
       cwd: options.cwd,
       force: options.overwrite,
       components: options.components,
-      defaults: false,
-      yes: true,
     })
 
     if (!projectPath) {
@@ -83,6 +82,7 @@ export async function runAdd(options: AddOptions): Promise<void> {
       force: true,
       defaults: false,
       components: [],
+      cssVariables: options.cssVariables,
     })
   }
 

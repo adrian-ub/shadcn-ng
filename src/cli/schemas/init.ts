@@ -6,6 +6,7 @@ export const InitSchema = v.object({
   force: v.boolean(),
   defaults: v.boolean(),
   yes: v.boolean(),
+  cssVariables: v.boolean(),
 })
 
 export type InitOptions = v.InferOutput<typeof InitSchema>

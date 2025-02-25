@@ -28,6 +28,8 @@ export const add = new Command()
   )
   .option('-a, --all', 'add all available components', false)
   .option('-p, --path <path>', 'the path to add the component to.')
+  .option('--css-variables', 'use css variables for theming.', true)
+  .option('--no-css-variables', 'do not use css variables for theming.')
   .action(async (components, opts) => {
     header()
 
