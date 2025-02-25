@@ -168,7 +168,12 @@ function addOrUpdateVars(
         node.type === 'decl' && node.prop === prop,
     )
 
-    existingDecl ? existingDecl.replaceWith(newDecl) : ruleNode?.append(newDecl)
+    // Do not override existing declarations.
+    // We do not want new components to override existing vars.
+    // Keep user defined vars.
+    if (!existingDecl) {
+      ruleNode?.append(newDecl)
+    }
   })
 }
 
