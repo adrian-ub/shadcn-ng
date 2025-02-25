@@ -20,7 +20,7 @@ export async function updateCssVars(
     tailwindConfig?: v.InferOutput<typeof RegistryItemTailwindSchema>['config']
   },
 ): Promise<void> {
-  if (!config.resolvedPaths.tailwindCss) {
+  if (!config.resolvedPaths.tailwindCss || !Object.keys(cssVars ?? {}).length) {
     return
   }
 
