@@ -67,8 +67,8 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['Geist Sans', ...fontFamily.sans],
-        mono: ['Geist Mono', ...fontFamily.mono],
+        sans: ['Geist Variable', ...fontFamily.sans],
+        mono: ['Geist Mono Variable', ...fontFamily.mono],
       },
       keyframes: {
         'accordion-down': {

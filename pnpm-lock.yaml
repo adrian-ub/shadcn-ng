@@ -207,7 +207,7 @@ importers:
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: ^19.1.6
-        version: 19.2.7(2jlfoydr6bmtn37rlgok3brfj4)
+        version: 19.2.7(bmnvowhzfy5k2lwleomaeyxenm)
       '@angular/cli':
         specifier: ^19.1.6
         version: 19.1.6(@types/node@18.19.75)(chokidar@4.0.3)
@@ -265,12 +265,12 @@ importers:
       '@astrojs/ts-plugin':
         specifier: ^1.10.4
         version: 1.10.4
-      '@fontsource/geist-mono':
-        specifier: ^5.1.1
-        version: 5.1.1
-      '@fontsource/geist-sans':
-        specifier: ^5.1.0
-        version: 5.1.0
+      '@fontsource-variable/geist':
+        specifier: ^5.2.5
+        version: 5.2.5
+      '@fontsource-variable/geist-mono':
+        specifier: ^5.2.5
+        version: 5.2.5
       '@ng-icons/core':
         specifier: ^30.2.0
         version: 30.2.0(@angular/common@19.2.6(@angular/core@19.2.6(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.6(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2)
@@ -2027,11 +2027,11 @@ packages:
     resolution: {integrity: sha512-lB05FkqEdUg2AA0xEbUz0SnkXT1LcCTa438W4IWTUh4hdOnVbQyOJ81OrDXsJk/LSiJHubgGEFoR5EHq1NsH1A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fontsource/geist-mono@5.1.1':
-    resolution: {integrity: sha512-Rr/VXX3qyRsLgEFwFUqhDS7PORzQUBDLoQc8bONbBz+hZ+SD8U0nEzHqRFBzT3zFcsf/0bMyCQPZUktKwPt3GQ==}
+  '@fontsource-variable/geist-mono@5.2.5':
+    resolution: {integrity: sha512-zyuyDtO00SbmqU4Bo5XWzX2hE5RUxL+h2bv3P8SrmxqfqW66FU/xw5DW3xRQPqQgyEpb/Fh5FEFCpOna78dvCA==}
 
-  '@fontsource/geist-sans@5.1.0':
-    resolution: {integrity: sha512-4AI/UxIcZiYgK6/cTo4R9oM4VHHLcFdHVv7m2+M42VyY16hhKJADrGe4HPjTxvolmce2IZX/jc6sFJ+GkLB64w==}
+  '@fontsource-variable/geist@5.2.5':
+    resolution: {integrity: sha512-773ht1maARKCDSxxmyc6cWiSRudk4GU+pW/0PHHnTEISprej9ARfGZVVhW04nmrk1Nlj888MLyuutTx1UnYy0g==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -8493,7 +8493,7 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-devkit/build-angular@19.2.7(2jlfoydr6bmtn37rlgok3brfj4)':
+  '@angular-devkit/build-angular@19.2.7(bmnvowhzfy5k2lwleomaeyxenm)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.1902.7(chokidar@4.0.3)
@@ -8512,7 +8512,7 @@ snapshots:
       '@babel/runtime': 7.26.10
       '@discoveryjs/json-ext': 0.6.3
       '@ngtools/webpack': 19.2.7(@angular/compiler-cli@19.2.6(@angular/compiler@19.2.6)(typescript@5.7.3))(typescript@5.7.3)(webpack@5.98.0(esbuild@0.25.1))
-      '@vitejs/plugin-basic-ssl': 1.2.0(vite@6.2.6(@types/node@18.19.75)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(sass@1.85.0)(stylus@0.64.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))
+      '@vitejs/plugin-basic-ssl': 1.2.0(vite@6.2.5(@types/node@18.19.75)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(sass@1.85.0)(stylus@0.64.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))
       ansi-colors: 4.1.3
       autoprefixer: 10.4.20(postcss@8.5.2)
       babel-loader: 9.2.1(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1))
@@ -10339,9 +10339,9 @@ snapshots:
       '@eslint/core': 0.10.0
       levn: 0.4.1
 
-  '@fontsource/geist-mono@5.1.1': {}
+  '@fontsource-variable/geist-mono@5.2.5': {}
 
-  '@fontsource/geist-sans@5.1.0': {}
+  '@fontsource-variable/geist@5.2.5': {}
 
   '@humanfs/core@0.19.1': {}
 
@@ -11721,10 +11721,6 @@ snapshots:
   '@vitejs/plugin-basic-ssl@1.2.0(vite@6.2.5(@types/node@22.13.1)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(sass@1.85.0)(stylus@0.64.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))':
     dependencies:
       vite: 6.2.5(@types/node@22.13.1)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(sass@1.85.0)(stylus@0.64.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0)
-
-  '@vitejs/plugin-basic-ssl@1.2.0(vite@6.2.6(@types/node@18.19.75)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(sass@1.85.0)(stylus@0.64.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))':
-    dependencies:
-      vite: 6.2.6(@types/node@18.19.75)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(sass@1.85.0)(stylus@0.64.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0)
 
   '@vitejs/plugin-basic-ssl@1.2.0(vite@6.2.6(@types/node@22.13.1)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(sass@1.85.0)(stylus@0.64.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0))':
     dependencies:
@@ -17362,23 +17358,6 @@ snapshots:
       rollup: 4.34.8
     optionalDependencies:
       '@types/node': 22.13.1
-      fsevents: 2.3.3
-      jiti: 2.4.2
-      less: 4.2.2
-      lightningcss: 1.29.1
-      sass: 1.85.0
-      stylus: 0.64.0
-      terser: 5.39.0
-      tsx: 4.19.2
-      yaml: 2.7.0
-
-  vite@6.2.6(@types/node@18.19.75)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.29.1)(sass@1.85.0)(stylus@0.64.0)(terser@5.39.0)(tsx@4.19.2)(yaml@2.7.0):
-    dependencies:
-      esbuild: 0.25.1
-      postcss: 8.5.3
-      rollup: 4.34.8
-    optionalDependencies:
-      '@types/node': 18.19.75
       fsevents: 2.3.3
       jiti: 2.4.2
       less: 4.2.2
