@@ -4,11 +4,13 @@ import { cn } from '@/lib/utils'
 
 <section
   class={cn(
-    'flex flex-col items-start gap-2 border-b border-border/40 py-8 dark:border-border md:py-10 lg:py-12',
+    'border-grid border-b',
     Astro.props.class,
   )}
 >
-  <div class="container">
-    <slot />
+  <div class="container-wrapper">
+    <div class="container flex flex-col items-start gap-1 py-8 md:py-10 lg:py-12">
+      <slot />
+    </div>
   </div>
 </section>

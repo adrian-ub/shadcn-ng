@@ -1,24 +1,12 @@
-export interface TNavItem {
-  title: string
-  href?: string
-  disabled?: boolean
-  label?: string
+import type { MainNavItem, SidebarNavItem } from '../../types/nav'
+
+export interface DocsConfig {
+  mainNav: MainNavItem[]
+  sidebarNav: SidebarNavItem[]
+  chartsNav: SidebarNavItem[]
 }
 
-export type TSidebarNavItem = TNavItem & {
-  items: TSidebarNavItem[]
-}
-
-export type TNavItemWithChildren = TNavItem & {
-  items: TNavItemWithChildren[]
-}
-
-export interface TDocsConfig {
-  mainNav: TNavItem[]
-  sidebarNav: TSidebarNavItem[]
-}
-
-export const docsConfig: TDocsConfig = {
+export const docsConfig: DocsConfig = {
   mainNav: [
     {
       title: 'Docs',
@@ -243,4 +231,5 @@ export const docsConfig: TDocsConfig = {
       ],
     },
   ],
+  chartsNav: [],
 }

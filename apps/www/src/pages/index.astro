@@ -12,42 +12,46 @@ import { buttonVariants } from '@/registry/new-york/ui/button'
 import { ExampleAuthenticationComponent } from './examples/authentication/_authentication'
 ---
 
-<RootLayout>
-  <div class="relative">
-    <PageHeader>
-      <Announcement />
-      <PageHeaderHeading>Build your component library</PageHeaderHeading>
-      <PageHeaderDescription>
-        Beautifully designed components that you can copy and paste into your apps. Made with Tailwind CSS. Open source.
-      </PageHeaderDescription>
+<RootLayout title={'Build your component library - ' + siteConfig.title} description="Beautifully designed components that you can copy and paste into your apps. Made with Tailwind CSS. Open source.">
+  <PageHeader>
+    <Announcement />
+    <PageHeaderHeading>Build your component library</PageHeaderHeading>
+    <PageHeaderDescription> Beautifully designed components that you can copy and paste into your apps. Made with Tailwind CSS. Open source. </PageHeaderDescription>
 
-      <PageActions>
-        <a
-          href="/docs"
-          class={buttonVariants({
-            size: 'sm',
-          })}
-        >
-          Get Started
-        </a>
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          class={buttonVariants({
-            size: 'sm',
-            variant: 'ghost',
-          })}
-        >
-          GitHub
-        </a>
-      </PageActions>
-    </PageHeader>
+    <PageActions>
+      <a
+        href="/docs"
+        class={buttonVariants({
+          size: 'sm',
+        })}
+      >
+        Get Started
+      </a>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={siteConfig.links.github}
+        class={buttonVariants({
+          size: 'sm',
+          variant: 'ghost',
+        })}
+      >
+        GitHub
+      </a>
+    </PageActions>
+  </PageHeader>
+  <div class="border-grid border-b">
+    <div class="container-wrapper">
+      <div class="container py-4">
+        <ExamplesNav class="[&>a:first-child]:text-primary" />
+      </div>
+    </div>
+  </div>
+
+  <div class="container-wrapper">
     <div class="container py-6">
-      <ExamplesNav class="[&>a:first-child]:text-primary" />
-
       <section class="hidden md:block [&>div]:p-0">
-        <div class="overflow-hidden rounded-[0.5rem] border bg-background shadow">
+        <div class="hidden md:block [&>div]:p-0">
           <ExampleAuthenticationComponent client:load />
         </div>
       </section>

@@ -11,6 +11,7 @@ const colorSchema = v.object({
   rgb: v.string(),
   hsl: v.string(),
   foreground: v.string(),
+  oklch: v.string(),
 })
 
 const colorPaletteSchema = v.object({
@@ -20,12 +21,13 @@ const colorPaletteSchema = v.object({
 
 export type ColorPalette = v.InferOutput<typeof colorPaletteSchema>
 
-export function getColorFormat(color: Color): { class: string, hex: string, rgb: string, hsl: string } {
+export function getColorFormat(color: Color): { class: string, hex: string, rgb: string, hsl: string, oklch: string } {
   return {
     class: `bg-${color.name}-100`,
     hex: color.hex,
     rgb: color.rgb,
     hsl: color.hsl,
+    oklch: color.oklch,
   }
 }
 
@@ -56,6 +58,10 @@ export function getColors(): ColorPalette[] {
               /^hsl\(([\d.]+),([\d.]+%),([\d.]+%)\)$/,
               '$1 $2 $3',
             ),
+            oklch: color.oklch.replace(
+              /^oklch\(([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\)$/,
+              '$1 $2 $3',
+            ),
             foreground: getForegroundFromBackground(rgb),
           }
         }),
@@ -68,15 +74,15 @@ export function getColors(): ColorPalette[] {
 
 export type Color = ReturnType<typeof getColors>[number]['colors'][number]
 
-function toLinear(number: number): number {
-  const base = number / 255
-  return base <= 0.04045
-    ? base / 12.92
-    : ((base + 0.055) / 1.055) ** 2.4
-}
-
-function getForegroundFromBackground(rgb: string): string {
+function getForegroundFromBackground(rgb: string): '#000' | '#fff' {
   const [r, g, b] = rgb.split(' ').map(Number)
+
+  function toLinear(number: number): number {
+    const base = number / 255
+    return base <= 0.04045
+      ? base / 12.92
+      : ((base + 0.055) / 1.055) ** 2.4
+  }
 
   const luminance
     = 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b)

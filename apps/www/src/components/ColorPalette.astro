@@ -10,7 +10,7 @@ export interface Props {
 const { colorPalette } = Astro.props
 ---
 
-<div class="rounded-lg shadow-sm ring-1 ring-border" x-data>
+<div id={colorPalette.name} class="rounded-lg shadow-sm ring-1 ring-border" x-data>
   <div class="flex items-center p-2 pb-0">
     <div class="flex-1 pl-1 text-sm font-medium">
       <h2 class="capitalize">{colorPalette.name}</h2>

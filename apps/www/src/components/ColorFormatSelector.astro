@@ -154,7 +154,7 @@ const options = Object.entries(formats).map(([format, title]) => ({ value: forma
     x-transition:enter="transition ease-out duration-50"
     x-transition:enter-start="opacity-0 -translate-y-1"
     x-transition:enter-end="opacity-100"
-    :class="{ 'bottom-0 mb-10' : selectDropdownPosition == 'top', 'top-7 mt-10' : selectDropdownPosition == 'bottom' }"
+    :class="{ 'bottom-0 mb-10' : selectDropdownPosition == 'top', 'top-7' : selectDropdownPosition == 'bottom' }"
     class="absolute z-50 w-full py-1 mt-1 overflow-auto text-sm bg-popover text-popover-foreground rounded-md shadow-md max-h-56 ring-1 ring-black ring-opacity-5 focus:outline-none"
     x-cloak
   >
