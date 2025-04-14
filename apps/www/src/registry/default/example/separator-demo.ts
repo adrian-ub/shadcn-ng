@@ -1,6 +1,6 @@
-import { UbSeparatorDirective } from '@/registry/default/ui/separator'
-
 import { Component } from '@angular/core'
+
+import { UbSeparatorDirective } from '~/registry/default/ui/separator'
 
 @Component({
   standalone: true,

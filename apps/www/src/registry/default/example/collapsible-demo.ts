@@ -1,11 +1,11 @@
-import { UbButtonDirective } from '@/registry/new-york/ui/button'
-
-import { UbCollapsible, UbCollapsibleContent, UbCollapsibleTrigger } from '@/registry/new-york/ui/collapsible'
-
 import { Component } from '@angular/core'
 
 import { NgIconComponent, provideIcons } from '@ng-icons/core'
+
 import { radixCaretSort } from '@ng-icons/radix-icons'
+
+import { UbButtonDirective } from '~/registry/new-york/ui/button'
+import { UbCollapsible, UbCollapsibleContent, UbCollapsibleTrigger } from '~/registry/new-york/ui/collapsible'
 
 @Component({
   standalone: true,

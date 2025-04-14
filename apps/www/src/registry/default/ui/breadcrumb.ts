@@ -1,9 +1,9 @@
-import { cn } from '@/lib/utils'
-
 import { Component, computed, Directive, input } from '@angular/core'
-import { NgIconComponent, provideIcons } from '@ng-icons/core'
 
+import { NgIconComponent, provideIcons } from '@ng-icons/core'
 import { radixChevronRight, radixDotsHorizontal } from '@ng-icons/radix-icons'
+
+import { cn } from '~/lib/utils'
 
 @Directive({
   selector: 'nav[ubBreadcrumb]',

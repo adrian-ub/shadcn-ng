@@ -1,6 +1,6 @@
-import { UbAvatarDirective, UbAvatarFallbackDirective, UbAvatarImageDirective } from '@/registry/default/ui/avatar'
-
 import { Component } from '@angular/core'
+
+import { UbAvatarDirective, UbAvatarFallbackDirective, UbAvatarImageDirective } from '~/registry/default/ui/avatar'
 
 @Component({
   standalone: true,

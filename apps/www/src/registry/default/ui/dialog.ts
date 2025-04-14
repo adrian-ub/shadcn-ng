@@ -1,10 +1,9 @@
 import type { TemplateRef } from '@angular/core'
 import type { RdxDialogConfig } from '@radix-ng/primitives/dialog'
-import { cn } from '@/lib/utils'
 import { Component, computed, Directive, effect, inject, input } from '@angular/core'
 import { NgIconComponent, provideIcons } from '@ng-icons/core'
-
 import { lucideX } from '@ng-icons/lucide'
+
 import {
   RdxDialogCloseDirective,
 
@@ -13,6 +12,7 @@ import {
   RdxDialogTitleDirective,
   RdxDialogTriggerDirective,
 } from '@radix-ng/primitives/dialog'
+import { cn } from '~/lib/utils'
 
 @Directive({
   standalone: true,

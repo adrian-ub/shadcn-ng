@@ -1,13 +1,13 @@
-import { UbButtonDirective } from '@/registry/new-york/ui/button'
+import { Component } from '@angular/core'
+import { UbButtonDirective } from '~/registry/new-york/ui/button'
+
 import {
   UbDropdownMenuCheckboxItemDirective,
   UbDropdownMenuContentDirective,
   UbDropdownMenuLabelDirective,
   UbDropdownMenuSeparator,
   UbDropdownMenuTriggerDirective,
-} from '@/registry/new-york/ui/dropdown-menu'
-
-import { Component } from '@angular/core'
+} from '~/registry/new-york/ui/dropdown-menu'
 
 @Component({
   standalone: true,

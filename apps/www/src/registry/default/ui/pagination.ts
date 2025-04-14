@@ -1,9 +1,9 @@
-import type { UbButtonSize } from '@/registry/default/ui/button'
-import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/registry/default/ui/button'
+import type { UbButtonSize } from '~/registry/default/ui/button'
 import { booleanAttribute, Component, computed, Directive, effect, inject, input } from '@angular/core'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import { lucideChevronLeft, lucideChevronRight, lucideEllipsis } from '@ng-icons/lucide'
+import { cn } from '~/lib/utils'
+import { buttonVariants } from '~/registry/default/ui/button'
 
 @Directive({
   standalone: true,

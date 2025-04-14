@@ -1,4 +1,5 @@
-import { UbButtonDirective } from '@/registry/new-york/ui/button'
+import { Component } from '@angular/core'
+import { UbButtonDirective } from '~/registry/new-york/ui/button'
 import {
   UbCardContentDirective,
   UbCardDescriptionDirective,
@@ -6,11 +7,10 @@ import {
   UbCardFooterDirective,
   UbCardHeaderDirective,
   UbCardTitleDirective,
-} from '@/registry/new-york/ui/card'
-import { UbInputDirective } from '@/registry/new-york/ui/input'
-import { UbLabelDirective } from '@/registry/new-york/ui/label'
+} from '~/registry/new-york/ui/card'
+import { UbInputDirective } from '~/registry/new-york/ui/input'
 
-import { Component } from '@angular/core'
+import { UbLabelDirective } from '~/registry/new-york/ui/label'
 
 @Component({
   standalone: true,

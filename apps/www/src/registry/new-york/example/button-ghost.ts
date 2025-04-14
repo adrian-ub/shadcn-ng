@@ -1,6 +1,6 @@
-import { UbButtonDirective } from '@/registry/new-york/ui/button'
-
 import { Component } from '@angular/core'
+
+import { UbButtonDirective } from '~/registry/new-york/ui/button'
 
 @Component({
   standalone: true,

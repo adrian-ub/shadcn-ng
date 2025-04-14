@@ -1,6 +1,6 @@
-import { UbAccordionContentDirective, UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective } from '@/registry/new-york/ui/accordion'
-
 import { Component } from '@angular/core'
+
+import { UbAccordionContentDirective, UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective } from '~/registry/new-york/ui/accordion'
 
 @Component({
   standalone: true,

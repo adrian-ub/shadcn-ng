@@ -1,6 +1,6 @@
-import { UbLabelDirective } from '@/registry/default/ui/label'
-import { UbTextAreaDirective } from '@/registry/default/ui/textarea'
 import { Component } from '@angular/core'
+import { UbLabelDirective } from '~/registry/default/ui/label'
+import { UbTextAreaDirective } from '~/registry/default/ui/textarea'
 
 @Component({
   standalone: true,

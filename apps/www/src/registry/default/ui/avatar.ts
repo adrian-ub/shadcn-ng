@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils'
 import { computed, Directive, input } from '@angular/core'
-
 import { RdxAvatarFallbackDirective, RdxAvatarImageDirective, RdxAvatarRootDirective } from '@radix-ng/primitives/avatar'
+
+import { cn } from '~/lib/utils'
 
 @Directive({
   standalone: true,
@@ -22,7 +22,12 @@ export class UbAvatarDirective {
 @Directive({
   standalone: true,
   selector: 'img[ubAvatarImage]',
-  hostDirectives: [RdxAvatarImageDirective],
+  hostDirectives: [
+    {
+      directive: RdxAvatarImageDirective,
+      inputs: ['src'],
+    },
+  ],
   host: {
     '[class]': 'computedClass()',
   },
@@ -38,7 +43,12 @@ export class UbAvatarImageDirective {
 @Directive({
   standalone: true,
   selector: 'span[ubAvatarFallback]',
-  hostDirectives: [RdxAvatarFallbackDirective],
+  hostDirectives: [
+    {
+      directive: RdxAvatarFallbackDirective,
+      inputs: ['delayMs'],
+    },
+  ],
   host: {
     '[class]': 'computedClass()',
   },

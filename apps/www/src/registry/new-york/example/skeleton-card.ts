@@ -1,6 +1,6 @@
-import { UbSkeletonDirective } from '@/registry/new-york/ui/skeleton'
-
 import { Component } from '@angular/core'
+
+import { UbSkeletonDirective } from '~/registry/new-york/ui/skeleton'
 
 @Component({
   standalone: true,

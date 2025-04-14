@@ -1,5 +1,3 @@
-import { cn } from '@/lib/utils'
-
 import { computed, Directive, input } from '@angular/core'
 
 import {
@@ -8,6 +6,8 @@ import {
   RdxTabsRootDirective,
   RdxTabsTriggerDirective,
 } from '@radix-ng/primitives/tabs'
+
+import { cn } from '~/lib/utils'
 
 @Directive({
   selector: '[ubTabs]',

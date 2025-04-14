@@ -1,5 +1,5 @@
-import { UbButtonDirective } from '@/registry/new-york/ui/button'
 import { Component } from '@angular/core'
+import { UbButtonDirective } from '~/registry/new-york/ui/button'
 
 import { UserAuthFormComponent } from './components/user-auth-form'
 

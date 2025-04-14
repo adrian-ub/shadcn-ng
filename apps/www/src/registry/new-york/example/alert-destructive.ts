@@ -1,13 +1,13 @@
+import { Component } from '@angular/core'
+import { NgIconComponent, provideIcons } from '@ng-icons/core'
+import { lucideRocket } from '@ng-icons/lucide'
+
 import {
   UbAlertDescriptionDirective,
   UbAlertDirective,
   UbAlertIconDirective,
   UbAlertTitleDirective,
-} from '@/registry/new-york/ui/alert'
-import { Component } from '@angular/core'
-import { NgIconComponent, provideIcons } from '@ng-icons/core'
-
-import { lucideRocket } from '@ng-icons/lucide'
+} from '~/registry/new-york/ui/alert'
 
 @Component({
   standalone: true,

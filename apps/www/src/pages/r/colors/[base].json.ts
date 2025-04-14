@@ -1,6 +1,6 @@
-import { baseColorsV4 } from '@/registry/registry-base-colors'
-import { availableColors, colorMapping, colorsData } from '@/registry/registry-colors'
 import template from 'lodash.template'
+import { baseColorsV4 } from '~/registry/registry-base-colors'
+import { availableColors, colorMapping, colorsData } from '~/registry/registry-colors'
 
 const BASE_STYLES = `@tailwind base;
 @tailwind components;

@@ -1,3 +1,5 @@
+import { Component } from '@angular/core'
+
 import {
   UbPaginationContentDirective,
   UbPaginationDirective,
@@ -6,9 +8,7 @@ import {
   UbPaginationLinkDirective,
   UbPaginationNextDirective,
   UbPaginationPreviousDirective,
-} from '@/registry/default/ui/pagination'
-
-import { Component } from '@angular/core'
+} from '~/registry/default/ui/pagination'
 
 @Component({
   standalone: true,

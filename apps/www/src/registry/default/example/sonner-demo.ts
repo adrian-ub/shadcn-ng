@@ -1,8 +1,8 @@
-import { UbButtonDirective } from '@/registry/default/ui/button'
-import { ToasterComponent } from '@/registry/default/ui/sonner'
-
 import { Component } from '@angular/core'
 import { toast } from 'ngx-sonner'
+
+import { UbButtonDirective } from '~/registry/default/ui/button'
+import { ToasterComponent } from '~/registry/default/ui/sonner'
 
 @Component({
   standalone: true,

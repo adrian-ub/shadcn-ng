@@ -1,4 +1,6 @@
-import { UbButtonDirective } from '@/registry/default/ui/button'
+import { Component } from '@angular/core'
+import { UbButtonDirective } from '~/registry/default/ui/button'
+
 import {
   DropdownSide,
   UbDropdownMenuContentDirective,
@@ -10,9 +12,7 @@ import {
   UbDropdownMenuSubContentDirective,
   UbDropdownMenuSubTrigger,
   UbDropdownMenuTriggerDirective,
-} from '@/registry/default/ui/dropdown-menu'
-
-import { Component } from '@angular/core'
+} from '~/registry/default/ui/dropdown-menu'
 
 @Component({
   standalone: true,

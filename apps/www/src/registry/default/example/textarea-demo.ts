@@ -1,5 +1,5 @@
-import { UbTextAreaDirective } from '@/registry/default/ui/textarea'
 import { Component } from '@angular/core'
+import { UbTextAreaDirective } from '~/registry/default/ui/textarea'
 
 @Component({
   standalone: true,

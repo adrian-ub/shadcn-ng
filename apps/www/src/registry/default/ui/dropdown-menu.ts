@@ -1,4 +1,3 @@
-import { cn } from '@/lib/utils'
 import { booleanAttribute, Component, computed, Directive, input } from '@angular/core'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import { lucideCheck, lucideChevronRight, lucideCircle } from '@ng-icons/lucide'
@@ -16,6 +15,7 @@ import {
   RdxDropdownMenuTriggerDirective,
 } from '@radix-ng/primitives/dropdown-menu'
 import { RdxMenuGroupDirective } from '@radix-ng/primitives/menu'
+import { cn } from '~/lib/utils'
 
 export { DropdownAlign, DropdownSide }
 

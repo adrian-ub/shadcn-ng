@@ -1,7 +1,7 @@
-import { UbLabelDirective } from '@/registry/new-york/ui/label'
-
-import { SwitchDirective } from '@/registry/new-york/ui/switch'
 import { Component } from '@angular/core'
+
+import { UbLabelDirective } from '~/registry/new-york/ui/label'
+import { SwitchDirective } from '~/registry/new-york/ui/switch'
 
 @Component({
   standalone: true,

@@ -1,8 +1,8 @@
-import { UbToggleDirective } from '@/registry/new-york/ui/toggle'
-
 import { Component } from '@angular/core'
+
 import { NgIconComponent, provideIcons } from '@ng-icons/core'
 import { lucideBold } from '@ng-icons/lucide'
+import { UbToggleDirective } from '~/registry/new-york/ui/toggle'
 
 @Component({
   standalone: true,

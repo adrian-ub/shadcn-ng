@@ -1,9 +1,9 @@
-import { UbButtonDirective } from '@/registry/default/ui/button'
-
 import { Component } from '@angular/core'
-import { NgIconComponent, provideIcons } from '@ng-icons/core'
 
+import { NgIconComponent, provideIcons } from '@ng-icons/core'
 import { radixEnvelopeOpen } from '@ng-icons/radix-icons'
+
+import { UbButtonDirective } from '~/registry/default/ui/button'
 
 @Component({
   standalone: true,

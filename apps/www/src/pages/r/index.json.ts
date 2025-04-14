@@ -1,4 +1,4 @@
-import { registry } from '@/registry'
+import { registry } from '~/registry'
 
 export async function GET(): Promise<Response> {
   const items = registry.items

@@ -1,5 +1,5 @@
-import { UbTextAreaDirective } from '@/registry/new-york/ui/textarea'
 import { Component } from '@angular/core'
+import { UbTextAreaDirective } from '~/registry/new-york/ui/textarea'
 
 @Component({
   standalone: true,

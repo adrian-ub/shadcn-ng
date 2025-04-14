@@ -5,11 +5,11 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import process from 'node:process'
 
-import { registry } from '@/registry'
-import { styles } from '@/registry/registry-styles'
 import { RegistryItemSchema } from 'shadcn-ng/registry'
 import { Project, ScriptKind } from 'ts-morph'
 import * as v from 'valibot'
+import { registry } from '~/registry'
+import { styles } from '~/registry/registry-styles'
 
 const project = new Project({
   compilerOptions: {},

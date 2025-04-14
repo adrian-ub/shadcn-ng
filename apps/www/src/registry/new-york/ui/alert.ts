@@ -1,9 +1,9 @@
 import type { VariantProps } from 'class-variance-authority'
 
-import { cn } from '@/lib/utils'
-
 import { computed, Directive, input } from '@angular/core'
+
 import { cva } from 'class-variance-authority'
+import { cn } from '~/lib/utils'
 
 const alertVariants = cva(
   'relative w-full rounded-lg border px-4 py-3 text-sm [&>[ubAlertIcon]+div]:translate-y-[-3px] [&>[ubAlertIcon]]:absolute [&>[ubAlertIcon]]:left-4 [&>[ubAlertIcon]]:top-4 [&>[ubAlertIcon]]:text-foreground [&>[ubAlertIcon]~*]:pl-7',

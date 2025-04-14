@@ -1,9 +1,9 @@
-import { cn } from '@/lib/utils'
-import { UbButtonDirective } from '@/registry/new-york/ui/button'
-import { UbInputDirective } from '@/registry/new-york/ui/input'
-import { UbLabelDirective } from '@/registry/new-york/ui/label'
 import { NgTemplateOutlet } from '@angular/common'
 import { Component, computed, input, signal } from '@angular/core'
+import { cn } from '~/lib/utils'
+import { UbButtonDirective } from '~/registry/new-york/ui/button'
+import { UbInputDirective } from '~/registry/new-york/ui/input'
+import { UbLabelDirective } from '~/registry/new-york/ui/label'
 
 @Component({
   standalone: true,

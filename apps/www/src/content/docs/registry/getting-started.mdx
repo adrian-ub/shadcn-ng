@@ -153,7 +153,7 @@ Here are some guidelines to follow when building components for a registry.
 - The following properties are required for the block definition: `name`, `description`, `type` and `files`.
 - Make sure to list all registry dependencies in `registryDependencies`. A registry dependency is the name of the component in the registry eg. `input`, `button`, `card`, etc or a URL to a registry item eg. `http://localhost:4200/r/editor.json`.
 - Make sure to list all dependencies in `dependencies`. A dependency is the name of the package in the registry eg. `zod`, `ngx-sonner`, etc. To set a version, you can use the `name@version` format eg. `zod@^3.20.0`.
-- **Imports should always use the `@/registry` or `~/registry` path.** eg. `import { HelloWorld } from "@/registry/hello-world/hello-world"` or `import { HelloWorld } from "~/registry/hello-world/hello-world"`.
+- **Imports should always use the `~/registry` or `~/registry` path.** eg. `import { HelloWorld } from "~/registry/hello-world/hello-world"` or `import { HelloWorld } from "~/registry/hello-world/hello-world"`.
 - Ideally, place your files within a registry item in `components`, `services`, `lib` directories.
 
 ## Install using the CLI

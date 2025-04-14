@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils'
 import { Component, computed, input, numberAttribute } from '@angular/core'
-
 import { RdxProgressIndicatorDirective, RdxProgressRootDirective } from '@radix-ng/primitives/progress'
+
+import { cn } from '~/lib/utils'
 
 @Component({
   standalone: true,
@@ -13,7 +13,7 @@ import { RdxProgressIndicatorDirective, RdxProgressRootDirective } from '@radix-
   hostDirectives: [
     {
       directive: RdxProgressRootDirective,
-      inputs: ['rdxValue:progress', 'rdxMax:max', 'rdxValueLabel:valueLabel'],
+      inputs: ['value:progress', 'max', 'valueLabel'],
     },
   ],
   template: `

@@ -1,3 +1,5 @@
+import { Component } from '@angular/core'
+
 import {
   UbTableBodyDirective,
   UbTableCaptionDirective,
@@ -7,9 +9,7 @@ import {
   UbTableHeadDirective,
   UbTableHeaderDirective,
   UbTableRowDirective,
-} from '@/registry/new-york/ui/table'
-
-import { Component } from '@angular/core'
+} from '~/registry/new-york/ui/table'
 
 @Component({
   standalone: true,

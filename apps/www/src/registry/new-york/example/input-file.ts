@@ -1,7 +1,7 @@
-import { UbInputDirective } from '@/registry/new-york/ui/input'
-
-import { UbLabelDirective } from '@/registry/new-york/ui/label'
 import { Component } from '@angular/core'
+
+import { UbInputDirective } from '~/registry/new-york/ui/input'
+import { UbLabelDirective } from '~/registry/new-york/ui/label'
 
 @Component({
   standalone: true,

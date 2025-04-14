@@ -1,7 +1,7 @@
 import type { OnDestroy, OnInit } from '@angular/core'
 
-import { ProgressDirective } from '@/registry/default/ui/progress'
 import { Component } from '@angular/core'
+import { ProgressDirective } from '~/registry/default/ui/progress'
 
 @Component({
   standalone: true,

@@ -1,4 +1,5 @@
-import { UbButtonDirective } from '@/registry/default/ui/button'
+import { Component } from '@angular/core'
+import { UbButtonDirective } from '~/registry/default/ui/button'
 import {
   UbDialogContentDirective,
   UbDialogDescriptionDirective,
@@ -6,11 +7,10 @@ import {
   UbDialogHeaderDirective,
   UbDialogTitleDirective,
   UbDialogTriggerDirective,
-} from '@/registry/default/ui/dialog'
-import { UbInputDirective } from '@/registry/default/ui/input'
-import { UbLabelDirective } from '@/registry/default/ui/label'
+} from '~/registry/default/ui/dialog'
+import { UbInputDirective } from '~/registry/default/ui/input'
 
-import { Component } from '@angular/core'
+import { UbLabelDirective } from '~/registry/default/ui/label'
 
 @Component({
   standalone: true,

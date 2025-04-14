@@ -1,6 +1,6 @@
-import { UbBadgeDirective } from '@/registry/default/ui/badge'
-
 import { Component } from '@angular/core'
+
+import { UbBadgeDirective } from '~/registry/default/ui/badge'
 
 @Component({
   standalone: true,

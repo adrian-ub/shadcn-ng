@@ -1,4 +1,4 @@
-import { availableColors, colorMapping, colorsData } from '@/registry/registry-colors'
+import { availableColors, colorMapping, colorsData } from '~/registry/registry-colors'
 
 export async function getStaticPaths(): Promise<{ params: { theme: string } }[]> {
   return availableColors.map(color => ({

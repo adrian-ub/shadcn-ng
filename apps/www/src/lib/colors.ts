@@ -1,6 +1,6 @@
-import { colors } from '@/registry/registry-colors'
-
 import * as v from 'valibot'
+
+import { colors } from '~/registry/registry-colors'
 
 const colorSchema = v.object({
   name: v.string(),

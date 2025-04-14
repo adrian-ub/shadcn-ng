@@ -1,7 +1,7 @@
-import type { Style } from '@/registry/registry-styles'
-import { cn } from '@/lib/utils'
+import type { Style } from '~/registry/registry-styles'
 import { AsyncPipe, NgComponentOutlet } from '@angular/common'
 import { Component, computed, input } from '@angular/core'
+import { cn } from '~/lib/utils'
 
 @Component({
   standalone: true,

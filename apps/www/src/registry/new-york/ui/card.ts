@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils'
-
 import { computed, Directive, input } from '@angular/core'
+
+import { cn } from '~/lib/utils'
 
 @Directive({
   standalone: true,

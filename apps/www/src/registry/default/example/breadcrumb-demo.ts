@@ -1,3 +1,5 @@
+import { Component } from '@angular/core'
+
 import {
   UbBreadcrumbDirective,
   UbBreadcrumbEllipsisComponent,
@@ -6,9 +8,7 @@ import {
   UbBreadcrumbListDirective,
   UbBreadcrumbPageDirective,
   UbBreadcrumbSeparatorComponent,
-} from '@/registry/default/ui/breadcrumb'
-
-import { Component } from '@angular/core'
+} from '~/registry/default/ui/breadcrumb'
 
 @Component({
   standalone: true,

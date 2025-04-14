@@ -1,14 +1,14 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 
-import DocsPager from '@/components/Pager.astro'
-import DocsNav from '@/components/DocsNav.astro'
-import Toc from '@/components/Toc.astro'
+import DocsPager from '~/components/Pager.astro'
+import DocsNav from '~/components/DocsNav.astro'
+import Toc from '~/components/Toc.astro'
 
-import { siteConfig } from '@/config/site'
-import { badgeVariants } from '@/registry/new-york/ui/badge'
-import { getTableOfContents } from '@/lib/toc'
-import { cn } from '@/lib/utils'
+import { siteConfig } from '~/config/site'
+import { badgeVariants } from '~/registry/new-york/ui/badge'
+import { getTableOfContents } from '~/lib/toc'
+import { cn } from '~/lib/utils'
 
 import RootLayout from './RootLayout.astro'
 

@@ -1,10 +1,10 @@
-import { UbButtonDirective } from '@/registry/default/ui/button'
-
-import { UbCardContentDirective, UbCardDescriptionDirective, UbCardDirective, UbCardFooterDirective, UbCardHeaderDirective, UbCardTitleDirective } from '@/registry/default/ui/card'
-import { UbInputDirective } from '@/registry/default/ui/input'
-import { UbLabelDirective } from '@/registry/default/ui/label'
-import { UbTabsContentDirective, UbTabsDirective, UbTabsListDirective, UbTabsTriggerDirective } from '@/registry/default/ui/tabs'
 import { Component } from '@angular/core'
+
+import { UbButtonDirective } from '~/registry/default/ui/button'
+import { UbCardContentDirective, UbCardDescriptionDirective, UbCardDirective, UbCardFooterDirective, UbCardHeaderDirective, UbCardTitleDirective } from '~/registry/default/ui/card'
+import { UbInputDirective } from '~/registry/default/ui/input'
+import { UbLabelDirective } from '~/registry/default/ui/label'
+import { UbTabsContentDirective, UbTabsDirective, UbTabsListDirective, UbTabsTriggerDirective } from '~/registry/default/ui/tabs'
 
 @Component({
   standalone: true,

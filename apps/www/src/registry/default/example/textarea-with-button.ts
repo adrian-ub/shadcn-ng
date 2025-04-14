@@ -1,6 +1,6 @@
-import { UbButtonDirective } from '@/registry/default/ui/button'
-import { UbTextAreaDirective } from '@/registry/default/ui/textarea'
 import { Component } from '@angular/core'
+import { UbButtonDirective } from '~/registry/default/ui/button'
+import { UbTextAreaDirective } from '~/registry/default/ui/textarea'
 
 @Component({
   standalone: true,

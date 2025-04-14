@@ -1,6 +1,6 @@
-import { UbButtonDirective } from '@/registry/new-york/ui/button'
-import { UbTextAreaDirective } from '@/registry/new-york/ui/textarea'
 import { Component } from '@angular/core'
+import { UbButtonDirective } from '~/registry/new-york/ui/button'
+import { UbTextAreaDirective } from '~/registry/new-york/ui/textarea'
 
 @Component({
   standalone: true,

@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils'
 import { Component, computed, input } from '@angular/core'
-
 import { RdxSwitchRootDirective, RdxSwitchThumbDirective } from '@radix-ng/primitives/switch'
+
+import { cn } from '~/lib/utils'
 
 @Component({
   standalone: true,

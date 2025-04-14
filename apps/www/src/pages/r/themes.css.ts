@@ -1,5 +1,5 @@
-import { baseColors } from '@/registry/registry-base-colors'
 import template from 'lodash.template'
+import { baseColors } from '~/registry/registry-base-colors'
 
 const THEME_STYLES_WITH_VARIABLES = `.theme-<%- theme %> {
   --background: <%- colors.light["background"] %>;
