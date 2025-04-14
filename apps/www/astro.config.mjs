@@ -20,7 +20,7 @@ import { rehypeNpmCommand } from './src/plugins/rehype-npm-command'
 
 /** @type {import('rehype-pretty-code').Options} */
 const optionsRehypePrettyCode = {
-  theme: 'github-dark',
+  theme: 'github-dark-default',
   getHighlighter: createHighlighter,
   onVisitLine(node) {
     // Prevent lines from collapsing in `display: grid` mode, and allow empty
