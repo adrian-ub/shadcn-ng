@@ -11,7 +11,11 @@ const { pathname } = Astro.props
       <div class="flex flex-col gap-1">
         <h4 class="rounded-md px-2 py-1 text-sm font-medium">
           {item.title}
-          {item.label && <span class="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs font-normal leading-none text-[#000000] no-underline group-hover:no-underline">{item.label}</span>}
+          {item.label && (
+            <span class="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs font-normal leading-none text-[#000000] no-underline group-hover:no-underline">
+              {item.label}
+            </span>
+          )}
         </h4>
         <div class="grid grid-flow-row auto-rows-max gap-0.5 text-sm">
           {item.items.map((subItem) =>
@@ -21,18 +25,41 @@ const { pathname } = Astro.props
                 class={cn(
                   'roup relative flex h-8 w-full items-center rounded-lg px-2 after:absolute after:inset-x-0 after:inset-y-[-2px]  after:rounded-lg hover:bg-accent hover:text-accent-foreground',
                   subItem.disabled && 'cursor-not-allowed opacity-60',
-                  pathname === subItem.href ? 'bg-accent font-medium text-accent-foreground' : 'font-normal text-foreground',
+                  pathname === subItem.href
+                    ? 'bg-accent font-medium text-accent-foreground'
+                    : 'font-normal text-foreground',
                 )}
                 target={subItem.external ? '_blank' : ''}
                 rel={subItem.external ? 'noreferrer' : ''}
               >
                 {subItem.title}
-                {subItem.label && <span class={cn('ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline')}>{subItem.label}</span>}
+                {subItem.label && (
+                  <span
+                    class={cn(
+                      'ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline',
+                    )}
+                  >
+                    {subItem.label}
+                  </span>
+                )}
               </a>
             ) : (
-              <span class={cn('flex w-full cursor-not-allowed items-center rounded-md p-2 text-muted-foreground hover:underline', subItem.disabled && 'cursor-not-allowed opacity-60')}>
+              <span
+                class={cn(
+                  'flex w-full cursor-not-allowed items-center rounded-md p-2 text-muted-foreground hover:underline',
+                  subItem.disabled && 'cursor-not-allowed opacity-60',
+                )}
+              >
                 {subItem.title}
-                {subItem.label && <span class={cn('ml-2 rounded-md bg-muted px-1.5 py-0.5 text-xs leading-none text-muted-foreground no-underline group-hover:no-underline')}>{subItem.label}</span>}
+                {subItem.label && (
+                  <span
+                    class={cn(
+                      'ml-2 rounded-md bg-muted px-1.5 py-0.5 text-xs leading-none text-muted-foreground no-underline group-hover:no-underline',
+                    )}
+                  >
+                    {subItem.label}
+                  </span>
+                )}
               </span>
             ),
           )}

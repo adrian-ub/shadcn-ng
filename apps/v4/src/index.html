@@ -1,35 +1,32 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>shadcn-ng</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
 
-<head>
-  <meta charset="utf-8">
-  <title>shadcn-ng</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preconnect" href="https://images.unsplash.com">
-
-  <script>
-    (function () {
-      try {
-        const theme = localStorage.getItem('theme');
-        const isDarkMode =
-          theme === 'dark' ||
-          (theme === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        if (isDarkMode) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
+    <script>
+      ;(function () {
+        try {
+          const theme = localStorage.getItem('theme')
+          const isDarkMode =
+            theme === 'dark' || (theme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          if (isDarkMode) {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
+        } catch (e) {
+          console.error('Error initializing theme:', e)
         }
-      } catch (e) {
-        console.error('Error initializing theme:', e);
-      }
-    })();
-  </script>
-</head>
+      })()
+    </script>
+  </head>
 
-<body class="bg-background min-h-svh overscroll-none font-sans antialiased">
-  <app-root></app-root>
-</body>
-
+  <body class="bg-background min-h-svh overscroll-none font-sans antialiased">
+    <app-root></app-root>
+  </body>
 </html>

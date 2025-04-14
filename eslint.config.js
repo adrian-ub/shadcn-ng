@@ -1,8 +1,6 @@
-// @ts-check
-import adrianub from '@adrianub/eslint-config'
+import antfu from '@antfu/eslint-config'
 
-export default adrianub(
-  {
-    type: 'lib',
-  },
-)
+export default antfu({
+  formatters: true,
+  astro: true,
+})

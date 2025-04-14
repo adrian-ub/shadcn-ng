@@ -11,7 +11,9 @@ import { cn } from '@/lib/utils'
 const { pathname } = Astro.url
 ---
 
-<header class="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+<header
+  class="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+>
   <div class="container-wrapper">
     <div class="container flex h-14 items-center gap-2 md:gap-4">
       <MainNav pathname={pathname} />
