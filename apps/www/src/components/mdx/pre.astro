@@ -1,6 +1,5 @@
 ---
 import { cn } from '~/lib/utils'
-import CopyNpmButton from '../CopyNpmButton.astro'
 import CopyButton from '../CopyButton.astro'
 import CodeBlockCommand from '../CodeBlockCommand.astro'
 
@@ -48,9 +47,7 @@ const isNpmCommand = __npmCommand__ && __yarnCommand__ && __pnpmCommand__ && __b
           className,
         )}
         {...rest}
-      >
-        <slot />
-      </pre>
+      ><slot /></pre>
 
       {__rawString__ && !__npmCommand__ ? (
         <CopyButton value={__rawString__} class={cn('absolute right-4 top-4', __withMeta__ && 'top-16')} />

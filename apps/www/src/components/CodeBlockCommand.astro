@@ -66,11 +66,7 @@ const tabs = {
         Object.entries(tabs).map(([_, value]) => {
           return (
             <TabsContent class="mt-0">
-              <pre class="px-4 py-5">
-                <code class="relative font-mono text-sm leading-none" data-language="bash">
-                  {value}
-                </code>
-              </pre>
+              <pre class="px-4 py-5"><code class="relative font-mono text-sm leading-none" data-language="bash">{value}</code></pre>
             </TabsContent>
           )
         })
