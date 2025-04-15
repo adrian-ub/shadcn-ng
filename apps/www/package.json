@@ -36,6 +36,7 @@
     "astro": "catalog:",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
+    "ejs": "catalog:",
     "ngx-sonner": "catalog:",
     "rehype-autolink-headings": "catalog:",
     "rehype-pretty-code": "catalog:",
@@ -62,8 +63,7 @@
     "@angular/platform-server": "catalog:",
     "@shikijs/transformers": "catalog:",
     "@types/alpinejs__focus": "catalog:",
-    "@types/lodash.template": "catalog:",
-    "lodash.template": "catalog:",
+    "@types/ejs": "catalog:",
     "mdast-util-toc": "catalog:",
     "remark": "catalog:",
     "typescript": "catalog:"

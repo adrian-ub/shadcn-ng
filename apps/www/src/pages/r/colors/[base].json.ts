@@ -1,4 +1,4 @@
-import template from 'lodash.template'
+import ejs from 'ejs'
 import { baseColorsV4 } from '~/registry/registry-base-colors'
 import { availableColors, colorMapping, colorsData } from '~/registry/registry-colors'
 
@@ -121,8 +121,8 @@ export async function GET({ params }: { params: { base: string } }): Promise<Res
   base.cssVarsV4 = baseColorsV4[baseColor as keyof typeof baseColorsV4]
 
   // Build css vars.
-  base.inlineColorsTemplate = template(BASE_STYLES)({})
-  base.cssVarsTemplate = template(BASE_STYLES_WITH_VARIABLES)({
+  base.inlineColorsTemplate = ejs.render(BASE_STYLES, {})
+  base.cssVarsTemplate = ejs.render(BASE_STYLES_WITH_VARIABLES, {
     colors: base.cssVars,
   })
 

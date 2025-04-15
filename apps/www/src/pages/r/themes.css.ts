@@ -1,4 +1,4 @@
-import template from 'lodash.template'
+import ejs from 'ejs'
 import { baseColors } from '~/registry/registry-base-colors'
 
 const THEME_STYLES_WITH_VARIABLES = `.theme-<%- theme %> {
@@ -69,7 +69,7 @@ export async function GET(): Promise<Response> {
   const themeCSS = []
   for (const theme of baseColors) {
     themeCSS.push(
-      template(THEME_STYLES_WITH_VARIABLES)({
+      ejs.render(THEME_STYLES_WITH_VARIABLES, {
         colors: theme.cssVars,
         theme: theme.name,
       }),
