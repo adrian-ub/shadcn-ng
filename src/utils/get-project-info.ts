@@ -269,8 +269,6 @@ export async function getProjectConfig(
 
   const config: RawConfig = {
     $schema: 'https://ui.adrianub.dev/schema.json',
-    rsc: projectInfo.isRSC,
-    tsx: projectInfo.isTsx,
     style: 'new-york',
     tailwind: {
       config: projectInfo.tailwindConfigFile ?? '',

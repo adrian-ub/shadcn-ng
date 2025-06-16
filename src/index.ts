@@ -1,6 +1,9 @@
 import process from 'node:process'
 
 import { Command } from 'commander'
+
+import { init } from '~/src/commands/init'
+
 import packageJson from '../package.json'
 
 process.on('SIGINT', () => process.exit(0))
@@ -15,6 +18,9 @@ async function main(): Promise<void> {
       '-v, --version',
       'display the version number',
     )
+
+  program
+    .addCommand(init)
 
   program.parse()
 }

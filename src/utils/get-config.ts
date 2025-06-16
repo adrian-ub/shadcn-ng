@@ -26,8 +26,6 @@ export const rawConfigSchema = z
   .object({
     $schema: z.string().optional(),
     style: z.string(),
-    rsc: z.coerce.boolean().default(false),
-    tsx: z.coerce.boolean().default(true),
     tailwind: z.object({
       config: z.string().optional(),
       css: z.string(),
@@ -59,6 +57,7 @@ export const configSchema = rawConfigSchema.extend({
     lib: z.string(),
     hooks: z.string(),
     ui: z.string(),
+    services: z.string().optional(),
   }),
 })
 
@@ -89,7 +88,7 @@ export async function resolveConfigPaths(cwd: string, config: RawConfig): Promis
 
   if (tsConfig.resultType === 'failed') {
     throw new Error(
-      `Failed to load ${config.tsx ? 'tsconfig' : 'jsconfig'}.json. ${
+      `Failed to load 'tsconfig.json'. ${
         tsConfig.message ?? ''
       }`.trim(),
     )
@@ -161,7 +160,7 @@ export async function getWorkspaceConfig(config: Config): Promise<Record<string,
       continue
     }
 
-    const resolvedPath = config.resolvedPaths[key]
+    const resolvedPath = config.resolvedPaths[key]!
     const packageRoot = await findPackageRoot(
       config.resolvedPaths.cwd,
       resolvedPath,
