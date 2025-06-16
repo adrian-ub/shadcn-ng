@@ -2,7 +2,7 @@
   "name": "shadcn-ng",
   "type": "module",
   "version": "1.1.0",
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.6.2",
   "description": "Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.",
   "author": "Adrián UB",
   "license": "MIT",
@@ -26,19 +26,11 @@
   "sideEffects": false,
   "exports": {
     ".": "./dist/index.mjs",
-    "./registry": "./dist/registry.mjs"
+    "./package.json": "./package.json"
   },
-  "main": "dist/index.mjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./dist/index.d.ts"
-      ]
-    }
-  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "bin": {
     "shadcn-ng": "bin/shadcn-ng.mjs"
   },
@@ -46,68 +38,56 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub",
-    "lint": "eslint .",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint",
     "prepublishOnly": "nr build",
     "release": "bumpp && pnpm publish",
     "start": "tsx src/index.ts",
-    "start:cli": "cross-env REGISTRY_URL=http://localhost:4321/r tsx src/cli.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "prepare": "simple-git-hooks",
-    "www:dev": "nr -C apps/www dev",
-    "www:build": "nr -C apps/www build",
-    "v4:dev": "nr -C apps/v4 dev",
-    "v4:build": "nr -C apps/v4 build",
-    "v4:registry:build": "nr -C apps/v4 registry:build"
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "@antfu/install-pkg": "catalog:",
-    "@clack/prompts": "catalog:",
-    "commander": "catalog:",
-    "deepmerge": "catalog:",
-    "diff": "catalog:",
-    "fast-glob": "catalog:",
-    "https-proxy-agent": "catalog:",
-    "local-pkg": "catalog:",
-    "node-fetch": "catalog:",
-    "package-manager-detector": "catalog:",
-    "picocolors": "catalog:",
-    "postcss": "catalog:",
-    "stringify-object": "catalog:",
-    "tailwindcss": "catalog:",
-    "tinyexec": "catalog:",
-    "ts-morph": "catalog:",
-    "tsconfck": "catalog:",
-    "tsconfig-paths": "catalog:",
-    "unconfig": "catalog:",
-    "valibot": "catalog:"
+    "commander": "catalog:cli",
+    "cosmiconfig": "catalog:utils",
+    "deepmerge": "catalog:utils",
+    "fast-glob": "catalog:utils",
+    "fs-extra": "catalog:utils",
+    "https-proxy-agent": "catalog:utils",
+    "kleur": "catalog:utils",
+    "node-fetch": "catalog:utils",
+    "ora": "catalog:utils",
+    "stringify-object": "catalog:utils",
+    "tailwindcss": "catalog:utils",
+    "ts-morph": "catalog:utils",
+    "tsconfig-paths": "catalog:utils",
+    "type-fest": "catalog:utils",
+    "zod": "catalog:utils"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:",
-    "@antfu/ni": "catalog:",
-    "@types/diff": "catalog:",
-    "@types/node": "catalog:",
-    "@types/stringify-object": "catalog:",
-    "astro-eslint-parser": "catalog:",
-    "bumpp": "catalog:",
-    "cross-env": "catalog:",
-    "eslint": "catalog:",
-    "eslint-plugin-astro": "catalog:",
-    "eslint-plugin-format": "catalog:",
-    "lint-staged": "catalog:",
-    "pnpm": "catalog:",
-    "prettier-plugin-astro": "catalog:",
-    "simple-git-hooks": "catalog:",
-    "tsx": "catalog:",
-    "typescript": "catalog:",
-    "unbuild": "catalog:",
-    "vite": "catalog:",
-    "vitest": "catalog:"
+    "@antfu/eslint-config": "catalog:cli",
+    "@antfu/ni": "catalog:cli",
+    "@antfu/nip": "catalog:",
+    "@antfu/utils": "catalog:inlined",
+    "@types/fs-extra": "catalog:types",
+    "@types/node": "catalog:types",
+    "@types/stringify-object": "catalog:types",
+    "bumpp": "catalog:cli",
+    "eslint": "catalog:cli",
+    "lint-staged": "catalog:cli",
+    "simple-git-hooks": "catalog:cli",
+    "tinyexec": "catalog:utils",
+    "tsdown": "catalog:cli",
+    "tsx": "catalog:cli",
+    "typescript": "catalog:cli",
+    "vite": "catalog:cli",
+    "vitest": "catalog:testing",
+    "vitest-package-exports": "catalog:testing",
+    "yaml": "catalog:testing"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
+    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && npx lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"

@@ -4,7 +4,7 @@ export const FRAMEWORKS = {
     label: 'Angular',
     links: {
       installation: 'https://ui.adrianub.dev/docs/installation/angular',
-      tailwind: 'https://tailwindcss.com/docs/installation/framework-guides/angular',
+      tailwind: 'https://tailwindcss.com/docs/guides/angular',
     },
   },
   vite: {
@@ -12,7 +12,15 @@ export const FRAMEWORKS = {
     label: 'Vite',
     links: {
       installation: 'https://ui.adrianub.dev/docs/installation/vite',
-      tailwind: 'https://tailwindcss.com/docs/installation/using-vite',
+      tailwind: 'https://tailwindcss.com/docs/guides/vite',
+    },
+  },
+  astro: {
+    name: 'astro',
+    label: 'Astro',
+    links: {
+      installation: 'https://ui.adrianub.dev/docs/installation/astro',
+      tailwind: 'https://tailwindcss.com/docs/guides/astro',
     },
   },
   manual: {
@@ -23,6 +31,6 @@ export const FRAMEWORKS = {
       tailwind: 'https://tailwindcss.com/docs/installation',
     },
   },
-}
+} as const
 
 export type Framework = (typeof FRAMEWORKS)[keyof typeof FRAMEWORKS]

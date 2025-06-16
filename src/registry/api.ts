@@ -1,18 +1,30 @@
-import type { Config } from './schema'
-import path from 'node:path'
+import type { Config } from '~/src/utils/get-config'
 
+import path from 'node:path'
 import process from 'node:process'
-import * as p from '@clack/prompts'
+
 import deepmerge from 'deepmerge'
 import { HttpsProxyAgent } from 'https-proxy-agent'
 import fetch from 'node-fetch'
-import * as v from 'valibot'
+import { z } from 'zod'
 
-import { getTargetStyleFromConfig } from '../cli/stages/get-config'
-import { getProjectTailwindVersionFromConfig } from '../cli/stages/get-project-info'
-import { handleError } from '../utils/handle-error'
-import { buildTailwindThemeColorsFromCssVars } from '../utils/updaters/update-tailwind-config'
-import { IconsSchema, RegistryBaseColorSchema, RegistryIndexSchema, RegistryItemSchema, RegistryResolvedItemsTreeSchema, StylesSchema } from './schema'
+import { getTargetStyleFromConfig } from '~/src/utils/get-config'
+import { getProjectTailwindVersionFromConfig } from '~/src/utils/get-project-info'
+import { handleError } from '~/src/utils/handle-error'
+import { highlighter } from '~/src/utils/highlighter'
+import { logger } from '~/src/utils/logger'
+import { buildTailwindThemeColorsFromCssVars } from '~/src/utils/updaters/update-tailwind-config'
+
+import {
+  iconsSchema,
+  registryBaseColorSchema,
+  registryIndexSchema,
+  registryItemSchema,
+  registryResolvedItemsTreeSchema,
+  stylesSchema,
+} from './schema'
+
+const REGISTRY_URL = process.env.REGISTRY_URL ?? 'https://ui.adrianub.dev/r'
 
 const agent = process.env.https_proxy
   ? new HttpsProxyAgent(process.env.https_proxy)
@@ -20,125 +32,58 @@ const agent = process.env.https_proxy
 
 const registryCache = new Map<string, Promise<any>>()
 
-function isUrl(path: string): boolean {
+export const BASE_COLORS = [
+  {
+    name: 'neutral',
+    label: 'Neutral',
+  },
+  {
+    name: 'gray',
+    label: 'Gray',
+  },
+  {
+    name: 'zinc',
+    label: 'Zinc',
+  },
+  {
+    name: 'stone',
+    label: 'Stone',
+  },
+  {
+    name: 'slate',
+    label: 'Slate',
+  },
+] as const
+
+export async function getRegistryIndex(): Promise<z.infer<typeof registryIndexSchema> | void> {
   try {
-    // eslint-disable-next-line no-new
-    new URL(path)
-    return true
-  }
-  catch {
-    return false
-  }
-}
+    const [result] = await fetchRegistry(['index.json'])
 
-function getRegistryUrl(urlRegistry: string, path: string): string {
-  if (isUrl(path)) {
-    const url = new URL(path)
-    return url.toString()
-  }
-
-  return `${urlRegistry}/${path}`
-}
-
-async function fetchRegistry(urlRegistry: string, paths: string[]): Promise<unknown[]> {
-  try {
-    const results = await Promise.all(
-      paths.map(async (path) => {
-        const url = getRegistryUrl(urlRegistry, path)
-        // Check cache first
-        if (registryCache.has(url)) {
-          return registryCache.get(url)
-        }
-        // Store the promise in the cache before awaiting
-        const fetchPromise = (async () => {
-          const response = await fetch(url, { agent })
-
-          if (!response.ok) {
-            const errorMessages: { [key: number]: string } = {
-              400: 'Bad request',
-              401: 'Unauthorized',
-              403: 'Forbidden',
-              404: 'Not found',
-              500: 'Internal server error',
-            }
-
-            if (response.status === 401) {
-              throw new Error(
-                `You are not authorized to access the component at ${p.log.info(
-                  url,
-                )}.\nIf this is a remote registry, you may need to authenticate.`,
-              )
-            }
-
-            if (response.status === 404) {
-              throw new Error(
-                `The component at ${p.log.info(
-                  url,
-                )} was not found.\nIt may not exist at the registry. Please make sure it is a valid component.`,
-              )
-            }
-
-            if (response.status === 403) {
-              throw new Error(
-                `You do not have access to the component at ${p.log.info(
-                  url,
-                )}.\nIf this is a remote registry, you may need to authenticate or a token.`,
-              )
-            }
-
-            const result = await response.json()
-            const message
-              = result && typeof result === 'object' && 'error' in result
-                ? result.error
-                : response.statusText || errorMessages[response.status]
-
-            throw new Error(
-              `Failed to fetch from ${p.log.info(url)}.\n${message}`,
-            )
-          }
-
-          return response.json()
-        })()
-
-        registryCache.set(url, fetchPromise)
-        return fetchPromise
-      }),
-    )
-
-    return results
+    return registryIndexSchema.parse(result)
   }
   catch (error) {
+    logger.error('\n')
+    handleError(error)
+  }
+}
+
+export async function getRegistryStyles(): Promise<z.infer<typeof stylesSchema>> {
+  try {
+    const [result] = await fetchRegistry(['styles/index.json'])
+
+    return stylesSchema.parse(result)
+  }
+  catch (error) {
+    logger.error('\n')
     handleError(error)
     return []
   }
 }
 
-async function getRegistryIndex(urlRegistry: string): Promise<v.InferOutput<typeof RegistryIndexSchema> | undefined> {
+export async function getRegistryIcons(): Promise<z.infer<typeof iconsSchema>> {
   try {
-    const [result] = await fetchRegistry(urlRegistry, ['index.json'])
-
-    return v.parse(RegistryIndexSchema, result)
-  }
-  catch (error) {
-    handleError(error)
-  }
-}
-
-async function getRegistryStyles(urlRegistry: string): Promise<v.InferOutput<typeof StylesSchema>> {
-  try {
-    const [result] = await fetchRegistry(urlRegistry, ['styles/index.json'])
-    return v.parse(StylesSchema, result)
-  }
-  catch (error) {
-    handleError(error)
-    return []
-  }
-}
-
-async function getRegistryIcons(urlRegistry: string): Promise<v.InferOutput<typeof IconsSchema>> {
-  try {
-    const [result] = await fetchRegistry(urlRegistry, ['icons/index.json'])
-    return v.parse(IconsSchema, result)
+    const [result] = await fetchRegistry(['icons/index.json'])
+    return iconsSchema.parse(result)
   }
   catch (error) {
     handleError(error)
@@ -146,76 +91,41 @@ async function getRegistryIcons(urlRegistry: string): Promise<v.InferOutput<type
   }
 }
 
-async function getRegistryItem(urlRegistry: string, name: string, style: string): Promise<v.InferOutput<typeof RegistryItemSchema> | null> {
+export async function getRegistryItem(name: string, style: string): Promise<z.infer<typeof registryItemSchema> | null> {
   try {
-    const [result] = await fetchRegistry(urlRegistry, [
+    const [result] = await fetchRegistry([
       isUrl(name) ? name : `styles/${style}/${name}.json`,
     ])
 
-    return v.parse(RegistryItemSchema, result)
+    return registryItemSchema.parse(result)
   }
   catch (error) {
+    logger.break()
     handleError(error)
     return null
   }
 }
 
-async function getRegistryBaseColor(urlRegistry: string, baseColor: string): Promise<v.InferOutput<typeof RegistryBaseColorSchema> | undefined> {
-  try {
-    const [result] = await fetchRegistry(urlRegistry, [`colors/${baseColor}.json`])
+export async function getRegistryBaseColors(): Promise<typeof BASE_COLORS> {
+  return BASE_COLORS
+}
 
-    return v.parse(RegistryBaseColorSchema, result)
+export async function getRegistryBaseColor(baseColor: string): Promise<z.infer<typeof registryBaseColorSchema> | void> {
+  try {
+    const [result] = await fetchRegistry([`colors/${baseColor}.json`])
+
+    return registryBaseColorSchema.parse(result)
   }
   catch (error) {
     handleError(error)
   }
 }
 
-async function fetchTree(
-  urlRegistry: string,
-  style: string,
-  tree: v.InferOutput<typeof RegistryIndexSchema>,
-): Promise<v.InferOutput<typeof RegistryIndexSchema> | undefined> {
-  try {
-    const paths = tree.map(item => `styles/${style}/${item.name}.json`)
-    const result = await fetchRegistry(urlRegistry, paths)
-    return v.parse(RegistryIndexSchema, result)
-  }
-  catch (error) {
-    handleError(error)
-  }
-}
-
-async function getRegistryBaseColors(): Promise<{ name: string, label: string }[]> {
-  return [
-    {
-      name: 'neutral',
-      label: 'Neutral',
-    },
-    {
-      name: 'gray',
-      label: 'Gray',
-    },
-    {
-      name: 'zinc',
-      label: 'Zinc',
-    },
-    {
-      name: 'stone',
-      label: 'Stone',
-    },
-    {
-      name: 'slate',
-      label: 'Slate',
-    },
-  ]
-}
-
-async function resolveTree(
-  index: v.InferOutput<typeof RegistryIndexSchema>,
+export async function resolveTree(
+  index: z.infer<typeof registryIndexSchema>,
   names: string[],
-): Promise<v.InferOutput<typeof RegistryIndexSchema>> {
-  const tree: v.InferOutput<typeof RegistryIndexSchema> = []
+): Promise<z.infer<typeof registryIndexSchema>> {
+  const tree: z.infer<typeof registryIndexSchema> = []
 
   for (const name of names) {
     const entry = index.find(entry => entry.name === name)
@@ -238,9 +148,23 @@ async function resolveTree(
   )
 }
 
-async function getItemTargetPath(
+export async function fetchTree(
+  style: string,
+  tree: z.infer<typeof registryIndexSchema>,
+): Promise<z.infer<typeof registryIndexSchema> | void> {
+  try {
+    const paths = tree.map(item => `styles/${style}/${item.name}.json`)
+    const result = await fetchRegistry(paths)
+    return registryIndexSchema.parse(result)
+  }
+  catch (error) {
+    handleError(error)
+  }
+}
+
+export async function getItemTargetPath(
   config: Config,
-  item: Pick<v.InferOutput<typeof RegistryItemSchema>, 'type'>,
+  item: Pick<z.infer<typeof registryItemSchema>, 'type'>,
   override?: string,
 ): Promise<string | null> {
   if (override) {
@@ -262,13 +186,101 @@ async function getItemTargetPath(
   )
 }
 
-async function registryResolveItemsTree(
-  urlRegistry: string,
-  names: v.InferOutput<typeof RegistryItemSchema>['name'][],
-  config: Config,
-): Promise<v.InferOutput<typeof RegistryResolvedItemsTreeSchema> | null> {
+export async function fetchRegistry(
+  paths: string[],
+  options: { useCache?: boolean } = {},
+): Promise<any[]> {
+  options = {
+    useCache: true,
+    ...options,
+  }
+
   try {
-    const index = await getRegistryIndex(urlRegistry)
+    const results = await Promise.all(
+      paths.map(async (path) => {
+        const url = getRegistryUrl(path)
+
+        // Check cache first if caching is enabled
+        if (options.useCache && registryCache.has(url)) {
+          return registryCache.get(url)
+        }
+
+        // Store the promise in the cache before awaiting if caching is enabled
+        const fetchPromise = (async () => {
+          const response = await fetch(url, { agent })
+
+          if (!response.ok) {
+            const errorMessages: { [key: number]: string } = {
+              400: 'Bad request',
+              401: 'Unauthorized',
+              403: 'Forbidden',
+              404: 'Not found',
+              500: 'Internal server error',
+            }
+
+            if (response.status === 401) {
+              throw new Error(
+                `You are not authorized to access the component at ${highlighter.info(
+                  url,
+                )}.\nIf this is a remote registry, you may need to authenticate.`,
+              )
+            }
+
+            if (response.status === 404) {
+              throw new Error(
+                `The component at ${highlighter.info(
+                  url,
+                )} was not found.\nIt may not exist at the registry. Please make sure it is a valid component.`,
+              )
+            }
+
+            if (response.status === 403) {
+              throw new Error(
+                `You do not have access to the component at ${highlighter.info(
+                  url,
+                )}.\nIf this is a remote registry, you may need to authenticate or a token.`,
+              )
+            }
+
+            const result = await response.json()
+            const message
+              = result && typeof result === 'object' && 'error' in result
+                ? result.error
+                : response.statusText || errorMessages[response.status]
+            throw new Error(
+              `Failed to fetch from ${highlighter.info(url)}.\n${message}`,
+            )
+          }
+
+          return response.json()
+        })()
+
+        if (options.useCache) {
+          registryCache.set(url, fetchPromise)
+        }
+        return fetchPromise
+      }),
+    )
+
+    return results
+  }
+  catch (error) {
+    logger.error('\n')
+    handleError(error)
+    return []
+  }
+}
+
+export function clearRegistryCache(): void {
+  registryCache.clear()
+}
+
+export async function registryResolveItemsTree(
+  names: z.infer<typeof registryItemSchema>['name'][],
+  config: Config,
+): Promise<z.infer<typeof registryResolvedItemsTreeSchema> | null> {
+  try {
+    const index = await getRegistryIndex()
     if (!index) {
       return null
     }
@@ -278,9 +290,9 @@ async function registryResolveItemsTree(
       names.unshift('index')
     }
 
-    const registryItems = await resolveRegistryItems(urlRegistry, names, config)
-    const result = await fetchRegistry(urlRegistry, registryItems)
-    const payload = v.parse(v.array(RegistryItemSchema), result)
+    const registryItems = await resolveRegistryItems(names, config)
+    const result = await fetchRegistry(registryItems)
+    const payload = z.array(registryItemSchema).parse(result)
 
     if (!payload) {
       return null
@@ -292,12 +304,20 @@ async function registryResolveItemsTree(
     // Other components will ship with their theme tokens.
     if (names.includes('index')) {
       if (config.tailwind.baseColor) {
-        const theme = await registryGetTheme(urlRegistry, config.tailwind.baseColor, config)
+        const theme = await registryGetTheme(config.tailwind.baseColor, config)
         if (theme) {
           payload.unshift(theme)
         }
       }
     }
+
+    // Sort the payload so that registry:theme is always first.
+    payload.sort((a) => {
+      if (a.type === 'registry:theme') {
+        return -1
+      }
+      return 1
+    })
 
     let tailwind = {}
     payload.forEach((item) => {
@@ -309,6 +329,11 @@ async function registryResolveItemsTree(
       cssVars = deepmerge(cssVars, item.cssVars ?? {})
     })
 
+    let css = {}
+    payload.forEach((item) => {
+      css = deepmerge(css, item.css ?? {})
+    })
+
     let docs = ''
     payload.forEach((item) => {
       if (item.docs) {
@@ -316,7 +341,7 @@ async function registryResolveItemsTree(
       }
     })
 
-    return v.parse(RegistryResolvedItemsTreeSchema, {
+    return registryResolvedItemsTreeSchema.parse({
       dependencies: deepmerge.all(
         payload.map(item => item.dependencies ?? []),
       ),
@@ -326,6 +351,7 @@ async function registryResolveItemsTree(
       files: deepmerge.all(payload.map(item => item.files ?? [])),
       tailwind,
       cssVars,
+      css,
       docs,
     })
   }
@@ -336,7 +362,6 @@ async function registryResolveItemsTree(
 }
 
 async function resolveRegistryDependencies(
-  urlRegistry: string,
   url: string,
   config: Config,
 ): Promise<string[]> {
@@ -349,7 +374,6 @@ async function resolveRegistryDependencies(
 
   async function resolveDependencies(itemUrl: string): Promise<void> {
     const url = getRegistryUrl(
-      urlRegistry,
       isUrl(itemUrl) ? itemUrl : `styles/${style}/${itemUrl}.json`,
     )
 
@@ -360,8 +384,8 @@ async function resolveRegistryDependencies(
     visited.add(url)
 
     try {
-      const [result] = await fetchRegistry(urlRegistry, [url])
-      const item = v.parse(RegistryItemSchema, result)
+      const [result] = await fetchRegistry([url])
+      const item = registryItemSchema.parse(result)
       payload.push(url)
 
       if (item.registryDependencies) {
@@ -382,15 +406,16 @@ async function resolveRegistryDependencies(
   return Array.from(new Set(payload))
 }
 
-async function registryGetTheme(urlRegistry: string, name: string, config: Config): Promise<v.InferOutput<typeof RegistryItemSchema> | null> {
+export async function registryGetTheme(name: string, config: Config): Promise<z.infer<typeof registryItemSchema> | null> {
   const [baseColor, tailwindVersion] = await Promise.all([
-    getRegistryBaseColor(urlRegistry, name),
+    getRegistryBaseColor(name),
     getProjectTailwindVersionFromConfig(config),
   ])
   if (!baseColor) {
     return null
   }
 
+  // TODO: Move this to the registry i.e registry:theme.
   const theme = {
     name,
     type: 'registry:theme',
@@ -409,19 +434,24 @@ async function registryGetTheme(urlRegistry: string, name: string, config: Confi
       },
     },
     cssVars: {
+      theme: {},
       light: {
         radius: '0.5rem',
       },
       dark: {},
     },
-  } satisfies v.InferOutput<typeof RegistryItemSchema>
+  } satisfies z.infer<typeof registryItemSchema>
 
   if (config.tailwind.cssVariables) {
     theme.tailwind.config.theme.extend.colors = {
       ...theme.tailwind.config.theme.extend.colors,
-      ...buildTailwindThemeColorsFromCssVars(baseColor.cssVars.dark),
+      ...buildTailwindThemeColorsFromCssVars(baseColor.cssVars.dark ?? {}),
     }
     theme.cssVars = {
+      theme: {
+        ...baseColor.cssVars.theme,
+        ...theme.cssVars.theme,
+      },
       light: {
         ...baseColor.cssVars.light,
         ...theme.cssVars.light,
@@ -431,30 +461,57 @@ async function registryGetTheme(urlRegistry: string, name: string, config: Confi
         ...theme.cssVars.dark,
       },
     }
-  }
 
-  // Update theme to be v4 compatible.
-  if (tailwindVersion === 'v4' && baseColor.cssVarsV4) {
-    theme.cssVars = {
-      light: {
-        ...theme.cssVars.light,
-        ...baseColor.cssVarsV4.light,
-      },
-      dark: {
-        ...theme.cssVars.dark,
-        ...baseColor.cssVarsV4.dark,
-      },
+    if (tailwindVersion === 'v4' && baseColor.cssVarsV4) {
+      theme.cssVars = {
+        theme: {
+          ...baseColor.cssVarsV4.theme,
+          ...theme.cssVars.theme,
+        },
+        light: {
+          radius: '0.625rem',
+          ...baseColor.cssVarsV4.light,
+        },
+        dark: {
+          ...baseColor.cssVarsV4.dark,
+        },
+      }
     }
   }
 
   return theme
 }
 
-async function resolveRegistryItems(urlRegistry: string, names: string[], config: Config): Promise<string[]> {
+function getRegistryUrl(path: string): string {
+  if (isUrl(path)) {
+    // If the url contains /chat/b/, we assume it's the v0 registry.
+    // We need to add the /json suffix if it's missing.
+    const url = new URL(path)
+    if (url.pathname.match(/\/chat\/b\//) && !url.pathname.endsWith('/json')) {
+      url.pathname = `${url.pathname}/json`
+    }
+
+    return url.toString()
+  }
+
+  return `${REGISTRY_URL}/${path}`
+}
+
+export function isUrl(path: string): boolean {
+  try {
+    const _ = new URL(path)
+    return true
+  }
+  catch {
+    return false
+  }
+}
+
+// TODO: We're double-fetching here. Use a cache.
+export async function resolveRegistryItems(names: string[], config: Config): Promise<string[]> {
   const registryDependencies: string[] = []
   for (const name of names) {
     const itemRegistryDependencies = await resolveRegistryDependencies(
-      urlRegistry,
       name,
       config,
     )
@@ -464,10 +521,21 @@ async function resolveRegistryItems(urlRegistry: string, names: string[], config
   return Array.from(new Set(registryDependencies))
 }
 
-function getRegistryParentMap(
-  registryItems: v.InferOutput<typeof RegistryItemSchema>[],
-): Map<string, v.InferOutput<typeof RegistryItemSchema>> {
-  const map = new Map<string, v.InferOutput<typeof RegistryItemSchema>>()
+export function getRegistryTypeAliasMap(): Map<string, string> {
+  return new Map<string, string>([
+    ['registry:ui', 'ui'],
+    ['registry:lib', 'lib'],
+    ['registry:hook', 'hooks'],
+    ['registry:block', 'components'],
+    ['registry:component', 'components'],
+  ])
+}
+
+// Track a dependency and its parent.
+export function getRegistryParentMap(
+  registryItems: z.infer<typeof registryItemSchema>[],
+): Map<string, z.infer<typeof registryItemSchema>> {
+  const map = new Map<string, z.infer<typeof registryItemSchema>>()
   registryItems.forEach((item) => {
     if (!item.registryDependencies) {
       return
@@ -478,44 +546,4 @@ function getRegistryParentMap(
     })
   })
   return map
-}
-
-function getRegistryTypeAliasMap(): Map<string, string> {
-  return new Map<string, string>([
-    ['registry:ui', 'ui'],
-    ['registry:lib', 'lib'],
-    ['registry:hook', 'hooks'],
-    ['registry:block', 'components'],
-    ['registry:component', 'components'],
-  ])
-}
-
-export function buildRegistry(url: string = 'https://ui.adrianub.dev/r'): {
-  getRegistryIndex: () => Promise<v.InferOutput<typeof RegistryIndexSchema> | undefined>
-  getRegistryStyles: () => Promise<v.InferOutput<typeof StylesSchema>>
-  getRegistryIcons: () => Promise<v.InferOutput<typeof IconsSchema>>
-  getRegistryItem: (name: string, style: string) => Promise<v.InferOutput<typeof RegistryItemSchema> | null>
-  getRegistryBaseColor: (baseColor: string) => Promise<v.InferOutput<typeof RegistryBaseColorSchema> | undefined>
-  fetchTree: (style: string, tree: v.InferOutput<typeof RegistryIndexSchema>) => Promise<v.InferOutput<typeof RegistryIndexSchema> | undefined>
-  getRegistryBaseColors: () => Promise<{ name: string, label: string }[]>
-  resolveTree: (index: v.InferOutput<typeof RegistryIndexSchema>, names: string[]) => Promise<v.InferOutput<typeof RegistryIndexSchema>>
-  getItemTargetPath: (config: Config, item: Pick<v.InferOutput<typeof RegistryItemSchema>, 'type'>, override?: string) => Promise<string | null>
-  getRegistryTypeAliasMap: () => Map<string, string>
-  getRegistryParentMap: (registryItems: v.InferOutput<typeof RegistryItemSchema>[]) => Map<string, v.InferOutput<typeof RegistryItemSchema>>
-  registryResolveItemsTree: (names: v.InferOutput<typeof RegistryItemSchema>['name'][], config: Config) => Promise<v.InferOutput<typeof RegistryResolvedItemsTreeSchema> | null>
-} {
-  return {
-    getRegistryIndex: () => getRegistryIndex(url),
-    getRegistryStyles: () => getRegistryStyles(url),
-    getRegistryIcons: () => getRegistryIcons(url),
-    getRegistryItem: (name: string, style: string) => getRegistryItem(url, name, style),
-    getRegistryBaseColor: (baseColor: string) => getRegistryBaseColor(url, baseColor),
-    fetchTree: (style: string, tree: v.InferOutput<typeof RegistryIndexSchema>) => fetchTree(url, style, tree),
-    getRegistryBaseColors: () => getRegistryBaseColors(),
-    resolveTree: (index: v.InferOutput<typeof RegistryIndexSchema>, names: string[]) => resolveTree(index, names),
-    getItemTargetPath: (config: Config, item: Pick<v.InferOutput<typeof RegistryItemSchema>, 'type'>, override?: string) => getItemTargetPath(config, item, override),
-    getRegistryTypeAliasMap: () => getRegistryTypeAliasMap(),
-    getRegistryParentMap: (registryItems: v.InferOutput<typeof RegistryItemSchema>[]) => getRegistryParentMap(registryItems),
-    registryResolveItemsTree: (names: v.InferOutput<typeof RegistryItemSchema>['name'][], config: Config) => registryResolveItemsTree(url, names, config),
-  }
 }
