@@ -57,7 +57,7 @@ export const configSchema = rawConfigSchema.extend({
     lib: z.string(),
     hooks: z.string(),
     ui: z.string(),
-    services: z.string().optional(),
+    services: z.string(),
   }),
 })
 
@@ -88,8 +88,7 @@ export async function resolveConfigPaths(cwd: string, config: RawConfig): Promis
 
   if (tsConfig.resultType === 'failed') {
     throw new Error(
-      `Failed to load 'tsconfig.json'. ${
-        tsConfig.message ?? ''
+      `Failed to load 'tsconfig.json'. ${tsConfig.message ?? ''
       }`.trim(),
     )
   }
@@ -126,6 +125,14 @@ export async function resolveConfigPaths(cwd: string, config: RawConfig): Promis
             ?? cwd,
             '..',
             'hooks',
+          ),
+      services: config.aliases.services
+        ? await resolveImport(config.aliases.services, tsConfig)
+        : path.resolve(
+            (await resolveImport(config.aliases.components, tsConfig))
+            ?? cwd,
+            '..',
+            'services',
           ),
     },
   })
