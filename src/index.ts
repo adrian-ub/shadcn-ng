@@ -3,6 +3,7 @@ import process from 'node:process'
 import { Command } from 'commander'
 
 import { add } from '~/src/commands/add'
+import { info } from '~/src/commands/info'
 import { init } from '~/src/commands/init'
 
 import packageJson from '../package.json'
@@ -23,6 +24,7 @@ async function main(): Promise<void> {
   program
     .addCommand(init)
     .addCommand(add)
+    .addCommand(info)
 
   program.parse()
 }
