@@ -1,0 +1,35 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@analogjs/astro-angular": "catalog:front",
+    "@angular-devkit/build-angular": "catalog:front",
+    "@angular/animations": "catalog:front",
+    "@angular/common": "catalog:front",
+    "@angular/compiler": "catalog:front",
+    "@angular/compiler-cli": "catalog:front",
+    "@angular/core": "catalog:front",
+    "@angular/language-service": "catalog:front",
+    "@angular/platform-browser": "catalog:front",
+    "@angular/platform-browser-dynamic": "catalog:front",
+    "@angular/platform-server": "catalog:front",
+    "@astrojs/starlight": "catalog:front",
+    "@astrojs/starlight-tailwind": "catalog:front",
+    "@tailwindcss/vite": "catalog:front",
+    "astro": "catalog:front",
+    "rxjs": "catalog:front",
+    "sharp": "catalog:front",
+    "tailwindcss": "catalog:utils",
+    "tslib": "catalog:front",
+    "zone.js": "catalog:front"
+  }
+}

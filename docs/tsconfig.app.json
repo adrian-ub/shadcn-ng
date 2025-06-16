@@ -1,0 +1,34 @@
+{
+  "extends": "./tsconfig.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": ["es2020", "dom"],
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "noEmit": false,
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "allowJs": false
+  },
+  "files": [],
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}
