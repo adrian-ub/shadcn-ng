@@ -26,6 +26,7 @@
   "sideEffects": false,
   "exports": {
     ".": "./dist/index.mjs",
+    "./registry": "./dist/registry/index.mjs",
     "./package.json": "./package.json"
   },
   "main": "./dist/index.mjs",
