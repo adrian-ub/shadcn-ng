@@ -24,7 +24,17 @@ export default defineConfig({
       title: 'shadcn-ng',
       titleDelimiter: '-',
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/adrian-ub/shadcn-ng' }],
-      sidebar: [],
+      sidebar: [
+        {
+          label: 'Get Started',
+          items: [
+            {
+              label: 'Installation',
+              slug: 'docs/installation',
+            },
+          ],
+        },
+      ],
       customCss: ['./src/styles/global.css'],
       components: {
         PageFrame: './src/components/starlight/PageFrame.astro',

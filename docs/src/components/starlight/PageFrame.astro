@@ -1,6 +1,10 @@
 ---
-import SiteHeader from "~/components/SiteHeader.astro";
-import SiteFooter from "~/components/SiteFooter.astro";
+import SiteHeader from '~/components/SiteHeader.astro'
+import SiteFooter from '~/components/SiteFooter.astro'
+
+import DocsSidebar from '~/components/starlight/Sidebar.astro'
+
+const { hasSidebar } = Astro.locals.starlightRoute
 ---
 
 <div
@@ -9,7 +13,17 @@ import SiteFooter from "~/components/SiteFooter.astro";
   <div class="bg-background relative z-10 flex min-h-svh flex-col">
     <SiteHeader />
     <main class="flex flex-1 flex-col">
-      <slot />
+      {!hasSidebar && <slot />}
+      {
+        hasSidebar && (
+          <div class="container-wrapper flex flex-1 flex-col px-2">
+            <DocsSidebar />
+            <div class="h-full w-full">
+              <slot />
+            </div>
+          </div>
+        )
+      }
     </main>
     <SiteFooter />
   </div>
