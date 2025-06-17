@@ -39,7 +39,6 @@ export const rawConfigSchema = z
       ui: z.string().optional(),
       lib: z.string().optional(),
       hooks: z.string().optional(),
-      services: z.string().optional(),
     }),
     iconLibrary: z.string().optional(),
   })
@@ -57,7 +56,6 @@ export const configSchema = rawConfigSchema.extend({
     lib: z.string(),
     hooks: z.string(),
     ui: z.string(),
-    services: z.string(),
   }),
 })
 
@@ -125,14 +123,6 @@ export async function resolveConfigPaths(cwd: string, config: RawConfig): Promis
             ?? cwd,
             '..',
             'hooks',
-          ),
-      services: config.aliases.services
-        ? await resolveImport(config.aliases.services, tsConfig)
-        : path.resolve(
-            (await resolveImport(config.aliases.components, tsConfig))
-            ?? cwd,
-            '..',
-            'services',
           ),
     },
   })

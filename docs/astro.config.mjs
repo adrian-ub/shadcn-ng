@@ -5,13 +5,18 @@ import tailwindcss from '@tailwindcss/vite'
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config'
 
+const angularComponentsPaths = [
+  'src/components',
+  'src/registry',
+]
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     analogjsangular({
       vite: {
         transformFilter: (_code, id) => {
-          return id.includes('src/components')
+          return angularComponentsPaths.some(path => id.includes(path))
         },
       },
     }),

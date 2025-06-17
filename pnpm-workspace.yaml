@@ -50,6 +50,7 @@ catalogs:
     '@types/prompts': ^2.4.9
     '@types/stringify-object': ^4.0.5
   utils:
+    class-variance-authority: ^0.7.1
     clsx: ^2.1.1
     cosmiconfig: ^9.0.0
     deepmerge: ^4.3.1

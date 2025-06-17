@@ -307,7 +307,6 @@ async function promptForConfig(defaultConfig: Config | null = null): Promise<Raw
       // TODO: fix this.
       lib: options.components.replace(/\/components$/, 'lib'),
       hooks: options.components.replace(/\/components$/, 'hooks'),
-      services: options.components.replace(/\/components$/, 'services'),
     },
   })
 }

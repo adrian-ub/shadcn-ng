@@ -78,6 +78,7 @@
     "@types/prompts": "catalog:types",
     "@types/stringify-object": "catalog:types",
     "bumpp": "catalog:cli",
+    "class-variance-authority": "catalog:utils",
     "clsx": "catalog:utils",
     "eslint": "catalog:cli",
     "lint-staged": "catalog:cli",

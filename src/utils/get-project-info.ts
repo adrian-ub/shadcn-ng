@@ -282,7 +282,6 @@ export async function getProjectConfig(
       components: `${projectInfo.aliasPrefix}/components`,
       ui: `${projectInfo.aliasPrefix}/components/ui`,
       hooks: `${projectInfo.aliasPrefix}/hooks`,
-      services: `${projectInfo.aliasPrefix}/services`,
       lib: `${projectInfo.aliasPrefix}/lib`,
       utils: `${projectInfo.aliasPrefix}/lib/utils`,
     },
