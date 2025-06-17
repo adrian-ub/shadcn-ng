@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+  href: string | URL
+  variant?: 'primary' | 'secondary' | 'minimal'
+}
+
+const { class: className, variant = 'primary', ...attrs } = Astro.props
+---
+
+<slot />

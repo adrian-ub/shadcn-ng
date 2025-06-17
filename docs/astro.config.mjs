@@ -24,6 +24,7 @@ export default defineConfig({
       components: {
         PageFrame: './src/components/starlight/PageFrame.astro',
         Head: './src/components/starlight/Head.astro',
+        Hero: './src/components/starlight/Hero.astro',
       },
     }),
   ],

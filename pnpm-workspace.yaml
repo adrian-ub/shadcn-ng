@@ -50,6 +50,7 @@ catalogs:
     '@types/prompts': ^2.4.9
     '@types/stringify-object': ^4.0.5
   utils:
+    clsx: ^2.1.1
     cosmiconfig: ^9.0.0
     deepmerge: ^4.3.1
     fast-glob: ^3.3.3
@@ -59,6 +60,7 @@ catalogs:
     node-fetch: ^3.3.2
     ora: ^8.2.0
     stringify-object: ^5.0.0
+    tailwind-merge: ^3.3.1
     tailwindcss: ^4.1.10
     tinyexec: ^0.3.2
     ts-morph: ^26.0.0

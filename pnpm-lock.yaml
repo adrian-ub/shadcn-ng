@@ -131,6 +131,9 @@ catalogs:
       specifier: ^4.0.5
       version: 4.0.5
   utils:
+    clsx:
+      specifier: ^2.1.1
+      version: 2.1.1
     cosmiconfig:
       specifier: ^9.0.0
       version: 9.0.0
@@ -158,6 +161,9 @@ catalogs:
     stringify-object:
       specifier: ^5.0.0
       version: 5.0.0
+    tailwind-merge:
+      specifier: ^3.3.1
+      version: 3.3.1
     tailwindcss:
       specifier: ^4.1.10
       version: 4.1.10
@@ -260,6 +266,9 @@ importers:
       bumpp:
         specifier: catalog:cli
         version: 10.1.0(magicast@0.3.5)
+      clsx:
+        specifier: catalog:utils
+        version: 2.1.1
       eslint:
         specifier: catalog:cli
         version: 9.22.0(jiti@2.4.2)
@@ -269,6 +278,9 @@ importers:
       simple-git-hooks:
         specifier: catalog:cli
         version: 2.11.1
+      tailwind-merge:
+        specifier: catalog:utils
+        version: 3.3.1
       tinyexec:
         specifier: catalog:utils
         version: 0.3.2
@@ -6071,6 +6083,9 @@ packages:
   synckit@0.9.2:
     resolution: {integrity: sha512-vrozgXDQwYO72vHjUb/HnFbQx1exDjoKzqx23aXEg2a9VIg2TSFZ8FmeZpTjUCFMYw7mpX4BE2SFu8wI7asYsw==}
     engines: {node: ^14.18.0 || >=16.0.0}
+
+  tailwind-merge@3.3.1:
+    resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
 
   tailwindcss@4.1.10:
     resolution: {integrity: sha512-P3nr6WkvKV/ONsTzj6Gb57sWPMX29EPNPopo7+FcpkQaNsrNpZ1pv8QmrYI2RqEKD7mlGqLnGovlcYnBK0IqUA==}
@@ -13457,6 +13472,8 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.1.1
       tslib: 2.8.1
+
+  tailwind-merge@3.3.1: {}
 
   tailwindcss@4.1.10: {}
 
