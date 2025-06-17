@@ -1,0 +1,31 @@
+---
+import { cn } from '~/lib/utils'
+import { buttonVariants } from '~/registry/new-york-v4/ui/button'
+---
+
+<button class={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'size-8', Astro.props.class)}>
+  <span class="sr-only">Toggle layout</span>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+    <path d="M2 3v18"></path>
+    <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+    <path d="M22 3v18"></path>
+  </svg>
+</button>
+
+<script>
+  const button = document.querySelector('button')!
+  button.addEventListener('click', () => {
+    const html = document.documentElement
+    const isFixedLayout = localStorage.getItem('layout') === 'fixed'
+
+    if (isFixedLayout) {
+      html.classList.remove('layout-fixed')
+      html.classList.add('layout-full')
+      localStorage.setItem('layout', 'full')
+    } else {
+      html.classList.remove('layout-full')
+      html.classList.add('layout-fixed')
+      localStorage.setItem('layout', 'fixed')
+    }
+  })
+</script>

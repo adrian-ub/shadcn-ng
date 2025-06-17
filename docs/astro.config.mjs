@@ -30,6 +30,7 @@ export default defineConfig({
         PageFrame: './src/components/starlight/PageFrame.astro',
         Head: './src/components/starlight/Head.astro',
         Hero: './src/components/starlight/Hero.astro',
+        ThemeSelect: './src/components/starlight/ThemeSelect.astro',
       },
     }),
   ],
@@ -43,6 +44,7 @@ export default defineConfig({
         name: 'Geist',
         cssVariable: '--font-sans',
         subsets: ['latin'],
+        weights: ['100 900'],
       },
       {
         provider: fontProviders.google(),
@@ -56,6 +58,7 @@ export default defineConfig({
         name: 'Inter',
         cssVariable: '--font-inter',
         subsets: ['latin'],
+        weights: ['100 900'],
       },
     ],
   },

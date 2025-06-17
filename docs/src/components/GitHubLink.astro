@@ -1,0 +1,10 @@
+---
+import { siteConfig } from '~/lib/config'
+import { cn } from '~/lib/utils'
+import { buttonVariants } from '~/registry/new-york-v4/ui/button'
+import { Icons } from './icons'
+---
+
+<a href={siteConfig.links.github} target="_blank" rel="noreferrer" class={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'h-8 shadow-none')}>
+  <Icons.gitHub class="size-4" />
+</a>
