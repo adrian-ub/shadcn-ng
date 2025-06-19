@@ -1,0 +1,18 @@
+---
+import SiteFooter from '~/components/SiteFooter.astro'
+import SiteHeader from '~/components/SiteHeader.astro'
+import RootLayout, { type Props as RootLayoutProps } from '~/layouts/Root.astro'
+
+export type Props = RootLayoutProps
+
+---
+
+<RootLayout {...Astro.props}>
+  <div class="bg-background relative z-10 flex min-h-svh flex-col">
+    <SiteHeader />
+    <main class="flex flex-1 flex-col">
+      <slot />
+    </main>
+    <SiteFooter />
+  </div>
+</RootLayout>

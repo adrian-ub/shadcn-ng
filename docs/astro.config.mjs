@@ -1,54 +1,40 @@
 import analogjsangular from '@analogjs/astro-angular'
-import starlight from '@astrojs/starlight'
+import mdx from '@astrojs/mdx'
 import tailwindcss from '@tailwindcss/vite'
 
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config'
 
-const angularComponentsPaths = [
-  'src/components',
-  'src/registry',
-]
+import rehypePrettyCode from 'rehype-pretty-code'
+import Icons from 'unplugin-icons/vite'
+
+import { transformers } from './src/lib/highlight-code'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    analogjsangular({
-      vite: {
-        transformFilter: (_code, id) => {
-          return angularComponentsPaths.some(path => id.includes(path))
-        },
-      },
-    }),
-    starlight({
-      title: 'shadcn-ng',
-      titleDelimiter: '-',
-      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/adrian-ub/shadcn-ng' }],
-      sidebar: [
+  integrations: [analogjsangular(), mdx()],
+  markdown: {
+    syntaxHighlight: false,
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
         {
-          label: 'Get Started',
-          items: [
-            {
-              label: 'Installation',
-              slug: 'docs/installation',
-            },
-          ],
+          theme: {
+            dark: 'github-dark',
+            light: 'github-light-default',
+          },
+          transformers,
         },
       ],
-      customCss: ['./src/styles/global.css'],
-      components: {
-        PageFrame: './src/components/starlight/PageFrame.astro',
-        Head: './src/components/starlight/Head.astro',
-        Hero: './src/components/starlight/Hero.astro',
-        ThemeSelect: './src/components/starlight/ThemeSelect.astro',
-        TwoColumnContent: './src/components/starlight/TwoColumnContent.astro',
-        Sidebar: './src/components/starlight/Sidebar.astro',
-        ContentPanel: './src/components/starlight/ContentPanel.astro',
-      },
-    }),
-  ],
+    ],
+  },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      Icons({
+        compiler: 'astro',
+      }),
+    ],
   },
   experimental: {
     fonts: [

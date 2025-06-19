@@ -1,0 +1,16 @@
+---
+import RootLayout, { type Props as RootLayoutProps } from '~/pages/_layout.astro'
+import DocsSidebar from '~/components/DocsSidebar.astro'
+
+export type Props = RootLayoutProps
+
+---
+
+<RootLayout {...Astro.props}>
+  <div class="container-wrapper flex flex-1 flex-col px-2">
+    <DocsSidebar />
+    <div class="h-full w-full">
+      <slot />
+    </div>
+  </div>
+</RootLayout>

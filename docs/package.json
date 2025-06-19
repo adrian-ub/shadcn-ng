@@ -22,14 +22,20 @@
     "@angular/platform-browser": "catalog:front",
     "@angular/platform-browser-dynamic": "catalog:front",
     "@angular/platform-server": "catalog:front",
-    "@astrojs/starlight": "catalog:front",
-    "@astrojs/starlight-tailwind": "catalog:front",
+    "@astrojs/mdx": "catalog:front",
     "@tailwindcss/vite": "catalog:front",
     "astro": "catalog:front",
+    "astro-seo-plugin": "catalog:front",
     "rxjs": "catalog:front",
     "sharp": "catalog:front",
     "tailwindcss": "catalog:utils",
     "tslib": "catalog:front",
     "zone.js": "catalog:front"
+  },
+  "devDependencies": {
+    "@iconify/json": "catalog:front",
+    "rehype-pretty-code": "catalog:front",
+    "shiki": "catalog:front",
+    "unplugin-icons": "catalog:front"
   }
 }

@@ -1,0 +1,39 @@
+---
+import { AstroSEO, type SEOProps } from 'astro-seo-plugin'
+import { Font } from 'astro:assets'
+import ThemeProvider from '~/components/ThemeProvider.astro'
+
+import { defaultSeo } from '~/lib/seo'
+import '~/styles/global.css'
+
+export type Props = {
+  seo?: SEOProps
+}
+
+let { seo } = Astro.props
+
+seo = {
+  ...defaultSeo,
+  ...seo,
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <AstroSEO {...seo} />
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-mono" preload />
+    <Font cssVariable="--font-inter" preload />
+   <ThemeProvider />
+  </head>
+  <body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]"
+  >
+    <slot />
+  </body>
+</html>

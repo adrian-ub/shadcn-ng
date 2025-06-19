@@ -9,7 +9,10 @@
       "shadcn-ng/*": [
         "../src/*"
       ]
-    }
+    },
+    "types": [
+      "unplugin-icons/types/astro"
+    ]
   },
   "include": [
     ".astro/types.d.ts",
