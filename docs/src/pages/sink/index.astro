@@ -1,0 +1,13 @@
+---
+import RootLayout from '~/layouts/Root.astro'
+import { SinkPage } from './_page'
+---
+
+<RootLayout
+  seo={{
+    title: 'Kitchen Sink',
+    description: 'A page with all components for testing purposes.',
+  }}
+>
+  <SinkPage client:only />
+</RootLayout>

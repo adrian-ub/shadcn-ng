@@ -35,6 +35,24 @@ export default defineConfig({
         compiler: 'astro',
       }),
     ],
+    optimizeDeps: {
+      include: [
+        '@radix-ng/primitives',
+        '@angular/common',
+        '@angular/core',
+        '@angular/cdk',
+        '@internationalized/date',
+      ],
+      ssr: {
+        noExternal: [
+          '@radix-ng/**',
+          '@angular/common',
+          '@angular/core',
+          '@angular/core/rxjs-interop',
+          '@internationalized/date',
+        ],
+      },
+    },
   },
   experimental: {
     fonts: [
