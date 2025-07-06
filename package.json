@@ -18,6 +18,7 @@
     "ui",
     "tailwind",
     "radix-ui",
+    "radix-ng",
     "shadcn",
     "shadcn-ng",
     "ng",
@@ -72,7 +73,6 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:cli",
     "@antfu/ni": "catalog:cli",
-    "@antfu/utils": "catalog:inlined",
     "@types/fs-extra": "catalog:types",
     "@types/node": "catalog:types",
     "@types/prompts": "catalog:types",

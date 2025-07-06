@@ -1,5 +1,6 @@
 import { Component, computed, Directive, input } from '@angular/core'
 
+import { lucideChevronDown, NgxiLucide } from '@ngxi/lucide'
 import {
   RdxAccordionContentDirective,
   RdxAccordionHeaderDirective,
@@ -16,20 +17,31 @@ import { cn } from '~/lib/utils'
   host: {
     'data-slot': 'accordion',
   },
-  hostDirectives: [RdxAccordionRootDirective],
+  hostDirectives: [
+    {
+      directive: RdxAccordionRootDirective,
+      inputs: ['type', 'collapsible', 'defaultValue', 'value', 'id', 'dir', 'disabled', 'orientation'],
+      outputs: ['onValueChange'],
+    },
+  ],
 })
-export class UbAccordionDirective { }
+export class UbAccordion { }
 
 @Directive({
   standalone: true,
   selector: '[ubAccordionItem], ub-accordion-item',
-  hostDirectives: [RdxAccordionItemDirective],
+  hostDirectives: [
+    {
+      directive: RdxAccordionItemDirective,
+      inputs: ['disabled', 'value'],
+    },
+  ],
   host: {
     '[class]': 'computedClass()',
     'data-slot': 'accordion-item',
   },
 })
-export class UbAccordionItemDirective {
+export class UbAccordionItem {
   readonly class = input<string>()
   readonly computedClass = computed(() => {
     return cn('border-b last:border-b-0', this.class())
@@ -39,17 +51,18 @@ export class UbAccordionItemDirective {
 @Component({
   standalone: true,
   selector: '[ubAccordionTrigger], ub-accordion-trigger',
-  imports: [RdxAccordionHeaderDirective, RdxAccordionTriggerDirective],
+  imports: [RdxAccordionHeaderDirective, NgxiLucide, RdxAccordionTriggerDirective],
   template: `
     <h3 rdxAccordionHeader class="flex">
       <button [class]="computedClass()" data-slot="accordion-trigger" rdxAccordionTrigger>
         <ng-content></ng-content>
-        <svg class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200"></svg>
+        <svg [ngxiLucide]="lucideChevronDown" class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200"></svg>
       </button>
     </h3>
     `,
 })
-export class UbAccordionTriggerDirective {
+export class UbAccordionTrigger {
+  readonly lucideChevronDown = lucideChevronDown
   readonly class = input<string>()
   readonly computedClass = computed(() => {
     return cn('focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180', this.class())
@@ -71,7 +84,7 @@ export class UbAccordionTriggerDirective {
     </div>
     `,
 })
-export class UbAccordionContentDirective {
+export class UbAccordionContent {
   readonly class = input<string>()
   readonly computedClass = computed(() => {
     return cn('pt-0 pb-4', this.class())

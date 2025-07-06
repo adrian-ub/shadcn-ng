@@ -1,7 +1,8 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import analogjsangular from '@analogjs/astro-angular'
 import mdx from '@astrojs/mdx'
 import tailwindcss from '@tailwindcss/vite'
-
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config'
 
@@ -10,6 +11,8 @@ import Icons from 'unplugin-icons/vite'
 
 import { transformers } from './src/lib/highlight-code'
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 // https://astro.build/config
 export default defineConfig({
   integrations: [analogjsangular(), mdx()],
@@ -41,18 +44,29 @@ export default defineConfig({
         '@angular/common',
         '@angular/core',
         '@angular/cdk',
+        '@ngxi/lucide',
+        '@internationalized/date',
+        'clsx',
+        'tailwind-merge',
+        'class-variance-authority',
+      ],
+    },
+    ssr: {
+      noExternal: [
+        '@radix-ng/primitives/**',
+        '@angular/common',
+        '@angular/core',
+        '@angular/core/rxjs-interop',
+        '@ngxi/lucide',
         '@internationalized/date',
       ],
-      ssr: {
-        noExternal: [
-          '@radix-ng/**',
-          '@angular/common',
-          '@angular/core',
-          '@angular/core/rxjs-interop',
-          '@internationalized/date',
-        ],
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
       },
     },
+
   },
   experimental: {
     fonts: [

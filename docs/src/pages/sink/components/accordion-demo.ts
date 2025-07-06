@@ -1,20 +1,20 @@
 import { Component } from '@angular/core'
 
 import {
-  UbAccordionContentDirective,
-  UbAccordionDirective,
-  UbAccordionItemDirective,
-  UbAccordionTriggerDirective,
+  UbAccordion,
+  UbAccordionContent,
+  UbAccordionItem,
+  UbAccordionTrigger,
 } from '~/registry/new-york-v4/ui/accordion'
 
 @Component({
   standalone: true,
   selector: 'AccordionDemo',
   imports: [
-    UbAccordionContentDirective,
-    UbAccordionDirective,
-    UbAccordionItemDirective,
-    UbAccordionTriggerDirective,
+    UbAccordionContent,
+    UbAccordion,
+    UbAccordionItem,
+    UbAccordionTrigger,
   ],
   template: `
   <div class="grid w-full max-w-xl gap-4">

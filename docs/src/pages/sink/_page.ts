@@ -15,6 +15,15 @@ import { sinkComponents } from './components'
     <ComponentWrapper name="alert">
       <AlertDemo />
     </ComponentWrapper>
+    <ComponentWrapper name="aspect-ratio">
+      <AspectRatioDemo />
+    </ComponentWrapper>
+    <ComponentWrapper name="avatar">
+      <AvatarDemo />
+    </ComponentWrapper>
+    <ComponentWrapper name="badge">
+      <BadgeDemo />
+    </ComponentWrapper>
   </div>
 `,
 })
