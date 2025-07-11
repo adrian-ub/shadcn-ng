@@ -4,7 +4,12 @@ import { buttonVariants } from '~/registry/new-york-v4/ui/button'
 ---
 
 <mode-switcher>
-  <button aria-pressed="false" data-theme-toggle class={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'group/toggle extend-touch-target size-8')} title="Toggle theme">
+  <button
+    aria-pressed="false"
+    data-theme-toggle
+    class={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'group/toggle extend-touch-target size-8')}
+    title="Toggle theme"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -33,6 +38,7 @@ import { buttonVariants } from '~/registry/new-york-v4/ui/button'
     customElements.define(
       'mode-switcher',
       class extends HTMLElement {
+        // eslint-disable-next-line ts/explicit-function-return-type
         connectedCallback() {
           this.setAttribute('role', 'group')
           this.setAttribute('aria-label', 'Theme Toggle')
@@ -61,6 +67,7 @@ import { buttonVariants } from '~/registry/new-york-v4/ui/button'
           })
         }
 
+        // eslint-disable-next-line ts/explicit-function-return-type
         updatePressedState(themeValue = theme.getTheme()) {
           const button = this.querySelector('[data-theme-toggle]')
           button.setAttribute('aria-pressed', themeValue !== 'auto')

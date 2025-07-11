@@ -10,7 +10,8 @@ import CardsDemo from '~/components/cards'
 import { Image } from 'astro:assets'
 
 const title = 'Build your Component Library'
-const description = 'A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.'
+const description =
+  'A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.'
 ---
 
 <RootLayout
@@ -36,8 +37,20 @@ const description = 'A set of beautifully-designed, accessible components and a 
     <div class="container-wrapper section-soft flex-1 pb-6">
       <div class="container overflow-hidden">
         <section class="border-border/50 -mx-4 w-[160vw] overflow-hidden rounded-lg border md:hidden md:w-[150vw]">
-          <Image src="/r/styles/new-york-v4/dashboard-01-light.png" width={1400} height={875} alt="Dashboard" class="block dark:hidden" />
-          <Image src="/r/styles/new-york-v4/dashboard-01-dark.png" width={1400} height={875} alt="Dashboard" class="hidden dark:block" />
+          <Image
+            src="/r/styles/new-york-v4/dashboard-01-light.png"
+            width={1400}
+            height={875}
+            alt="Dashboard"
+            class="block dark:hidden"
+          />
+          <Image
+            src="/r/styles/new-york-v4/dashboard-01-dark.png"
+            width={1400}
+            height={875}
+            alt="Dashboard"
+            class="hidden dark:block"
+          />
           <section class="theme-container hidden md:block">
             <CardsDemo />
           </section>

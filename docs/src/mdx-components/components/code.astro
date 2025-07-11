@@ -21,10 +21,8 @@ function isPlainText(str: string) {
   if (/<[a-z][\s\S]*>/i.test(str)) return false
   if (str.includes('\n')) return false
   const trimmed = str.trim()
-  if (
-    (trimmed.startsWith('{') && trimmed.endsWith('}')) ||
-    (trimmed.startsWith('[') && trimmed.endsWith(']'))
-  ) return false
+  if ((trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']')))
+    return false
   return true
 }
 
@@ -34,7 +32,11 @@ const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__ && !isPlain
 
 {
   isPlain && (
-    <code class={cn('bg-muted relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] outline-none', className)}><slot /></code>
+    <code
+      class={cn('bg-muted relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] outline-none', className)}
+    >
+      <slot />
+    </code>
   )
 }
 
@@ -44,7 +46,9 @@ const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__ && !isPlain
   !isPlain && !isNpmCommand && (
     <>
       {__raw__ && <CopyButton value={__raw__} src={__src__} />}
-      <code {...props}><slot /></code>
+      <code {...props}>
+        <slot />
+      </code>
     </>
   )
 }

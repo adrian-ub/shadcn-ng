@@ -24,10 +24,10 @@ export async function createProject(
     'cwd' | 'force' | 'components' | 'template'
   >,
 ): Promise<{
-    projectPath: string
-    projectName: string
-    template: keyof typeof TEMPLATES
-  }> {
+  projectPath: string
+  projectName: string
+  template: keyof typeof TEMPLATES
+}> {
   let template: keyof typeof TEMPLATES
     = options.template && TEMPLATES[options.template as keyof typeof TEMPLATES]
       ? (options.template as keyof typeof TEMPLATES)

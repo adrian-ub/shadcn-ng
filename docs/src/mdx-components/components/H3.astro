@@ -7,6 +7,9 @@ export type Props = HTMLAttributes<'h3'>
 const { class: className, ...props } = Astro.props
 ---
 
-<h3 class={cn('font-heading mt-8 scroll-m-28 text-xl font-semibold tracking-tight *:[code]:text-xl', className)} {...props}>
+<h3
+  class={cn('font-heading mt-8 scroll-m-28 text-xl font-semibold tracking-tight *:[code]:text-xl', className)}
+  {...props}
+>
   <slot />
 </h3>

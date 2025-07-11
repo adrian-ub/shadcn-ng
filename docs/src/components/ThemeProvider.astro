@@ -19,6 +19,7 @@ const { defaultTheme = 'auto' } = Astro.props
       applyTheme(theme.getTheme())
     })
 
+    // eslint-disable-next-line ts/explicit-function-return-type
     function applyTheme(theme) {
       const resolved = theme === 'auto' ? systemTheme : theme
       const html = document.documentElement
@@ -34,19 +35,23 @@ const { defaultTheme = 'auto' } = Astro.props
       )
     }
 
+    // eslint-disable-next-line ts/explicit-function-return-type
     function setTheme(theme = defaultTheme) {
       store.setItem(storageKey, theme)
       applyTheme(theme)
     }
 
+    // eslint-disable-next-line ts/explicit-function-return-type
     function getTheme() {
       return store.getItem(storageKey) || defaultTheme
     }
 
+    // eslint-disable-next-line ts/explicit-function-return-type
     function getSystemTheme() {
       return systemTheme
     }
 
+    // eslint-disable-next-line ts/explicit-function-return-type
     function getDefaultTheme() {
       return defaultTheme
     }

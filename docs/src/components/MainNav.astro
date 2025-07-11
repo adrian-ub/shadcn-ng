@@ -14,7 +14,10 @@ const pathname = Astro.url.pathname
 <nav class={cn('items-center gap-0.5', className)} {...props}>
   {
     items.map((item) => (
-      <a href={item.href} class={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), pathname === item.href && 'text-primary')}>
+      <a
+        href={item.href}
+        class={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), pathname === item.href && 'text-primary')}
+      >
         {item.label}
       </a>
     ))

@@ -13,6 +13,7 @@ import hr from './components/hr.astro'
 import Image from './components/Image.astro'
 import img from './components/img.astro'
 import li from './components/li.astro'
+import LinkedCard from './components/LinkedCard.astro'
 import ol from './components/ol.astro'
 import p from './components/p.astro'
 import pre from './components/pre.astro'
@@ -50,4 +51,5 @@ export const mdxComponents = {
   Step,
   Steps,
   Image,
+  LinkedCard,
 }

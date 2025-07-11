@@ -7,10 +7,17 @@ export type Props = HTMLAttributes<'figcaption'>
 
 const { class: className, ...props } = Astro.props
 
-const iconExtension = 'data-language' in props && typeof props['data-language'] === 'string' ? props['data-language'] : null
+const iconExtension =
+  'data-language' in props && typeof props['data-language'] === 'string' ? props['data-language'] : null
 ---
 
-<figcaption class={cn('text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70', className)} {...props}>
+<figcaption
+  class={cn(
+    'text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70',
+    className,
+  )}
+  {...props}
+>
   {iconExtension && <GetIconForLanguageExtension language={iconExtension} />}
   <slot />
 </figcaption>
