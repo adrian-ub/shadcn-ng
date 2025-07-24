@@ -1,0 +1,50 @@
+---
+import { getSidebarConfig, isActiveRoute } from '~/lib/navigation'
+
+const sidebarConfig = await getSidebarConfig()
+const currentPath = Astro.url.pathname
+---
+
+<div
+  data-slot="sidebar"
+  class="text-sidebar-foreground w-(--sidebar-width) flex-col sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex"
+>
+  <div
+    data-slot="sidebar-content"
+    data-sidebar="content"
+    class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden no-scrollbar px-2 pb-12"
+  >
+    <div class="h-(--top-spacing) shrink-0"></div>
+    {
+      sidebarConfig.groups.map((group) => (
+        <div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+          <div
+            data-slot="sidebar-group-label"
+            data-sidebar="group-label"
+            class="ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0 group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 text-muted-foreground font-medium"
+          >
+            {group.title}
+          </div>
+          <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+            <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+              {group.items.map((item) => (
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+                  <a
+                    data-slot="sidebar-menu-button"
+                    data-sidebar="menu-button"
+                    data-size="default"
+                    data-active={isActiveRoute(currentPath, item.href) ? 'true' : 'false'}
+                    class="peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
+                    href={item.href}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

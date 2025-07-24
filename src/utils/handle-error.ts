@@ -1,30 +1,37 @@
 import process from 'node:process'
-import * as p from '@clack/prompts'
-import { ValiError } from 'valibot'
+
+import { z } from 'zod'
+
+import { highlighter } from '~/src/utils/highlighter'
+import { logger } from '~/src/utils/logger'
 
 export function handleError(error: unknown): void {
-  p.log.error(
+  logger.error(
     `Something went wrong. Please check the error below for more details.`,
   )
-  p.log.error(`If the problem persists, please open an issue on GitHub.`)
-
+  logger.error(`If the problem persists, please open an issue on GitHub.`)
+  logger.error('')
   if (typeof error === 'string') {
-    p.log.error(error)
+    logger.error(error)
+    logger.break()
     process.exit(1)
   }
 
-  if (error instanceof ValiError) {
-    p.log.error('Validation failed:')
-    for (const issue of error.issues) {
-      p.log.error(`- ${issue.message}`)
+  if (error instanceof z.ZodError) {
+    logger.error('Validation failed:')
+    for (const [key, value] of Object.entries(error.flatten().fieldErrors)) {
+      logger.error(`- ${highlighter.info(key)}: ${value}`)
     }
+    logger.break()
     process.exit(1)
   }
 
   if (error instanceof Error) {
-    p.log.error(error.message)
+    logger.error(error.message)
+    logger.break()
     process.exit(1)
   }
 
+  logger.break()
   process.exit(1)
 }

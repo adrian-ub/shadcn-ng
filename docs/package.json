@@ -1,0 +1,50 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@analogjs/astro-angular": "catalog:front",
+    "@angular-devkit/build-angular": "catalog:front",
+    "@angular/animations": "catalog:front",
+    "@angular/cdk": "catalog:front",
+    "@angular/common": "catalog:front",
+    "@angular/compiler": "catalog:front",
+    "@angular/compiler-cli": "catalog:front",
+    "@angular/core": "catalog:front",
+    "@angular/forms": "catalog:front",
+    "@angular/language-service": "catalog:front",
+    "@angular/platform-browser": "catalog:front",
+    "@angular/platform-browser-dynamic": "catalog:front",
+    "@angular/platform-server": "catalog:front",
+    "@astrojs/mdx": "catalog:front",
+    "@internationalized/date": "catalog:front",
+    "@ngxi/lucide": "0.12.1",
+    "@ngxpert/input-otp": "^1.0.3",
+    "@radix-ng/primitives": "catalog:front",
+    "@tailwindcss/vite": "catalog:front",
+    "astro": "catalog:front",
+    "astro-seo-plugin": "catalog:front",
+    "rxjs": "^7.8.2",
+    "shadcn-ng": "workspace:*",
+    "sharp": "catalog:front",
+    "tailwindcss": "catalog:utils",
+    "tslib": "catalog:front",
+    "zone.js": "catalog:front"
+  },
+  "devDependencies": {
+    "@iconify/json": "catalog:front",
+    "puppeteer": "^24.15.0",
+    "rehype-pretty-code": "catalog:front",
+    "rimraf": "^6.0.1",
+    "shiki": "catalog:front",
+    "unplugin-icons": "catalog:front"
+  }
+}
