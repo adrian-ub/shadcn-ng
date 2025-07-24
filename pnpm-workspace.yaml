@@ -23,24 +23,24 @@ catalogs:
     typescript: ^5.8.2
     vite: ^6.2.1
   front:
-    '@analogjs/astro-angular': ^1.17.1
-    '@angular-devkit/build-angular': ^20.0.2
-    '@angular/animations': ^20.0.3
-    '@angular/cdk': ^20.0.3
-    '@angular/common': ^20.0.3
-    '@angular/compiler': ^20.0.3
-    '@angular/compiler-cli': ^20.0.3
-    '@angular/core': ^20.0.3
-    '@angular/forms': ^20.0.3
-    '@angular/language-service': ^20.0.3
-    '@angular/platform-browser': ^20.0.3
-    '@angular/platform-browser-dynamic': ^20.0.3
-    '@angular/platform-server': ^20.0.3
+    '@analogjs/astro-angular': ^1.19.1
+    '@angular-devkit/build-angular': ^20.1.2
+    '@angular/animations': ^20.1.3
+    '@angular/cdk': ^20.1.3
+    '@angular/common': ^20.1.3
+    '@angular/compiler': ^20.1.3
+    '@angular/compiler-cli': ^20.1.3
+    '@angular/core': ^20.1.3
+    '@angular/forms': ^20.1.3
+    '@angular/language-service': ^20.1.3
+    '@angular/platform-browser': ^20.1.3
+    '@angular/platform-browser-dynamic': ^20.1.3
+    '@angular/platform-server': ^20.1.3
     '@astrojs/mdx': ^4.3.0
     '@iconify/json': ^2.2.351
     '@internationalized/date': ^3.8.2
     '@ngxi/lucide': ^0.12.0
-    '@radix-ng/primitives': ^0.40.0
+    '@radix-ng/primitives': ^0.43.0
     '@tailwindcss/vite': ^4.0.7
     astro: ^5.6.1
     astro-seo-plugin: ^1.3.5
