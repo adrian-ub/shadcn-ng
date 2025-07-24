@@ -33,6 +33,7 @@
     "astro": "catalog:front",
     "astro-seo-plugin": "catalog:front",
     "rxjs": "^7.8.2",
+    "shadcn-ng": "workspace:*",
     "sharp": "catalog:front",
     "tailwindcss": "catalog:utils",
     "tslib": "^2.8.1",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@iconify/json": "catalog:front",
     "rehype-pretty-code": "catalog:front",
+    "rimraf": "^6.0.1",
     "shiki": "catalog:front",
     "unplugin-icons": "catalog:front"
   }

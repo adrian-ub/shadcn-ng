@@ -21,7 +21,7 @@ export const registry = {
       {
         name: 'index',
         type: 'registry:style',
-        dependencies: ['class-variance-authority', 'lucide-react'],
+        dependencies: ['class-variance-authority', '@ngxi/lucide'],
         devDependencies: ['tw-animate-css'],
         registryDependencies: ['utils'],
         cssVars: {},
@@ -40,11 +40,6 @@ export const registry = {
         return !DEPRECATED_ITEMS.includes(item.name)
       })
       .map((item) => {
-        // Temporary fix for dashboard-01.
-        if (item.name === 'dashboard-01') {
-          item.dependencies?.push('@tabler/icons-react')
-        }
-
         if (item.name === 'accordion' && 'tailwind' in item) {
           delete item.tailwind
         }

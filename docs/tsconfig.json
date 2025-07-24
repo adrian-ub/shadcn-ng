@@ -4,10 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": [
-        "src/*"
-      ],
-      "shadcn-ng/*": [
-        "../src/*"
+        "./src/*"
       ]
     },
     "types": [
