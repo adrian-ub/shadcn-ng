@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@iconify/json": "catalog:front",
+    "puppeteer": "^24.15.0",
     "rehype-pretty-code": "catalog:front",
     "rimraf": "^6.0.1",
     "shiki": "catalog:front",
