@@ -6,6 +6,7 @@ import { Command } from 'commander'
 import { build } from '@/src/commands/build'
 import { info } from '@/src/commands/info'
 import { mcp } from '@/src/commands/mcp'
+import { search } from '@/src/commands/search'
 
 import packageJson from '../package.json'
 
@@ -24,6 +25,7 @@ async function main() {
 
   program
     .addCommand(info)
+    .addCommand(search)
     .addCommand(build)
     .addCommand(mcp)
 
