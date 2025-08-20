@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@antfu/ni": "25.0.0",
+    "@dotenvx/dotenvx": "1.49.0",
     "@modelcontextprotocol/sdk": "1.17.3",
     "commander": "14.0.0",
     "cosmiconfig": "9.0.0",
