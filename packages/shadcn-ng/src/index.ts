@@ -5,6 +5,7 @@ import { Command } from 'commander'
 
 import { add } from '@/src/commands/add'
 import { build } from '@/src/commands/build'
+import { diff } from '@/src/commands/diff'
 import { info } from '@/src/commands/info'
 import { init } from '@/src/commands/init'
 import { mcp } from '@/src/commands/mcp'
@@ -29,6 +30,7 @@ async function main() {
   program
     .addCommand(add)
     .addCommand(init)
+    .addCommand(diff)
     .addCommand(view)
     .addCommand(info)
     .addCommand(search)
