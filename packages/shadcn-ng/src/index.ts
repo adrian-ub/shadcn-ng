@@ -3,6 +3,7 @@ import process from 'node:process'
 
 import { Command } from 'commander'
 
+import { build } from '@/src/commands/build'
 import { mcp } from '@/src/commands/mcp'
 
 import packageJson from '../package.json'
@@ -20,7 +21,9 @@ async function main() {
       'display the version number',
     )
 
-  program.addCommand(mcp)
+  program
+    .addCommand(build)
+    .addCommand(mcp)
 
   program.parse()
 }
