@@ -4,6 +4,7 @@ import process from 'node:process'
 import { Command } from 'commander'
 
 import { build } from '@/src/commands/build'
+import { info } from '@/src/commands/info'
 import { mcp } from '@/src/commands/mcp'
 
 import packageJson from '../package.json'
@@ -22,6 +23,7 @@ async function main() {
     )
 
   program
+    .addCommand(info)
     .addCommand(build)
     .addCommand(mcp)
 
