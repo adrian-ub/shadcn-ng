@@ -1,0 +1,58 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import CodeBlockCommand from '@/components/CodeBlockCommand.astro'
+import CopyButton from '@/components/CopyButton.astro'
+import { cn } from '@/lib/utils'
+
+export type Props = HTMLAttributes<'code'> & {
+  __raw__?: string
+  __src__?: string
+  __npm__?: string
+  __yarn__?: string
+  __pnpm__?: string
+  __bun__?: string
+}
+
+const { class: className, __raw__, __src__, __npm__, __yarn__, __pnpm__, __bun__, ...props } = Astro.props
+
+const children = await Astro.slots.render('default')
+
+function isPlainText(str: string) {
+  if (/<[a-z][\s\S]*>/i.test(str)) return false
+  if (str.includes('\n')) return false
+  const trimmed = str.trim()
+  if ((trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']')))
+    return false
+  return true
+}
+
+const isPlain = isPlainText(children)
+const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__ && !isPlain
+---
+
+{
+  isPlain && (
+    <code
+      class={cn('bg-muted relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] outline-none', className)}
+    >
+      <slot />
+    </code>
+  )
+}
+
+{
+  !isPlain && isNpmCommand && (
+    <CodeBlockCommand __npm__={__npm__} __yarn__={__yarn__} __pnpm__={__pnpm__} __bun__={__bun__} />
+  )
+}
+
+{
+  !isPlain && !isNpmCommand && (
+    <>
+      {__raw__ && <CopyButton value={__raw__} src={__src__} />}
+      <code {...props}>
+        <slot />
+      </code>
+    </>
+  )
+}

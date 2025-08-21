@@ -1,0 +1,61 @@
+---
+import RootLayout from '@/pages/_layout.astro'
+import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '@/components/page-header'
+import Announcement from '@/components/Announcement.astro'
+import { buttonVariants } from '@/registry/new-york-v4/ui/button'
+import PageNav from '@/components/PageNav.astro'
+import ExamplesNav from '@/components/ExamplesNav.astro'
+import ThemeSelector from '@/components/ThemeSelector.astro'
+import CardsDemo from '@/components/cards'
+import { Image } from 'astro:assets'
+
+const title = 'Build your Component Library'
+const description =
+  'A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.'
+---
+
+<RootLayout
+  seo={{
+    title,
+    description,
+  }}
+>
+  <div class="flex flex-1 flex-col">
+    <PageHeader>
+      <Announcement />
+      <PageHeaderHeading>{title}</PageHeaderHeading>
+      <PageHeaderDescription>{description}</PageHeaderDescription>
+      <PageActions>
+        <a href="/docs/installation" class={buttonVariants({ size: 'sm' })}>Get Started</a>
+        <a href="/blocks" class={buttonVariants({ size: 'sm', variant: 'ghost' })}>Browse Blocks</a>
+      </PageActions>
+    </PageHeader>
+    <PageNav class="hidden md:flex">
+      <ExamplesNav class="[&>a:first-child]:text-primary flex-1 overflow-hidden" />
+      <ThemeSelector class="mr-4 hidden md:flex" />
+    </PageNav>
+    <div class="container-wrapper section-soft flex-1 pb-6">
+      <div class="container overflow-hidden">
+        <section class="border-border/50 -mx-4 w-[160vw] overflow-hidden rounded-lg border md:hidden md:w-[150vw]">
+          <Image
+            src="/r/styles/new-york-v4/dashboard-01-light.png"
+            width={1400}
+            height={875}
+            alt="Dashboard"
+            class="block dark:hidden"
+          />
+          <Image
+            src="/r/styles/new-york-v4/dashboard-01-dark.png"
+            width={1400}
+            height={875}
+            alt="Dashboard"
+            class="hidden dark:block"
+          />
+          <section class="theme-container hidden md:block">
+            <CardsDemo />
+          </section>
+        </section>
+      </div>
+    </div>
+  </div>
+</RootLayout>

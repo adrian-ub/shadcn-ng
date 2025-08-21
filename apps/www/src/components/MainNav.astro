@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/registry/new-york-v4/ui/button'
+
+type Props = HTMLAttributes<'nav'> & {
+  items: { href: string; label: string }[]
+}
+const { class: className, items, ...props } = Astro.props
+const pathname = Astro.url.pathname
+---
+
+<nav class={cn('items-center gap-0.5', className)} {...props}>
+  {
+    items.map((item) => (
+      <a
+        href={item.href}
+        class={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), pathname === item.href && 'text-primary')}
+      >
+        {item.label}
+      </a>
+    ))
+  }
+</nav>

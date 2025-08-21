@@ -1,0 +1,15 @@
+---
+import SiteFooter from '@/components/SiteFooter.astro'
+import SiteHeader from '@/components/SiteHeader.astro'
+import RootLayout from '@/layouts/Root.astro'
+---
+
+<RootLayout>
+  <div class="bg-background relative z-10 flex min-h-svh flex-col">
+    <SiteHeader />
+    <main class="flex flex-1 flex-col">
+      <slot />
+    </main>
+    <SiteFooter />
+  </div>
+</RootLayout>

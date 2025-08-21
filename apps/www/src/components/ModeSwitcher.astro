@@ -1,0 +1,78 @@
+---
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/registry/new-york-v4/ui/button'
+---
+
+<mode-switcher>
+  <button
+    aria-pressed="false"
+    data-theme-toggle
+    class={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'group/toggle extend-touch-target size-8')}
+    title="Toggle theme"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-4.5"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+      <path d="M12 3l0 18"></path>
+      <path d="M12 9l4.65 -4.65"></path>
+      <path d="M12 14.3l7.37 -7.37"></path>
+      <path d="M12 19.6l8.85 -8.85"></path>
+    </svg>
+    <span class="sr-only">Toggle theme</span>
+  </button>
+</mode-switcher>
+
+<script is:inline>
+  if (!customElements.get('mode-switcher')) {
+    customElements.define(
+      'mode-switcher',
+      class extends HTMLElement {
+        // eslint-disable-next-line ts/explicit-function-return-type
+        connectedCallback() {
+          this.setAttribute('role', 'group')
+          this.setAttribute('aria-label', 'Theme Toggle')
+
+          const button = this.querySelector('[data-theme-toggle]')
+
+          button.addEventListener('click', () => {
+            const current = theme.getTheme()
+            const system = theme.getSystemTheme()
+
+            let newTheme
+
+            if (current === 'auto') {
+              newTheme = system === 'dark' ? 'light' : 'dark'
+            } else {
+              newTheme = 'auto'
+            }
+
+            theme.setTheme(newTheme)
+          })
+
+          this.updatePressedState()
+
+          document.addEventListener('theme-changed', (event) => {
+            this.updatePressedState(event.detail.theme)
+          })
+        }
+
+        // eslint-disable-next-line ts/explicit-function-return-type
+        updatePressedState(themeValue = theme.getTheme()) {
+          const button = this.querySelector('[data-theme-toggle]')
+          button.setAttribute('aria-pressed', themeValue !== 'auto')
+        }
+      },
+    )
+  }
+</script>

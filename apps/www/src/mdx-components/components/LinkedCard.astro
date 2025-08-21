@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { cn } from '@/lib/utils'
+
+export type Props = HTMLAttributes<'a'>
+
+const { class: className, ...props } = Astro.props
+---
+
+<a
+  class={cn(
+    'bg-surface text-surface-foreground hover:bg-surface/80 flex w-full flex-col items-center rounded-xl p-6 transition-colors sm:p-10',
+    className,
+  )}
+  {...props}
+>
+  <slot />
+</a>

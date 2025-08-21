@@ -1,0 +1,192 @@
+---
+import { render } from 'astro:content'
+
+import IconArrowUpRight from '~icons/tabler/arrow-up-right'
+import IconArrowLeft from '~icons/tabler/arrow-left'
+import IconArrowRight from '~icons/tabler/arrow-right'
+
+import Layout from '@/pages/docs/_layout.astro'
+import { source } from '@/lib/source'
+import { findNeighbour } from '@/docs/utils'
+import { createTOC } from '@/lib/toc';
+import { buttonVariants } from '@/registry/new-york-v4/ui/button'
+import { cn } from '@/lib/utils'
+import { mdxComponents } from '@/mdx-components'
+
+export async function getStaticPaths() {
+  return source.generateParams()
+}
+
+const { page } = Astro.props
+const { Content, headings } = await render(page)
+
+const neighbours = findNeighbour(source.pageTree, Astro.url.pathname)
+const toc = createTOC(headings)
+const doc = page.data
+---
+
+<Layout>
+  <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+    <div class="flex min-w-0 flex-1 flex-col">
+      <div class="h-(--top-spacing) shrink-0"></div>
+      <div class="mx-auto flex w-full max-w-2xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-0 lg:py-8 dark:text-neutral-300">
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-2">
+            <div class="flex items-start justify-between">
+              <h1 class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
+                {doc.title}
+              </h1>
+              <div class="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
+                {
+                  neighbours.previous && (
+                    <a href={neighbours.previous.url} class={cn(buttonVariants({ variant: 'secondary', size: 'icon' }), 'extend-touch-target size-8 shadow-none md:size-7')}>
+                      <IconArrowLeft />
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  )
+                }
+                {
+                  neighbours.next && (
+                    <a href={neighbours.next.url} class={cn(buttonVariants({ variant: 'secondary', size: 'icon' }), 'extend-touch-target size-8 shadow-none md:size-7')}>
+                      <IconArrowRight />
+                      <span class="sr-only">Next</span>
+                    </a>
+                  )
+                }
+              </div>
+            </div>
+            {doc.description && <p class="text-muted-foreground text-[1.05rem] text-balance sm:text-base">{doc.description}</p>}
+          </div>
+          {
+            doc.links && (
+              <div class="flex items-center space-x-2 pt-4">
+                {doc.links.doc && (
+                  <a href={doc.links.doc} class={buttonVariants({ variant: 'secondary' })} target="_blank" rel="noreferrer">
+                    Docs <IconArrowUpRight />
+                  </a>
+                )}
+                {doc.links.api && (
+                  <a href={doc.links.api} class={buttonVariants({ variant: 'secondary' })} target="_blank" rel="noreferrer">
+                    API Reference <IconArrowUpRight />
+                  </a>
+                )}
+              </div>
+            )
+          }
+        </div>
+        <div class="w-full flex-1 *:data-[slot=alert]:first:mt-0">
+          <Content components={mdxComponents} />
+        </div>
+      </div>
+      <div class="mx-auto flex h-auto w-full max-w-2xl items-center gap-4 px-4 py-6 md:px-0">
+        {
+          neighbours.previous && (
+            <a href={neighbours.previous.url} class={cn(buttonVariants({ variant: 'secondary', size: 'sm' }), 'shadow-none')}>
+              <IconArrowLeft /> {neighbours.previous.name}
+            </a>
+          )
+        }
+        {
+          neighbours.next && (
+            <a href={neighbours.next.url} class={cn(buttonVariants({ variant: 'secondary', size: 'sm' }), 'ml-auto shadow-none')}>
+              {neighbours.next.name} <IconArrowRight />
+            </a>
+          )
+        }
+      </div>
+    </div>
+    <div
+      class="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex"
+    >
+      <div class="h-(--top-spacing) shrink-0"></div>
+      {
+        toc.items.length > 0 && (
+          <div class="no-scrollbar overflow-y-auto px-8">
+            <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+              <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+              {toc.items.map((item) => (
+                <a
+                  href={`#${item.slug}`}
+                  class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+                  data-active={item.active ? 'true' : 'false'}
+                  data-depth={item.depth}
+                  data-heading-id={item.slug}
+                >
+                  {item.text}
+                </a>
+              ))}
+            </div>
+            <div class="h-12" />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</Layout>
+
+
+<script>
+  function initTOC(): void {
+    const headingLinks = document.querySelectorAll('[data-heading-id]')
+    const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).filter((h) => h.id)
+
+    if (headings.length === 0 || headingLinks.length === 0) {
+      return
+    }
+
+    function updateActiveHeading(): void {
+      const scrollY = window.scrollY
+      const headerHeight = 80
+
+      let currentActive: string | null = null
+
+      for (let i = headings.length - 1; i >= 0; i--) {
+        const heading = headings[i]
+        const rect = heading.getBoundingClientRect()
+        const offsetTop = rect.top + scrollY
+
+        if (scrollY + headerHeight >= offsetTop - 10) {
+          currentActive = heading.id
+          break
+        }
+      }
+
+      if (!currentActive && headings.length > 0) {
+        currentActive = headings[0].id
+      }
+
+      headingLinks.forEach((link) => {
+        const headingId = link.getAttribute('data-heading-id')
+        const isActive = headingId === currentActive
+        link.setAttribute('data-active', isActive ? 'true' : 'false')
+      })
+    }
+
+    updateActiveHeading()
+
+    let ticking = false
+    function handleScroll(): void {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateActiveHeading()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    document.addEventListener('astro:before-preparation', () => {
+      window.removeEventListener('scroll', handleScroll)
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTOC)
+  } else {
+    initTOC()
+  }
+
+  document.addEventListener('astro:page-load', initTOC)
+</script>
