@@ -7,7 +7,12 @@ function flattenTree(nodes: TreeNode[]): PageNode[] {
       list.push(node)
     }
     else if (node.type === 'folder') {
-      if (node.index) {
+      if (
+        node.index
+        && !node.children.some(
+          child => child.type === 'page' && child.id === node.index!.id,
+        )
+      ) {
         list.push(node.index)
       }
       list.push(...flattenTree(node.children))

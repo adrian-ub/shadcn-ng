@@ -60,10 +60,9 @@ export function loader(options: LoaderOptions) {
 
     const meta = metaData.find(m => m.id === id)
     if (meta) {
-      // Buscar el index.mdx para este folder
       const indexId = `${meta.id}/index`
-      const indexPage = pageData.find(d => d.id === indexId)
       let indexNode: PageNode | undefined
+      const indexPage = pageData.find(d => d.id === indexId)
       if (indexPage) {
         indexNode = {
           type: 'page',
@@ -74,12 +73,10 @@ export function loader(options: LoaderOptions) {
           external: false,
         }
       }
-      // Generar hijos excluyendo el index
+
       const children = (meta.data.pages
         ?.map((p: string) => resolveNode(p, meta.id))
-        .filter(
-          node => node && !(node.type === 'page' && (node.id === indexId)),
-        ) as TreeNode[]) || []
+        .filter(node => node) as TreeNode[]) || []
       return {
         type: 'folder',
         id: meta.id,
