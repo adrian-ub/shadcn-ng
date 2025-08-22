@@ -26,6 +26,29 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  button: {
+    name: 'button',
+    description: '',
+    type: 'registry:ui',
+    registryDependencies: undefined,
+    files: [{
+      path: 'registry/new-york-v4/ui/button.ts',
+      type: 'registry:ui',
+      target: '',
+    }],
+    component: async (environmentInjector: EnvironmentInjector) => {
+      const mod = await import('@/registry/new-york-v4/ui/button.ts')
+      const exportName = Object.keys(mod).find((key) => {
+        const value = (mod as Record<string, unknown>)[key]
+        return typeof value === 'function' && value.prototype && value.prototype.constructor === value
+      })
+      return createComponent(mod[exportName as keyof typeof mod], {
+        environmentInjector,
+      })
+    },
+    categories: undefined,
+    meta: undefined,
+  },
   utils: {
     name: 'utils',
     description: '',
