@@ -8,7 +8,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "build:registry": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-registry.mts"
+    "registry:build": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-registry.mts"
   },
   "prettier": {
     "printWidth": 100,
