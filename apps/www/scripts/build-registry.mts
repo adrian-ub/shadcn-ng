@@ -1,0 +1,129 @@
+import { exec } from 'node:child_process'
+import { promises as fs } from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
+import { rimraf } from 'rimraf'
+
+import { getAllBlocks } from '@/lib/blocks'
+import { registry } from '@/registry/index'
+
+async function buildRegistryJsonFile() {
+  // 1. Fix the path for registry items.
+  const fixedRegistry = {
+    ...registry,
+    items: registry.items.map((item) => {
+      const files = item.files?.map((file) => {
+        return {
+          ...file,
+          path: `registry/new-york-v4/${file.path}`,
+        }
+      })
+
+      return {
+        ...item,
+        files,
+      }
+    }),
+  }
+
+  // 2. Write the content of the registry to `registry.json`
+  rimraf.sync(path.join(process.cwd(), `registry.json`))
+  await fs.writeFile(
+    path.join(process.cwd(), `registry.json`),
+    JSON.stringify(fixedRegistry, null, 2),
+  )
+
+  // 3. Copy the registry.json to the v3/public/r/styles/new-york-v4 directory.
+  await fs.cp(
+    path.join(process.cwd(), 'registry.json'),
+    path.join(
+      process.cwd(),
+      '../v3/public/r/styles/new-york-v4/registry.json',
+    ),
+    { recursive: true },
+  )
+}
+
+async function buildRegistry() {
+  return new Promise((resolve, reject) => {
+    const process = exec(
+      `tsx --tsconfig ./tsconfig.scripts.json ../../packages/shadcn-ng/src/index.ts build registry.json --output ../v3/public/r/styles/new-york-v4`,
+    )
+
+    process.on('exit', (code) => {
+      if (code === 0) {
+        resolve(undefined)
+      }
+      else {
+        reject(new Error(`Process exited with code ${code}`))
+      }
+    })
+  })
+}
+
+async function syncRegistry() {
+  // Store the current registry content
+  const registryDir = path.join(process.cwd(), 'registry')
+  const registryIndexPath = path.join(registryDir, '__index__.tsx')
+  let registryContent = null
+
+  try {
+    registryContent = await fs.readFile(registryIndexPath, 'utf8')
+  }
+  catch {
+    // File might not exist yet, that's ok
+  }
+
+  // 1. Call pnpm registry:build for v3.
+  await exec('pnpm --filter=v3 registry:build')
+
+  // 2. Copy the v3/public/r directory to v4/public/r.
+  rimraf.sync(path.join(process.cwd(), 'public/r'))
+  await fs.cp(
+    path.resolve(process.cwd(), '../v3/public/r'),
+    path.resolve(process.cwd(), 'public/r'),
+    { recursive: true },
+  )
+
+  // 3. Restore the registry content if we had it
+  if (registryContent) {
+    await fs.writeFile(registryIndexPath, registryContent, 'utf8')
+  }
+}
+
+async function buildBlocksIndex() {
+  const blocks = await getAllBlocks(['registry:block'])
+
+  const payload = blocks.map(block => ({
+    name: block.name,
+    description: block.description,
+    categories: block.categories,
+  }))
+
+  rimraf.sync(path.join(process.cwd(), 'registry/__blocks__.json'))
+  await fs.writeFile(
+    path.join(process.cwd(), 'registry/__blocks__.json'),
+    JSON.stringify(payload, null, 2),
+  )
+}
+
+try {
+  // console.log('🗂️ Building registry/__index__.tsx...')
+  // await buildRegistryIndex()
+
+  console.log('🗂️ Building registry/__blocks__.json...')
+  await buildBlocksIndex()
+
+  console.log('💅 Building registry.json...')
+  await buildRegistryJsonFile()
+
+  console.log('🏗️ Building registry...')
+  await buildRegistry()
+
+  console.log('🔄 Syncing registry...')
+  await syncRegistry()
+}
+catch (error) {
+  console.error(error)
+  process.exit(1)
+}

@@ -3,7 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/registry/*": ["registry/*"],
+      "@/lib/*": ["lib/*", "src/lib/*"],
+      "@/*": ["src/*"],
+      "shadcn-ng/schema": ["../../packages/shadcn-ng/src/registry/schema.ts"],
+      "shadcn-ng/*": ["../../packages/shadcn-ng/src/*"]
     },
     "types": [
       "unplugin-icons/types/astro"

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "style",
+  "type": "registry:style",
+  "dependencies": [
+    "class-variance-authority",
+    "@ngxi/lucide"
+  ],
+  "devDependencies": [
+    "tw-animate-css"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [],
+  "cssVars": {}
+}
