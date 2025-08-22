@@ -1,5 +1,5 @@
 import ComponentPreview from '@/components/ComponentPreview.astro'
-
+import ComponentsList from '@/components/ComponentsList.astro'
 import a from './components/a.astro'
 import blockquote from './components/blockquote.astro'
 import code from './components/code.astro'
@@ -55,4 +55,5 @@ export const mdxComponents = {
   Image,
   LinkedCard,
   ComponentPreview,
+  ComponentsList,
 }
