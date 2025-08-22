@@ -1,3 +1,5 @@
+import analogjsangular from '@analogjs/astro-angular'
+
 import mdx from '@astrojs/mdx'
 
 import tailwindcss from '@tailwindcss/vite'
@@ -9,7 +11,7 @@ import Icons from 'unplugin-icons/vite'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  integrations: [mdx(), analogjsangular()],
   vite: {
     plugins: [
       tailwindcss(),
