@@ -1,5 +1,6 @@
 import ComponentPreview from '@/components/ComponentPreview.astro'
 import ComponentsList from '@/components/ComponentsList.astro'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import a from './components/a.astro'
 import blockquote from './components/blockquote.astro'
 import code from './components/code.astro'
@@ -56,4 +57,8 @@ export const mdxComponents = {
   LinkedCard,
   ComponentPreview,
   ComponentsList,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
 }

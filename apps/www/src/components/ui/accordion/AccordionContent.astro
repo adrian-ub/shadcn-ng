@@ -1,0 +1,20 @@
+---
+import { cn } from '@/lib/utils'
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'div'>
+
+const { class: className, ...rest } = Astro.props
+---
+
+<div
+  class={cn('data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm data-[state=closed]:h-0', className)}
+  data-slot="accordion-content"
+  data-state="closed"
+  style="animation: none;"
+  {...rest}
+>
+  <div class="overflow-hidden px-5 pt-0 pb-4">
+    <slot />
+  </div>
+</div>

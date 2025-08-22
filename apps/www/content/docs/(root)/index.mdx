@@ -27,6 +27,26 @@ shadcn-ng hands you the actual component code. You have full control to customiz
 
 _In a typical library, if you need to change a button’s behavior, you have to override styles or wrap the component. With shadcn-ng, you simply edit the button code directly._
 
+<Accordion collapsible>
+  <AccordionItem value="faq-1" class="border-none">
+    <AccordionTrigger class="w-full">
+      How do I pull upstream updates in an Open Code approach?
+    </AccordionTrigger>
+    <AccordionContent>
+      <p>
+        shadcn-ng follows a headless component architecture. This means the core
+        of your app can receive fixes by updating your dependencies, for
+        instance, radix-ng.
+      </p>
+      <p class="mt-4">
+        The topmost layer, i.e., the one closest to your design system, is not
+        coupled with the implementation of the library. It stays open for
+        modification.
+      </p>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
 ## Composition
 
 Every component in shadcn-ng shares a common, composable interface. **If a component does not exist, we bring it in, make it composable, and adjust its style to match and work with the rest of the design system.**
