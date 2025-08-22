@@ -1,4 +1,8 @@
 ---
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+
+import TerminalIcon from '~icons/lucide/terminal'
+
 export type Props = {
   __npm__: string
   __yarn__: string
@@ -6,4 +10,35 @@ export type Props = {
   __bun__: string
 }
 const { __bun__, __npm__, __pnpm__, __yarn__ } = Astro.props
+
+const tabs = {
+  pnpm: __pnpm__,
+  npm: __npm__,
+  yarn: __yarn__,
+  bun: __bun__,
+}
+
 ---
+<div class="overflow-x-auto">
+  <Tabs class="gap-0">
+    <div class="border-border/50 flex items-center gap-2 border-b px-3 py-1">
+      <div class="bg-foreground flex size-4 items-center justify-center rounded-[1px] opacity-70">
+        <TerminalIcon class="text-code size-3" />
+      </div>
+      <TabsList class="rounded-none bg-transparent p-0">
+        {
+          Object.entries(tabs).map(([key]) => (
+            <TabsTrigger value={key} class="data-[state=active]:bg-accent data-[state=active]:border-input h-7 border border-transparent pt-0.5 data-[state=active]:shadow-none">{key}</TabsTrigger>
+          ))
+        }
+      </TabsList>
+    </div>
+    <div class="no-scrollbar overflow-x-auto">
+      {
+        Object.entries(tabs).map(([key, value]) => (
+          <TabsContent value={key} class="mt-0 px-4 py-3.5"><pre><code class="relative font-mono text-sm leading-none" data-language="bash">{value}</code></pre></TabsContent>
+        ))
+      }
+    </div>
+  </Tabs>
+</div>

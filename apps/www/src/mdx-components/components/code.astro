@@ -34,9 +34,7 @@ const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__ && !isPlain
   isPlain && (
     <code
       class={cn('bg-muted relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] outline-none', className)}
-    >
-      <slot />
-    </code>
+    ><slot /></code>
   )
 }
 
@@ -50,9 +48,7 @@ const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__ && !isPlain
   !isPlain && !isNpmCommand && (
     <>
       {__raw__ && <CopyButton value={__raw__} src={__src__} />}
-      <code {...props}>
-        <slot />
-      </code>
+      <code {...props}><slot /></code>
     </>
   )
 }
