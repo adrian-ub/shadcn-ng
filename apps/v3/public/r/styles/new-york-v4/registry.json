@@ -231,6 +231,18 @@
           "chart-5": "141 40% 9%"
         }
       }
+    },
+    {
+      "name": "button-demo",
+      "type": "registry:example",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york-v4/examples/button-demo.ts",
+          "type": "registry:example"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,22 @@
+---
+import { Index } from '@/registry/__index__'
+import ComponentPreviewTabs from './ComponentPreviewTabs.astro'
+
+export interface Props {
+  name: string
+}
+
+const { name } = Astro.props
+
+const Component = Index[name]?.component
+---
+
+{
+  !Component && (
+    <p class="text-muted-foreground text-sm">
+      Component <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">{name}</code> not found in registry.
+    </p>
+  )
+}
+
+{Component && <ComponentPreviewTabs {name} />}

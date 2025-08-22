@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "button-demo",
+  "type": "registry:example",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york-v4/examples/button-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbButton } from '@/registry/new-york-v4/ui/button'\n\n@Component({\n  imports: [UbButton],\n  template: `\n    <div class=\"flex flex-wrap items-center gap-2 md:flex-row\">\n      <button ubButton>Button</button>\n    </div>\n  `,\n})\nexport default class ButtonDemo {}\n",
+      "type": "registry:example"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+---
+import { Index } from '@/registry/__index__'
+import { readFileSync } from 'node:fs'
+import { highlightCode } from '@/lib/highlight-code'
+import ComponentCode from './ComponentCode.astro'
+
+export interface Props {
+  name?: string
+  src?: string
+  title?: string
+  language?: string
+  collapsible?: boolean
+}
+
+const { name, language, title } = Astro.props
+
+const item = Index[name!]
+const path = item.files[0].path
+
+const code = readFileSync(path, 'utf-8').trim()
+
+const lang = language ?? title?.split('.').pop() ?? 'angular-ts'
+const highlightedCode = await highlightCode(code, lang)
+---
+
+<div class="relative">
+  <ComponentCode name={name} src={path} title={title} language={lang} highlightedCode={highlightedCode} />
+</div>

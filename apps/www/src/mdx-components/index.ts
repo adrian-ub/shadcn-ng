@@ -1,3 +1,5 @@
+import ComponentPreview from '@/components/ComponentPreview.astro'
+
 import a from './components/a.astro'
 import blockquote from './components/blockquote.astro'
 import code from './components/code.astro'
@@ -52,4 +54,5 @@ export const mdxComponents = {
   Steps,
   Image,
   LinkedCard,
+  ComponentPreview,
 }
