@@ -71,6 +71,20 @@ export function loader(options: LoaderOptions) {
       } satisfies FolderNode
     }
 
+    const subPages = pageData.filter((d) => {
+      const prefix = id.endsWith('/') ? id : `${id}/`
+      const isDirectChild = d.id.startsWith(prefix) && !d.id.slice(prefix.length).includes('/')
+      return isDirectChild
+    })
+    if (subPages.length > 0) {
+      return {
+        type: 'folder',
+        id,
+        name: id,
+        children: subPages.map(d => resolveNode(d.id)).filter(Boolean) as TreeNode[],
+      } satisfies FolderNode
+    }
+
     const match = page.match(/\[(.*?)\]\((.*?)\)/)
     if (match) {
       return {
