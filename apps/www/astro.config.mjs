@@ -7,11 +7,29 @@ import tailwindcss from '@tailwindcss/vite'
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config'
 
+import rehypePrettyCode from 'rehype-pretty-code'
 import Icons from 'unplugin-icons/vite'
+
+import { transformers } from './lib/highlight-code'
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), analogjsangular()],
+  markdown: {
+    syntaxHighlight: false,
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        {
+          theme: {
+            dark: 'github-dark',
+            light: 'github-light-default',
+          },
+          transformers,
+        },
+      ],
+    ],
+  },
   vite: {
     plugins: [
       tailwindcss(),
