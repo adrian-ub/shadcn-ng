@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "textarea-with-button",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/textarea-with-button.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbButtonDirective } from '@/registry/new-york/ui/button'\nimport { UbTextAreaDirective } from '@/registry/new-york/ui/textarea'\n\n@Component({\n  standalone: true,\n  selector: '[textarea-with-label-new-york]',\n  imports: [UbTextAreaDirective, UbButtonDirective],\n  template: `\n  <div class=\"grid w-full gap-2\">\n    <textarea ubTextarea placeholder=\"Type your message here.\"></textarea>\n    <button ubButton>Send message</button>\n  </div>`,\n})\nexport default class TextAreaWithButtonNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

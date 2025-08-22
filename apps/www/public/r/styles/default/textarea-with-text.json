@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "textarea-with-text",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/textarea-with-text.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbLabelDirective } from '@/registry/default/ui/label'\nimport { UbTextAreaDirective } from '@/registry/default/ui/textarea'\n\n@Component({\n  standalone: true,\n  selector: '[textarea-with-text-default]',\n  imports: [UbTextAreaDirective, UbLabelDirective],\n  template: `\n  <div class=\"grid w-full gap-1.5\">\n    <label ubLabel for=\"message\">Your message</label>\n    <textarea ubTextarea placeholder=\"Type your message here.\" id=\"message\"></textarea>\n    <p class=\"text-sm text-muted-foreground\">\n      Your message will be copied to the support team.\n    </p>\n  </div>`,\n})\nexport default class TextAreaWithTextDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "dropdown-menu-radio-group",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "dropdown-menu"
+  ],
+  "files": [
+    {
+      "path": "example/dropdown-menu-radio-group.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbButtonDirective } from '@/registry/new-york/ui/button'\n\nimport {\n  UbDropdownMenuContentDirective,\n  UbDropdownMenuLabelDirective,\n  UbDropdownMenuRadioGroupDirective,\n  UbDropdownMenuRadioItemDirective,\n  UbDropdownMenuSeparator,\n  UbDropdownMenuTriggerDirective,\n} from '@/registry/new-york/ui/dropdown-menu'\n\n@Component({\n  standalone: true,\n  selector: '[dropdown-menu-demo-new-york]',\n  imports: [\n    UbDropdownMenuTriggerDirective,\n    UbDropdownMenuContentDirective,\n    UbDropdownMenuLabelDirective,\n    UbDropdownMenuSeparator,\n    UbButtonDirective,\n    UbDropdownMenuRadioItemDirective,\n    UbDropdownMenuRadioGroupDirective,\n  ],\n  template: `\n  <button ubButton variant=\"outline\" [ubDropdownMenuTrigger]=\"content\">Open</button>\n\n  <ng-template #content>\n    <div ubDropdownMenuContent class=\"w-56\">\n      <div ubDropdownMenuLabel>Panel Position</div>\n      <div ubDropdownMenuSeparator></div>\n      <div ubDropdownMenuRadioGroup [(value)]=\"position\">\n        <div ubDropdownMenuRadioItem value=\"top\">\n          Top\n        </div>\n        <div ubDropdownMenuRadioItem value=\"bottom\">\n          Bottom\n        </div>\n        <div ubDropdownMenuRadioItem value=\"right\">\n          Right\n        </div>\n      </div>\n    </div>\n  </ng-template>\n  `,\n})\nexport default class DropDownMenuRadioGroupNewYork {\n  position = 'bottom'\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

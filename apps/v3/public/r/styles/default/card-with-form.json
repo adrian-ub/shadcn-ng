@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "card-with-form",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "card"
+  ],
+  "files": [
+    {
+      "path": "example/card-with-form.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbButtonDirective } from '@/registry/new-york/ui/button'\nimport {\n  UbCardContentDirective,\n  UbCardDescriptionDirective,\n  UbCardDirective,\n  UbCardFooterDirective,\n  UbCardHeaderDirective,\n  UbCardTitleDirective,\n} from '@/registry/new-york/ui/card'\nimport { UbInputDirective } from '@/registry/new-york/ui/input'\n\nimport { UbLabelDirective } from '@/registry/new-york/ui/label'\n\n@Component({\n  standalone: true,\n  selector: '[card-with-form-default]',\n  imports: [\n    UbCardDirective,\n    UbCardHeaderDirective,\n    UbCardTitleDirective,\n    UbCardDescriptionDirective,\n    UbCardContentDirective,\n    UbCardFooterDirective,\n\n    UbInputDirective,\n    UbLabelDirective,\n    UbButtonDirective,\n  ],\n  template: `\n    <div ubCard class=\"w-[350px]\">\n\n        <div ubCardHeader>\n            <h3 ubCardTitle>Create project</h3>\n            <p ubCardDescription>Deploy your new project in one-click.</p>\n        </div>\n\n        <div ubCardContent>\n            <form>\n                <div class=\"grid w-full items-center gap-4\">\n                    <div class=\"flex flex-col space-y-1.5\">\n                        <label ubLabel htmlFor=\"name\">Name</label>\n                        <input ubInput type=\"text\" id=\"name\" placeholder=\"Name of your project\" />\n                    </div>\n                </div>\n            </form>\n        </div>\n\n        <div ubCardFooter class=\"flex justify-between\">\n            <button ubButton variant=\"outline\">Cancel</button>\n            <button ubButton>Deploy</button>\n        </div>\n\n    </div>\n `,\n})\nexport default class CardWithFormDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

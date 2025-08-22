@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "textarea-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "textarea"
+  ],
+  "files": [
+    {
+      "path": "example/textarea-demo.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbTextAreaDirective } from '@/registry/new-york/ui/textarea'\n\n@Component({\n  standalone: true,\n  selector: '[textarea-demo-new-york]',\n  imports: [UbTextAreaDirective],\n  template: `<textarea ubTextarea placeholder=\"Type your message here.\"></textarea>`,\n})\nexport default class TextAreaDemoNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

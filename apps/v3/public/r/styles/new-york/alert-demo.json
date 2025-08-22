@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "alert-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "alert"
+  ],
+  "files": [
+    {
+      "path": "example/alert-demo.ts",
+      "content": "import { Component } from '@angular/core'\nimport { NgIconComponent, provideIcons } from '@ng-icons/core'\nimport { lucideRocket } from '@ng-icons/lucide'\n\nimport {\n  UbAlertDescriptionDirective,\n  UbAlertDirective,\n  UbAlertIconDirective,\n  UbAlertTitleDirective,\n} from '@/registry/new-york/ui/alert'\n\n@Component({\n  standalone: true,\n  selector: '[alert-demo-new-york]',\n  imports: [\n    NgIconComponent,\n    UbAlertDirective,\n    UbAlertTitleDirective,\n    UbAlertDescriptionDirective,\n    UbAlertIconDirective,\n  ],\n  viewProviders: [provideIcons({ lucideRocket })],\n  template: `\n    <div ubAlert>\n      <ng-icon ubAlertIcon name=\"lucideRocket\" class=\"h-4 w-4\" />\n      <h5 ubAlertTitle>Heads up!</h5>\n      <div ubAlertDescription>\n        You can add components and dependencies to your app using the cli.\n      </div>\n    </div>\n  `,\n})\nexport default class AlertDemoNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

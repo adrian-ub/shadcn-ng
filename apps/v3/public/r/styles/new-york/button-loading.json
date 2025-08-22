@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "button-loading",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "example/button-loading.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { NgIconComponent, provideIcons } from '@ng-icons/core'\nimport { radixReload } from '@ng-icons/radix-icons'\n\nimport { UbButtonDirective } from '@/registry/new-york/ui/button'\n\n@Component({\n  standalone: true,\n  selector: '[button-loading-new-york]',\n  imports: [UbButtonDirective, NgIconComponent],\n  viewProviders: [provideIcons({ radixReload })],\n  template: `\n    <button ubButton disabled>\n        <ng-icon name=\"radixReload\" class=\"mr-2 h-4 w-4 animate-spin\" /> Please wait\n    </button>\n    `,\n})\nexport default class ButtonLoadingNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

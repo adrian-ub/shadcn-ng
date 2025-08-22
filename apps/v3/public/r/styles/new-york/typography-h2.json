@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "typography-h2",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/typography-h2.ts",
+      "content": "import { Component } from '@angular/core'\n\n@Component({\n  standalone: true,\n  selector: '[typography-h2-new-york]',\n  template: `\n    <h2 class=\"scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0\">\n      The People of the Kingdom\n    </h2>\n  `,\n})\nexport default class TypographyH2NewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

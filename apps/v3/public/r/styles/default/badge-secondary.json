@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "badge-secondary",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "badge"
+  ],
+  "files": [
+    {
+      "path": "example/badge-secondary.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbBadgeDirective } from '@/registry/default/ui/badge'\n\n@Component({\n  standalone: true,\n  selector: '[badge-secondary-default]',\n  imports: [UbBadgeDirective],\n  template: `<div ubBadge variant=\"secondary\">Badge</div>`,\n})\nexport default class BadgeSecondaryDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

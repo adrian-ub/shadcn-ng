@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "dependencies": [
+    "@radix-ng/primitives"
+  ],
+  "files": [
+    {
+      "path": "ui/aspect-ratio.ts",
+      "content": "import { Directive } from '@angular/core'\n\nimport { RdxAspectRatioDirective } from '@radix-ng/primitives/aspect-ratio'\n\n@Directive({\n  standalone: true,\n  selector: '[ubAspectRatio]',\n  hostDirectives: [\n    {\n      directive: RdxAspectRatioDirective,\n      inputs: ['ratio'],\n    },\n  ],\n})\nexport class UbAspectRatioDirective { }\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

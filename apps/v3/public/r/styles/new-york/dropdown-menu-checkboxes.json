@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "dropdown-menu-checkboxes",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "dropdown-menu"
+  ],
+  "files": [
+    {
+      "path": "example/dropdown-menu-checkboxes.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbButtonDirective } from '@/registry/new-york/ui/button'\n\nimport {\n  UbDropdownMenuCheckboxItemDirective,\n  UbDropdownMenuContentDirective,\n  UbDropdownMenuLabelDirective,\n  UbDropdownMenuSeparator,\n  UbDropdownMenuTriggerDirective,\n} from '@/registry/new-york/ui/dropdown-menu'\n\n@Component({\n  standalone: true,\n  selector: '[dropdown-menu-demo-new-york]',\n  imports: [\n    UbDropdownMenuTriggerDirective,\n    UbDropdownMenuContentDirective,\n    UbDropdownMenuLabelDirective,\n    UbDropdownMenuSeparator,\n    UbButtonDirective,\n    UbDropdownMenuCheckboxItemDirective,\n  ],\n  template: `\n  <button ubButton variant=\"outline\" [ubDropdownMenuTrigger]=\"content\">Open</button>\n\n  <ng-template #content>\n    <div ubDropdownMenuContent class=\"w-56\">\n      <div ubDropdownMenuLabel>Appearance</div>\n      <div ubDropdownMenuSeparator></div>\n      <div ubDropdownMenuCheckboxItem [(checked)]=\"statusBar\">\n        Status Bar\n      </div>\n      <div ubDropdownMenuCheckboxItem [(checked)]=\"activityBar\" disabled>\n        Activity Bar\n      </div>\n      <div ubDropdownMenuCheckboxItem [(checked)]=\"panel\">\n        Panel\n      </div>\n    </div>\n  </ng-template>\n  `,\n})\nexport default class DropDownMenuCheckboxesNewYork {\n  statusBar = true\n  activityBar = false\n  panel = false\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

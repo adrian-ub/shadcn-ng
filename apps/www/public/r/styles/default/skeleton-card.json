@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "skeleton-card",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "skeleton"
+  ],
+  "files": [
+    {
+      "path": "example/skeleton-card.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbSkeletonDirective } from '@/registry/default/ui/skeleton'\n\n@Component({\n  standalone: true,\n  selector: '[skeleton-card-default]',\n  imports: [UbSkeletonDirective],\n  template: `\n    <div class=\"flex flex-col space-y-3\">\n        <div ubSkeleton class=\"h-[125px] w-[250px] rounded-xl\"></div>\n        <div class=\"space-y-2\">\n            <div ubSkeleton class=\"h-4 w-[250px]\"></div>\n            <div ubSkeleton class=\"h-4 w-[200px]\"></div>\n        </div>\n    </div>\n    `,\n})\nexport default class SekeletonCardDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "typography-lead",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/typography-lead.ts",
+      "content": "import { Component } from '@angular/core'\n\n@Component({\n  standalone: true,\n  selector: '[typography-lead-new-york]',\n  template: `\n    <p class=\"text-xl text-muted-foreground\">\n      A modal dialog that interrupts the user with important content and expects\n      a response.\n    </p>\n  `,\n})\nexport default class TypographyLeadNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

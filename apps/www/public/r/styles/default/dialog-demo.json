@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "dialog-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "dialog"
+  ],
+  "files": [
+    {
+      "path": "example/dialog-demo.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbButtonDirective } from '@/registry/default/ui/button'\nimport {\n  UbDialogContentDirective,\n  UbDialogDescriptionDirective,\n  UbDialogFooterDirective,\n  UbDialogHeaderDirective,\n  UbDialogTitleDirective,\n  UbDialogTriggerDirective,\n} from '@/registry/default/ui/dialog'\nimport { UbInputDirective } from '@/registry/default/ui/input'\n\nimport { UbLabelDirective } from '@/registry/default/ui/label'\n\n@Component({\n  standalone: true,\n  selector: '[dialog-demo-default]',\n  imports: [\n    UbDialogTriggerDirective,\n    UbDialogContentDirective,\n    UbDialogHeaderDirective,\n    UbDialogTitleDirective,\n    UbDialogDescriptionDirective,\n    UbDialogFooterDirective,\n\n    UbButtonDirective,\n    UbLabelDirective,\n    UbInputDirective,\n  ],\n  template: `\n    <button ubButton variant=\"outline\" [ubDialogTrigger]=\"dialog\">Edit Profile</button>\n    <ng-template #dialog>\n      <div ubDialogContent class=\"sm:max-w-[425px]\">\n        <div ubDialogHeader>\n          <h2 ubDialogTitle>Edit profile</h2>\n          <p ubDialogDescription>Make changes to your profile here. Click save when you're done.</p>\n        </div>\n\n        <div class=\"grid gap-4 py-4\">\n          <div class=\"grid grid-cols-4 items-center gap-4\">\n            <label ubLabel htmlFor=\"name\" class=\"text-right\">\n              Name\n            </label>\n            <input ubInput type=\"text\" id=\"name\" value=\"Pedro Duarte\" class=\"col-span-3\" />\n          </div>\n          <div class=\"grid grid-cols-4 items-center gap-4\">\n            <label ubLabel htmlFor=\"username\" class=\"text-right\">\n              Username\n            </label>\n            <input ubInput type=\"text\" id=\"username\" value=\"@peduarte\" class=\"col-span-3\" />\n          </div>\n        </div>\n\n        <div ubDialogFooter>\n          <button ubButton>Save changes</button>\n        </div>\n\n      </div>\n    </ng-template>\n  `,\n})\nexport default class DialogDemoDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

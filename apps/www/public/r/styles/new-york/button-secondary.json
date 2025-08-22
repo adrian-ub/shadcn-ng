@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "button-secondary",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "example/button-secondary.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbButtonDirective } from '@/registry/new-york/ui/button'\n\n@Component({\n  standalone: true,\n  selector: '[button-secondary-new-york]',\n  imports: [UbButtonDirective],\n  template: `<button ubButton variant=\"secondary\">Button</button>`,\n})\nexport default class ButtonSecondaryNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

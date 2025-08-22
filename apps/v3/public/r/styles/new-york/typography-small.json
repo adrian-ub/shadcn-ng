@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "typography-small",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/typography-small.ts",
+      "content": "import { Component } from '@angular/core'\n\n@Component({\n  standalone: true,\n  selector: '[typography-small-new-york]',\n  template: `\n    <small class=\"text-sm font-medium leading-none\">Email address</small>\n    `,\n})\nexport default class TypographySmallNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

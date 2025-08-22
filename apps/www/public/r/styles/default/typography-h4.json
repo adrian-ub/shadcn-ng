@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "typography-h4",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/typography-h4.ts",
+      "content": "import { Component } from '@angular/core'\n\n@Component({\n  standalone: true,\n  selector: '[typography-h4-default]',\n  template: `\n    <h4 class=\"scroll-m-20 text-xl font-semibold tracking-tight\">\n      People stopped telling jokes\n    </h4>\n  `,\n})\nexport default class TypographyH4Default { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

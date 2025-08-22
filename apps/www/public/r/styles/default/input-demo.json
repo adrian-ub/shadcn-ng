@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "input-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "input"
+  ],
+  "files": [
+    {
+      "path": "example/input-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbInputDirective } from '@/registry/default/ui/input'\n\n@Component({\n  standalone: true,\n  selector: '[input-demo-default]',\n  imports: [UbInputDirective],\n  template: `<input ubInput type=\"text\" placeholder=\"Email\" />`,\n})\nexport default class InputDemoDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "progress-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "progress"
+  ],
+  "files": [
+    {
+      "path": "example/progress-demo.ts",
+      "content": "import type { OnDestroy, OnInit } from '@angular/core'\n\nimport { Component } from '@angular/core'\nimport { ProgressDirective } from '@/registry/new-york/ui/progress'\n\n@Component({\n  standalone: true,\n  selector: '[progress-demo-new-york]',\n  imports: [ProgressDirective],\n  template: `<div ubProgress [progress]=\"progress\" class=\"w-[60%]\"></div>`,\n})\nexport default class ProgressDemoNewYork implements OnInit, OnDestroy {\n  progress = 10\n  intervalId!: NodeJS.Timeout\n\n  ngOnInit(): void {\n    this.intervalId = setTimeout(() => {\n      this.progress = 66\n    }, 500)\n  }\n\n  ngOnDestroy(): void {\n    if (this.intervalId) {\n      clearInterval(this.intervalId)\n    }\n  }\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

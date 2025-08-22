@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "typography-h1",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/typography-h1.ts",
+      "content": "import { Component } from '@angular/core'\n\n@Component({\n  standalone: true,\n  selector: '[typography-h1-default]',\n  template: `\n    <h1 class=\"scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl\">\n      Taxing Laughter: The Joke Tax Chronicles\n    </h1>\n  `,\n})\nexport default class TypographyH1Default { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

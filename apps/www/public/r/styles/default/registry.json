@@ -1,0 +1,1302 @@
+{
+  "name": "shadcn-ng",
+  "homepage": "https://ui.adrianub.dev",
+  "items": [
+    {
+      "name": "index",
+      "type": "registry:style",
+      "dependencies": [
+        "tailwindcss-animate",
+        "class-variance-authority",
+        "@ng-icons/core",
+        "@ng-icons/lucide"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [],
+      "tailwind": {
+        "config": {
+          "plugins": [
+            "require(\"tailwindcss-animate\")"
+          ]
+        }
+      },
+      "cssVars": {}
+    },
+    {
+      "name": "style",
+      "type": "registry:style",
+      "dependencies": [
+        "tailwindcss-animate",
+        "class-variance-authority",
+        "@ng-icons/core",
+        "@ng-icons/lucide"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [],
+      "tailwind": {
+        "config": {
+          "plugins": [
+            "require(\"tailwindcss-animate\")"
+          ]
+        }
+      },
+      "cssVars": {}
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/accordion.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ],
+      "tailwind": {
+        "config": {
+          "theme": {
+            "extend": {
+              "keyframes": {
+                "accordion-down": {
+                  "from": {
+                    "height": "0"
+                  },
+                  "to": {
+                    "height": "var(--radix-accordion-content-height)"
+                  }
+                },
+                "accordion-up": {
+                  "from": {
+                    "height": "var(--radix-accordion-content-height)"
+                  },
+                  "to": {
+                    "height": "0"
+                  }
+                }
+              },
+              "animation": {
+                "accordion-down": "accordion-down 0.2s ease-out",
+                "accordion-up": "accordion-up 0.2s ease-out"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/alert.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/aspect-ratio.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/avatar.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/badge.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/breadcrumb.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/button.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/card.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/collapsible.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/dialog.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/dropdown-menu.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/input.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/label.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/pagination.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/progress.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/separator.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/skeleton.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "dependencies": [
+        "ngx-sonner"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/sonner.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/switch.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/table.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/tabs.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/default/ui/textarea.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ng/primitives"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/toggle.ts",
+          "type": "registry:ui",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/lib/utils.ts",
+          "type": "registry:lib",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "theme-daylight",
+      "type": "registry:theme",
+      "cssVars": {
+        "light": {
+          "background": "36 39% 88%",
+          "foreground": "36 45% 15%",
+          "primary": "36 45% 70%",
+          "primary-foreground": "36 45% 11%",
+          "secondary": "40 35% 77%",
+          "secondary-foreground": "36 45% 25%",
+          "accent": "36 64% 57%",
+          "accent-foreground": "36 72% 17%",
+          "destructive": "0 84% 37%",
+          "destructive-foreground": "0 0% 98%",
+          "muted": "36 33% 75%",
+          "muted-foreground": "36 45% 25%",
+          "card": "36 46% 82%",
+          "card-foreground": "36 45% 20%",
+          "popover": "0 0% 100%",
+          "popover-foreground": "240 10% 3.9%",
+          "border": "36 45% 60%",
+          "input": "36 45% 60%",
+          "ring": "36 45% 30%",
+          "chart-1": "25 34% 28%",
+          "chart-2": "26 36% 34%",
+          "chart-3": "28 40% 40%",
+          "chart-4": "31 41% 48%",
+          "chart-5": "35 43% 53%"
+        },
+        "dark": {
+          "background": "36 39% 88%",
+          "foreground": "36 45% 15%",
+          "primary": "36 45% 70%",
+          "primary-foreground": "36 45% 11%",
+          "secondary": "40 35% 77%",
+          "secondary-foreground": "36 45% 25%",
+          "accent": "36 64% 57%",
+          "accent-foreground": "36 72% 17%",
+          "destructive": "0 84% 37%",
+          "destructive-foreground": "0 0% 98%",
+          "muted": "36 33% 75%",
+          "muted-foreground": "36 45% 25%",
+          "card": "36 46% 82%",
+          "card-foreground": "36 45% 20%",
+          "popover": "0 0% 100%",
+          "popover-foreground": "240 10% 3.9%",
+          "border": "36 45% 60%",
+          "input": "36 45% 60%",
+          "ring": "36 45% 30%",
+          "chart-1": "25 34% 28%",
+          "chart-2": "26 36% 34%",
+          "chart-3": "28 40% 40%",
+          "chart-4": "31 41% 48%",
+          "chart-5": "35 43% 53%"
+        }
+      }
+    },
+    {
+      "name": "theme-midnight",
+      "type": "registry:theme",
+      "cssVars": {
+        "light": {
+          "background": "240 5% 6%",
+          "foreground": "60 5% 90%",
+          "primary": "240 0% 90%",
+          "primary-foreground": "60 0% 0%",
+          "secondary": "240 4% 15%",
+          "secondary-foreground": "60 5% 85%",
+          "accent": "240 0% 13%",
+          "accent-foreground": "60 0% 100%",
+          "destructive": "0 60% 50%",
+          "destructive-foreground": "0 0% 98%",
+          "muted": "240 5% 25%",
+          "muted-foreground": "60 5% 85%",
+          "card": "240 4% 10%",
+          "card-foreground": "60 5% 90%",
+          "popover": "240 5% 15%",
+          "popover-foreground": "60 5% 85%",
+          "border": "240 6% 20%",
+          "input": "240 6% 20%",
+          "ring": "240 5% 90%",
+          "chart-1": "359 2% 90%",
+          "chart-2": "240 1% 74%",
+          "chart-3": "240 1% 58%",
+          "chart-4": "240 1% 42%",
+          "chart-5": "240 2% 26%"
+        },
+        "dark": {
+          "background": "240 5% 6%",
+          "foreground": "60 5% 90%",
+          "primary": "240 0% 90%",
+          "primary-foreground": "60 0% 0%",
+          "secondary": "240 4% 15%",
+          "secondary-foreground": "60 5% 85%",
+          "accent": "240 0% 13%",
+          "accent-foreground": "60 0% 100%",
+          "destructive": "0 60% 50%",
+          "destructive-foreground": "0 0% 98%",
+          "muted": "240 5% 25%",
+          "muted-foreground": "60 5% 85%",
+          "card": "240 4% 10%",
+          "card-foreground": "60 5% 90%",
+          "popover": "240 5% 15%",
+          "popover-foreground": "60 5% 85%",
+          "border": "240 6% 20%",
+          "input": "240 6% 20%",
+          "ring": "240 5% 90%",
+          "chart-1": "359 2% 90%",
+          "chart-2": "240 1% 74%",
+          "chart-3": "240 1% 58%",
+          "chart-4": "240 1% 42%",
+          "chart-5": "240 2% 26%"
+        }
+      }
+    },
+    {
+      "name": "theme-emerald",
+      "type": "registry:theme",
+      "cssVars": {
+        "light": {
+          "background": "0 0% 100%",
+          "foreground": "240 10% 3.9%",
+          "card": "0 0% 100%",
+          "card-foreground": "240 10% 3.9%",
+          "popover": "0 0% 100%",
+          "popover-foreground": "240 10% 3.9%",
+          "primary": "142 86% 28%",
+          "primary-foreground": "356 29% 98%",
+          "secondary": "240 4.8% 95.9%",
+          "secondary-foreground": "240 5.9% 10%",
+          "muted": "240 4.8% 95.9%",
+          "muted-foreground": "240 3.8% 45%",
+          "accent": "240 4.8% 95.9%",
+          "accent-foreground": "240 5.9% 10%",
+          "destructive": "0 72% 51%",
+          "destructive-foreground": "0 0% 98%",
+          "border": "240 5.9% 90%",
+          "input": "240 5.9% 90%",
+          "ring": "142 86% 28%",
+          "chart-1": "139 65% 20%",
+          "chart-2": "140 74% 44%",
+          "chart-3": "142 88% 28%",
+          "chart-4": "137 55% 15%",
+          "chart-5": "141 40% 9%"
+        },
+        "dark": {
+          "background": "240 10% 3.9%",
+          "foreground": "0 0% 98%",
+          "card": "240 10% 3.9%",
+          "card-foreground": "0 0% 98%",
+          "popover": "240 10% 3.9%",
+          "popover-foreground": "0 0% 98%",
+          "primary": "142 86% 28%",
+          "primary-foreground": "356 29% 98%",
+          "secondary": "240 4.8% 95.9%",
+          "secondary-foreground": "240 5.9% 10%",
+          "muted": "240 3.7% 15.9%",
+          "muted-foreground": "240 5% 64.9%",
+          "accent": "240 3.7% 15.9%",
+          "accent-foreground": "0 0% 98%",
+          "destructive": "0 72% 51%",
+          "destructive-foreground": "0 0% 98%",
+          "border": "240 3.7% 15.9%",
+          "input": "240 3.7% 15.9%",
+          "ring": "142 86% 28%",
+          "chart-1": "142 88% 28%",
+          "chart-2": "139 65% 20%",
+          "chart-3": "140 74% 24%",
+          "chart-4": "137 55% 15%",
+          "chart-5": "141 40% 9%"
+        }
+      }
+    },
+    {
+      "name": "accordion-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/accordion-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "alert-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "alert"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/alert-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "alert-destructive",
+      "type": "registry:example",
+      "registryDependencies": [
+        "alert"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/alert-destructive.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "aspect-ratio"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/aspect-ratio-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "avatar-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/avatar-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "badge-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/badge-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "badge-destructive",
+      "type": "registry:example",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/badge-destructive.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "badge-outline",
+      "type": "registry:example",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/badge-outline.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "badge-secondary",
+      "type": "registry:example",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/badge-secondary.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "breadcrumb"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/breadcrumb-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-destructive",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-destructive.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-ghost",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-ghost.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-icon",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-icon.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-link",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-link.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-loading",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-loading.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-outline",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-outline.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-secondary",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-secondary.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "button-with-icon",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/button-with-icon.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "card-with-form",
+      "type": "registry:example",
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/card-with-form.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "collapsible-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "collapsible"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/collapsible-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "dialog-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dialog"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/dialog-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu-checkboxes",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/dropdown-menu-checkboxes.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/dropdown-menu-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu-radio-group",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/dropdown-menu-radio-group.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "input-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/input-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "input-disabled",
+      "type": "registry:example",
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/input-disabled.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "input-file",
+      "type": "registry:example",
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/input-file.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "pagination-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "pagination"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/pagination-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "progress-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/progress-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "separator-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/separator-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "skeleton-card",
+      "type": "registry:example",
+      "registryDependencies": [
+        "skeleton"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/skeleton-card.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "skeleton-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "skeleton"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/skeleton-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "sonner-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "sonner"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/sonner-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "switch-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "switch"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/switch-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "table-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "table"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/table-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "tabs-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/tabs-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "toggle-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "toggle"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/toggle-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "textarea-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "registry/default/example/textarea-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "textarea-disabled",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/textarea-disabled.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "textarea-with-button",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/textarea-with-button.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "textarea-with-label",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/textarea-with-label.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "textarea-with-text",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/textarea-with-text.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-blockquote",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-blockquote.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-demo",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-demo.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-h1",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-h1.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-h2",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-h2.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-h3",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-h3.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-h4",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-h4.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-inline-code",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-inline-code.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-large",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-large.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-lead",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-lead.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-list",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-list.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-muted",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-muted.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-p",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-p.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-small",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-small.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    },
+    {
+      "name": "typography-table",
+      "type": "registry:example",
+      "files": [
+        {
+          "path": "registry/default/example/typography-table.ts",
+          "type": "registry:example",
+          "target": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "toggle-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "toggle"
+  ],
+  "files": [
+    {
+      "path": "example/toggle-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { NgIconComponent, provideIcons } from '@ng-icons/core'\nimport { lucideBold } from '@ng-icons/lucide'\nimport { UbToggleDirective } from '@/registry/new-york/ui/toggle'\n\n@Component({\n  standalone: true,\n  selector: '[toggle-demo-new-york]',\n  imports: [UbToggleDirective, NgIconComponent],\n  viewProviders: [provideIcons({ lucideBold })],\n  template: `\n    <button ubToggle>\n      <ng-icon name=\"lucideBold\" class=\"h-4 w-4\"></ng-icon>\n    </button>\n  `,\n})\nexport default class ToggleDemoNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "v3",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "build:registry": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-registry.mts"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "dependencies": {
+    "@angular/cdk": "^20.2.0",
+    "@angular/common": "^20.2.0",
+    "@angular/compiler": "^20.2.0",
+    "@angular/core": "^20.2.0",
+    "@angular/forms": "^20.2.0",
+    "@angular/platform-browser": "^20.2.0",
+    "@angular/router": "^20.2.0",
+    "@ng-icons/core": "^32.1.0",
+    "@ng-icons/lucide": "^32.1.0",
+    "@ng-icons/radix-icons": "^32.1.0",
+    "@radix-ng/primitives": "^0.43.0",
+    "class-variance-authority": "^0.7.1",
+    "ngx-sonner": "^3.1.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.2.0",
+    "@angular/cli": "^20.2.0",
+    "@angular/compiler-cli": "^20.2.0",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@types/lodash": "^4.17.20",
+    "autoprefixer": "^10.4.21",
+    "clsx": "^2.1.1",
+    "lodash": "^4.17.21",
+    "postcss": "8.5.6",
+    "rimraf": "^6.0.1",
+    "shadcn-ng": "workspace:*",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "ts-morph": "26.0.0",
+    "typescript": "~5.9.2",
+    "zod": "^4.0.17"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "sonner-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "sonner"
+  ],
+  "files": [
+    {
+      "path": "example/sonner-demo.ts",
+      "content": "import { Component } from '@angular/core'\nimport { toast } from 'ngx-sonner'\n\nimport { UbButtonDirective } from '@/registry/default/ui/button'\nimport { ToasterComponent } from '@/registry/default/ui/sonner'\n\n@Component({\n  standalone: true,\n  selector: '[sonner-demo-default]',\n  imports: [ToasterComponent, UbButtonDirective],\n  template: `\n    <ub-toaster />\n    <button ubButton variant=\"outline\" (click)=\"onClick()\">Show Toast</button>\n  `,\n})\nexport default class SonnerDemoDefault {\n  protected onClick(): void {\n    toast('Event has been created', {\n      description: 'Sunday, December 03, 2023 at 9:00 AM',\n      action: {\n        label: 'Undo',\n        // eslint-disable-next-line no-console\n        onClick: () => console.log('Undo'),\n      },\n    })\n  }\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

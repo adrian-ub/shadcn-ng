@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "input-disabled",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "input"
+  ],
+  "files": [
+    {
+      "path": "example/input-disabled.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbInputDirective } from '@/registry/new-york/ui/input'\n\n@Component({\n  standalone: true,\n  selector: '[input-disabled-new-york]',\n  imports: [UbInputDirective],\n  template: ` <input disabled ubInput type=\"text\" placeholder=\"Email\" /> `,\n})\nexport default class InputDisabledNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

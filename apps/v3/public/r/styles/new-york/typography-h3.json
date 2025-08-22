@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "typography-h3",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/typography-h3.ts",
+      "content": "import { Component } from '@angular/core'\n\n@Component({\n  standalone: true,\n  selector: '[typography-h3-new-york]',\n  template: `\n    <h3 class=\"scroll-m-20 text-2xl font-semibold tracking-tight\">\n      The Joke Tax\n    </h3>\n  `,\n})\nexport default class TypographyH3NewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

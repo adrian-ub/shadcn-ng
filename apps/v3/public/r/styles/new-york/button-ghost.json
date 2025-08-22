@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "button-ghost",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "example/button-ghost.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbButtonDirective } from '@/registry/new-york/ui/button'\n\n@Component({\n  standalone: true,\n  selector: '[button-ghost-new-york]',\n  imports: [UbButtonDirective],\n  template: `<button ubButton variant=\"ghost\">Button</button>`,\n})\nexport default class ButtonGhostNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

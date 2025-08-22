@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "switch-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "switch"
+  ],
+  "files": [
+    {
+      "path": "example/switch-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbLabelDirective } from '@/registry/default/ui/label'\nimport { SwitchDirective } from '@/registry/default/ui/switch'\n\n@Component({\n  standalone: true,\n  selector: '[switch-demo-default]',\n  imports: [SwitchDirective, UbLabelDirective],\n  template: `\n    <div class=\"flex items-center space-x-2\">\n        <button ubSwitch id=\"airplane-mode\"></button>\n        <label for=\"airplane-mode\" ubLabel>Airplane Mode</label>\n    </div>\n    `,\n})\nexport default class SwitchDemoDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

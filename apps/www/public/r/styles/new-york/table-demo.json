@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "table-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "table"
+  ],
+  "files": [
+    {
+      "path": "example/table-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport {\n  UbTableBodyDirective,\n  UbTableCaptionDirective,\n  UbTableCellDirective,\n  UbTableDirective,\n  UbTableFooterDirective,\n  UbTableHeadDirective,\n  UbTableHeaderDirective,\n  UbTableRowDirective,\n} from '@/registry/new-york/ui/table'\n\n@Component({\n  standalone: true,\n  selector: '[table-demo-new-york]',\n  imports: [\n    UbTableDirective,\n    UbTableCaptionDirective,\n    UbTableHeaderDirective,\n    UbTableRowDirective,\n    UbTableHeadDirective,\n    UbTableBodyDirective,\n    UbTableCellDirective,\n    UbTableFooterDirective,\n  ],\n  template: `\n    <table ubTable>\n      <caption ubTableCaption>\n        A list of your recent invoices.\n      </caption>\n\n      <thead ubTableHeader>\n        <tr ubTableRow>\n          <th ubTableHead class=\"w-[100px]\">Invoice</th>\n          <th ubTableHead>Status</th>\n          <th ubTableHead>Method</th>\n          <th ubTableHead class=\"text-right\">Amount</th>\n        </tr>\n      </thead>\n\n      <tbody ubTableBody>\n        @for (invoice of invoices; track $index) {\n          <tr ubTableRow>\n            <td ubTableCell class=\"font-medium\">\n              {{ invoice.invoice }}\n            </td>\n            <td ubTableCell>\n              {{ invoice.paymentStatus }}\n            </td>\n            <td ubTableCell>\n              {{ invoice.paymentMethod }}\n            </td>\n            <td ubTableCell class=\"text-right\">\n              {{ invoice.totalAmount }}\n            </td>\n          </tr>\n        }\n      </tbody>\n\n      <tfoot ubTableFooter>\n        <tr ubTableRow>\n          <td ubTableCell colspan=\"3\">Total</td>\n          <td ubTableCell class=\"text-right\">$2,500.00</td>\n        </tr>\n      </tfoot>\n    </table>\n  `,\n})\nexport default class TableDemoNewYork {\n  invoices = [\n    {\n      invoice: 'INV001',\n      paymentStatus: 'Paid',\n      totalAmount: '$250.00',\n      paymentMethod: 'Credit Card',\n    },\n    {\n      invoice: 'INV002',\n      paymentStatus: 'Pending',\n      totalAmount: '$150.00',\n      paymentMethod: 'PayPal',\n    },\n    {\n      invoice: 'INV003',\n      paymentStatus: 'Unpaid',\n      totalAmount: '$350.00',\n      paymentMethod: 'Bank Transfer',\n    },\n    {\n      invoice: 'INV004',\n      paymentStatus: 'Paid',\n      totalAmount: '$450.00',\n      paymentMethod: 'Credit Card',\n    },\n    {\n      invoice: 'INV005',\n      paymentStatus: 'Paid',\n      totalAmount: '$550.00',\n      paymentMethod: 'PayPal',\n    },\n    {\n      invoice: 'INV006',\n      paymentStatus: 'Pending',\n      totalAmount: '$200.00',\n      paymentMethod: 'Bank Transfer',\n    },\n    {\n      invoice: 'INV007',\n      paymentStatus: 'Unpaid',\n      totalAmount: '$300.00',\n      paymentMethod: 'Credit Card',\n    },\n  ]\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

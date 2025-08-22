@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "dropdown-menu-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "dropdown-menu"
+  ],
+  "files": [
+    {
+      "path": "example/dropdown-menu-demo.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbButtonDirective } from '@/registry/default/ui/button'\n\nimport {\n  DropdownSide,\n  UbDropdownMenuContentDirective,\n  UbDropdownMenuGroupDirective,\n  UbDropdownMenuItemDirective,\n  UbDropdownMenuLabelDirective,\n  UbDropdownMenuSeparator,\n  UbDropdownMenuShortcutDirective,\n  UbDropdownMenuSubContentDirective,\n  UbDropdownMenuSubTrigger,\n  UbDropdownMenuTriggerDirective,\n} from '@/registry/default/ui/dropdown-menu'\n\n@Component({\n  standalone: true,\n  selector: '[dropdown-menu-demo-default]',\n  imports: [\n    UbDropdownMenuTriggerDirective,\n    UbDropdownMenuContentDirective,\n    UbDropdownMenuLabelDirective,\n    UbDropdownMenuItemDirective,\n    UbDropdownMenuSeparator,\n    UbButtonDirective,\n    UbDropdownMenuGroupDirective,\n    UbDropdownMenuShortcutDirective,\n    UbDropdownMenuSubTrigger,\n    UbDropdownMenuSubContentDirective,\n  ],\n  template: `\n  <button ubButton variant=\"outline\" [ubDropdownMenuTrigger]=\"content\">Open</button>\n\n  <ng-template #content>\n    <div ubDropdownMenuContent class=\"w-56\">\n      <div ubDropdownMenuLabel>My Account</div>\n      <div ubDropdownMenuSeparator></div>\n      <section ubDropdownMenuGroup>\n        <div ubDropdownMenuItem>\n          Profile\n          <span ubDropdownMenuShortcut>⇧⌘P</span>\n        </div>\n        <div ubDropdownMenuItem>\n          Billing\n          <span ubDropdownMenuShortcut>⌘B</span>\n        </div>\n        <div ubDropdownMenuItem>\n          Settings\n          <span ubDropdownMenuShortcut>⌘S</span>\n        </div>\n        <div ubDropdownMenuItem>\n          Keyboard shortcuts\n          <span ubDropdownMenuShortcut>⌘K</span>\n        </div>\n      </section>\n      <div ubDropdownMenuSeparator></div>\n      <section ubDropdownMenuGroup>\n        <div ubDropdownMenuItem>\n          Team\n        </div>\n        <div>\n          <div [ubDropdownMenuSubTrigger]=\"team\" [side]=\"DropdownSide.Right\">\n            Invite users\n          </div>\n        </div>\n        <div ubDropdownMenuItem>\n          New Team\n          <span ubDropdownMenuShortcut>⌘+T</span>\n        </div>\n      </section>\n      <div ubDropdownMenuSeparator></div>\n      <div ubDropdownMenuItem>GitHub</div>\n      <div ubDropdownMenuItem>Support</div>\n      <div ubDropdownMenuItem disabled>API</div>\n      <div ubDropdownMenuSeparator></div>\n      <div ubDropdownMenuItem>\n        Log out\n        <span ubDropdownMenuShortcut>⇧⌘Q</span>\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template #team>\n    <div ubDropdownMenuSubContent class=\"w-56\">\n      <div ubDropdownMenuItem>\n        Email\n      </div>\n      <div ubDropdownMenuItem>\n        Message\n      </div>\n      <div ubDropdownMenuSeparator></div>\n      <div ubDropdownMenuItem>\n        More...\n      </div>\n    </div>\n  </ng-template>\n  `,\n})\nexport default class DropDownMenuDemoDefault {\n  protected readonly DropdownSide = DropdownSide\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

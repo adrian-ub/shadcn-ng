@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "aspect-ratio-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "aspect-ratio"
+  ],
+  "files": [
+    {
+      "path": "example/aspect-ratio-demo.ts",
+      "content": "import type { ImageLoaderConfig } from '@angular/common'\n\nimport { IMAGE_LOADER, NgOptimizedImage } from '@angular/common'\nimport { Component } from '@angular/core'\nimport { UbAspectRatioDirective } from '@/registry/default/ui/aspect-ratio'\n\n@Component({\n  standalone: true,\n  selector: '[aspect-ratio-demo-default]',\n  imports: [UbAspectRatioDirective, NgOptimizedImage],\n  providers: [\n    {\n      provide: IMAGE_LOADER,\n      useValue: (config: ImageLoaderConfig) => {\n        return `${config?.src}?w=${config?.width}`\n      },\n    },\n  ],\n  template: `\n  <div ubAspectRatio [ratio]=\"16 / 9\" class=\"bg-muted\">\n      <img\n        ngSrc=\"https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80\"\n        alt=\"Photo by Drew Beamer\"\n        fill\n        class=\"h-full w-full rounded-md object-cover\"\n        ngSrcset=\"640w, 750w, 828w, 1080w, 1200w, 1920w, 2048w, 3840w\"\n        sizes=\"100vw\"\n        style=\"position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;\"\n        priority\n      />\n  </div>\n  `,\n})\nexport default class AspectRatioDemoDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

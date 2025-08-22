@@ -1,0 +1,47 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "dependencies": [
+    "@radix-ng/primitives"
+  ],
+  "files": [
+    {
+      "path": "ui/accordion.ts",
+      "content": "import type { ClassValue } from 'clsx'\nimport { Component, computed, Directive, input } from '@angular/core'\n\nimport { NgIconComponent, provideIcons } from '@ng-icons/core'\nimport { lucideChevronDown } from '@ng-icons/lucide'\n\nimport {\n  RdxAccordionContentDirective,\n  RdxAccordionHeaderDirective,\n  RdxAccordionItemDirective,\n  RdxAccordionRootDirective,\n  RdxAccordionTriggerDirective,\n} from '@radix-ng/primitives/accordion'\nimport { cn } from '@/lib/utils'\n\n@Directive({\n  standalone: true,\n  selector: '[ubAccordion]',\n  hostDirectives: [RdxAccordionRootDirective],\n})\nexport class UbAccordionDirective { }\n\n@Directive({\n  standalone: true,\n  selector: '[ubAccordionItem]',\n  hostDirectives: [\n    {\n      directive: RdxAccordionItemDirective,\n      inputs: ['disabled', 'value'],\n    },\n  ],\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbAccordionItemDirective {\n  class = input<ClassValue>()\n  computedClass = computed(() => {\n    return cn('border-b', this.class())\n  })\n}\n\n@Component({\n  standalone: true,\n  selector: '[ubAccordionTrigger], ub-accordion-trigger',\n  imports: [RdxAccordionHeaderDirective, NgIconComponent],\n  hostDirectives: [RdxAccordionTriggerDirective],\n  viewProviders: [provideIcons({ lucideChevronDown })],\n  template: `\n    <h3 rdxAccordionHeader class=\"flex group\">\n        <button [class]=\"computedClass()\">\n            <ng-content></ng-content>\n            <ng-icon name=\"lucideChevronDown\" class=\"h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200\"></ng-icon>\n        </button>\n    </h3>\n    `,\n})\nexport class UbAccordionTriggerDirective {\n  class = input<ClassValue>()\n  computedClass = computed(() => {\n    return cn('flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline group-data-[state=open]:[&>*>svg]:rotate-180', this.class())\n  })\n}\n\n@Component({\n  standalone: true,\n  selector: '[ubAccordionContent], ub-accordion-content',\n  hostDirectives: [RdxAccordionContentDirective],\n  host: {\n    class:\n            'overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',\n  },\n  template: `\n        <div [className]=\"computedClass()\">\n            <ng-content></ng-content>\n        </div>\n    `,\n})\nexport class UbAccordionContentDirective {\n  class = input<ClassValue>()\n  computedClass = computed(() => {\n    return cn('pb-4 pt-0', this.class())\n  })\n}\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ],
+  "tailwind": {
+    "config": {
+      "theme": {
+        "extend": {
+          "keyframes": {
+            "accordion-down": {
+              "from": {
+                "height": "0"
+              },
+              "to": {
+                "height": "var(--radix-accordion-content-height)"
+              }
+            },
+            "accordion-up": {
+              "from": {
+                "height": "var(--radix-accordion-content-height)"
+              },
+              "to": {
+                "height": "0"
+              }
+            }
+          },
+          "animation": {
+            "accordion-down": "accordion-down 0.2s ease-out",
+            "accordion-up": "accordion-up 0.2s ease-out"
+          }
+        }
+      }
+    }
+  }
+}

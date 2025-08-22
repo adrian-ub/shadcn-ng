@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "avatar-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "avatar"
+  ],
+  "files": [
+    {
+      "path": "example/avatar-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbAvatarDirective, UbAvatarFallbackDirective, UbAvatarImageDirective } from '@/registry/new-york/ui/avatar'\n\n@Component({\n  standalone: true,\n  selector: '[avatar-demo-new-york]',\n  imports: [UbAvatarDirective, UbAvatarImageDirective, UbAvatarFallbackDirective],\n  template: `\n    <span ubAvatar>\n        <img src=\"https://github.com/adrian-ub.png\" alt=\"@adrianub\" ubAvatarImage />\n        <span ubAvatarFallback>UB</span>\n    </span>\n    `,\n})\nexport default class AvatarDemoNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

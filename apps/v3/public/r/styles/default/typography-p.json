@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "typography-p",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/typography-p.ts",
+      "content": "import { Component } from '@angular/core'\n\n@Component({\n  standalone: true,\n  selector: '[typography-p-default]',\n  template: `\n    <p class=\"leading-7 [&:not(:first-child)]:mt-6\">\n      The king, seeing how much happier his subjects were, realized the error of\n      his ways and repealed the joke tax.\n    </p>\n  `,\n})\nexport default class TypographyPDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

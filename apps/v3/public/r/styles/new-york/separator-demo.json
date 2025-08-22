@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "separator-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "separator"
+  ],
+  "files": [
+    {
+      "path": "example/separator-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbSeparatorDirective } from '@/registry/new-york/ui/separator'\n\n@Component({\n  standalone: true,\n  selector: '[separator-demo-new-york]',\n  imports: [UbSeparatorDirective],\n  template: `\n    <div>\n      <div class=\"space-y-1\">\n        <h4 class=\"text-sm font-medium leading-none\">Radix Primitives</h4>\n        <p class=\"text-sm text-muted-foreground\">\n          An open-source UI component library.\n        </p>\n      </div>\n      <div ubSeperator class=\"my-4\"></div>\n      <div class=\"flex h-5 items-center space-x-4 text-sm\">\n        <div>Blog</div>\n        <div ubSeperator orientation=\"vertical\"></div>\n        <div>Docs</div>\n        <div ubSeperator orientation=\"vertical\"></div>\n        <div>Source</div>\n      </div>\n    </div>\n  `,\n})\nexport default class SeparatorNewYork { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

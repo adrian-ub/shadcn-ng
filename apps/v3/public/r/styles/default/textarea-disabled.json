@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "textarea-disabled",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/textarea-disabled.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbTextAreaDirective } from '@/registry/default/ui/textarea'\n\n@Component({\n  standalone: true,\n  selector: '[textarea-disabled-default]',\n  imports: [UbTextAreaDirective],\n  template: `<textarea ubTextarea placeholder=\"Type your message here.\" disabled></textarea>`,\n})\nexport default class TextAreaDisabledDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

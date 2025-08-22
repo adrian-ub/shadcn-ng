@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "typography-blockquote",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "files": [
+    {
+      "path": "example/typography-blockquote.ts",
+      "content": "import { Component } from '@angular/core'\n\n@Component({\n  standalone: true,\n  selector: '[typography-blockquote-default]',\n  template: `\n    <blockquote class=\"mt-6 border-l-2 pl-6 italic\">\n      \"After all,\" he said, \"everyone enjoys a good joke, so it's only fair that\n      they should pay for the privilege.\"\n    </blockquote>\n  `,\n})\nexport default class TypographyBlockquoteDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

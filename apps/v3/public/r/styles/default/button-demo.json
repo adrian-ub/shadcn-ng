@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "button-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "example/button-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbButtonDirective } from '@/registry/default/ui/button'\n\n@Component({\n  standalone: true,\n  selector: '[button-demo-default]',\n  imports: [UbButtonDirective],\n  template: `<button ubButton>Button</button>`,\n})\nexport default class ButtonDemoDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

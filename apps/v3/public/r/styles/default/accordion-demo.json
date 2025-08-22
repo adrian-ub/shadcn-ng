@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "accordion-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "accordion"
+  ],
+  "files": [
+    {
+      "path": "example/accordion-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { UbAccordionContentDirective, UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective } from '@/registry/default/ui/accordion'\n\n@Component({\n  standalone: true,\n  selector: '[accordion-demo-default]',\n  imports: [UbAccordionDirective, UbAccordionItemDirective, UbAccordionTriggerDirective, UbAccordionContentDirective],\n  template: `\n    <div ubAccordion class=\"w-full\" orientation=\"vertical\">\n      <div ubAccordionItem value=\"item-1\">\n        <ub-accordion-trigger>Is it accessible?</ub-accordion-trigger>\n        <div ubAccordionContent>\n          Yes. It adheres to the WAI-ARIA design pattern.\n        </div>\n      </div>\n      <div ubAccordionItem value=\"item-2\">\n        <ub-accordion-trigger>Is it styled?</ub-accordion-trigger>\n        <div ubAccordionContent>\n          Yes. It comes with default styles that matches the other components&apos; aesthetic.\n        </div>\n      </div>\n      <div ubAccordionItem value=\"item-3\">\n        <ub-accordion-trigger>Is it animated?</ub-accordion-trigger>\n        <div ubAccordionContent>\n          Yes. It&apos;s animated by default, but you can disable it if you prefer.\n        </div>\n      </div>\n    </div>\n    `,\n})\nexport default class AccordionDemoDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

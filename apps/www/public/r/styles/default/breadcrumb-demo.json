@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "breadcrumb-demo",
+  "type": "registry:example",
+  "author": "shadcn-ng (https://ui.adrianub.dev)",
+  "registryDependencies": [
+    "breadcrumb"
+  ],
+  "files": [
+    {
+      "path": "example/breadcrumb-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport {\n  UbBreadcrumbDirective,\n  UbBreadcrumbEllipsisComponent,\n  UbBreadcrumbItemDirective,\n  UbBreadcrumbLinkDirective,\n  UbBreadcrumbListDirective,\n  UbBreadcrumbPageDirective,\n  UbBreadcrumbSeparatorComponent,\n} from '@/registry/default/ui/breadcrumb'\n\n@Component({\n  standalone: true,\n  selector: '[breadcrumb-demo-default]',\n  imports: [\n    UbBreadcrumbDirective,\n    UbBreadcrumbListDirective,\n    UbBreadcrumbItemDirective,\n    UbBreadcrumbLinkDirective,\n    UbBreadcrumbSeparatorComponent,\n    UbBreadcrumbEllipsisComponent,\n    UbBreadcrumbPageDirective,\n  ],\n  template: `\n    <nav ubBreadcrumb>\n      <ol ubBreadcrumbList>\n        <li ubBreadcrumbItem>\n          <a ubBreadcrumbLink>Home</a>\n        </li>\n        <li ubBreadcrumbSeparator></li>\n        <li ubBreadcrumbItem>\n          <span ubBreadcrumbEllipsis></span>\n        </li>\n        <li ubBreadcrumbSeparator></li>\n        <li ubBreadcrumbItem>\n          <a ubBreadcrumbLink>Components</a>\n        </li>\n        <li ubBreadcrumbSeparator></li>\n        <li ubBreadcrumbItem>\n          <span ubBreadcrumbPage>Breadcrumb</span>\n        </li>\n      </ol>\n    </nav>\n  `,\n})\nexport default class BreadcrumbDemoDefault { }\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}
