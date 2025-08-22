@@ -35,6 +35,16 @@
       "cssVars": {}
     },
     {
+      "name": "button",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/new-york-v4/ui/button.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "utils",
       "type": "registry:lib",
       "dependencies": [
