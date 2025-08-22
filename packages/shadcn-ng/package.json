@@ -17,7 +17,19 @@
   "sideEffects": false,
   "exports": {
     ".": "./dist/index.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./registry": {
+      "types": "./dist/registry/index.d.ts",
+      "default": "./dist/registry/index.js"
+    },
+    "./schema": {
+      "types": "./dist/registry/schema.d.ts",
+      "default": "./dist/registry/schema.js"
+    },
+    "./mcp": {
+      "types": "./dist/mcp/index.d.ts",
+      "default": "./dist/mcp/index.js"
+    }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -32,10 +44,14 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "test": "vitest",
-    "run": "tsx ./src/index.ts",
+    "test": "vitest run",
+    "test:dev": "REGISTRY_URL=http://localhost:4321/r vitest run",
+    "start": "tsx ./src/index.ts",
+    "start:dev": "REGISTRY_URL=http://localhost:4321/r tsx ./src/index.ts",
+    "start:prod": "REGISTRY_URL=https://ui.adrianub.dev/r tsx ./src/index.ts",
     "typecheck": "tsc --noEmit",
-    "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta"
+    "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta",
+    "mcp:inspect": "pnpm dlx @modelcontextprotocol/inspector tsx ./src/index.ts mcp"
   },
   "dependencies": {
     "@antfu/ni": "25.0.0",
