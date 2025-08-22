@@ -1,0 +1,62 @@
+---
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/registry/new-york-v4/ui/button'
+import type { HTMLAttributes } from 'astro/types'
+import type { VariantProps } from 'class-variance-authority'
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
+
+export interface Props extends HTMLAttributes<'button'> {
+  variant?: VariantProps<typeof buttonVariants>['variant']
+  value: string
+}
+
+const { variant = 'ghost', class: className, value } = Astro.props
+---
+
+
+<Tooltip class="absolute top-3 right-2 z-10">
+  <TooltipTrigger>
+    <button id="copy-btn" type="button" data-value={value} class={cn(buttonVariants({ variant }), 'bg-code size-7 hover:opacity-100 focus-visible:opacity-100', className)}>
+      <span class="sr-only">Copy</span>
+      <span id="copy-icon"></span>
+    </button>
+  </TooltipTrigger>
+  <TooltipContent>
+    <span id="copy-tooltip">Copy to clipboard</span>
+  </TooltipContent>
+</Tooltip>
+
+<script>
+  let hasCopied = false;
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  const btn = document.getElementById('copy-btn');
+  const icon = document.getElementById('copy-icon');
+  const tooltip = document.getElementById('copy-tooltip');
+  const value = btn?.getAttribute('data-value') ?? '';
+
+  function setIcon() {
+    if (icon) {
+      icon.innerHTML = hasCopied
+        ? '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+        : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg>';
+    }
+    if (tooltip) {
+      tooltip.textContent = hasCopied ? 'Copied' : 'Copy to clipboard';
+    }
+  }
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(value);
+      hasCopied = true;
+      setIcon();
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        hasCopied = false;
+        setIcon();
+      }, 2000);
+    });
+  }
+
+  setIcon();
+</script>
