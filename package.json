@@ -15,7 +15,8 @@
     "lint:fix": "eslint --fix",
     "prepare": "simple-git-hooks",
     "build": "pnpm -r run build",
-    "build:cli": "pnpm --filter=shadcn-ng build"
+    "build:cli": "pnpm --filter=shadcn-ng build",
+    "shadcn-ng": "pnpm --filter=shadcn-ng start:dev"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",
