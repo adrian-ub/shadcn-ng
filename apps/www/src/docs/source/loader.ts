@@ -1,23 +1,23 @@
 import type { CollectionEntry } from 'astro:content'
 
-export type TreeNode
-  = | {
-    type: 'page'
-    id: string
-    name: string
-    description?: string
-    url: string
-    external: boolean
-  }
-  | {
-    type: 'folder'
-    id: string
-    name: string
-    children: TreeNode[]
-  }
+export interface PageNode {
+  type: 'page'
+  id: string
+  name: string
+  description?: string
+  url: string
+  external: boolean
+}
 
-export type PageNode = Extract<TreeNode, { type: 'page' }>
-export type FolderNode = Extract<TreeNode, { type: 'folder' }>
+export interface FolderNode {
+  type: 'folder'
+  id: string
+  name: string
+  children: TreeNode[]
+  index?: PageNode
+}
+
+export type TreeNode = PageNode | FolderNode
 
 function cleanUrl(id: string, basePath = '') {
   const slug = id
@@ -60,14 +60,32 @@ export function loader(options: LoaderOptions) {
 
     const meta = metaData.find(m => m.id === id)
     if (meta) {
+      // Buscar el index.mdx para este folder
+      const indexId = `${meta.id}/index`
+      const indexPage = pageData.find(d => d.id === indexId)
+      let indexNode: PageNode | undefined
+      if (indexPage) {
+        indexNode = {
+          type: 'page',
+          id: indexPage.id,
+          name: indexPage.data.title,
+          description: indexPage.data.description,
+          url: cleanUrl(indexPage.id, baseUrl),
+          external: false,
+        }
+      }
+      // Generar hijos excluyendo el index
+      const children = (meta.data.pages
+        ?.map((p: string) => resolveNode(p, meta.id))
+        .filter(
+          node => node && !(node.type === 'page' && (node.id === indexId)),
+        ) as TreeNode[]) || []
       return {
         type: 'folder',
         id: meta.id,
         name: meta.data.title || meta.id,
-        children:
-          (meta.data.pages
-            ?.map((p: string) => resolveNode(p, meta.id))
-            .filter(Boolean) as TreeNode[]) || [],
+        children,
+        index: indexNode,
       } satisfies FolderNode
     }
 
@@ -77,11 +95,32 @@ export function loader(options: LoaderOptions) {
       return isDirectChild
     })
     if (subPages.length > 0) {
+      // Buscar el index.mdx para este folder
+      const indexId = `${id}/index`
+      const indexPage = pageData.find(d => d.id === indexId)
+      let indexNode: PageNode | undefined
+      if (indexPage) {
+        indexNode = {
+          type: 'page',
+          id: indexPage.id,
+          name: indexPage.data.title,
+          description: indexPage.data.description,
+          url: cleanUrl(indexPage.id, baseUrl),
+          external: false,
+        }
+      }
+      // Generar hijos excluyendo el index
+      const children = subPages
+        .map(d => resolveNode(d.id))
+        .filter(
+          node => node && !(node.type === 'page' && (node.id === indexId)),
+        ) as TreeNode[]
       return {
         type: 'folder',
         id,
         name: id,
-        children: subPages.map(d => resolveNode(d.id)).filter(Boolean) as TreeNode[],
+        children,
+        index: indexNode,
       } satisfies FolderNode
     }
 

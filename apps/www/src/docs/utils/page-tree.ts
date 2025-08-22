@@ -7,6 +7,9 @@ function flattenTree(nodes: TreeNode[]): PageNode[] {
       list.push(node)
     }
     else if (node.type === 'folder') {
+      if (node.index) {
+        list.push(node.index)
+      }
       list.push(...flattenTree(node.children))
     }
   }
