@@ -4,7 +4,7 @@ import { defineCollection, z } from 'astro:content'
 const docs = defineCollection({
   loader: glob({
     pattern: '**/[^_]*.mdx',
-    base: './src/content/docs',
+    base: './content/docs',
     generateId: ({ entry }) =>
       entry.replace(/\.mdx$/, ''),
   }),
@@ -25,7 +25,7 @@ const docs = defineCollection({
 const meta = defineCollection({
   loader: glob({
     pattern: '**/meta.json',
-    base: './src/content/docs',
+    base: './content/docs',
     generateId: ({ entry }) =>
       entry.replace(/\/meta\.json$/, ''),
   }),
