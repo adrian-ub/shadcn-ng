@@ -1,6 +1,6 @@
 ---
 import GetIconForLanguageExtension from './icons/GetIconForLanguageExtension.astro'
-import CopyButton from '@/components/CopyButton.astro'
+import { CopyButton } from '@/components/CopyButton'
 
 export interface Props {
   title?: string
@@ -13,7 +13,7 @@ export interface Props {
 const { title, language = 'angular-ts', collapsible, highlightedCode, code } = Astro.props
 ---
 
-<figure data-rehype-pretty-code-figure="" class="[&>pre]:max-h-96 overflow-visible relative">
+<figure data-rehype-pretty-code-figure="" class="[&>pre]:max-h-96">
   {
     title && (
       <figcaption data-rehype-pretty-code-title="" class="text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70" data-language={language}>
@@ -22,6 +22,6 @@ const { title, language = 'angular-ts', collapsible, highlightedCode, code } = A
       </figcaption>
     )
   }
-  <CopyButton value={code} />
+  <CopyButton value={code} client:visible />
   <div set:html={highlightedCode} />
 </figure>

@@ -1,6 +1,6 @@
 ---
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-
+import { CopyButton } from './CopyButton'
 import TerminalIcon from '~icons/lucide/terminal'
 
 export type Props = {
@@ -41,4 +41,5 @@ const tabs = {
       }
     </div>
   </Tabs>
+  <CopyButton  client:visible class="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100" />
 </div>

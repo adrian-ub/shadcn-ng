@@ -12,4 +12,6 @@ const { class: className, ...rest } = Astro.props
     className,
   )}
   {...rest}
-/>
+>
+  <slot />
+</ComponentTabs>

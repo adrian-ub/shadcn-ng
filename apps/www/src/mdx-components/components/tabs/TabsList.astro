@@ -6,4 +6,6 @@ export { type Props } from '@/components/ui/tabs/TabsList.astro'
 const { class: className, ...rest } = Astro.props
 ---
 
-<ComponentTabs class={cn('justify-start gap-4 rounded-none bg-transparent px-2 md:px-0', className)} {...rest} />
+<ComponentTabs class={cn('justify-start gap-4 rounded-none bg-transparent px-2 md:px-0', className)} {...rest}>
+  <slot />
+</ComponentTabs>

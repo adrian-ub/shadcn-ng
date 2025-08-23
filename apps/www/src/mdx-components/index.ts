@@ -1,5 +1,7 @@
+import CodeTabs from '@/components/CodeTabs.astro'
 import ComponentPreview from '@/components/ComponentPreview.astro'
 import ComponentsList from '@/components/ComponentsList.astro'
+import ComponentSource from '@/components/ComponentSource.astro'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import a from './components/a.astro'
 import blockquote from './components/blockquote.astro'
@@ -66,4 +68,6 @@ export const mdxComponents = {
   TabsContent,
   TabsList,
   TabsTrigger,
+  CodeTabs,
+  ComponentSource,
 }

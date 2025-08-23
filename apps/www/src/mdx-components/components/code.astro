@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import CodeBlockCommand from '@/components/CodeBlockCommand.astro'
-import CopyButton from '@/components/CopyButton.astro'
+import {CodeBlockCommand} from '@/components/CodeBlockCommand'
+import {CopyButton} from '@/components/CopyButton'
 import { cn } from '@/lib/utils'
 
 export type Props = HTMLAttributes<'code'> & {
@@ -40,14 +40,14 @@ const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__ && !isPlain
 
 {
   !isPlain && isNpmCommand && (
-    <CodeBlockCommand __npm__={__npm__} __yarn__={__yarn__} __pnpm__={__pnpm__} __bun__={__bun__} />
+    <CodeBlockCommand __npm__={__npm__} __yarn__={__yarn__} __pnpm__={__pnpm__} __bun__={__bun__} client:visible />
   )
 }
 
 {
   !isPlain && !isNpmCommand && (
     <>
-      {__raw__ && <CopyButton value={__raw__} src={__src__} />}
+      {__raw__ && <CopyButton value={__raw__} src={__src__} client:visible />}
       <code {...props}><slot /></code>
     </>
   )
