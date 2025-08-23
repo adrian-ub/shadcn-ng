@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import type { HTMLAttributes } from "astro/types";
 
-type Props = Omit<HTMLAttributes<"div">, "role">;
+export type Props = Omit<HTMLAttributes<"div">, "role">;
 
 const { class: className, ...rest } = Astro.props;
 ---

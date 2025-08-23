@@ -24,6 +24,7 @@ import Step from './components/Step.astro'
 import Steps from './components/Steps.astro'
 import strong from './components/strong.astro'
 import table from './components/table.astro'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/tabs'
 import td from './components/td.astro'
 import tr from './components/tr.astro'
 import ul from './components/ul.astro'
@@ -61,4 +62,8 @@ export const mdxComponents = {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 }
