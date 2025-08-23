@@ -3,7 +3,7 @@ import { Index } from '@/registry/__index__'
 import { readFileSync } from 'node:fs'
 import { highlightCode } from '@/lib/highlight-code'
 import ComponentCode from './ComponentCode.astro'
-
+import { ComponentSource as ComponentSourceComponent } from './ComponentSource'
 export interface Props {
   name?: string
   src?: string
@@ -12,25 +12,13 @@ export interface Props {
   collapsible?: boolean
 }
 
-const { name, language, title } = Astro.props
+const { name, language, title, collapsible = true } = Astro.props
 
 function updateImportsInSource(code: string, aliases: Record<string, string>) {
-  code = code.replace(
-    /import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/ui\/(.+?)['"]/g,
-    (match, imports, subpath) => `import ${imports}from '${aliases.ui}/${subpath}'`
-  )
-  code = code.replace(
-    /import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/components\/(.+?)['"]/g,
-    (match, imports, subpath) => `import ${imports}from '${aliases.components}/${subpath}'`
-  )
-  code = code.replace(
-    /import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/lib\/(.+?)['"]/g,
-    (match, imports, subpath) => `import ${imports}from '${aliases.lib}/${subpath}'`
-  )
-  code = code.replace(
-    /import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/hooks\/(.+?)['"]/g,
-    (match, imports, subpath) => `import ${imports}from '${aliases.hooks}/${subpath}'`
-  )
+  code = code.replace(/import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/ui\/(.+?)['"]/g, (match, imports, subpath) => `import ${imports}from '${aliases.ui}/${subpath}'`)
+  code = code.replace(/import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/components\/(.+?)['"]/g, (match, imports, subpath) => `import ${imports}from '${aliases.components}/${subpath}'`)
+  code = code.replace(/import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/lib\/(.+?)['"]/g, (match, imports, subpath) => `import ${imports}from '${aliases.lib}/${subpath}'`)
+  code = code.replace(/import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/hooks\/(.+?)['"]/g, (match, imports, subpath) => `import ${imports}from '${aliases.hooks}/${subpath}'`)
 
   return code
 }
@@ -52,6 +40,4 @@ const lang = language ?? title?.split('.').pop() ?? 'angular-ts'
 const highlightedCode = await highlightCode(code, lang)
 ---
 
-<div class="relative">
-  <ComponentCode title={title} language={lang} highlightedCode={highlightedCode} code={code} />
-</div>
+<ComponentSourceComponent title={title} language={lang} highlightedCode={highlightedCode} code={code} collapsible={collapsible} client:visible />

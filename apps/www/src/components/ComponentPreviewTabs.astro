@@ -27,7 +27,7 @@ const { name, align = "center", } = Astro.props
         </div>
       </TabsContent>
       <TabsContent value="code" class="border-code **:[figure]:!m-0 **:[pre]:h-[450px]">
-          <ComponentSource {...{name}} />
+          <ComponentSource {...{name, collapsible:false}} />
       </TabsContent>
     </div>
   </Tabs>

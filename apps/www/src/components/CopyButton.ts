@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { UbButton } from '@/registry/new-york-v4/ui/button'
 
 @Component({
+  selector: 'copy-button',
   imports: [
     RdxTooltipRootDirective,
     RdxTooltipTriggerDirective,
