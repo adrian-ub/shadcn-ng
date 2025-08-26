@@ -24,6 +24,27 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  'accordion': {
+    name: 'accordion',
+    description: '',
+    type: 'registry:ui',
+    registryDependencies: undefined,
+    files: [{
+      path: 'registry/new-york-v4/ui/accordion.ts',
+      type: 'registry:ui',
+      target: '',
+    }],
+    component: async () => {
+      const mod = await import('@/registry/new-york-v4/ui/accordion.ts')
+      const exportName = Object.keys(mod).find((key) => {
+        const value = (mod as Record<string, unknown>)[key]
+        return typeof value === 'function' && value.prototype && value.prototype.constructor === value
+      })
+      return mod[exportName as keyof typeof mod]
+    },
+    categories: undefined,
+    meta: undefined,
+  },
   'button': {
     name: 'button',
     description: '',
@@ -57,6 +78,27 @@ export const Index: Record<string, any> = {
     }],
     component: async () => {
       const mod = await import('@/registry/new-york-v4/lib/utils.ts')
+      const exportName = Object.keys(mod).find((key) => {
+        const value = (mod as Record<string, unknown>)[key]
+        return typeof value === 'function' && value.prototype && value.prototype.constructor === value
+      })
+      return mod[exportName as keyof typeof mod]
+    },
+    categories: undefined,
+    meta: undefined,
+  },
+  'accordion-demo': {
+    name: 'accordion-demo',
+    description: '',
+    type: 'registry:example',
+    registryDependencies: [],
+    files: [{
+      path: 'registry/new-york-v4/examples/accordion-demo.ts',
+      type: 'registry:example',
+      target: '',
+    }],
+    component: async () => {
+      const mod = await import('@/registry/new-york-v4/examples/accordion-demo.ts')
       const exportName = Object.keys(mod).find((key) => {
         const value = (mod as Record<string, unknown>)[key]
         return typeof value === 'function' && value.prototype && value.prototype.constructor === value

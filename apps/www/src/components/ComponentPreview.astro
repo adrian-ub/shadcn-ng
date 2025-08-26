@@ -1,12 +1,14 @@
 ---
 import { Index } from '@/registry/__index__'
 import ComponentPreviewTabs from './ComponentPreviewTabs.astro'
+import type { HTMLAttributes } from 'astro/types'
 
-export interface Props {
+export interface Props extends HTMLAttributes<"div">{
   name: string
+  align?: 'center' | 'start' | 'end'
 }
 
-const { name } = Astro.props
+const { name, align } = Astro.props
 
 const Component = Index[name]?.component
 ---
@@ -19,4 +21,4 @@ const Component = Index[name]?.component
   )
 }
 
-{Component && <ComponentPreviewTabs {name} />}
+{Component && <ComponentPreviewTabs {name} class={Astro.props.class} {align} />}
