@@ -3,6 +3,7 @@ import process from 'node:process'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { Command } from 'commander'
 import { server } from '@/src/mcp'
+import { loadEnvFiles } from '@/src/utils/env-loader'
 import { handleError } from '@/src/utils/handle-error'
 import { logger } from '@/src/utils/logger'
 
@@ -14,8 +15,9 @@ export const mcp = new Command()
     'the working directory. defaults to the current directory.',
     process.cwd(),
   )
-  .action(async () => {
+  .action(async (options) => {
     try {
+      await loadEnvFiles(options.cwd)
       const transport = new StdioServerTransport()
       await server.connect(transport)
     }
