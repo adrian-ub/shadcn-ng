@@ -78,7 +78,7 @@ export const initOptionsSchema = z.object({
         return true
       },
       {
-        message: 'Invalid template. Please use \'next\' or \'next-monorepo\'.',
+        message: 'Invalid template. Please use \'angular\' or \'angular-monorepo\'.',
       },
     ),
   baseColor: z
@@ -128,6 +128,12 @@ export const init = new Command()
   .option('--no-base-style', 'do not install the base shadcn-ng style.')
   .action(async (components, opts) => {
     try {
+      // Apply defaults when --defaults flag is set.
+      if (opts.defaults) {
+        opts.template = opts.template || 'angular'
+        opts.baseColor = opts.baseColor || 'neutral'
+      }
+
       const options = initOptionsSchema.parse({
         cwd: path.resolve(opts.cwd),
         isNewProject: false,
