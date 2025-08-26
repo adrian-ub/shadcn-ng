@@ -9,9 +9,9 @@ import ThemeSelector from '@/components/ThemeSelector.astro'
 import CardsDemo from '@/components/cards'
 import { Image } from 'astro:assets'
 
-const title = 'Build your Component Library'
+const title = 'The Foundation for your Design System'
 const description =
-  'A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.'
+  'A set of beautifully designed components that you can customize, extend, and build on. Start here then make it your own. Open Source. Open Code.'
 ---
 
 <RootLayout
@@ -27,7 +27,7 @@ const description =
       <PageHeaderDescription>{description}</PageHeaderDescription>
       <PageActions>
         <a href="/docs/installation" class={buttonVariants({ size: 'sm' })}>Get Started</a>
-        <a href="/blocks" class={buttonVariants({ size: 'sm', variant: 'ghost' })}>Browse Blocks</a>
+        <a href="/docs/components" class={buttonVariants({ size: 'sm', variant: 'ghost' })}>View Components</a>
       </PageActions>
     </PageHeader>
     <PageNav class="hidden md:flex">
