@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "badge-demo",
+  "type": "registry:example",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york-v4/examples/badge-demo.ts",
+      "content": "import { Component } from '@angular/core'\n\nimport { lucideBadgeCheck, NgxiLucide } from '@ngxi/lucide'\n\nimport { UbBadge } from '@/registry/new-york-v4/ui/badge'\n\n@Component({\n  standalone: true,\n  imports: [UbBadge, NgxiLucide],\n  template: `\n  <div class=\"flex flex-col items-center gap-2\">\n    <div class=\"flex w-full flex-wrap gap-2\">\n      <span ubBadge>Badge</span>\n      <span ubBadge variant=\"secondary\">Secondary</span>\n      <span ubBadge variant=\"destructive\">Destructive</span>\n      <span ubBadge variant=\"outline\">Outline</span>\n    </div>\n    <div class=\"flex w-full flex-wrap gap-2\">\n      <span ubBadge variant=\"secondary\" class=\"bg-blue-500 text-white dark:bg-blue-600\">\n        <svg [ngxiLucide]=\"lucideBadgeCheck\"></svg>\n        Verified\n      </span>\n      <span ubBadge class=\"h-5 min-w-5 rounded-full px-1 font-mono tabular-nums\">8</span>\n      <span ubBadge variant=\"destructive\" class=\"h-5 min-w-5 rounded-full px-1 font-mono tabular-nums\">99</span>\n      <span ubBadge variant=\"outline\" class=\"h-5 min-w-5 rounded-full px-1 font-mono tabular-nums\">20+</span>\n    </div>\n  </div>\n  `,\n})\nexport class BadgeDemo {\n  protected readonly lucideBadgeCheck = lucideBadgeCheck\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

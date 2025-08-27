@@ -13,6 +13,16 @@ export const ui: Registry['items'] = [
     ],
   },
   {
+    name: 'badge',
+    type: 'registry:ui',
+    files: [
+      {
+        path: 'ui/badge.ts',
+        type: 'registry:ui',
+      },
+    ],
+  },
+  {
     name: 'button',
     type: 'registry:ui',
     files: [

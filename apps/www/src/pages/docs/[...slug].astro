@@ -12,6 +12,7 @@ import { createTOC } from '@/lib/toc';
 import { buttonVariants } from '@/registry/new-york-v4/ui/button'
 import { cn } from '@/lib/utils'
 import { mdxComponents } from '@/mdx-components'
+import { badgeVariants } from '@/registry/new-york-v4/ui/badge'
 
 export async function getStaticPaths() {
   return source.generateParams()
@@ -61,12 +62,12 @@ const doc = page.data
             doc.links && (
               <div class="flex items-center space-x-2 pt-4">
                 {doc.links.doc && (
-                  <a href={doc.links.doc} class={buttonVariants({ variant: 'secondary' })} target="_blank" rel="noreferrer">
+                  <a href={doc.links.doc} class={badgeVariants({ variant: 'secondary' })} target="_blank" rel="noreferrer">
                     Docs <IconArrowUpRight />
                   </a>
                 )}
                 {doc.links.api && (
-                  <a href={doc.links.api} class={buttonVariants({ variant: 'secondary' })} target="_blank" rel="noreferrer">
+                  <a href={doc.links.api} class={badgeVariants({ variant: 'secondary' })} target="_blank" rel="noreferrer">
                     API Reference <IconArrowUpRight />
                   </a>
                 )}

@@ -45,6 +45,16 @@
       ]
     },
     {
+      "name": "badge",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/new-york-v4/ui/badge.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "files": [
@@ -250,6 +260,18 @@
       "files": [
         {
           "path": "registry/new-york-v4/examples/accordion-demo.ts",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "badge-demo",
+      "type": "registry:example",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york-v4/examples/badge-demo.ts",
           "type": "registry:example"
         }
       ]

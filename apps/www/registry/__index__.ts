@@ -45,6 +45,27 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  'badge': {
+    name: 'badge',
+    description: '',
+    type: 'registry:ui',
+    registryDependencies: undefined,
+    files: [{
+      path: 'registry/new-york-v4/ui/badge.ts',
+      type: 'registry:ui',
+      target: '',
+    }],
+    component: async () => {
+      const mod = await import('@/registry/new-york-v4/ui/badge.ts')
+      const exportName = Object.keys(mod).find((key) => {
+        const value = (mod as Record<string, unknown>)[key]
+        return typeof value === 'function' && value.prototype && value.prototype.constructor === value
+      })
+      return mod[exportName as keyof typeof mod]
+    },
+    categories: undefined,
+    meta: undefined,
+  },
   'button': {
     name: 'button',
     description: '',
@@ -99,6 +120,27 @@ export const Index: Record<string, any> = {
     }],
     component: async () => {
       const mod = await import('@/registry/new-york-v4/examples/accordion-demo.ts')
+      const exportName = Object.keys(mod).find((key) => {
+        const value = (mod as Record<string, unknown>)[key]
+        return typeof value === 'function' && value.prototype && value.prototype.constructor === value
+      })
+      return mod[exportName as keyof typeof mod]
+    },
+    categories: undefined,
+    meta: undefined,
+  },
+  'badge-demo': {
+    name: 'badge-demo',
+    description: '',
+    type: 'registry:example',
+    registryDependencies: [],
+    files: [{
+      path: 'registry/new-york-v4/examples/badge-demo.ts',
+      type: 'registry:example',
+      target: '',
+    }],
+    component: async () => {
+      const mod = await import('@/registry/new-york-v4/examples/badge-demo.ts')
       const exportName = Object.keys(mod).find((key) => {
         const value = (mod as Record<string, unknown>)[key]
         return typeof value === 'function' && value.prototype && value.prototype.constructor === value
