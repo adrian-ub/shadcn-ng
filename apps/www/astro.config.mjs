@@ -1,5 +1,4 @@
 import analogjsangular from '@analogjs/astro-angular'
-
 import mdx from '@astrojs/mdx'
 
 import tailwindcss from '@tailwindcss/vite'
@@ -8,8 +7,8 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
 
 import rehypePrettyCode from 'rehype-pretty-code'
-import Icons from 'unplugin-icons/vite'
 
+import Icons from 'unplugin-icons/vite'
 import { transformers } from './lib/highlight-code'
 
 // https://astro.build/config
@@ -40,26 +39,17 @@ export default defineConfig({
     optimizeDeps: {
       include: [
         '@radix-ng/primitives',
-        '@radix-ng/components',
         '@angular/common',
         '@angular/core',
         '@angular/cdk',
-        '@internationalized/date',
-        '@stackblitz/sdk',
-        'classnames',
-        'lucide-angular',
+        '@ngxi/lucide',
       ],
     },
     ssr: {
       noExternal: [
-        '@radix-ng/**',
-        '@angular/common',
-        '@angular/core',
-        '@angular/core/rxjs-interop',
-        '@stackblitz/sdk',
-        'classnames',
-        '@internationalized/date',
-        'lucide-angular',
+        '@radix-ng/primitives',
+        '@angular/cdk',
+        '@ngxi/lucide',
       ],
     },
   },
