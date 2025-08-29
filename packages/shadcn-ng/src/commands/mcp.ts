@@ -17,7 +17,7 @@ import { logger } from '@/src/utils/logger'
 import { spinner } from '@/src/utils/spinner'
 import { updateDependencies } from '@/src/utils/updaters/update-dependencies'
 
-const SHADCN_NG_MCP_VERSION = 'beta'
+const SHADCN_NG_MCP_VERSION = 'latest'
 
 const CLIENTS = [
   {
