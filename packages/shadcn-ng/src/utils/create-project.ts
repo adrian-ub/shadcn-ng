@@ -17,8 +17,8 @@ const MONOREPO_TEMPLATE_URL
   = 'https://codeload.github.com/adrian-ub/shadcn-ng/tar.gz/main'
 
 export const TEMPLATES = {
-  'angular': 'angular',
-  'angular-monorepo': 'angular-monorepo',
+  angular: 'angular',
+  // 'angular-monorepo': 'angular-monorepo', // TODO: Implement Angular monorepo template
 } as const
 
 export async function createProject(
@@ -52,7 +52,7 @@ export async function createProject(
         )} does not contain a package.json file.\n  Would you like to start a new project?`,
         choices: [
           { title: 'Angular', value: 'angular' },
-          { title: 'Angular (Monorepo)', value: 'angular-monorepo' },
+          // { title: 'Angular (Monorepo)', value: 'angular-monorepo' }, // TODO: Implement Angular (Monorepo) template
         ],
         initial: 0,
       },
@@ -151,7 +151,7 @@ async function createMonorepoProject(
       '--strip-components=2',
       `shadcn-ng-main/templates/${projectType}`,
     ])
-    const extractedPath = path.resolve(templatePath, 'monorepo-next')
+    const extractedPath = path.resolve(templatePath, projectType)
     await fs.move(extractedPath, projectPath)
     await fs.remove(templatePath)
 
