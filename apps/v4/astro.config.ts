@@ -26,6 +26,7 @@ export default defineConfig({
         PageFrame: './src/components/starlight/PageFrame.astro',
         Head: './src/components/starlight/Head.astro',
         Search: './src/components/starlight/Search.astro',
+        Sidebar: './src/components/starlight/Sidebar.astro',
       },
     }),
     angular({
