@@ -1,4 +1,4 @@
-import type { Registry } from 'shadcn-ng/registry'
+import type { Registry } from 'shadcn-ng/schema'
 import { blocks } from './registry-blocks'
 import { charts } from './registry-charts'
 import { examples } from './registry-examples'

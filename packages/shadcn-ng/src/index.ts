@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+import process from 'node:process'
+
+import { Command } from 'commander'
+
+import { add } from '@/src/commands/add'
+import { build } from '@/src/commands/build'
+import { diff } from '@/src/commands/diff'
+import { info } from '@/src/commands/info'
+import { init } from '@/src/commands/init'
+import { mcp } from '@/src/commands/mcp'
+import { search } from '@/src/commands/search'
+import { view } from '@/src/commands/view'
+
+import packageJson from '../package.json'
+
+process.on('SIGINT', () => process.exit(0))
+process.on('SIGTERM', () => process.exit(0))
+
+async function main() {
+  const program = new Command()
+    .name('shadcn-ng')
+    .description('add items from registries to your project')
+    .version(
+      packageJson.version || '1.0.0',
+      '-v, --version',
+      'display the version number',
+    )
+
+  program
+    .addCommand(add)
+    .addCommand(init)
+    .addCommand(diff)
+    .addCommand(view)
+    .addCommand(info)
+    .addCommand(search)
+    .addCommand(build)
+    .addCommand(mcp)
+
+  program.parse()
+}
+
+main()
+
+export * from './registry/api'

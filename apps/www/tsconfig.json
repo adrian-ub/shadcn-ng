@@ -6,11 +6,11 @@
       "~/*": [
         "src/*"
       ],
-      "shadcn-ng": [
-        "../../src/index.ts"
+      "shadcn-ng/schema": [
+        "../../packages/shadcn-ng/src/registry/schema.ts"
       ],
-      "shadcn-ng/registry": [
-        "../../src/registry.ts"
+      "shadcn-ng/*": [
+        "../../packages/shadcn-ng/src/*"
       ]
     },
     "plugins": [

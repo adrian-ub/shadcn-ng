@@ -1,10 +1,10 @@
-import type { Registry } from '../../../../src/registry'
+import type { Registry } from 'shadcn-ng/schema'
 import type { Style } from '../registry/registry-styles'
 import process from 'node:process'
 
-import * as v from 'valibot'
+import { registrySchema } from 'shadcn-ng/schema'
 
-import { RegistrySchema } from '../../../../src/registry'
+import { z } from 'zod'
 import { registry } from '../registry'
 import { styles } from '../registry/registry-styles'
 
@@ -77,15 +77,15 @@ async function buildRegistry(registry: Registry): Promise<void> {
 }
 
 try {
-  const result = v.safeParse(RegistrySchema, registry)
+  const result = z.safeParse(registrySchema, registry)
 
   if (!result.success) {
-    console.error(result.issues.map(issue => issue.message).join('\n'))
+    console.error(result.error.issues.map(issue => issue.message).join('\n'))
     process.exit(1)
   }
 
   // eslint-disable-next-line antfu/no-top-level-await
-  await buildRegistry(result.output)
+  await buildRegistry(result.data)
 }
 catch (error) {
   console.error(error)

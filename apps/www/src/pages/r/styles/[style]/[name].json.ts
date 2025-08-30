@@ -1,13 +1,13 @@
-import type { RegistryItem } from 'shadcn-ng/registry'
+import type { RegistryItem } from 'shadcn-ng/schema'
 
 import fs from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import process from 'node:process'
 
-import { RegistryItemSchema } from 'shadcn-ng/registry'
+import { registryItemSchema } from 'shadcn-ng/schema'
 import { Project, ScriptKind } from 'ts-morph'
-import * as v from 'valibot'
+import { z } from 'zod'
 import { registry } from '~/registry'
 import { styles } from '~/registry/registry-styles'
 
@@ -98,8 +98,8 @@ export async function GET({
     )
   }
 
-  const payload = v.safeParse(
-    RegistryItemSchema,
+  const payload = z.safeParse(
+    registryItemSchema,
     {
       ...item,
       files,
@@ -113,7 +113,7 @@ export async function GET({
   const response = {
     $schema: 'https://ui.adrianub.dev/schema/registry-item.json',
     author: 'Adrián UB (https://ui.adrianub.dev)',
-    ...payload.output,
+    ...payload.data,
   }
 
   return new Response(

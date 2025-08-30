@@ -1,10 +1,8 @@
-import { toJsonSchema } from '@valibot/to-json-schema'
-import { RawConfigSchema } from 'shadcn-ng/registry'
+import { rawConfigSchema } from 'shadcn-ng/schema'
+import * as z from 'zod'
 
 export async function GET(): Promise<Response> {
-  const JsonRawConfigSchema = toJsonSchema(RawConfigSchema, {
-    errorMode: 'ignore',
-  })
+  const JsonRawConfigSchema = z.toJSONSchema(rawConfigSchema)
 
   return new Response(JSON.stringify(JsonRawConfigSchema, null, 2))
 }

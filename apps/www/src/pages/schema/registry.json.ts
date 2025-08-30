@@ -1,10 +1,8 @@
-import { toJsonSchema } from '@valibot/to-json-schema'
-import { RegistrySchema } from 'shadcn-ng/registry'
+import { registrySchema } from 'shadcn-ng/schema'
+import * as z from 'zod'
 
 export async function GET(): Promise<Response> {
-  const JsonRegistrySchema = toJsonSchema(RegistrySchema, {
-    errorMode: 'ignore',
-  })
+  const JsonRegistrySchema = z.toJSONSchema(registrySchema)
 
   return new Response(JSON.stringify(JsonRegistrySchema, null, 2))
 }

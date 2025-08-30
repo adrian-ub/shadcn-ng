@@ -1,4 +1,4 @@
-import type { RegistryItem } from 'shadcn-ng/registry'
+import type { RegistryItem } from 'shadcn-ng/schema'
 import type { Style } from '~/registry/registry-styles'
 import { styles } from '~/registry/registry-styles'
 

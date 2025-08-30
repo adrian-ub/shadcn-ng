@@ -2,17 +2,17 @@ import { computed, Directive, input } from '@angular/core'
 
 import { cn } from '~/lib/utils'
 
-export type InputType =
-  | 'date'
-  | 'datetime-local'
-  | 'email'
-  | 'month'
-  | 'number'
-  | 'password'
-  | 'tel'
-  | 'file'
-  | 'search'
-  | 'text'
+export type InputType
+  = | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'tel'
+    | 'file'
+    | 'search'
+    | 'text'
 
 @Directive({
   selector: '[ubInput]',

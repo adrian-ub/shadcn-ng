@@ -1,25 +1,25 @@
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { colors } from '~/registry/registry-colors'
 
-const colorSchema = v.object({
-  name: v.string(),
-  id: v.string(),
-  scale: v.number(),
-  class: v.string(),
-  hex: v.string(),
-  rgb: v.string(),
-  hsl: v.string(),
-  foreground: v.string(),
-  oklch: v.string(),
+const colorSchema = z.object({
+  name: z.string(),
+  id: z.string(),
+  scale: z.number(),
+  class: z.string(),
+  hex: z.string(),
+  rgb: z.string(),
+  hsl: z.string(),
+  foreground: z.string(),
+  oklch: z.string(),
 })
 
-const colorPaletteSchema = v.object({
-  name: v.string(),
-  colors: v.array(colorSchema),
+const colorPaletteSchema = z.object({
+  name: z.string(),
+  colors: z.array(colorSchema),
 })
 
-export type ColorPalette = v.InferOutput<typeof colorPaletteSchema>
+export type ColorPalette = z.infer<typeof colorPaletteSchema>
 
 export function getColorFormat(color: Color): { class: string, hex: string, rgb: string, hsl: string, oklch: string } {
   return {
@@ -34,7 +34,7 @@ export function getColorFormat(color: Color): { class: string, hex: string, rgb:
 export type ColorFormat = keyof ReturnType<typeof getColorFormat>
 
 export function getColors(): ColorPalette[] {
-  const tailwindColors = v.parse(v.array(colorPaletteSchema), Object.entries(colors)
+  const tailwindColors = z.array(colorPaletteSchema).parse(Object.entries(colors)
     .map(([name, color]) => {
       if (!Array.isArray(color)) {
         return null
