@@ -33,11 +33,16 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest",
+    "run": "tsx ./src/index.ts",
     "typecheck": "tsc --noEmit",
     "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta"
   },
   "dependencies": {
+    "@antfu/ni": "25.0.0",
+    "@modelcontextprotocol/sdk": "1.17.3",
+    "commander": "14.0.0",
     "cosmiconfig": "9.0.0",
+    "dedent": "1.6.0",
     "deepmerge": "4.3.1",
     "fast-glob": "3.3.3",
     "fs-extra": "11.3.1",
