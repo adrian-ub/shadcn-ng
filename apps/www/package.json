@@ -70,6 +70,6 @@
     "shadcn-ng": "workspace:*",
     "ts-morph": "26.0.0",
     "typescript": "~5.8.0",
-    "zod": "^4.0.17"
+    "zod": "^4.1.5"
   }
 }

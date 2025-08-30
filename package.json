@@ -17,6 +17,9 @@
     "build": "pnpm -r run build",
     "build:cli": "pnpm --filter=shadcn-ng build"
   },
+  "dependencies": {
+    "zod": "^4.1.5"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",
     "@changesets/changelog-github": "0.5.1",
@@ -27,6 +30,7 @@
     "eslint": "^9.33.0",
     "eslint-plugin-format": "^1.0.1",
     "lint-staged": "16.1.5",
+    "puppeteer": "^24.17.1",
     "simple-git-hooks": "2.13.1",
     "tailwindcss": "4.1.12",
     "tsdown": "0.14.1",
