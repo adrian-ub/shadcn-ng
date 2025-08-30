@@ -3,13 +3,39 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "shadcn-ng/schema": ["../../packages/shadcn-ng/src/registry/schema.ts"],
-      "shadcn-ng/*": ["../../packages/shadcn-ng/src/*"],
-      "@/registry/*": ["registry/*"],
-      "@/lib/*": ["lib/*", "src/lib/*"],
-      "@/*": ["src/*"]
-    }
+      "shadcn-ng/schema": [
+        "../../packages/shadcn-ng/src/registry/schema.ts"
+      ],
+      "shadcn-ng/*": [
+        "../../packages/shadcn-ng/src/*"
+      ],
+      "@/registry/*": [
+        "registry/*"
+      ],
+      "@/lib/*": [
+        "lib/*",
+        "src/lib/*"
+      ],
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "types": [
+      "unplugin-icons/types/astro"
+    ]
   },
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "allowJs": false
+  },
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ]
 }

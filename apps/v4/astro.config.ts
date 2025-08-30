@@ -3,6 +3,7 @@ import markdoc from '@astrojs/markdoc'
 import starlight from '@astrojs/starlight'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
+import Icons from 'unplugin-icons/vite'
 import { sidebar } from './astro.sidebar'
 import { devServerFileWatcher } from './config/integrations/dev-server-file-watcher'
 import { siteConfig } from './lib/config'
@@ -28,6 +29,10 @@ export default defineConfig({
         Search: './src/components/starlight/Search.astro',
         Sidebar: './src/components/starlight/Sidebar.astro',
         TwoColumnContent: './src/components/starlight/TwoColumnContent.astro',
+        ContentPanel: './src/components/starlight/ContentPanel.astro',
+        PageTitle: './src/components/starlight/PageTitle.astro',
+        MarkdownContent: './src/components/starlight/MarkdownContent.astro',
+        Pagination: './src/components/starlight/Pagination.astro',
       },
     }),
     angular({
@@ -43,7 +48,12 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      Icons({
+        compiler: 'astro',
+      }),
+    ],
     optimizeDeps: {
       include: [
         '@radix-ng/primitives',

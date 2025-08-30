@@ -5,8 +5,10 @@ import DocsSidebar from '../DocsSidebar.astro'
 const { sidebar } = Astro.locals.starlightRoute
 ---
 
-<DocsSidebar sublist={sidebar} />
+<div>
+  <DocsSidebar sublist={sidebar} />
 
-<div class="md:sl-hidden">
-  <MobileMenuFooter />
+  <div class="md:sl-hidden">
+    <MobileMenuFooter />
+  </div>
 </div>
