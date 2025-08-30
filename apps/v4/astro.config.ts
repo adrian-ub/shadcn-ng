@@ -27,6 +27,7 @@ export default defineConfig({
         Head: './src/components/starlight/Head.astro',
         Search: './src/components/starlight/Search.astro',
         Sidebar: './src/components/starlight/Sidebar.astro',
+        TwoColumnContent: './src/components/starlight/TwoColumnContent.astro',
       },
     }),
     angular({
