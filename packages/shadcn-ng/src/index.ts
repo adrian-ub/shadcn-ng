@@ -1,3 +1,1 @@
-export function myFunction() {
-  return 'Hello, world!'
-}
+export * from './registry/api'

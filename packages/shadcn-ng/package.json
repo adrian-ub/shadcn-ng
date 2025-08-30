@@ -35,5 +35,27 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "pub:beta": "pnpm build && pnpm publish --no-git-checks --access public --tag beta"
+  },
+  "dependencies": {
+    "cosmiconfig": "9.0.0",
+    "deepmerge": "4.3.1",
+    "fast-glob": "3.3.3",
+    "fs-extra": "11.3.1",
+    "fuzzysort": "3.1.0",
+    "https-proxy-agent": "7.0.6",
+    "kleur": "4.1.5",
+    "node-fetch": "3.3.2",
+    "ora": "8.2.0",
+    "prompts": "2.4.2",
+    "stringify-object": "5.0.0",
+    "ts-morph": "26.0.0",
+    "tsconfig-paths": "4.2.0",
+    "zod": "4.0.17"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/prompts": "^2.4.9",
+    "@types/stringify-object": "^4.0.5",
+    "type-fest": "^4.41.0"
   }
 }
