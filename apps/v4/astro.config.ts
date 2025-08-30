@@ -2,10 +2,10 @@ import angular from '@analogjs/astro-angular'
 import markdoc from '@astrojs/markdoc'
 import starlight from '@astrojs/starlight'
 import tailwindcss from '@tailwindcss/vite'
-
-import { defineConfig } from 'astro/config'
+import { defineConfig, fontProviders } from 'astro/config'
 import { sidebar } from './astro.sidebar'
 import { devServerFileWatcher } from './config/integrations/dev-server-file-watcher'
+import { siteConfig } from './lib/config'
 
 export default defineConfig({
   integrations: [
@@ -14,15 +14,18 @@ export default defineConfig({
       './astro.sidebar.ts',
     ]),
     starlight({
-      title: 'shadcn-ng',
-      logo: {
-        src: '/src/assets/logo.svg',
-      },
-      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/adrian-ub/shadcn-ng' }],
+      title: siteConfig.name,
+      social: [{ icon: 'github', label: 'GitHub', href: siteConfig.links.github }],
       sidebar,
       customCss: ['./src/styles/global.css'],
       expressiveCode: {
         themes: ['github-dark', 'github-light-default'],
+      },
+      components: {
+        Header: './src/components/starlight/Header.astro',
+        PageFrame: './src/components/starlight/PageFrame.astro',
+        Head: './src/components/starlight/Head.astro',
+        Search: './src/components/starlight/Search.astro',
       },
     }),
     angular({
@@ -55,5 +58,30 @@ export default defineConfig({
         '@ngxi/lucide',
       ],
     },
+  },
+  experimental: {
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: 'Geist',
+        cssVariable: '--font-sans',
+        subsets: ['latin'],
+        weights: ['100 900'],
+      },
+      {
+        provider: fontProviders.google(),
+        name: 'Geist Mono',
+        cssVariable: '--font-mono',
+        subsets: ['latin'],
+        weights: ['400'],
+      },
+      {
+        provider: fontProviders.google(),
+        name: 'Inter',
+        cssVariable: '--font-inter',
+        subsets: ['latin'],
+        weights: ['100 900'],
+      },
+    ],
   },
 })

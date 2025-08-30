@@ -1,0 +1,44 @@
+---
+import config from 'virtual:starlight/user-config'
+import Search from 'virtual:starlight/components/Search'
+import SocialIcons from 'virtual:starlight/components/SocialIcons'
+import { Image } from 'astro:assets'
+import logo from '@/assets/logo.svg'
+import { siteConfig } from '@/lib/config'
+import { cn } from '@/lib/utils'
+import MainNav from '@/components/MainNav.astro'
+import { buttonVariants } from '@/registry/new-york-v4/ui/button'
+import { separatorClass } from '@/registry/new-york-v4/ui/separator'
+import SiteConfig from '@/components/SiteConfig.astro'
+import ModeSwitcher from '@/components/ModeSwitcher.astro'
+
+/**
+ * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
+ */
+const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro'
+
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<header class="bg-background sticky top-0 z-50 w-full">
+  <div class="container-wrapper 3xl:fixed:px-0 px-6">
+    <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+      <a href={siteTitleHref} class={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'hidden size-8 lg:flex')}>
+        <Image src={logo} alt="shadcn-ng" class="size-5" />
+        <span class="sr-only">{siteTitle}</span>
+      </a>
+      <MainNav items={siteConfig.navItems} class="hidden lg:flex" />
+      <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+        <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+          {shouldRenderSearch && <Search />}
+        </div>
+        <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>
+        <SocialIcons />
+        <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>
+        <SiteConfig class="3xl:flex hidden" />
+        <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>
+        <ModeSwitcher />
+      </div>
+    </div>
+  </div>
+</header>
