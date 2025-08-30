@@ -151,7 +151,7 @@ async function createMonorepoProject(
       '--strip-components=2',
       `shadcn-ng-main/templates/${projectType}`,
     ])
-    const extractedPath = path.resolve(templatePath, 'monorepo-next')
+    const extractedPath = path.resolve(templatePath, projectType)
     await fs.move(extractedPath, projectPath)
     await fs.remove(templatePath)
 
