@@ -31,7 +31,7 @@
     "tailwindcss": "4.1.12",
     "tsdown": "0.14.1",
     "tsx": "4.20.4",
-    "typescript": "5.9.2",
+    "typescript": "~5.8.0",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4"
   },

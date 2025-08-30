@@ -1,0 +1,37 @@
+---
+import { siteConfig } from '~/config/site'
+---
+
+<footer class="border-grid border-t py-6 md:py-0">
+  <div class="container-wrapper">
+    <div class="container py-4">
+      <p class="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+        Built & designed by{' '}
+        <a
+          href={siteConfig.links.shadcn.twitter}
+          target="_blank"
+          rel="noreferrer"
+          class="font-medium underline underline-offset-4"
+        >
+          shadcn
+        </a>. Ported to Angular by{' '}
+        <a
+          href={siteConfig.links.twitter}
+          target="_blank"
+          rel="noreferrer"
+          class="font-medium underline underline-offset-4"
+        >
+          Adrián UB
+        </a>. The source code is available on{' '}
+        <a
+          href={siteConfig.links.github}
+          target="_blank"
+          rel="noreferrer"
+          class="font-medium underline underline-offset-4"
+        >
+          GitHub.
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>

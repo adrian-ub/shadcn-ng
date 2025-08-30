@@ -1,0 +1,287 @@
+---
+import { cn } from '~/lib/utils'
+import { buttonVariants } from '~/registry/new-york/ui/button'
+
+import { docsConfig } from '~/config/docs'
+
+let commandItems = docsConfig.sidebarNav.reduce(
+  (
+    acc: { [key: string]: { title: string; value: string; icon: string; default: boolean; action: string }[] },
+    section,
+  ) => {
+    acc[section.title] = section.items.map((item) => ({
+      title: item.title,
+      value: item.title,
+      icon: `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2 h-3 w-3"><path d="M0.877075 7.49991C0.877075 3.84222 3.84222 0.877075 7.49991 0.877075C11.1576 0.877075 14.1227 3.84222 14.1227 7.49991C14.1227 11.1576 11.1576 14.1227 7.49991 14.1227C3.84222 14.1227 0.877075 11.1576 0.877075 7.49991ZM7.49991 1.82708C4.36689 1.82708 1.82708 4.36689 1.82708 7.49991C1.82708 10.6329 4.36689 13.1727 7.49991 13.1727C10.6329 13.1727 13.1727 10.6329 13.1727 7.49991C13.1727 4.36689 10.6329 1.82708 7.49991 1.82708Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`,
+      default: true,
+      action: `window.location.href = '${item.href}'`,
+    }))
+    return acc
+  },
+  {
+    links: docsConfig.mainNav.map((item) => ({
+      title: item.title,
+      value: item.title,
+      icon: `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4"><path d="M3.5 2C3.22386 2 3 2.22386 3 2.5V12.5C3 12.7761 3.22386 13 3.5 13H11.5C11.7761 13 12 12.7761 12 12.5V6H8.5C8.22386 6 8 5.77614 8 5.5V2H3.5ZM9 2.70711L11.2929 5H9V2.70711ZM2 2.5C2 1.67157 2.67157 1 3.5 1H8.5C8.63261 1 8.75979 1.05268 8.85355 1.14645L12.8536 5.14645C12.9473 5.24021 13 5.36739 13 5.5V12.5C13 13.3284 12.3284 14 11.5 14H3.5C2.67157 14 2 13.3284 2 12.5V2.5Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`,
+      default: true,
+      action: `window.location.href = '${item.href}'`,
+    })),
+  },
+)
+
+commandItems = {
+  ...commandItems,
+  Theme: [
+    {
+      title: 'Light',
+      icon: `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4"><path d="M7.5 0C7.77614 0 8 0.223858 8 0.5V2.5C8 2.77614 7.77614 3 7.5 3C7.22386 3 7 2.77614 7 2.5V0.5C7 0.223858 7.22386 0 7.5 0ZM2.1967 2.1967C2.39196 2.00144 2.70854 2.00144 2.90381 2.1967L4.31802 3.61091C4.51328 3.80617 4.51328 4.12276 4.31802 4.31802C4.12276 4.51328 3.80617 4.51328 3.61091 4.31802L2.1967 2.90381C2.00144 2.70854 2.00144 2.39196 2.1967 2.1967ZM0.5 7C0.223858 7 0 7.22386 0 7.5C0 7.77614 0.223858 8 0.5 8H2.5C2.77614 8 3 7.77614 3 7.5C3 7.22386 2.77614 7 2.5 7H0.5ZM2.1967 12.8033C2.00144 12.608 2.00144 12.2915 2.1967 12.0962L3.61091 10.682C3.80617 10.4867 4.12276 10.4867 4.31802 10.682C4.51328 10.8772 4.51328 11.1938 4.31802 11.3891L2.90381 12.8033C2.70854 12.9986 2.39196 12.9986 2.1967 12.8033ZM12.5 7C12.2239 7 12 7.22386 12 7.5C12 7.77614 12.2239 8 12.5 8H14.5C14.7761 8 15 7.77614 15 7.5C15 7.22386 14.7761 7 14.5 7H12.5ZM10.682 4.31802C10.4867 4.12276 10.4867 3.80617 10.682 3.61091L12.0962 2.1967C12.2915 2.00144 12.608 2.00144 12.8033 2.1967C12.9986 2.39196 12.9986 2.70854 12.8033 2.90381L11.3891 4.31802C11.1938 4.51328 10.8772 4.51328 10.682 4.31802ZM8 12.5C8 12.2239 7.77614 12 7.5 12C7.22386 12 7 12.2239 7 12.5V14.5C7 14.7761 7.22386 15 7.5 15C7.77614 15 8 14.7761 8 14.5V12.5ZM10.682 10.682C10.8772 10.4867 11.1938 10.4867 11.3891 10.682L12.8033 12.0962C12.9986 12.2915 12.9986 12.608 12.8033 12.8033C12.608 12.9986 12.2915 12.9986 12.0962 12.8033L10.682 11.3891C10.4867 11.1938 10.4867 10.8772 10.682 10.682ZM5.5 7.5C5.5 6.39543 6.39543 5.5 7.5 5.5C8.60457 5.5 9.5 6.39543 9.5 7.5C9.5 8.60457 8.60457 9.5 7.5 9.5C6.39543 9.5 5.5 8.60457 5.5 7.5ZM7.5 4.5C5.84315 4.5 4.5 5.84315 4.5 7.5C4.5 9.15685 5.84315 10.5 7.5 10.5C9.15685 10.5 10.5 9.15685 10.5 7.5C10.5 5.84315 9.15685 4.5 7.5 4.5Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`,
+      default: true,
+      value: 'Light',
+      action: `document.documentElement.classList.remove('dark')`,
+    },
+    {
+      title: 'Dark',
+      icon: `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4"><path d="M2.89998 0.499976C2.89998 0.279062 2.72089 0.0999756 2.49998 0.0999756C2.27906 0.0999756 2.09998 0.279062 2.09998 0.499976V1.09998H1.49998C1.27906 1.09998 1.09998 1.27906 1.09998 1.49998C1.09998 1.72089 1.27906 1.89998 1.49998 1.89998H2.09998V2.49998C2.09998 2.72089 2.27906 2.89998 2.49998 2.89998C2.72089 2.89998 2.89998 2.72089 2.89998 2.49998V1.89998H3.49998C3.72089 1.89998 3.89998 1.72089 3.89998 1.49998C3.89998 1.27906 3.72089 1.09998 3.49998 1.09998H2.89998V0.499976ZM5.89998 3.49998C5.89998 3.27906 5.72089 3.09998 5.49998 3.09998C5.27906 3.09998 5.09998 3.27906 5.09998 3.49998V4.09998H4.49998C4.27906 4.09998 4.09998 4.27906 4.09998 4.49998C4.09998 4.72089 4.27906 4.89998 4.49998 4.89998H5.09998V5.49998C5.09998 5.72089 5.27906 5.89998 5.49998 5.89998C5.72089 5.89998 5.89998 5.72089 5.89998 5.49998V4.89998H6.49998C6.72089 4.89998 6.89998 4.72089 6.89998 4.49998C6.89998 4.27906 6.72089 4.09998 6.49998 4.09998H5.89998V3.49998ZM1.89998 6.49998C1.89998 6.27906 1.72089 6.09998 1.49998 6.09998C1.27906 6.09998 1.09998 6.27906 1.09998 6.49998V7.09998H0.499976C0.279062 7.09998 0.0999756 7.27906 0.0999756 7.49998C0.0999756 7.72089 0.279062 7.89998 0.499976 7.89998H1.09998V8.49998C1.09998 8.72089 1.27906 8.89997 1.49998 8.89997C1.72089 8.89997 1.89998 8.72089 1.89998 8.49998V7.89998H2.49998C2.72089 7.89998 2.89998 7.72089 2.89998 7.49998C2.89998 7.27906 2.72089 7.09998 2.49998 7.09998H1.89998V6.49998ZM8.54406 0.98184L8.24618 0.941586C8.03275 0.917676 7.90692 1.1655 8.02936 1.34194C8.17013 1.54479 8.29981 1.75592 8.41754 1.97445C8.91878 2.90485 9.20322 3.96932 9.20322 5.10022C9.20322 8.37201 6.82247 11.0878 3.69887 11.6097C3.45736 11.65 3.20988 11.6772 2.96008 11.6906C2.74563 11.702 2.62729 11.9535 2.77721 12.1072C2.84551 12.1773 2.91535 12.2458 2.98667 12.3128L3.05883 12.3795L3.31883 12.6045L3.50684 12.7532L3.62796 12.8433L3.81491 12.9742L3.99079 13.089C4.11175 13.1651 4.23536 13.2375 4.36157 13.3059L4.62496 13.4412L4.88553 13.5607L5.18837 13.6828L5.43169 13.7686C5.56564 13.8128 5.70149 13.8529 5.83857 13.8885C5.94262 13.9155 6.04767 13.9401 6.15405 13.9622C6.27993 13.9883 6.40713 14.0109 6.53544 14.0298L6.85241 14.0685L7.11934 14.0892C7.24637 14.0965 7.37436 14.1002 7.50322 14.1002C11.1483 14.1002 14.1032 11.1453 14.1032 7.50023C14.1032 7.25044 14.0893 7.00389 14.0623 6.76131L14.0255 6.48407C13.991 6.26083 13.9453 6.04129 13.8891 5.82642C13.8213 5.56709 13.7382 5.31398 13.6409 5.06881L13.5279 4.80132L13.4507 4.63542L13.3766 4.48666C13.2178 4.17773 13.0353 3.88295 12.8312 3.60423L12.6782 3.40352L12.4793 3.16432L12.3157 2.98361L12.1961 2.85951L12.0355 2.70246L11.8134 2.50184L11.4925 2.24191L11.2483 2.06498L10.9562 1.87446L10.6346 1.68894L10.3073 1.52378L10.1938 1.47176L9.95488 1.3706L9.67791 1.2669L9.42566 1.1846L9.10075 1.09489L8.83599 1.03486L8.54406 0.98184ZM10.4032 5.30023C10.4032 4.27588 10.2002 3.29829 9.83244 2.40604C11.7623 3.28995 13.1032 5.23862 13.1032 7.50023C13.1032 10.593 10.596 13.1002 7.50322 13.1002C6.63646 13.1002 5.81597 12.9036 5.08355 12.5522C6.5419 12.0941 7.81081 11.2082 8.74322 10.0416C8.87963 10.2284 9.10028 10.3497 9.34928 10.3497C9.76349 10.3497 10.0993 10.0139 10.0993 9.59971C10.0993 9.24256 9.84965 8.94373 9.51535 8.86816C9.57741 8.75165 9.63653 8.63334 9.6926 8.51332C9.88358 8.63163 10.1088 8.69993 10.35 8.69993C11.0403 8.69993 11.6 8.14028 11.6 7.44993C11.6 6.75976 11.0406 6.20024 10.3505 6.19993C10.3853 5.90487 10.4032 5.60464 10.4032 5.30023Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`,
+      default: true,
+      value: 'Dark',
+      action: `document.documentElement.classList.add('dark')`,
+    },
+    {
+      title: 'System',
+      icon: `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4"><path d="M2 4.25C2 4.11193 2.11193 4 2.25 4H12.75C12.8881 4 13 4.11193 13 4.25V11.5H2V4.25ZM2.25 3C1.55964 3 1 3.55964 1 4.25V12H0V12.5C0 12.7761 0.223858 13 0.5 13H14.5C14.7761 13 15 12.7761 15 12.5V12H14V4.25C14 3.55964 13.4404 3 12.75 3H2.25Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`,
+      value: 'System',
+      action: `document.documentElement.classList.remove('dark'); window.matchMedia('(prefers-color-scheme: dark)').matches ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')`,
+      default: true,
+    },
+  ],
+}
+---
+
+<div x-data="commandMenu" @keydown.escape.window="commandOpen = false" @keydown.meta.k.window="commandOpen=true">
+  <button
+    class={cn(
+      buttonVariants({ variant: 'outline' }),
+      'relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64',
+    )}
+    @click="commandOpen=true"
+  >
+    <span class="hidden lg:inline-flex">Search documentation...</span>
+    <span class="inline-flex lg:hidden">Search...</span>
+    <kbd
+      class="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex"
+    >
+      <span class="text-xs">⌘</span>K
+    </kbd>
+  </button>
+  <template x-teleport="body">
+    <div
+      x-show="commandOpen"
+      class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
+      x-cloak
+    >
+      <div
+        x-show="commandOpen"
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        @click="commandOpen=false"
+        class="absolute inset-0 w-full h-full bg-black/80"
+      >
+      </div>
+
+      <div
+        x-show="commandOpen"
+        x-data={`{
+          commandItems: ${JSON.stringify(commandItems)},
+          commandItemsFiltered: [],
+          commandItemActive: null,
+          commandItemSelected: null,
+          commandId: $id('command'),
+          commandSearch: '',
+          commandSearchIsEmpty() {
+            return this.commandSearch.length == 0
+          },
+          commandItemIsActive(item) {
+            return this.commandItemActive && this.commandItemActive.value == item.value
+          },
+          commandItemActiveNext() {
+            const index = this.commandItemsFiltered.indexOf(this.commandItemActive)
+            if (index < this.commandItemsFiltered.length - 1) {
+              this.commandItemActive = this.commandItemsFiltered[index + 1]
+              this.commandScrollToActiveItem()
+            }
+          },
+          commandItemActivePrevious() {
+            const index = this.commandItemsFiltered.indexOf(this.commandItemActive)
+            if (index > 0) {
+              this.commandItemActive = this.commandItemsFiltered[index - 1]
+              this.commandScrollToActiveItem()
+            }
+          },
+          commandScrollToActiveItem() {
+            if (this.commandItemActive) {
+              const activeElement = document.getElementById(\`\${this.commandItemActive.value}-\${this.commandId}\`)
+              if (!activeElement) {
+                return
+              }
+
+              const newScrollPos = activeElement.offsetTop + activeElement.offsetHeight - this.$refs.commandItemsList.offsetHeight
+              if (newScrollPos > 0) {
+                this.$refs.commandItemsList.scrollTop = newScrollPos
+              } else {
+                this.$refs.commandItemsList.scrollTop = 0
+              }
+            }
+          },
+          commandSearchItems() {
+            if (!this.commandSearchIsEmpty()) {
+              const searchTerm = this.commandSearch.replace(/\\\*/g, '').toLowerCase();
+              this.commandItemsFiltered = this.commandItems.filter((item) => item.title.toLowerCase().startsWith(searchTerm))
+
+              this.commandScrollToActiveItem()
+            } else {
+              this.commandItemsFiltered = this.commandItems.filter((item) => item.default)
+            }
+            this.commandItemActive = this.commandItemsFiltered[0]
+          },
+          commandShowCategory(item, index) {
+            if (index == 0) {
+              return true
+            }
+            if (typeof this.commandItems[index - 1] === 'undefined') {
+              return false
+            }
+            return item.category != this.commandItems[index - 1].category
+          },
+          commandCategoryCapitalize(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1)
+          },
+          commandItemsReorganize() {
+            const commandItemsOriginal = this.commandItems
+            const keys = Object.keys(this.commandItems)
+            this.commandItems = []
+            keys.forEach((key, index) => {
+              for (let i = 0; i < commandItemsOriginal[key].length; i++) {
+                commandItemsOriginal[key][i].category = key
+                this.commandItems.push(commandItemsOriginal[key][i])
+              }
+            })
+          }
+        }`}
+        x-init="
+          commandItemsReorganize();
+          commandItemsFiltered = commandItems;
+          commandItemActive=commandItems[0];
+          $watch('commandSearch', value => commandSearchItems());
+          $watch('commandItemSelected', function(item){
+              if(item){
+                eval(item.action)
+                commandOpen = false
+              }
+          });
+        "
+        x-trap.inert.noscroll="commandOpen"
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        @keydown.down="event.preventDefault(); commandItemActiveNext();"
+        @keydown.up="event.preventDefault(); commandItemActivePrevious()"
+        @keydown.enter="commandItemSelected=commandItemActive;"
+        @command-input-focus.window="$refs.commandInput.focus();"
+        class="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg overflow-hidden p-0"
+        :data-state="commandOpen ? 'open' : 'closed'"
+        x-cloak
+      >
+        <div class="flex items-center border-b px-3">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="mr-2 h-4 w-4 shrink-0 opacity-50"
+          >
+            <path
+              d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+              clip-rule="evenodd"></path>
+          </svg>
+          <input
+            type="text"
+            x-ref="commandInput"
+            x-model="commandSearch"
+            class="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+            placeholder="Type a command or search..."
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+          />
+        </div>
+
+        <div x-ref="commandItemsList" class="max-h-[300px] overflow-y-auto overflow-x-hidden">
+          <div>
+            <div x-show="!commandItemsFiltered.length" class="py-6 text-center text-sm">No results found.</div>
+
+            <template x-for="(item, index) in commandItemsFiltered" :key="'item-' + index">
+              <div class="pb-1 space-y-1">
+                <template x-if="commandShowCategory(item, index)">
+                  <div class="px-1 overflow-hidden text-gray-700">
+                    <div
+                      class="px-2 py-1 my-1 text-xs font-medium text-neutral-500"
+                      x-text="commandCategoryCapitalize(item.category)"
+                    >
+                    </div>
+                  </div>
+                </template>
+
+                <template x-if="(item.default && commandSearchIsEmpty()) || !commandSearchIsEmpty()">
+                  <div class="px-1">
+                    <div
+                      :id="item.value + '-' + commandId"
+                      @click="commandItemSelected=item"
+                      @mousemove="commandItemActive=item"
+                      :class="{ 'bg-accent text-accent-foreground' : commandItemIsActive(item) }"
+                      class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                    >
+                      <span x-html="item.icon"></span>
+                      <span x-text="item.title"></span>
+                      <template x-if="item.right">
+                        <span class="ml-auto text-xs tracking-widest text-muted-foreground" x-text="item.right"></span>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
+<script>
+  import Alpine from 'alpinejs'
+
+  Alpine.data('commandMenu', () => ({
+    commandOpen: false,
+    init() {
+      this.$watch('commandOpen', (value) => {
+        if (value === true) {
+          document.body.classList.add('overflow-hidden')
+          this.$nextTick(() => {
+            window.dispatchEvent(new CustomEvent('command-input-focus', {}))
+          })
+          return
+        }
+        document.body.classList.remove('overflow-hidden')
+      })
+    },
+  }))
+</script>

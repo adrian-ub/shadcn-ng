@@ -1,0 +1,100 @@
+---
+title: Sonner
+description: An opinionated toast component for Angular.
+links:
+  doc: https://tutkli.github.io/ngx-sonner/
+---
+
+<ComponentPreview name="sonner-demo" />
+
+## About
+
+ngx-sonner is built and maintained by [tutkli](https://github.com/tutkli).
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
+
+```bash
+npx shadcn-ng@latest add sonner
+```
+
+<Step>Add the Toaster component</Step>
+
+```angular-ts
+import { Component } from '@angular/core'
+
+import { ToasterComponent } from '~/components/ui/sonner'
+
+@Component({
+  standalone: true,
+  selector: 'app-root',
+  imports: [ToasterComponent],
+  template: `
+    <ub-toaster />
+  `,
+})
+export class AppComponent {}
+```
+
+</Steps>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install ngx-sonner
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="sonner" />
+
+<Step>Add the Toaster component</Step>
+
+```angular-ts
+import { Component } from '@angular/core'
+
+import { ToasterComponent } from '~/components/ui/sonner'
+
+@Component({
+  standalone: true,
+  selector: 'app-root',
+  imports: [ToasterComponent],
+  template: `
+    <ub-toaster />
+  `,
+})
+export class AppComponent {}
+```
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```ts
+import { toast } from "ngx-sonner"
+```
+
+```ts
+toast("Event has been created.")
+```

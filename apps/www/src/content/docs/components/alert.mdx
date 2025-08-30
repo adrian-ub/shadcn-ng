@@ -1,0 +1,62 @@
+---
+title: Alert
+description: Displays a callout for user attention.
+---
+
+<ComponentPreview name="alert-demo" />
+
+## Installation
+
+<Tabs>
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+
+<TabsContent value="cli">
+```bash frame="code"
+npx shadcn-ng@latest add alert
+```
+</TabsContent>
+
+<TabsContent value="manual">
+<Steps>
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="alert" />
+
+<Step>Update the import paths to match your project setup.</Step>
+</Steps>
+
+</TabsContent>
+</Tabs>
+
+## Usage
+
+```ts
+import {
+  UbAlertDirective,
+  UbAlertDescriptionDirective,
+  UbAlertTitleDirective,
+} from "~/components/ui/alert.directive";
+```
+
+```html
+<div ubAlert>
+    <h5 ubAlertTitle>Heads up!</h5>
+    <div ubAlertDescription>
+        You can add components and dependencies to your app using the cli.
+    </div>
+</div>
+```
+
+## Examples
+
+### Default
+
+<ComponentPreview name="alert-demo" />
+
+### Destructive
+
+<ComponentPreview name="alert-destructive" />

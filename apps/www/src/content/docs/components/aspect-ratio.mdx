@@ -1,0 +1,65 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio.
+links:
+  doc: https://www.radix-ng.com/primitives/components/aspect-ratio
+  api: https://www.radix-ng.com/primitives/components/aspect-ratio#api-reference
+---
+
+<link rel="preconnect" href="https://images.unsplash.com" />
+
+<ComponentPreview
+  name="aspect-ratio-demo"
+  title="Aspect Ratio"
+  description="A component that displays an image with a 16:9 aspect ratio."
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ng@latest add aspect-ratio
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @radix-ng/primitives
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="aspect-ratio" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```ts
+import { UbAspectRatioDirective } from "~/components/ui/aspect-ratio"
+```
+
+```html
+<div ubAspectRatio [ratio]="16 / 9">
+  <img src="..." alt="Image" class="rounded-md object-cover" >
+</div>
+```

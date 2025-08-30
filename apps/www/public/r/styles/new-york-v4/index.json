@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "index",
+  "type": "registry:style",
+  "dependencies": [
+    "tailwindcss-animate",
+    "class-variance-authority",
+    "@ng-icons/core",
+    "@ng-icons/lucide"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [],
+  "tailwind": {
+    "config": {
+      "plugins": [
+        "require(\"tailwindcss-animate\")"
+      ]
+    }
+  },
+  "cssVars": {}
+}

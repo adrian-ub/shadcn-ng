@@ -1,0 +1,35 @@
+---
+import type { TableOfContents } from '~/lib/toc'
+import { cn } from '~/lib/utils'
+
+export interface Props {
+  tree: TableOfContents
+  level?: number
+}
+
+const { tree, level = 1 } = Astro.props
+const { pathname } = Astro.url
+---
+
+{
+  tree?.items?.length && level < 3 && (
+    <ul class={cn('m-0 list-none', { 'pl-4': level !== 1 })}>
+      {tree.items.map((item) => {
+        return (
+          <li class={cn('mt-0 pt-2')}>
+            <a
+              href={`${pathname}${item.url}`}
+              class={cn(
+                'inline-block no-underline transition-colors hover:text-foreground text-muted-foreground',
+                '[&.active-toc-item]:font-medium [&.active-toc-item]:text-foreground',
+              )}
+            >
+              {item.title}
+            </a>
+            {item.items?.length ? <Astro.self tree={item} level={level + 1} /> : null}
+          </li>
+        )
+      })}
+    </ul>
+  )
+}

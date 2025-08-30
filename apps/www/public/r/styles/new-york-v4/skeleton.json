@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "registry/new-york-v4/ui/skeleton.ts",
+      "content": "import { computed, Directive, input } from '@angular/core'\n\nimport { cn } from '~/lib/utils'\n\n@Directive({\n  selector: '[ubSkeleton]',\n  standalone: true,\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbSkeletonDirective {\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn('bg-primary/10 animate-pulse rounded-md', this.class()),\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

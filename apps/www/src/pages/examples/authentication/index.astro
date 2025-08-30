@@ -1,0 +1,9 @@
+---
+import ExampleLayout from '~/layouts/ExampleLayout.astro'
+
+import { ExampleAuthenticationComponent } from './_authentication'
+---
+
+<ExampleLayout>
+  <ExampleAuthenticationComponent client:load />
+</ExampleLayout>

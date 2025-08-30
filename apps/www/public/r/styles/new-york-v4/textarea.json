@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "registry/new-york-v4/ui/textarea.ts",
+      "content": "import { computed, Directive, input } from '@angular/core'\n\nimport { cn } from '~/lib/utils'\n\n@Directive({\n  standalone: true,\n  selector: 'textarea[ubTextarea]',\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbTextAreaDirective {\n  class = input<string>()\n  computedClass = computed(() =>\n    cn('border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm', this.class()),\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

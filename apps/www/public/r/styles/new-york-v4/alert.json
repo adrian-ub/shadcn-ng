@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "alert",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "registry/new-york-v4/ui/alert.ts",
+      "content": "import type { VariantProps } from 'class-variance-authority'\n\nimport { computed, Directive, input } from '@angular/core'\n\nimport { cva } from 'class-variance-authority'\nimport { cn } from '~/lib/utils'\n\nconst alertVariants = cva(\n  'relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>*>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>*>svg]:gap-x-3 gap-y-0.5 items-start [&>*>svg]:size-4 [&>*>svg]:translate-y-0.5 [&>*>svg]:text-current',\n  {\n    variants: {\n      variant: {\n        default: 'bg-background text-foreground',\n        destructive:\n          'text-destructive-foreground [&>*>svg]:text-current *:data-[slot=alert-description]:text-destructive-foreground/80',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  },\n)\n\ntype AlertProps = VariantProps<typeof alertVariants>\ntype UbAlertVariant = NonNullable<AlertProps['variant']>\n\n@Directive({\n  selector: 'div[ubAlert]',\n  standalone: true,\n  host: {\n    'role': 'alert',\n    '[class]': 'computedClass()',\n    'data-slot': 'alert',\n  },\n})\nexport class UbAlertDirective {\n  readonly class = input<string>()\n  readonly variant = input<UbAlertVariant>('default')\n\n  protected computedClass = computed(() =>\n    cn(alertVariants({ variant: this.variant(), class: this.class() })),\n  )\n}\n\n@Directive({\n  selector: 'h5[ubAlertTitle]',\n  standalone: true,\n  host: {\n    '[class]': 'computedClass()',\n    'data-slot': 'alert-title',\n  },\n})\nexport class UbAlertTitleDirective {\n  readonly class = input<string>()\n\n  protected computedClass = computed(() =>\n    cn('col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight', this.class()),\n  )\n}\n\n@Directive({\n  selector: 'div[ubAlertDescription]',\n  standalone: true,\n  host: {\n    '[class]': 'computedClass()',\n    'data-slot': 'alert-description',\n  },\n})\nexport class UbAlertDescriptionDirective {\n  readonly class = input<string>()\n\n  protected computedClass = computed(() =>\n    cn('col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed', this.class()),\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

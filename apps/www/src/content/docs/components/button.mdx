@@ -1,0 +1,84 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+---
+
+<ComponentPreview name="button-demo" />
+
+## Installation
+
+<Tabs>
+
+<TabsList>
+<TabsTrigger value="cli">CLI</TabsTrigger>
+<TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+```bash frame="code"
+npx shadcn-ng@latest add button
+```
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="button" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+</Tabs>
+
+## Usage
+
+```ts
+import { UbButtonDirective } from "~/components/ui/button.directive";
+```
+
+```html
+<button ubButton>Button</button>
+```
+
+## Examples
+
+### Primary
+
+<ComponentPreview name="button-demo" />
+
+### Secondary
+
+<ComponentPreview name="button-secondary" />
+
+### Destructive
+
+<ComponentPreview name="button-destructive" />
+
+### Outline
+
+<ComponentPreview name="button-outline" />
+
+### Ghost
+
+<ComponentPreview name="button-ghost" />
+
+### Link
+
+<ComponentPreview name="button-link" />
+
+### Icon
+
+<ComponentPreview name="button-icon" />
+
+### With Icon
+
+<ComponentPreview name="button-with-icon" />
+
+### Loading
+
+<ComponentPreview name="button-loading" />

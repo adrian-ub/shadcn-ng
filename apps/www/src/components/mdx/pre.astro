@@ -1,0 +1,57 @@
+---
+import { cn } from '~/lib/utils'
+import CopyButton from '../CopyButton.astro'
+import CodeBlockCommand from '../CodeBlockCommand.astro'
+
+type Props = {
+  __rawString__: string
+  __npmCommand__: string
+  __yarnCommand__: string
+  __pnpmCommand__: string
+  __bunCommand__: string
+  __withMeta__: boolean
+  className?: string
+}
+
+const {
+  __rawString__,
+  __npmCommand__,
+  __pnpmCommand__,
+  __yarnCommand__,
+  __bunCommand__,
+  __withMeta__,
+  className,
+  ...rest
+} = Astro.props
+
+const isNpmCommand = __npmCommand__ && __yarnCommand__ && __pnpmCommand__ && __bunCommand__
+---
+
+{
+  isNpmCommand && (
+    <CodeBlockCommand
+      __npmCommand__={__npmCommand__}
+      __yarnCommand__={__yarnCommand__}
+      __pnpmCommand__={__pnpmCommand__}
+      __bunCommand__={__bunCommand__}
+    />
+  )
+}
+
+{
+  !isNpmCommand && (
+    <>
+      <pre
+        class={cn(
+          'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border !bg-zinc-950 py-4 dark:!bg-zinc-900',
+          className,
+        )}
+        {...rest}
+      ><slot /></pre>
+
+      {__rawString__ && !__npmCommand__ ? (
+        <CopyButton value={__rawString__} class={cn('absolute right-4 top-4', __withMeta__ && 'top-16')} />
+      ) : null}
+    </>
+  )
+}

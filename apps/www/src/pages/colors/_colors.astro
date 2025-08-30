@@ -1,0 +1,10 @@
+---
+import { getColors } from '~/lib/colors'
+import ColorPalette from '~/components/ColorPalette.astro'
+
+const colors = getColors()
+---
+
+<div id="colors" class="grid scroll-mt-20 gap-8">
+  {colors.map((colorPalette) => <ColorPalette {colorPalette} />)}
+</div>

@@ -1,0 +1,90 @@
+---
+import { cn } from '~/lib/utils'
+import { styles } from '~/registry/registry-styles'
+
+import CopyButton from '../CopyButton.astro'
+
+import StyleSwitcher from '../StyleSwitcher.astro'
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../tabs'
+
+import { ComponentPeviewComponent } from './component-preview'
+
+export interface Props {
+  name: string
+  class?: string
+  align?: string
+  codeNewYork: string
+  codeDefault: string
+}
+const { name, class: className, align = 'center', codeDefault, codeNewYork, ...rest } = Astro.props
+---
+
+<div x-data class={cn('group relative my-4 flex flex-col space-y-2', className)} {...rest}>
+  <Tabs class="relative mr-auto w-full">
+    <div class="flex items-center justify-between pb-3">
+      <TabsList class="w-full justify-start rounded-none border-b bg-transparent p-0">
+        <TabsTrigger
+          class="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+        >
+          Preview
+        </TabsTrigger>
+        <TabsTrigger
+          class="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+        >
+          Code
+        </TabsTrigger>
+      </TabsList>
+    </div>
+
+    <TabsContent class="relative rounded-md border">
+      <div class="flex items-center justify-between p-4">
+        <StyleSwitcher />
+        <div class="flex items-center gap-2">
+          <template x-if={`$store.style == 'new-york'`}>
+            {
+              codeNewYork && (
+                <CopyButton
+                  variant="outline"
+                  value={codeNewYork}
+                  class="h-7 w-7 text-foreground opacity-100 hover:bg-muted hover:text-foreground [&_svg]:h-3.5 [&_svg]:w-3.5"
+                />
+              )
+            }
+          </template>
+          <template x-if={`$store.style == 'default'`}>
+            {
+              codeDefault && (
+                <CopyButton
+                  variant="outline"
+                  value={codeDefault}
+                  class="h-7 w-7 text-foreground opacity-100 hover:bg-muted hover:text-foreground [&_svg]:h-3.5 [&_svg]:w-3.5"
+                />
+              )
+            }
+          </template>
+        </div>
+      </div>
+      {
+        styles.map(({ name: styleName }) => (
+          <div x-show={`$store.style === '${styleName}'`}>
+            <ComponentPeviewComponent client:visible {...{ nameExample: name, styleName: styleName, align }} />
+          </div>
+        ))
+      }
+    </TabsContent>
+
+    <TabsContent>
+      <div class="flex flex-col space-y-4">
+        <div class="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[410px] [&_pre]:overflow-auto">
+          <template x-if="$store.style === 'new-york'">
+            <slot name="new-york" slot="new-york"> <p>Not found</p> </slot>
+          </template>
+          <template x-if="$store.style === 'default'">
+            <slot name="default" slot="default"> <p>Not found</p> </slot>
+          </template>
+        </div>
+      </div>
+    </TabsContent>
+  </Tabs>
+</div>
