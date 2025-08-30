@@ -6,9 +6,10 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.
+> [!WARNING]
+> You are viewing changes for the upcoming version. If you want to see what is currently in production, please visit the 'v1' branch.
 
-![hero](apps/www/public/og.jpg)
+Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.
 
 ## Sponsors
 

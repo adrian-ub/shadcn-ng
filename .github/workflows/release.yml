@@ -1,33 +1,48 @@
 name: Release
 
-permissions:
-  id-token: write
-  contents: write
-
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 jobs:
   release:
+    if: ${{ github.repository_owner == 'adrian-ub' }}
+    name: Create a PR for release workflow
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repo
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+
+      - name: Use PNPM
+        uses: pnpm/action-setup@v4
         with:
-          node-version: lts/*
-          registry-url: https://registry.npmjs.org/
+          version: 10.11.0
 
-      - run: pnpm dlx changelogithub
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          version: 10.11.0
+          node-version: 18
+          cache: pnpm
 
-      - run: pnpm install
-      - run: pnpm publish -r --access public --no-git-checks
+      - name: Install NPM Dependencies
+        run: pnpm install
+
+      - name: Build the package
+        run: pnpm shadcn-ng:build
+
+      - name: Create Version PR or Publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          commit: 'chore(release): version packages'
+          title: 'chore(release): version packages'
+          version: node .github/changeset-version.js
+          publish: npx changeset publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-          NPM_CONFIG_PROVENANCE: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_ENV: production
