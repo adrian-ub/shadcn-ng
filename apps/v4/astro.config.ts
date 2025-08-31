@@ -33,6 +33,7 @@ export default defineConfig({
         PageTitle: './src/components/starlight/PageTitle.astro',
         MarkdownContent: './src/components/starlight/MarkdownContent.astro',
         Pagination: './src/components/starlight/Pagination.astro',
+        Hero: './src/components/starlight/Hero.astro',
       },
     }),
     angular({

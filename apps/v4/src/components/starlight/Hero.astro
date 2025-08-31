@@ -1,0 +1,25 @@
+---
+import Announcement from '../Announcement.astro'
+import LinkButton from '../LinkButton.astro'
+import { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading } from '../page-header'
+
+const { data } = Astro.locals.starlightRoute.entry
+const { title = data.title, tagline, actions = [] } = data.hero || {}
+---
+
+<PageHeader>
+  <Announcement />
+  <PageHeaderHeading class="max-w-4xl">{title}</PageHeaderHeading>
+  <PageHeaderDescription>{tagline}</PageHeaderDescription>
+  {
+    actions.length > 0 && (
+      <PageActions>
+        {actions.map(({ attrs: { class: className, ...attrs } = {}, link: href, text, variant }) => (
+          <LinkButton {href} {variant} class:list={[className]} {...attrs}>
+            {text}
+          </LinkButton>
+        ))}
+      </PageActions>
+    )
+  }
+</PageHeader>

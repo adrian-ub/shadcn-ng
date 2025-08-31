@@ -1,0 +1,20 @@
+---
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/registry/new-york-v4/ui/button'
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+  href: string | URL
+  variant?: 'primary' | 'secondary' | 'minimal'
+}
+
+const { class: className, variant = 'primary', ...attrs } = Astro.props
+
+const variantButton = {
+  primary: 'default',
+  secondary: 'secondary',
+  minimal: 'ghost',
+}[variant] as 'default' | 'secondary' | 'ghost'
+---
+
+<a class={cn(buttonVariants({ size: 'sm', variant: variantButton }), className)} {...attrs}><slot /></a>

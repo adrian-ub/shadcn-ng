@@ -1,109 +1,13 @@
 ---
-function getTocItems() {
-  return Astro.locals.starlightRoute.toc.items.filter((item) => item.slug !== '_top')
-}
+import DocsLayout from './DocsLayout.astro'
 ---
 
-<div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
-  <div class="flex min-w-0 flex-1 flex-col">
-    <div class="h-(--top-spacing) shrink-0"></div>
+{
+  Astro.locals.starlightRoute.entry.data.template === 'splash' ? (
     <slot />
-  </div>
-  <div class="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
-    <div class="h-(--top-spacing) shrink-0"></div>
-    {
-      Astro.locals.starlightRoute.toc && (
-        <div class="no-scrollbar overflow-y-auto px-8">
-          <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
-            <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
-            {getTocItems().map((item) => (
-              <a
-                href={`#${item.slug}`}
-                class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-                data-depth={item.depth}
-                data-heading-id={item.slug}
-              >
-                {item.text}
-              </a>
-            ))}
-          </div>
-          <div class="h-12" />
-        </div>
-      )
-    }
-  </div>
-</div>
-
-<style is:global>
-  @reference "../../styles/global.css";
-
-  [data-slot='docs'] main {
-    @apply mx-auto flex w-full max-w-2xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-0 lg:py-8 dark:text-neutral-300;
-  }
-</style>
-
-<script>
-  function initTOC(): void {
-    const headingLinks = document.querySelectorAll('[data-heading-id]')
-    const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).filter((h) => h.id)
-
-    if (headings.length === 0 || headingLinks.length === 0) {
-      return
-    }
-
-    function updateActiveHeading(): void {
-      const scrollY = window.scrollY
-      const headerHeight = 80
-
-      let currentActive: string | null = null
-
-      for (let i = headings.length - 1; i >= 0; i--) {
-        const heading = headings[i]
-        const rect = heading.getBoundingClientRect()
-        const offsetTop = rect.top + scrollY
-
-        if (scrollY + headerHeight >= offsetTop - 10) {
-          currentActive = heading.id
-          break
-        }
-      }
-
-      if (!currentActive && headings.length > 0) {
-        currentActive = headings[0].id
-      }
-
-      headingLinks.forEach((link) => {
-        const headingId = link.getAttribute('data-heading-id')
-        const isActive = headingId === currentActive
-        link.setAttribute('data-active', isActive ? 'true' : 'false')
-      })
-    }
-
-    updateActiveHeading()
-
-    let ticking = false
-    function handleScroll(): void {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateActiveHeading()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    document.addEventListener('astro:before-preparation', () => {
-      window.removeEventListener('scroll', handleScroll)
-    })
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTOC)
-  } else {
-    initTOC()
-  }
-
-  document.addEventListener('astro:page-load', initTOC)
-</script>
+  ) : (
+    <DocsLayout>
+      <slot />
+    </DocsLayout>
+  )
+}

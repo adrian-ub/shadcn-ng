@@ -1,7 +1,6 @@
 ---
 import config from 'virtual:starlight/user-config'
 import Search from 'virtual:starlight/components/Search'
-import SocialIcons from 'virtual:starlight/components/SocialIcons'
 import { Image } from 'astro:assets'
 import logo from '@/assets/logo.svg'
 import { siteConfig } from '@/lib/config'
@@ -11,6 +10,7 @@ import { buttonVariants } from '@/registry/new-york-v4/ui/button'
 import { separatorClass } from '@/registry/new-york-v4/ui/separator'
 import SiteConfig from '@/components/SiteConfig.astro'
 import ModeSwitcher from '@/components/ModeSwitcher.astro'
+import GitHubLink from '../GitHubLink.astro'
 
 /**
  * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
@@ -33,7 +33,7 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
           {shouldRenderSearch && <Search />}
         </div>
         <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>
-        <SocialIcons />
+        <GitHubLink />
         <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>
         <SiteConfig class="3xl:flex hidden" />
         <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>

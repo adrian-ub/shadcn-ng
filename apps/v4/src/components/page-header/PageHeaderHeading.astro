@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+import { cn } from '@/lib/utils'
+
+type Props = HTMLAttributes<'h1'>
+const { class: className, ...props } = Astro.props
+---
+
+<h1
+  class={cn(
+    'text-primary leading-tighter text-4xl font-semibold tracking-tight text-balance lg:leading-[1.1] lg:font-semibold xl:text-5xl xl:tracking-tighter max-w-4xl',
+    className,
+  )}
+  {...props}
+>
+  <slot />
+</h1>
