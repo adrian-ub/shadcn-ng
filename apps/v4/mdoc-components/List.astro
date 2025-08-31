@@ -1,0 +1,9 @@
+---
+const { ordered } = Astro.props;
+---
+
+{ordered ? (
+  <ol class="my-6 ml-6 list-decimal"><slot /></ol>
+) : (
+  <ul class="my-6 ml-6 list-disc"><slot /></ul>
+)}

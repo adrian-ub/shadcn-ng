@@ -14,5 +14,17 @@ export default defineMarkdocConfig({
       ...nodes.heading,
       render: component('./mdoc-components/Heading.astro'),
     },
+    paragraph: {
+      ...nodes.paragraph,
+      render: component('./mdoc-components/Paragraph.astro'),
+    },
+    list: {
+      ...nodes.list,
+      render: component('./mdoc-components/List.astro'),
+    },
+    item: {
+      ...nodes.item,
+      render: component('./mdoc-components/item.astro'),
+    },
   },
 })

@@ -1,0 +1,7 @@
+---
+import { cn } from "@/lib/utils";
+---
+
+<p class={cn('leading-relaxed [&:not(:first-child)]:mt-6', Astro.props.class)}>
+  <slot/>
+</p>
