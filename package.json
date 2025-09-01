@@ -33,7 +33,7 @@
     "puppeteer": "^24.17.1",
     "simple-git-hooks": "2.13.1",
     "tailwindcss": "4.1.12",
-    "tsdown": "0.14.1",
+    "tsdown": "^0.14.2",
     "tsx": "4.20.4",
     "typescript": "~5.8.0",
     "vite-tsconfig-paths": "5.1.4",

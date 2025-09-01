@@ -41,7 +41,7 @@ importers:
         version: 16.1.5
       puppeteer:
         specifier: ^24.17.1
-        version: 24.17.1(typescript@5.8.3)
+        version: 24.18.0(typescript@5.8.3)
       simple-git-hooks:
         specifier: 2.13.1
         version: 2.13.1
@@ -49,8 +49,8 @@ importers:
         specifier: 4.1.12
         version: 4.1.12
       tsdown:
-        specifier: 0.14.1
-        version: 0.14.1(typescript@5.8.3)
+        specifier: ^0.14.2
+        version: 0.14.2(typescript@5.8.3)
       tsx:
         specifier: 4.20.4
         version: 4.20.4
@@ -113,10 +113,10 @@ importers:
         version: 4.0.1(@astrojs/starlight@0.35.2(astro@5.13.5(@types/node@22.17.2)(encoding@0.1.13)(jiti@2.5.1)(less@4.4.0)(lightningcss@1.30.1)(rollup@4.49.0)(sass@1.90.0)(terser@5.43.1)(tsx@4.20.4)(typescript@5.8.3)(yaml@2.8.1)))(tailwindcss@4.1.12)
       '@iconify/json':
         specifier: ^2.2.379
-        version: 2.2.379
+        version: 2.2.380
       '@pagefind/default-ui':
         specifier: ^1.3.0
-        version: 1.3.0
+        version: 1.4.0
       '@tailwindcss/vite':
         specifier: ^4.0.7
         version: 4.1.12(vite@6.3.5(@types/node@22.17.2)(jiti@2.5.1)(less@4.4.0)(lightningcss@1.30.1)(sass@1.90.0)(terser@5.43.1)(tsx@4.20.4)(yaml@2.8.1))
@@ -150,7 +150,7 @@ importers:
         version: 19.2.19(@angular/common@20.2.3(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
       '@ngxi/lucide':
         specifier: ^0.12.21
-        version: 0.12.21(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))
+        version: 0.12.22(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))
       '@radix-ng/primitives':
         specifier: ^0.33.2
         version: 0.33.2(@angular/cdk@19.2.19(@angular/common@20.2.3(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))
@@ -2168,8 +2168,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@iconify/json@2.2.379':
-    resolution: {integrity: sha512-PInpWLQi2C+fDIbBdVNcKOj9QKl7TT6sXqFqYMa4e34sMx206PiUlg0puWgo1Q1C/TDNQiy/raGWUbssOb1eyg==}
+  '@iconify/json@2.2.380':
+    resolution: {integrity: sha512-+Al/Q+mMB/nLz/tawmJEOkCs6+RKKVUS/Yg9I80h2yRpu0kIzxVLQRfF0NifXz/fH92vDVXbS399wio4lMVF4Q==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -2901,8 +2901,8 @@ packages:
       typescript: '>=5.8 <6.0'
       webpack: ^5.54.0
 
-  '@ngxi/lucide@0.12.21':
-    resolution: {integrity: sha512-50xPKKj1wWMwzZQcQ+XivH3g0CujnGOuDkBkgUDBj/4nSP5l1ol4x4MaS4HaEwWJVLgYmu8keB5UfrLLl3nS6g==}
+  '@ngxi/lucide@0.12.22':
+    resolution: {integrity: sha512-fO70GZIJ8zRK2TiEO9+Y05b+iy/bPk2nK1s9FyRyKFFaWIsoQm6wpOZBqa0E+ZdaL1AiEC3KEeg/tKgGEaq1dQ==}
     peerDependencies:
       '@angular/core': ^18.0.0 || ^19.0.0 || ^20.0.0
 
@@ -2994,8 +2994,8 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-  '@pagefind/default-ui@1.3.0':
-    resolution: {integrity: sha512-CGKT9ccd3+oRK6STXGgfH+m0DbOKayX6QGlq38TfE1ZfUcPc5+ulTuzDbZUnMo+bubsEOIypm4Pl2iEyzZ1cNg==}
+  '@pagefind/default-ui@1.4.0':
+    resolution: {integrity: sha512-wie82VWn3cnGEdIjh4YwNESyS1G6vRHwL6cNjy9CFgNnWW/PGRjsLq300xjVH5sfPFK3iK36UxvIBymtQIEiSQ==}
 
   '@pagefind/linux-arm64@1.3.0':
     resolution: {integrity: sha512-8lsxNAiBRUk72JvetSBXs4WRpYrQrVJXjlRRnOL6UCdBN9Nlsz0t7hWstRk36+JqHpGWOKYiuHLzGYqYAqoOnQ==}
@@ -7596,12 +7596,12 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  puppeteer-core@24.17.1:
-    resolution: {integrity: sha512-Msh/kf9k1XFN0wuKiT4/npMmMWOT7kPBEUw01gWvRoKOOoz3It9TEmWjnt4Gl4eO+p73VMrvR+wfa0dm9rfxjw==}
+  puppeteer-core@24.18.0:
+    resolution: {integrity: sha512-As0BvfXxek2MbV0m7iqBmQKFnfSrzSvTM4zGipjd4cL+9f2Ccgut6RvHlc8+qBieKHqCMFy9BSI4QyveoYXTug==}
     engines: {node: '>=18'}
 
-  puppeteer@24.17.1:
-    resolution: {integrity: sha512-KIuX0w+0um4TUbm55yFl2WIsbgjya2BHIgW9ylTuhavtwjXCOM7lMo9oLR1jQnCxrFvm9h/Yeb+zfs4nlgntPg==}
+  puppeteer@24.18.0:
+    resolution: {integrity: sha512-Ke8oL/87GhzKIM2Ag6Yj49t5xbGc4rspGIuSuFLFCQBtYzWqCSanvqoCu08WkI78rbqcwnHjxiTH6oDlYFrjrw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -8508,8 +8508,8 @@ packages:
     resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
     engines: {node: '>=6'}
 
-  tsdown@0.14.1:
-    resolution: {integrity: sha512-/nBuFDKZeYln9hAxwWG5Cm55/823sNIVI693iVi0xRFHzf9OVUq4b/lx9PH1TErFr/IQ0kd2hutFbJIPM0XQWA==}
+  tsdown@0.14.2:
+    resolution: {integrity: sha512-6ThtxVZoTlR5YJov5rYvH8N1+/S/rD/pGfehdCLGznGgbxz+73EASV1tsIIZkLw2n+SXcERqHhcB/OkyxdKv3A==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
@@ -10280,7 +10280,7 @@ snapshots:
       '@astrojs/markdown-remark': 6.3.6
       '@astrojs/mdx': 4.3.4(astro@5.13.5(@types/node@22.17.2)(encoding@0.1.13)(jiti@2.5.1)(less@4.4.0)(lightningcss@1.30.1)(rollup@4.49.0)(sass@1.90.0)(terser@5.43.1)(tsx@4.20.4)(typescript@5.8.3)(yaml@2.8.1))
       '@astrojs/sitemap': 3.5.1
-      '@pagefind/default-ui': 1.3.0
+      '@pagefind/default-ui': 1.4.0
       '@types/hast': 3.0.4
       '@types/js-yaml': 4.0.9
       '@types/mdast': 4.0.4
@@ -12248,7 +12248,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@iconify/json@2.2.379':
+  '@iconify/json@2.2.380':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2
@@ -12892,7 +12892,7 @@ snapshots:
       typescript: 5.8.3
       webpack: 5.101.2(esbuild@0.25.9)
 
-  '@ngxi/lucide@0.12.21(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))':
+  '@ngxi/lucide@0.12.22(@angular/core@20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1))':
     dependencies:
       '@angular/core': 20.2.3(@angular/compiler@20.2.3)(rxjs@7.8.2)(zone.js@0.15.1)
       tslib: 2.8.1
@@ -12929,7 +12929,7 @@ snapshots:
 
   '@npmcli/fs@4.0.0':
     dependencies:
-      semver: 7.7.1
+      semver: 7.7.2
 
   '@npmcli/git@6.0.3':
     dependencies:
@@ -12992,7 +12992,7 @@ snapshots:
   '@pagefind/darwin-x64@1.3.0':
     optional: true
 
-  '@pagefind/default-ui@1.3.0': {}
+  '@pagefind/default-ui@1.4.0': {}
 
   '@pagefind/linux-arm64@1.3.0':
     optional: true
@@ -17807,7 +17807,7 @@ snapshots:
       make-fetch-happen: 14.0.3
       nopt: 8.1.0
       proc-log: 5.0.0
-      semver: 7.7.1
+      semver: 7.7.2
       tar: 7.4.3
       tinyglobby: 0.2.14
       which: 5.0.0
@@ -18413,7 +18413,7 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  puppeteer-core@24.17.1:
+  puppeteer-core@24.18.0:
     dependencies:
       '@puppeteer/browsers': 2.10.8
       chromium-bidi: 8.0.0(devtools-protocol@0.0.1475386)
@@ -18427,13 +18427,13 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  puppeteer@24.17.1(typescript@5.8.3):
+  puppeteer@24.18.0(typescript@5.8.3):
     dependencies:
       '@puppeteer/browsers': 2.10.8
       chromium-bidi: 8.0.0(devtools-protocol@0.0.1475386)
       cosmiconfig: 9.0.0(typescript@5.8.3)
       devtools-protocol: 0.0.1475386
-      puppeteer-core: 24.17.1
+      puppeteer-core: 24.18.0
       typed-query-selector: 2.12.0
     transitivePeerDependencies:
       - bare-buffer
@@ -19686,7 +19686,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsdown@0.14.1(typescript@5.8.3):
+  tsdown@0.14.2(typescript@5.8.3):
     dependencies:
       ansis: 4.1.0
       cac: 6.7.14
