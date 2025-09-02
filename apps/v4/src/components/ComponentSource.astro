@@ -1,0 +1,41 @@
+---
+import { Index } from '@/registry/__index__'
+import { readFileSync } from 'node:fs'
+import { Code } from '@astrojs/starlight/components';
+
+export interface Props {
+  name?: string
+  src?: string
+  title?: string
+  language?: string
+  collapsible?: boolean
+}
+
+const { name, language, title, collapsible = true } = Astro.props
+
+function updateImportsInSource(code: string, aliases: Record<string, string>) {
+  code = code.replace(/import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/ui\/(.+?)['"]/g, (match, imports, subpath) => `import ${imports}from '${aliases.ui}/${subpath}'`)
+  code = code.replace(/import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/components\/(.+?)['"]/g, (match, imports, subpath) => `import ${imports}from '${aliases.components}/${subpath}'`)
+  code = code.replace(/import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/lib\/(.+?)['"]/g, (match, imports, subpath) => `import ${imports}from '${aliases.lib}/${subpath}'`)
+  code = code.replace(/import\s+([\s\S]*?)from\s+['"]@\/registry\/[^/]+\/hooks\/(.+?)['"]/g, (match, imports, subpath) => `import ${imports}from '${aliases.hooks}/${subpath}'`)
+
+  return code
+}
+
+const aliases = {
+  components: '@/components',
+  ui: '@/components/ui',
+  lib: '@/lib',
+  hooks: '@/hooks',
+}
+
+const item = Index[name!]
+const path = item.files[0].path
+
+let code = readFileSync(path, 'utf-8').trim()
+code = updateImportsInSource(code, aliases)
+
+const lang = language ?? title?.split('.').pop() ?? 'angular-ts'
+---
+
+<Code {code} lang={lang} />

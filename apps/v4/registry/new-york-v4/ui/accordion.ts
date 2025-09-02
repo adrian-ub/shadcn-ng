@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils'
   hostDirectives: [
     {
       directive: RdxAccordionRootDirective,
-      inputs: ['dir', 'disabled', 'orientation', 'defaultValue', 'value', 'collapsible', 'type'],
+      inputs: ['disabled', 'orientation', 'defaultValue', 'value', 'collapsible', 'type'],
       outputs: ['onValueChange'],
     },
   ],
