@@ -19,9 +19,6 @@ export default defineConfig({
       social: [{ icon: 'github', label: 'GitHub', href: siteConfig.links.github }],
       sidebar,
       customCss: ['./src/styles/global.css'],
-      expressiveCode: {
-        themes: ['github-dark', 'github-light-default'],
-      },
       components: {
         Header: './src/components/starlight/Header.astro',
         PageFrame: './src/components/starlight/PageFrame.astro',

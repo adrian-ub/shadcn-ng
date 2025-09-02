@@ -9,7 +9,7 @@ const { defaultTheme = 'auto' } = Astro.props
 <script is:inline data-default-theme={defaultTheme}>
   window.theme ??= (() => {
     const defaultTheme = document.currentScript.getAttribute('data-default-theme')
-    const storageKey = 'theme'
+    const storageKey = 'starlight-theme'
     const store = typeof localStorage !== 'undefined' ? localStorage : { getItem: () => null, setItem: () => {} }
 
     const mediaMatcher = window.matchMedia('(prefers-color-scheme: light)')
@@ -24,8 +24,7 @@ const { defaultTheme = 'auto' } = Astro.props
       const resolved = theme === 'auto' ? systemTheme : theme
       const html = document.documentElement
 
-      html.classList.remove('light', 'dark')
-      html.classList.add(resolved)
+      html.dataset.theme = resolved
       html.style.colorScheme = resolved
 
       document.dispatchEvent(

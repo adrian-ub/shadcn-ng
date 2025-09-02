@@ -31,13 +31,13 @@ const { name, align = 'center', class: className } = Astro.props
         </TabsTrigger>
       </TabsList>
     </div>
-    <div class="relative rounded-lg border md:-mx-1">
-      <TabsContent value="preview">
+    <TabsContent value="preview">
+      <div class="relative rounded-lg border md:-mx-1">
         <ComponentPreviewWrapper {...{ name, align, class: Astro.props.class }} client:visible />
-      </TabsContent>
-      <TabsContent value="code" class="border-code **:[figure]:!m-0 **:[pre]:h-[450px]">
-        <ComponentSource {...{ name, collapsible: false }} />
-      </TabsContent>
-    </div>
+      </div>
+    </TabsContent>
+    <TabsContent value="code" class="border-code **:[figure]:!m-0 **:[pre]:h-[450px]">
+      <ComponentSource {...{ name, collapsible: false }} />
+    </TabsContent>
   </Tabs>
 </div>
