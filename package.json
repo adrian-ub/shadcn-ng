@@ -1,14 +1,18 @@
 {
-  "name": "shadcn-ng",
+  "name": "@adrianub/shadcn-ng",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
-  "description": "",
+  "packageManager": "pnpm@10.11.0",
+  "author": "Adrián UB",
+  "license": "MIT",
   "scripts": {
-    "dev": "pnpm -r run dev",
-    "lint": "pnpm -r run lint",
-    "lint:md": "pnpm -r run lint:md",
-    "format:check": "pnpm -r run format:check",
-    "format:write": "pnpm -r run format:write",
+    "test": "vitest",
+    "release": "changeset version",
+    "pub:beta": "cd packages/shadcn-ng && pnpm pub:beta",
+    "shadcn-ng:build": "pnpm --filter=shadcn-ng build",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "prepare": "simple-git-hooks",
     "build": "pnpm -r run build",
     "build:cli": "pnpm --filter=shadcn-ng build",
@@ -19,22 +23,32 @@
     "zod": "^4.1.5"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.15.2",
-    "@changesets/cli": "^2.27.1",
-    "@types/node": "^20.11.25",
-    "attw": "^1.1.0",
-    "del-cli": "^5.1.0",
-    "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.13.0",
-    "prettier-plugin-tailwindcss": "^0.5.12",
-    "simple-git-hooks": "^2.10.0",
-    "tsx": "^4.7.1",
-    "typescript": "^5.4.2"
+    "@antfu/eslint-config": "^5.2.1",
+    "@changesets/changelog-github": "0.5.1",
+    "@changesets/cli": "2.29.6",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@types/node": "22.17.2",
+    "eslint": "^9.33.0",
+    "eslint-plugin-format": "^1.0.1",
+    "lint-staged": "16.1.5",
+    "puppeteer": "^24.17.1",
+    "simple-git-hooks": "2.13.1",
+    "tailwindcss": "4.1.12",
+    "tsdown": "^0.14.2",
+    "tsx": "4.20.4",
+    "typescript": "~5.8.0",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.2.4"
+  },
+  "volta": {
+    "node": "22.18.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format:write",
-    "commit-msg": "pnpm commitlint --edit \"$1\"",
-    "pre-push": "pnpm typecheck && pnpm lint"
+    "commit-msg": "pnpm dlx commitlint --edit $1",
+    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && npx lint-staged"
   },
-  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
 }
