@@ -1,34 +1,14 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "./tsconfig.json",
-  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es2020",
-    "lib": ["es2020", "dom"],
-    "experimentalDecorators": true,
-    "baseUrl": "./",
-    "module": "es2020",
-    "moduleResolution": "node",
-    "strict": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "importHelpers": true,
-    "noEmit": false,
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "types": [],
+    "outDir": "./out-tsc/app"
   },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "allowJs": false
-  },
-  "files": [],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "registry/**/*.ts", "registry/**/*.tsx", "lib/**/*.ts", "lib/**/*.tsx"]
+  "files": ["src/main.ts", "src/main.server.ts"],
+  "include": [
+    "src/**/*.d.ts",
+    "src/app/pages/**/*.page.ts",
+    "src/server/middleware/**/*.ts"
+  ]
 }

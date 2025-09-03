@@ -1,41 +1,44 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": ".",
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "useDefineForClassFields": false,
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "paths": {
-      "shadcn-ng/schema": [
-        "../../packages/shadcn-ng/src/registry/schema.ts"
-      ],
-      "shadcn-ng/*": [
-        "../../packages/shadcn-ng/src/*"
-      ],
-      "@/registry/*": [
-        "registry/*"
-      ],
-      "@/lib/*": [
-        "lib/*",
-        "src/lib/*"
-      ],
-      "@/*": [
-        "src/*"
-      ]
+      "@/registry/*": ["registry/*"],
+      "@/lib/*": ["lib/*"],
+      "@/*": ["src/app/*"]
     },
-    "types": [
-      "unplugin-icons/types/astro"
-    ]
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "allowJs": false
+    "strictTemplates": true
   },
-  "include": [
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": [
-    "dist"
+  "references": [
+    {
+      "path": "tsconfig.spec.json"
+    }
   ]
 }
