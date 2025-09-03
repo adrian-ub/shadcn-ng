@@ -12,6 +12,12 @@
     "module": "ES2022",
     "moduleResolution": "bundler",
     "paths": {
+      "shadcn-ng/schema": [
+        "../../packages/shadcn-ng/src/registry/schema.ts"
+      ],
+      "shadcn-ng/*": [
+        "../../packages/shadcn-ng/src/*"
+      ],
       "@/registry/*": ["registry/*"],
       "@/lib/*": ["lib/*"],
       "@/*": ["src/app/*"]

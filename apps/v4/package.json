@@ -13,7 +13,8 @@
     "build": "vite build",
     "watch": "vite build --watch",
     "test": "vitest",
-    "preview": "node dist/analog/server/index.mjs"
+    "preview": "node dist/analog/server/index.mjs",
+    "validate:registries": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/validate-registries.mts"
   },
   "dependencies": {
     "@analogjs/content": "^1.20.2",
