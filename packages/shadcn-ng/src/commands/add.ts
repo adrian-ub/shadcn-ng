@@ -163,7 +163,7 @@ export const add = new Command()
       }
 
       if (errors[ERRORS.MISSING_DIR_OR_EMPTY_PROJECT]) {
-        const { projectPath, template } = await createProject({
+        const { projectPath, template: _template } = await createProject({
           cwd: options.cwd,
           force: options.overwrite,
           components: options.components,
@@ -174,23 +174,23 @@ export const add = new Command()
         }
         options.cwd = projectPath
 
-        if (template === 'angular-monorepo') {
-          options.cwd = path.resolve(options.cwd, 'apps/web')
-          config = await getConfig(options.cwd)
-        }
-        else {
-          config = await runInit({
-            cwd: options.cwd,
-            yes: true,
-            force: true,
-            defaults: false,
-            skipPreflight: true,
-            silent: true,
-            isNewProject: true,
-            cssVariables: options.cssVariables,
-            baseStyle: true,
-          })
-        }
+        // if (template === 'angular-monorepo') {
+        //   options.cwd = path.resolve(options.cwd, 'apps/web')
+        //   config = await getConfig(options.cwd)
+        // }
+        // else {
+        config = await runInit({
+          cwd: options.cwd,
+          yes: true,
+          force: true,
+          defaults: false,
+          skipPreflight: true,
+          silent: true,
+          isNewProject: true,
+          cssVariables: options.cssVariables,
+          baseStyle: true,
+        })
+        // }
       }
 
       if (!config) {

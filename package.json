@@ -15,7 +15,8 @@
     "lint:fix": "eslint --fix",
     "prepare": "simple-git-hooks",
     "build": "pnpm -r run build",
-    "build:cli": "pnpm --filter=shadcn-ng build"
+    "build:cli": "pnpm --filter=shadcn-ng build",
+    "typecheck": "pnpm --filter=!www typecheck"
   },
   "dependencies": {
     "zod": "^4.1.5"
