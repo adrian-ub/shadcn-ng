@@ -12,6 +12,9 @@ import { UbSeparator } from '@/registry/new-york-v4/ui/separator'
 
 @Component({
   selector: 'site-header',
+  host: {
+    class: 'bg-background sticky top-0 z-50 w-full',
+  },
   imports: [
     MobileNav,
     UbButton,
@@ -24,7 +27,7 @@ import { UbSeparator } from '@/registry/new-york-v4/ui/separator'
     UbSeparator,
   ],
   template: `
-  <header class="bg-background sticky top-0 z-50 w-full">
+  <header>
     <div class="container-wrapper 3xl:fixed:px-0 px-6">
       <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
         <mobile-nav />
