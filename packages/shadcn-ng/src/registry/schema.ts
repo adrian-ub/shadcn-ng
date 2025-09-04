@@ -145,7 +145,7 @@ export const registryConfigItemSchema = z.union([
 
 export const registryConfigSchema = z.record(
   z.string().refine(key => key.startsWith('@'), {
-    message: 'Registry names must start with @ (e.g., @shadcn-ng, @acme)',
+    message: 'Registry names must start with @ (e.g., @v0, @acme)',
   }),
   registryConfigItemSchema,
 )
@@ -207,3 +207,8 @@ export const searchResultsSchema = z.object({
   }),
   items: z.array(searchResultItemSchema),
 })
+
+export const registriesIndexSchema = z.record(
+  z.string().regex(/^@[a-z0-9][\w-]*$/i),
+  z.string(),
+)

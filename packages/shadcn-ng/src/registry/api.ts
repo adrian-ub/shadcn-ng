@@ -1,11 +1,14 @@
 import type { Config } from '@/src/utils/get-config'
-
 import path from 'node:path'
+import process from 'node:process'
 import { z } from 'zod'
-
 import { buildUrlAndHeadersForRegistryItem } from '@/src/registry/builder'
 import { configWithDefaults } from '@/src/registry/config'
-import { BASE_COLORS, BUILTIN_REGISTRIES } from '@/src/registry/constants'
+import {
+  BASE_COLORS,
+  BUILTIN_REGISTRIES,
+  REGISTRY_URL,
+} from '@/src/registry/constants'
 import {
   clearRegistryContext,
   setRegistryHeaders,
@@ -21,16 +24,17 @@ import {
   fetchRegistryItems,
   resolveRegistryTree,
 } from '@/src/registry/resolver'
+import { isUrl } from '@/src/registry/utils'
 import {
   iconsSchema,
+  registriesIndexSchema,
   registryBaseColorSchema,
   registryConfigSchema,
   registryIndexSchema,
   registryItemSchema,
   registrySchema,
   stylesSchema,
-} from '@/src/registry/schema'
-import { isUrl } from '@/src/registry/utils'
+} from '@/src/schema'
 import { explorer } from '@/src/utils/get-config'
 import { handleError } from '@/src/utils/handle-error'
 import { logger } from '@/src/utils/logger'
@@ -280,4 +284,18 @@ export async function getItemTargetPath(
     config.resolvedPaths[parent as keyof typeof config.resolvedPaths],
     type,
   )
+}
+
+export async function fetchRegistries() {
+  try {
+    // TODO: Do we want this inside /r?
+    const url = `${REGISTRY_URL}/registries.json`
+    const [data] = await fetchRegistry([url], {
+      useCache: process.env.NODE_ENV !== 'development',
+    })
+    return registriesIndexSchema.parse(data)
+  }
+  catch {
+    return null
+  }
 }

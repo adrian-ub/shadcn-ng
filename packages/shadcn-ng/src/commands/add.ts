@@ -18,6 +18,7 @@ import { getProjectInfo } from '@/src/utils/get-project-info'
 import { handleError } from '@/src/utils/handle-error'
 import { highlighter } from '@/src/utils/highlighter'
 import { logger } from '@/src/utils/logger'
+import { ensureRegistriesInConfig } from '@/src/utils/registries'
 
 export const addOptionsSchema = z.object({
   components: z.array(z.string()).optional(),
@@ -27,7 +28,6 @@ export const addOptionsSchema = z.object({
   all: z.boolean(),
   path: z.string().optional(),
   silent: z.boolean(),
-  srcDir: z.boolean().optional(),
   cssVariables: z.boolean(),
 })
 
@@ -45,15 +45,6 @@ export const add = new Command()
   .option('-a, --all', 'add all available components', false)
   .option('-p, --path <path>', 'the path to add the component to.')
   .option('-s, --silent', 'mute output.', false)
-  .option(
-    '--src-dir',
-    'use the src directory when creating a new project.',
-    false,
-  )
-  .option(
-    '--no-src-dir',
-    'do not use the src directory when creating a new project.',
-  )
   .option('--css-variables', 'use css variables for theming.', true)
   .option('--no-css-variables', 'do not use css variables for theming.')
   .action(async (components, opts) => {
@@ -74,6 +65,17 @@ export const add = new Command()
             cwd: options.cwd,
           },
         })
+      }
+
+      let hasNewRegistries = false
+      if (components.length > 0) {
+        const { config: updatedConfig, newRegistries }
+          = await ensureRegistriesInConfig(components, initialConfig, {
+            silent: options.silent,
+            writeFile: false,
+          })
+        initialConfig = updatedConfig
+        hasNewRegistries = newRegistries.length > 0
       }
 
       if (components.length > 0) {
@@ -134,6 +136,7 @@ export const add = new Command()
       let { errors, config } = await preFlightAdd(options)
 
       // No components.json file. Prompt the user to run init.
+      let initHasRun = false
       if (errors[ERRORS.MISSING_CONFIG]) {
         const { proceed } = await prompts({
           type: 'confirm',
@@ -155,11 +158,13 @@ export const add = new Command()
           force: true,
           defaults: false,
           skipPreflight: false,
-          silent: true,
+          silent: options.silent || !hasNewRegistries,
           isNewProject: false,
           cssVariables: options.cssVariables,
           baseStyle: true,
+          components: options.components,
         })
+        initHasRun = true
       }
 
       if (errors[ERRORS.MISSING_DIR_OR_EMPTY_PROJECT]) {
@@ -185,11 +190,13 @@ export const add = new Command()
           force: true,
           defaults: false,
           skipPreflight: true,
-          silent: true,
+          silent: !hasNewRegistries && options.silent,
           isNewProject: true,
           cssVariables: options.cssVariables,
           baseStyle: true,
+          components: options.components,
         })
+        initHasRun = true
         // }
       }
 
@@ -199,7 +206,18 @@ export const add = new Command()
         )
       }
 
-      await addComponents(options.components, config, options)
+      const { config: updatedConfig } = await ensureRegistriesInConfig(
+        options.components,
+        config,
+        {
+          silent: options.silent || hasNewRegistries,
+        },
+      )
+      config = updatedConfig
+
+      if (!initHasRun) {
+        await addComponents(options.components, config, options)
+      }
     }
     catch (error) {
       logger.break()
