@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { siteConfig } from '@/lib/config'
 
 @Component({
   selector: 'site-footer',
@@ -7,11 +8,13 @@ import { Component } from '@angular/core'
     <div class="container-wrapper px-4 xl:px-6">
       <div class="flex h-(--footer-height) items-center justify-between">
         <div class="text-muted-foreground w-full px-1 text-center text-xs leading-loose sm:text-sm">
-          Built by <a href="" target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4">shadcn</a>
+          Built & designed by <a [href]="siteConfig.links.shadcn" target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4">shadcn</a>. Ported to Angular by <a [href]="siteConfig.links.bluesky" target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4">Adrián UB</a>. The source code is available on <a [href]="siteConfig.links.github" target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4">GitHub</a>.
         </div>
       </div>
     </div>
   </footer>
   `,
 })
-export class SiteFooter { }
+export class SiteFooter {
+  protected readonly siteConfig = siteConfig
+}
