@@ -5,6 +5,10 @@ import { injectData } from './inject-data'
 export interface Doc {
   title: string
   description?: string
+  links?: {
+    doc?: string
+    api?: string
+  }
 }
 
 export function injectDoc() {
