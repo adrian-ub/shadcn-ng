@@ -1,5 +1,6 @@
-import { Location } from '@angular/common'
-import { inject } from '@angular/core'
+import { inject, Injector, runInInjectionContext } from '@angular/core'
+import { map, switchMap } from 'rxjs'
+import { injectCurrentPath } from '@/utils/inject-current-path'
 import { injectData } from './inject-data'
 
 export interface Doc {
@@ -12,8 +13,12 @@ export interface Doc {
 }
 
 export function injectDoc() {
-  const location = inject(Location)
-  const currentPath = location.path()
-  const slug = currentPath.replace(/^\//, '').split('/').slice(1).join('/')
-  return injectData<Doc>('docs', slug)
+  const injector = inject(Injector)
+
+  return injectCurrentPath().pipe(
+    map((path: string) => path.replace(/^\//, '').split('/').slice(1).join('/')),
+    switchMap(slug =>
+      runInInjectionContext(injector, () => injectData<Doc>('docs', slug)),
+    ),
+  )
 }

@@ -1,6 +1,7 @@
 import { MarkdownComponent } from '@analogjs/content'
 import { Component } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
+
 import { DocsToc } from '@/components/docs-toc'
 import { injectDoc } from '@/data/docs'
 import { UbBadge } from '@/registry/new-york-v4/ui/badge'
@@ -61,8 +62,5 @@ import { UbBadge } from '@/registry/new-york-v4/ui/badge'
   `,
 })
 export default class DocsSlugPage {
-  protected readonly data = toSignal(
-    injectDoc(),
-    { initialValue: null },
-  )
+  protected readonly data = toSignal(injectDoc())
 }
