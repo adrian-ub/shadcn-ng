@@ -33,8 +33,8 @@ export const routeMeta: RouteMeta = {
   <div class="flex flex-1 flex-col">
     <page-header>
       <announcement />
-      <h1 pageHeaderHeading class="max-w-4xl">${title}</h1>
-      <p pageHeaderDescription>${description}</p>
+      <h1 pageHeaderHeading class="max-w-4xl">{{title}}</h1>
+      <p pageHeaderDescription>{{description}}</p>
       <div pageHeaderActions>
         <a href="/docs/installation" ubButton size="sm">Get Started</a>
         <a href="/docs/components" ubButton size="sm" variant="ghost">View Components</a>
@@ -43,4 +43,7 @@ export const routeMeta: RouteMeta = {
   </div>
   `,
 })
-export default class IndexPage { }
+export default class IndexPage {
+  protected readonly title = title
+  protected readonly description = description
+}
