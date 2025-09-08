@@ -40,6 +40,8 @@
     "marked": "^15.0.7",
     "marked-shiki": "^1.1.0",
     "rxjs": "~7.8.0",
+    "satori": "^0.18.2",
+    "satori-html": "^0.3.2",
     "shiki": "^1.6.1",
     "tailwindcss": "^4.1.12",
     "tslib": "^2.3.0"
@@ -53,6 +55,8 @@
     "@angular/compiler-cli": "^20.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "fast-glob": "3.3.3",
+    "gray-matter": "^4.0.3",
     "jsdom": "^22.0.0",
     "tailwind-merge": "^3.3.1",
     "tw-animate-css": "^1.3.7",
