@@ -21,7 +21,7 @@ import { sidebarData } from '@/data/sidebar'
                 <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-1">
                   @for (item of sidebarGroup.items; track $index) {
                     <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
-                      <a [routerLink]="item.link" routerLinkActive #rla="routerLinkActive"
+                      <a [routerLink]="item.link" routerLinkActive #rla="routerLinkActive" [routerLinkActiveOptions]="{exact: true}"
                       [attr.data-active]="rla.isActive" data-slot="sidebar-menu-button" class="peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">{{item.label}}</a>
                     </li>
                   }
