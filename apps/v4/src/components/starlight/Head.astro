@@ -7,8 +7,8 @@ const { head } = Astro.locals.starlightRoute
 
 <ThemeProvider />
 
-<Font cssVariable="--font-sans" preload />
-<Font cssVariable="--font-mono" preload />
-<Font cssVariable="--font-inter" preload />
+<Font cssVariable="--font-sans-geist" preload />
+<Font cssVariable="--font-mono-geist" preload />
+<Font cssVariable="--font-inter-var" preload />
 
 {head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
