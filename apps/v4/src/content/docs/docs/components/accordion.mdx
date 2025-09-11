@@ -1,0 +1,75 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+links:
+  doc: https://www.radix-ng.com/primitives/components/accordion
+  api: https://www.radix-ng.com/primitives/components/accordion#api-reference
+---
+
+<ComponentPreview
+  name="accordion-demo"
+  className="[&_.preview>[data-orientation=vertical]]:sm:max-w-[80%] **:[.preview]:min-h-[400px]"
+  description="An accordion with three items"
+  align="start"
+/>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn-ng@latest add accordion
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @radix-ng/primitives
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="accordion" title="components/ui/accordion.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```ts showLineNumbers
+import {
+  UbAccordion,
+  UbAccordionContent,
+  UbAccordionItem,
+  UbAccordionTrigger,
+} from "@/components/ui/accordion"
+```
+
+```html showLineNumbers
+<div ubAccordion type="single" collapsible>
+  <div ubAccordionItem value="item-1">
+    <ub-accordion-trigger>Is it accessible?</ub-accordion-trigger>
+    <div ubAccordionContent>
+      Yes. It adheres to the WAI-ARIA design pattern.
+    </div>
+  </div>
+</div>
+```
