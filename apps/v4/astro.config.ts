@@ -11,6 +11,7 @@ import { siteConfig } from './lib/config'
 import { transformers } from './lib/highlight-code'
 
 export default defineConfig({
+  trailingSlash: 'never',
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [
@@ -32,6 +33,7 @@ export default defineConfig({
       './astro.sidebar.ts',
     ]),
     starlight({
+      titleDelimiter: '-',
       markdown: {
         headingLinks: false,
       },
