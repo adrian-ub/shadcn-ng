@@ -17,7 +17,7 @@ import GitHubLink from '../GitHubLink.astro'
  */
 const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro'
 
-const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute
 ---
 
 <header class="bg-background sticky top-0 z-50 w-full">
@@ -32,9 +32,9 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
         <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
           {shouldRenderSearch && <Search />}
         </div>
-        <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>
+        <div class={cn(separatorClass, 'ml-2 hidden lg:block')} data-orientation="vertical" data-slot="separator"></div>
         <GitHubLink />
-        <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>
+        <div class={cn(separatorClass, '3xl:flex hidden')} data-orientation="vertical" data-slot="separator"></div>
         <SiteConfig class="3xl:flex hidden" />
         <div class={separatorClass} data-orientation="vertical" data-slot="separator"></div>
         <ModeSwitcher />
