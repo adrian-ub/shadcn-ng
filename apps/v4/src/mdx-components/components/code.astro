@@ -40,14 +40,14 @@ const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__ && !isPlain
 
 {
   !isPlain && isNpmCommand && (
-    <CodeBlockCommand __npm__={__npm__} __yarn__={__yarn__} __pnpm__={__pnpm__} __bun__={__bun__} client:visible />
+    <CodeBlockCommand __npm__={__npm__} __yarn__={__yarn__} __pnpm__={__pnpm__} __bun__={__bun__} client:only="angular" />
   )
 }
 
 {
   !isPlain && !isNpmCommand && (
     <>
-      {/* {__raw__ && <CopyButton value={__raw__} client:visible />} */}
+      {__raw__ && <CopyButton value={__raw__} client:only="angular" />}
       <code {...props}><slot /></code>
     </>
   )

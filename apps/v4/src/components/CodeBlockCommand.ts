@@ -7,6 +7,7 @@ import { UbButton } from '@/registry/new-york-v4/ui/button'
 import { UbTabs, UbTabsContent, UbTabsList, UbTabsTrigger } from '@/registry/new-york-v4/ui/tabs'
 
 @Component({
+  selector: 'code-block-command',
   imports: [
     UbTabsContent,
     UbTabs,
