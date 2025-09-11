@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@angular/cdk": "^19.2.19",
-    "@ngxi/lucide": "^0.12.21",
+    "@ngxi/lucide": "^0.12.26",
     "@radix-ng/primitives": "^0.33.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
