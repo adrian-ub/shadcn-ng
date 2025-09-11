@@ -34,7 +34,8 @@ import { UbButton } from '@/registry/new-york-v4/ui/button'
         </div>
         <div rdxTooltipArrow class="bg-primary fill-primary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]"></div>
       </ng-template>
-    </ng-container>`,
+    </ng-container>
+    `,
 })
 export class CopyButton {
   clipboard = inject(Clipboard)

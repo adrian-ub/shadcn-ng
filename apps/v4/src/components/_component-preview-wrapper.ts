@@ -4,6 +4,7 @@ import { Component, input, viewChild, ViewContainerRef } from '@angular/core'
 import { Index } from '@/registry/__index__'
 
 @Component({
+  selector: 'component-preview-wrapper',
   template: `
     <ng-container #container> </ng-container>`,
 })

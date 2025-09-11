@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, viewChild } from '@angular/core'
 import {
   RdxCollapsibleContentDirective,
   RdxCollapsibleRootDirective,
@@ -17,7 +17,7 @@ import { UbButton } from '@/registry/new-york-v4/ui/button'
     RdxSeparatorRootDirective,
   ],
   template: `
-  <!-- <div #collapsibleRoot="rdxCollapsibleRoot" rdxCollapsibleRoot class="group/collapsible relative md:-mx-1" [open]="true">
+  <div #collapsibleRoot="rdxCollapsibleRoot" rdxCollapsibleRoot class="group/collapsible relative md:-mx-1" [open]="true">
     <div class="absolute top-8 right-9 z-10 flex items-center">
       <button class="text-muted-foreground h-7 rounded-md px-2" rdxCollapsibleTrigger ubButton variant="ghost" size="sm">
         @if (collapsibleRoot.open()) {
@@ -38,15 +38,15 @@ import { UbButton } from '@/registry/new-york-v4/ui/button'
         Expand
       }
     </div>
-  </div> -->
+  </div>
   `,
 })
 export class CodeCollapsibleWrapper {
-  // collapsibleRoot = viewChild(RdxCollapsibleRootDirective)
+  collapsibleRoot = viewChild(RdxCollapsibleRootDirective)
 
-  // constructor() {
-  //   setTimeout(() => {
-  //     this.collapsibleRoot()!.open.set(false)
-  //   }, 0)
-  // }
+  constructor() {
+    setTimeout(() => {
+      this.collapsibleRoot()!.open.set(false)
+    }, 0)
+  }
 }
