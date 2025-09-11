@@ -1,20 +1,41 @@
 import angular from '@analogjs/astro-angular'
-import markdoc from '@astrojs/markdoc'
+import mdx from '@astrojs/mdx'
 import starlight from '@astrojs/starlight'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
+import rehypePrettyCode from 'rehype-pretty-code'
 import Icons from 'unplugin-icons/vite'
 import { sidebar } from './astro.sidebar'
 import { devServerFileWatcher } from './config/integrations/dev-server-file-watcher'
 import { siteConfig } from './lib/config'
+import { transformers } from './lib/highlight-code'
 
 export default defineConfig({
+  markdown: {
+    syntaxHighlight: false,
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        {
+          theme: {
+            dark: 'github-dark',
+            light: 'github-light-default',
+          },
+          transformers,
+        },
+      ],
+    ],
+  },
   integrations: [
     devServerFileWatcher([
       './config/**',
       './astro.sidebar.ts',
     ]),
     starlight({
+      markdown: {
+        headingLinks: false,
+      },
+      expressiveCode: false,
       title: siteConfig.name,
       social: [{ icon: 'github', label: 'GitHub', href: siteConfig.links.github }],
       sidebar,
@@ -40,10 +61,7 @@ export default defineConfig({
         },
       },
     }),
-    markdoc({
-      ignoreIndentation: true,
-      allowHTML: true,
-    }),
+    mdx(),
   ],
   vite: {
     plugins: [
@@ -59,6 +77,8 @@ export default defineConfig({
         '@angular/core',
         '@angular/cdk',
         '@ngxi/lucide',
+        'clsx',
+        'class-variance-authority',
       ],
     },
     ssr: {
@@ -66,6 +86,7 @@ export default defineConfig({
         '@radix-ng/primitives',
         '@angular/cdk',
         '@ngxi/lucide',
+        '@angular/cdk/**',
       ],
     },
   },

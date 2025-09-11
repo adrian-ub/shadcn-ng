@@ -1,8 +1,8 @@
 ---
 import { Index } from '@/registry/__index__'
 import { readFileSync } from 'node:fs'
-import { Code } from '@astrojs/starlight/components';
-
+import { highlightCode } from '@/lib/highlight-code'
+import { ComponentSource as ComponentSourceComponent } from './ComponentSource'
 export interface Props {
   name?: string
   src?: string
@@ -36,6 +36,7 @@ let code = readFileSync(path, 'utf-8').trim()
 code = updateImportsInSource(code, aliases)
 
 const lang = language ?? title?.split('.').pop() ?? 'angular-ts'
+const highlightedCode = await highlightCode(code, lang)
 ---
 
-<Code {code} lang={lang} />
+<ComponentSourceComponent title={title} language={lang} highlightedCode={highlightedCode} code={code} collapsible={collapsible} client:visible />

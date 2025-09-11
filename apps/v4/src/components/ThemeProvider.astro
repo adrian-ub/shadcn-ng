@@ -25,6 +25,8 @@ const { defaultTheme = 'auto' } = Astro.props
       const html = document.documentElement
 
       html.dataset.theme = resolved
+      html.classList.remove('light', 'dark')
+      html.classList.add(resolved)
       html.style.colorScheme = resolved
 
       document.dispatchEvent(
