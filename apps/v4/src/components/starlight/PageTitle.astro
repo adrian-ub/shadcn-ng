@@ -4,6 +4,7 @@ import { badgeVariants } from '@/registry/new-york-v4/ui/badge'
 import { buttonVariants } from '@/registry/new-york-v4/ui/button';
 import IconArrowLeft from '~icons/tabler/arrow-left'
 import IconArrowRight from '~icons/tabler/arrow-right'
+import IconArrowUpRight from '~icons/tabler/arrow-up-right'
 
 const { dir, pagination } = Astro.locals.starlightRoute;
 const { prev, next } = pagination;
@@ -44,13 +45,13 @@ const { prev, next } = pagination;
         {Astro.locals.starlightRoute.entry.data.links.doc && (
           <a href={Astro.locals.starlightRoute.entry.data.links.doc} class={badgeVariants({ variant: 'secondary' })} target="_blank" rel="noreferrer">
             Docs
-            {/* <IconArrowUpRight /> */}
+            <IconArrowUpRight />
           </a>
         )}
         {Astro.locals.starlightRoute.entry.data.links.api && (
           <a href={Astro.locals.starlightRoute.entry.data.links.api} class={badgeVariants({ variant: 'secondary' })} target="_blank" rel="noreferrer">
             API Reference
-            {/* <IconArrowUpRight /> */}
+            <IconArrowUpRight />
           </a>
         )}
       </div>
