@@ -55,6 +55,24 @@ export default defineConfig({
         Pagination: './src/components/starlight/Pagination.astro',
         Hero: './src/components/starlight/Hero.astro',
       },
+      head: [
+        {
+          tag: 'link',
+          attrs: { rel: 'author', href: 'https://adrianub.dev' },
+        },
+        {
+          tag: 'meta',
+          attrs: { name: 'author', content: 'Adrián UB' },
+        },
+        {
+          tag: 'meta',
+          attrs: { name: 'keywords', content: 'Angular,Tailwind CSS,Components,shadcn,shadcn-ng' },
+        },
+        {
+          tag: 'meta',
+          attrs: { name: 'creator', content: 'adrianub' },
+        },
+      ],
     }),
     angular({
       vite: {
