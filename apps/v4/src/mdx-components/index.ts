@@ -5,6 +5,7 @@ import ComponentSource from '@/components/ComponentSource.astro'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import a from './components/a.astro'
 import blockquote from './components/blockquote.astro'
+import Button from './components/button.astro'
 import code from './components/code.astro'
 import figcaption from './components/figcaption.astro'
 import figure from './components/figure.astro'
@@ -28,6 +29,7 @@ import strong from './components/strong.astro'
 import table from './components/table.astro'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/tabs'
 import td from './components/td.astro'
+import th from './components/th.astro'
 import tr from './components/tr.astro'
 import ul from './components/ul.astro'
 
@@ -48,6 +50,7 @@ export const mdxComponents = {
   img,
   hr,
   table,
+  th,
   tr,
   td,
   pre,
@@ -70,4 +73,5 @@ export const mdxComponents = {
   TabsTrigger,
   CodeTabs,
   ComponentSource,
+  Button,
 }

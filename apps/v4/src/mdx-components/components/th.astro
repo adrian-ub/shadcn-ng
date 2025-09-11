@@ -7,9 +7,9 @@ export type Props = HTMLAttributes<'tr'>
 const { class: className, ...props } = Astro.props
 ---
 
-<tr
-  class={cn('last:border-b-none m-0 border-b', className)}
+<th
+  class={cn('px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right', className)}
   {...props}
 >
   <slot />
-</tr>
+</th>

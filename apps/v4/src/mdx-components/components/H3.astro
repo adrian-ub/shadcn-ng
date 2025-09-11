@@ -8,7 +8,7 @@ const { class: className, ...props } = Astro.props
 ---
 
 <h3
-  class={cn('font-heading mt-8 scroll-m-28 text-xl font-semibold tracking-tight *:[code]:text-xl', className)}
+  class={cn('font-heading mt-8 scroll-m-28 text-lg font-medium tracking-tight *:[code]:text-xl', className)}
   {...props}
 >
   <slot />

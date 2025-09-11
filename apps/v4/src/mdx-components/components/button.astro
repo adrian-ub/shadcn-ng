@@ -1,0 +1,15 @@
+---
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/registry/new-york-v4/ui/button'
+import type { HTMLAttributes } from 'astro/types'
+import { VariantProps } from 'class-variance-authority'
+
+export type Props = HTMLAttributes<'button'> & {
+  variant?: VariantProps<typeof buttonVariants>['variant']
+  size?: VariantProps<typeof buttonVariants>['size']
+}
+
+const { variant, size, class: className, ...props } = Astro.props
+---
+
+<button class={cn(buttonVariants({ variant, size }), className)} {...props}><slot /></button>

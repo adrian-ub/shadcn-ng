@@ -7,6 +7,6 @@ export type Props = HTMLAttributes<'h5'>
 const { class: className, ...props } = Astro.props
 ---
 
-<h5 class={cn('mt-8 scroll-m-28 text-lg font-medium tracking-tight', className)} {...props}>
+<h5 class={cn('mt-8 scroll-m-28 text-base font-medium tracking-tight', className)} {...props}>
   <slot />
 </h5>
