@@ -1,0 +1,27 @@
+---
+import type { TocItem } from 'node_modules/@astrojs/starlight/utils/generateToC'
+
+interface Props {
+  toc: TocItem[]
+}
+
+const { toc } = Astro.props
+---
+
+{
+  toc.map((item) => (
+    <>
+      {item.slug !== '_top' && (
+        <a
+          href={`#${item.slug}`}
+          class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+          data-depth={item.depth}
+          data-heading-id={item.slug}
+        >
+          {item.text}
+        </a>
+      )}
+      {item.children.length > 0 && <Astro.self toc={item.children} />}
+    </>
+  ))
+}
