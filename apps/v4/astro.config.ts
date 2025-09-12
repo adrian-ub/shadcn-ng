@@ -11,6 +11,7 @@ import { siteConfig } from './lib/config'
 import { transformers } from './lib/highlight-code'
 
 export default defineConfig({
+  site: 'https://ui.adrianub.dev',
   trailingSlash: 'never',
   markdown: {
     syntaxHighlight: false,
@@ -33,6 +34,7 @@ export default defineConfig({
       './astro.sidebar.ts',
     ]),
     starlight({
+      routeMiddleware: './src/routeData.ts',
       titleDelimiter: '-',
       markdown: {
         headingLinks: false,
