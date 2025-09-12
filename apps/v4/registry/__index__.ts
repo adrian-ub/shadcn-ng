@@ -66,6 +66,27 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  'aspect-ratio': {
+    name: 'aspect-ratio',
+    description: '',
+    type: 'registry:ui',
+    registryDependencies: undefined,
+    files: [{
+      path: 'registry/new-york-v4/ui/aspect-ratio.ts',
+      type: 'registry:ui',
+      target: '',
+    }],
+    component: async () => {
+      const mod = await import('@/registry/new-york-v4/ui/aspect-ratio.ts')
+      const exportName = Object.keys(mod).find((key) => {
+        const value = (mod as Record<string, unknown>)[key]
+        return typeof value === 'function' && value.prototype && value.prototype.constructor === value
+      })
+      return mod[exportName as keyof typeof mod]
+    },
+    categories: undefined,
+    meta: undefined,
+  },
   'badge': {
     name: 'badge',
     description: '',
@@ -162,6 +183,27 @@ export const Index: Record<string, any> = {
     }],
     component: async () => {
       const mod = await import('@/registry/new-york-v4/examples/alert-demo.ts')
+      const exportName = Object.keys(mod).find((key) => {
+        const value = (mod as Record<string, unknown>)[key]
+        return typeof value === 'function' && value.prototype && value.prototype.constructor === value
+      })
+      return mod[exportName as keyof typeof mod]
+    },
+    categories: undefined,
+    meta: undefined,
+  },
+  'aspect-ratio-demo': {
+    name: 'aspect-ratio-demo',
+    description: '',
+    type: 'registry:example',
+    registryDependencies: [],
+    files: [{
+      path: 'registry/new-york-v4/examples/aspect-ratio-demo.ts',
+      type: 'registry:example',
+      target: '',
+    }],
+    component: async () => {
+      const mod = await import('@/registry/new-york-v4/examples/aspect-ratio-demo.ts')
       const exportName = Object.keys(mod).find((key) => {
         const value = (mod as Record<string, unknown>)[key]
         return typeof value === 'function' && value.prototype && value.prototype.constructor === value

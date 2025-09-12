@@ -23,6 +23,16 @@ export const ui: Registry['items'] = [
     ],
   },
   {
+    name: 'aspect-ratio',
+    type: 'registry:ui',
+    files: [
+      {
+        path: 'ui/aspect-ratio.ts',
+        type: 'registry:ui',
+      },
+    ],
+  },
+  {
     name: 'badge',
     type: 'registry:ui',
     files: [

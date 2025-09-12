@@ -55,6 +55,16 @@
       ]
     },
     {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/new-york-v4/ui/aspect-ratio.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "files": [
@@ -473,6 +483,18 @@
       "files": [
         {
           "path": "registry/new-york-v4/examples/alert-demo.ts",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio-demo",
+      "type": "registry:example",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york-v4/examples/aspect-ratio-demo.ts",
           "type": "registry:example"
         }
       ]

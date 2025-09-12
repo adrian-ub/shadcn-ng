@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "registry/new-york-v4/ui/aspect-ratio.ts",
+      "content": "import { Directive } from '@angular/core'\n\nimport { RdxAspectRatioDirective } from '@radix-ng/primitives/aspect-ratio'\n\n@Directive({\n  standalone: true,\n  selector: 'div[ubAspectRatio],ub-aspect-ratio',\n  host: {\n    'data-slot': 'aspect-ratio',\n  },\n  hostDirectives: [\n    {\n      directive: RdxAspectRatioDirective,\n      inputs: ['ratio'],\n    },\n  ],\n})\nexport class UbAspectRatio {}\n",
+      "type": "registry:ui"
+    }
+  ]
+}
