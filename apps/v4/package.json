@@ -7,7 +7,10 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "registry:build": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-registry.mts",
+    "registry:capture": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/capture-registry.mts",
+    "validate:registries": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/validate-registries.mts"
   },
   "dependencies": {
     "@analogjs/astro-angular": "^1.20.1",
@@ -47,6 +50,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "rimraf": "^6.0.1",
+    "shadcn-ng": "workspace:*",
     "tailwind-merge": "^3.3.1",
     "tw-animate-css": "^1.3.7",
     "zod": "^4.1.5"

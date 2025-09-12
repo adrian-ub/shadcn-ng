@@ -172,6 +172,9 @@ importers:
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
+      shadcn-ng:
+        specifier: workspace:*
+        version: link:../../packages/shadcn-ng
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1

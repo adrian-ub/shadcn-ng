@@ -16,7 +16,8 @@
     "prepare": "simple-git-hooks",
     "build": "pnpm -r run build",
     "build:cli": "pnpm --filter=shadcn-ng build",
-    "typecheck": "pnpm --filter=!www typecheck"
+    "typecheck": "pnpm --filter=!www typecheck",
+    "validate:registries": "pnpm --filter=v4 validate:registries"
   },
   "dependencies": {
     "zod": "^4.1.5"
