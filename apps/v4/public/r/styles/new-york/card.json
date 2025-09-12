@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "author": "Adrián UB (https://ui.adrianub.dev)",
+  "name": "card",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "ui/card.ts",
+      "content": "import { computed, Directive, input } from '@angular/core'\n\nimport { cn } from '~/lib/utils'\n\n@Directive({\n  standalone: true,\n  selector: 'div[ubCard]',\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbCardDirective {\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn('rounded-xl border bg-card text-card-foreground shadow', this.class()),\n  )\n}\n\n@Directive({\n  standalone: true,\n  selector: 'div[ubCardHeader]',\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbCardHeaderDirective {\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn('flex flex-col space-y-1.5 p-6', this.class()),\n  )\n}\n\n@Directive({\n  standalone: true,\n  selector: 'h3[ubCardTitle]',\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbCardTitleDirective {\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn('font-semibold leading-none tracking-tight', this.class()),\n  )\n}\n\n@Directive({\n  standalone: true,\n  selector: 'p[ubCardDescription]',\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbCardDescriptionDirective {\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn('text-sm text-muted-foreground', this.class()),\n  )\n}\n\n@Directive({\n  standalone: true,\n  selector: 'div[ubCardContent]',\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbCardContentDirective {\n  readonly class = input<string>()\n  protected computedClass = computed(() => cn('p-6 pt-0', this.class()))\n}\n\n@Directive({\n  standalone: true,\n  selector: 'div[ubCardFooter]',\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbCardFooterDirective {\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn('flex items-center p-6 pt-0', this.class()),\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "accordion",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/accordion.ts",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "badge",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/badge.ts",
+        "type": "registry:ui"
+      }
+    ]
+  },
+  {
+    "name": "button",
+    "type": "registry:ui",
+    "files": [
+      {
+        "path": "ui/button.ts",
+        "type": "registry:ui"
+      }
+    ]
+  }
+]

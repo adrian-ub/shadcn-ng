@@ -7,6 +7,8 @@ import { rimraf } from 'rimraf'
 import { getAllBlocks } from '@/lib/blocks'
 import { registry } from '@/registry/index'
 
+const REGISTRY_PATH = path.join(process.cwd(), 'public/r')
+
 async function buildRegistryIndex() {
   let index = `// eslint-disable-next-line ts/ban-ts-comment
 // @ts-nocheck
@@ -65,6 +67,35 @@ export const Index: Record<string, any> = {`
 
   console.log(`#️⃣  ${Object.keys(registry.items).length} items found`)
 
+  // ----------------------------------------------------------------------------
+  // Build registry/index.json (central index for all styles).
+  // ----------------------------------------------------------------------------
+  const items = registry.items
+    .filter(item => ['registry:ui'].includes(item.type))
+    .map((item) => {
+      return {
+        ...item,
+        files: item.files?.map((_file) => {
+          const file
+            = typeof _file === 'string'
+              ? {
+                  path: _file,
+                  type: item.type,
+                }
+              : _file
+
+          return file
+        }),
+      }
+    })
+  const registryJson = JSON.stringify(items, null, 2)
+  rimraf.sync(path.join(REGISTRY_PATH, 'index.json'))
+  await fs.writeFile(
+    path.join(REGISTRY_PATH, 'index.json'),
+    registryJson,
+    'utf8',
+  )
+
   // Write style index.
   rimraf.sync(path.join(process.cwd(), 'registry/__index__.ts'))
   await fs.writeFile(path.join(process.cwd(), 'registry/__index__.ts'), `${index}\n`)
@@ -108,9 +139,10 @@ async function buildRegistryJsonFile() {
 }
 
 async function buildRegistry() {
+  rimraf.sync(path.join(process.cwd(), 'public/r/styles/new-york-v4'))
   return new Promise((resolve, reject) => {
     const process = exec(
-      `tsx --tsconfig ./tsconfig.scripts.json ../../packages/shadcn-ng/src/index.ts build registry.json --output ../www/public/r/styles/new-york-v4`,
+      `shadcn-ng build registry.json --output ./public/r/styles/new-york-v4`,
     )
 
     process.on('exit', (code) => {
@@ -138,12 +170,11 @@ async function syncRegistry() {
   }
 
   // 1. Call pnpm registry:build for v3.
-  await exec('pnpm --filter=www registry:build')
+  await exec('pnpm --filter=www build')
 
   // 2. Copy the v3/public/r directory to v4/public/r.
-  rimraf.sync(path.join(process.cwd(), 'public/r'))
   await fs.cp(
-    path.resolve(process.cwd(), '../www/public/r'),
+    path.resolve(process.cwd(), '../www/dist/r'),
     path.resolve(process.cwd(), 'public/r'),
     { recursive: true },
   )
@@ -171,6 +202,9 @@ async function buildBlocksIndex() {
 }
 
 try {
+  console.log('🔄 Syncing registry...')
+  await syncRegistry()
+
   console.log('🗂️ Building registry/__index__.ts...')
   await buildRegistryIndex()
 
@@ -182,9 +216,6 @@ try {
 
   console.log('🏗️ Building registry...')
   await buildRegistry()
-
-  console.log('🔄 Syncing registry...')
-  await syncRegistry()
 }
 catch (error) {
   console.error(error)

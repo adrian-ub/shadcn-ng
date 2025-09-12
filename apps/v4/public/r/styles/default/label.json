@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "author": "Adrián UB (https://ui.adrianub.dev)",
+  "name": "label",
+  "type": "registry:ui",
+  "dependencies": [
+    "@radix-ng/primitives"
+  ],
+  "files": [
+    {
+      "path": "ui/label.ts",
+      "content": "import { computed, Directive, input } from '@angular/core'\n\nimport { RdxLabelDirective } from '@radix-ng/primitives/label'\nimport { cva } from 'class-variance-authority'\n\nimport { cn } from '~/lib/utils'\n\nconst labelVariants = cva(\n  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',\n)\n\n@Directive({\n  selector: '[ubLabel]',\n  standalone: true,\n  hostDirectives: [\n    {\n      directive: RdxLabelDirective,\n      inputs: ['htmlFor'],\n    },\n  ],\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbLabelDirective {\n  readonly class = input<string>('')\n  protected computedClass = computed(() => cn(labelVariants(), this.class()))\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

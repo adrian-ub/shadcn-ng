@@ -1,6 +1,6 @@
 import type { Registry } from 'shadcn-ng/schema'
 import { registryItemSchema } from 'shadcn-ng/schema'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 
 import { blocks } from '@/registry/registry-blocks'
 import { charts } from '@/registry/registry-charts'
@@ -46,13 +46,6 @@ export const registry = {
     ]
       .filter((item) => {
         return !DEPRECATED_ITEMS.includes(item.name)
-      })
-      .map((item) => {
-        if (item.name === 'accordion' && 'tailwind' in item) {
-          delete item.tailwind
-        }
-
-        return item
       }),
   ),
 } satisfies Registry

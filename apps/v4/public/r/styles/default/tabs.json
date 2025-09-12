@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "author": "Adrián UB (https://ui.adrianub.dev)",
+  "name": "tabs",
+  "type": "registry:ui",
+  "dependencies": [
+    "@radix-ng/primitives"
+  ],
+  "files": [
+    {
+      "path": "ui/tabs.ts",
+      "content": "import { computed, Directive, input } from '@angular/core'\n\nimport {\n  RdxTabsContentDirective,\n  RdxTabsListDirective,\n  RdxTabsRootDirective,\n  RdxTabsTriggerDirective,\n} from '@radix-ng/primitives/tabs'\n\nimport { cn } from '~/lib/utils'\n\n@Directive({\n  selector: '[ubTabs]',\n  standalone: true,\n  hostDirectives: [\n    {\n      directive: RdxTabsRootDirective,\n      inputs: ['defaultValue: defaultValue'],\n    },\n  ],\n})\nexport class UbTabsDirective {\n  defaultValue = input<string>()\n}\n\n@Directive({\n  selector: '[ubTabsList]',\n  standalone: true,\n  hostDirectives: [RdxTabsListDirective],\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbTabsListDirective {\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn(\n      'inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',\n      this.class(),\n    ),\n  )\n}\n\n@Directive({\n  selector: '[ubTabsTrigger]',\n  standalone: true,\n  hostDirectives: [\n    { directive: RdxTabsTriggerDirective, inputs: ['value: value'] },\n  ],\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbTabsTriggerDirective {\n  readonly value = input.required<string>()\n\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn(\n      'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm',\n      this.class(),\n    ),\n  )\n}\n\n@Directive({\n  selector: '[ubTabsContent]',\n  standalone: true,\n  hostDirectives: [\n    { directive: RdxTabsContentDirective, inputs: ['value: value'] },\n  ],\n  host: {\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbTabsContentDirective {\n  readonly value = input.required<string>()\n\n  readonly class = input<string>()\n  protected computedClass = computed(() =>\n    cn(\n      'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',\n      this.class(),\n    ),\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

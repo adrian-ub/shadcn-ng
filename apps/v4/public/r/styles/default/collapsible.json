@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "author": "Adrián UB (https://ui.adrianub.dev)",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "dependencies": [
+    "@radix-ng/primitives"
+  ],
+  "files": [
+    {
+      "path": "ui/collapsible.ts",
+      "content": "import { Directive } from '@angular/core'\n\nimport {\n  RdxCollapsibleContentDirective,\n  RdxCollapsibleRootDirective,\n  RdxCollapsibleTriggerDirective,\n} from '@radix-ng/primitives/collapsible'\n\n@Directive({\n  standalone: true,\n  selector: '[ubCollapsible]',\n  exportAs: 'ubCollapsible',\n  hostDirectives: [\n    {\n      directive: RdxCollapsibleRootDirective,\n      inputs: ['open: open', 'disabled: disabled'],\n      outputs: ['onOpenChange: onOpenChange'],\n    },\n  ],\n})\nexport class UbCollapsible { }\n\n@Directive({\n  standalone: true,\n  selector: '[ubCollapsibleTrigger]',\n  hostDirectives: [RdxCollapsibleTriggerDirective],\n})\nexport class UbCollapsibleTrigger { }\n\n@Directive({\n  standalone: true,\n  selector: '[ubCollapsibleContent]',\n  hostDirectives: [RdxCollapsibleContentDirective],\n})\nexport class UbCollapsibleContent { }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

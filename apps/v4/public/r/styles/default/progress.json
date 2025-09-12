@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "author": "Adrián UB (https://ui.adrianub.dev)",
+  "name": "progress",
+  "type": "registry:ui",
+  "dependencies": [
+    "@radix-ng/primitives"
+  ],
+  "files": [
+    {
+      "path": "ui/progress.ts",
+      "content": "import { Component, computed, input, numberAttribute } from '@angular/core'\nimport { RdxProgressIndicatorDirective, RdxProgressRootDirective } from '@radix-ng/primitives/progress'\n\nimport { cn } from '~/lib/utils'\n\n@Component({\n  standalone: true,\n  selector: '[ubProgress]',\n  imports: [RdxProgressIndicatorDirective],\n  host: {\n    '[class]': 'computedClass()',\n  },\n  hostDirectives: [\n    {\n      directive: RdxProgressRootDirective,\n      inputs: ['value:progress', 'max', 'valueLabel'],\n    },\n  ],\n  template: `\n    <div rdxProgressIndicator class=\"h-full w-full flex-1 bg-primary transition-all\" [style.transform]=\"'translateX(-' + (100 - (progress() || 0)) + '%)'\"></div>\n  `,\n})\nexport class ProgressDirective {\n  progress = input(0, {\n    transform: numberAttribute,\n  })\n\n  class = input<string>()\n  computedClass = computed(() => cn('relative h-4 w-full overflow-hidden rounded-full bg-secondary', this.class()))\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}
