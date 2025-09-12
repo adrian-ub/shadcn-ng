@@ -53,4 +53,4 @@ import { UbAccordionContentDirective, UbAccordionDirective, UbAccordionItemDirec
     </div>
     `,
 })
-export class AccordionDemoNewYork { }
+export class AccordionDemo { }

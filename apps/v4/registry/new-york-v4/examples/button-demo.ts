@@ -3,6 +3,7 @@ import { Component } from '@angular/core'
 import { UbButton } from '@/registry/new-york-v4/ui/button'
 
 @Component({
+  standalone: true,
   imports: [UbButton],
   template: `
     <div class="flex flex-wrap items-center gap-2 md:flex-row">
