@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york-v4/ui/avatar.ts",
+      "content": "import { computed, Directive, input } from '@angular/core'\n\nimport { RdxAvatarImageDirective, RdxAvatarRootDirective } from '@radix-ng/primitives/avatar'\n\nimport { cn } from '@/lib/utils'\n\n@Directive({\n  standalone: true,\n  selector: 'span[ubAvatar],ub-avatar',\n  host: {\n    'data-slot': 'avatar',\n    '[class]': 'computedClass()',\n  },\n  hostDirectives: [RdxAvatarRootDirective],\n})\nexport class UbAvatar {\n  readonly class = input<string>()\n  protected readonly computedClass = computed(() => cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', this.class()))\n}\n\n@Directive({\n  standalone: true,\n  selector: 'img[ubAvatarImage]',\n  host: {\n    'data-slot': 'avatar-image',\n    '[class]': 'computedClass()',\n  },\n  hostDirectives: [\n    {\n      directive: RdxAvatarImageDirective,\n      inputs: ['src', 'referrerPolicy'],\n      outputs: ['onLoadingStatusChange'],\n    },\n  ],\n})\nexport class UbAvatarImage {\n  readonly class = input<string>()\n  protected readonly computedClass = computed(() => cn('aspect-square size-full', this.class()))\n}\n\n@Directive({\n  standalone: true,\n  selector: 'span[ubAvatarFallback], ub-avatar-fallback',\n  host: {\n    'data-slot': 'avatar-fallback',\n    '[class]': 'computedClass()',\n  },\n})\nexport class UbAvatarFallback {\n  readonly class = input<string>()\n  protected readonly computedClass = computed(() => cn('bg-muted flex size-full items-center justify-center rounded-full', this.class()))\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.adrianub.dev/schema/registry-item.json",
+  "name": "avatar-demo",
+  "type": "registry:example",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york-v4/examples/avatar-demo.ts",
+      "content": "import { Component } from '@angular/core'\nimport { UbAvatar, UbAvatarFallback, UbAvatarImage } from '@/registry/new-york-v4/ui/avatar'\n\n@Component({\n  standalone: true,\n  imports: [UbAvatar, UbAvatarImage, UbAvatarFallback],\n  template: `\n  <div class=\"flex flex-row flex-wrap items-center gap-12\">\n    <span ubAvatar>\n      <img src=\"https://github.com/adrian-ub.png\" alt=\"@adrianub\" ubAvatarImage />\n      <span ubAvatarFallback>UB</span>\n    </span>\n\n    <span ubAvatar class=\"rounded-lg\">\n      <img src=\"https://github.com/adrian-ub.png\" alt=\"@adrianub\" ubAvatarImage />\n      <span ubAvatarFallback>UB</span>\n    </span>\n\n    <div class=\"*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale\">\n      <span ubAvatar>\n        <img src=\"https://github.com/adrian-ub.png\" alt=\"@adrianub\" ubAvatarImage />\n        <span ubAvatarFallback>UB</span>\n      </span>\n      <span ubAvatar>\n        <img src=\"https://github.com/adrian-ub.png\" alt=\"@adrianub\" ubAvatarImage />\n        <span ubAvatarFallback>UB</span>\n      </span>\n      <span ubAvatar>\n        <img src=\"https://github.com/adrian-ub.png\" alt=\"@adrianub\" ubAvatarImage />\n        <span ubAvatarFallback>UB</span>\n      </span>\n    </div>\n  </div>\n  `,\n})\nexport class AvatarDemo {}\n",
+      "type": "registry:example"
+    }
+  ]
+}

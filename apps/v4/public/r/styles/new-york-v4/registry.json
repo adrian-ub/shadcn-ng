@@ -65,6 +65,18 @@
       ]
     },
     {
+      "name": "avatar",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york-v4/ui/avatar.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "files": [
@@ -495,6 +507,18 @@
       "files": [
         {
           "path": "registry/new-york-v4/examples/aspect-ratio-demo.ts",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "avatar-demo",
+      "type": "registry:example",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/new-york-v4/examples/avatar-demo.ts",
           "type": "registry:example"
         }
       ]

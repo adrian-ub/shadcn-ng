@@ -33,6 +33,18 @@ export const ui: Registry['items'] = [
     ],
   },
   {
+    name: 'avatar',
+    type: 'registry:ui',
+    dependencies: [],
+    registryDependencies: [],
+    files: [
+      {
+        path: 'ui/avatar.ts',
+        type: 'registry:ui',
+      },
+    ],
+  },
+  {
     name: 'badge',
     type: 'registry:ui',
     files: [

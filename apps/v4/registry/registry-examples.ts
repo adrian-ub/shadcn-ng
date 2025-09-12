@@ -39,6 +39,18 @@ export const examples: Registry['items'] = [
     ],
   },
   {
+    name: 'avatar-demo',
+    type: 'registry:example',
+    dependencies: [],
+    registryDependencies: [],
+    files: [
+      {
+        type: 'registry:example',
+        path: 'examples/avatar-demo.ts',
+      },
+    ],
+  },
+  {
     name: 'badge-demo',
     type: 'registry:example',
     dependencies: [],
