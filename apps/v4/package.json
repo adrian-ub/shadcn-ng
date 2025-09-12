@@ -53,6 +53,6 @@
     "shadcn-ng": "workspace:*",
     "tailwind-merge": "^3.3.1",
     "tw-animate-css": "^1.3.7",
-    "zod": "^4.1.5"
+    "zod": "^3.25.76"
   }
 }

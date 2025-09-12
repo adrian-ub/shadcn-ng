@@ -1,10 +1,11 @@
 import type { APIRoute } from 'astro'
+import fs from 'node:fs'
 import { getCollection, getEntry } from 'astro:content'
 
 export const GET: APIRoute = async ({ params }) => {
   const docs = await getEntry('docs', `docs/${params.slug}`)
-  const data = await import(/* @vite-ignore */`../../../${docs?.filePath}?raw`)
-  return new Response(data.default, {
+  const data = fs.readFileSync(docs?.filePath || '', 'utf-8')
+  return new Response(data, {
     headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
   })
 }

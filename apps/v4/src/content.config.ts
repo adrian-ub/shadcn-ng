@@ -7,12 +7,10 @@ export const collections = {
     loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
-        links: z.optional(
-          z.object({
-            doc: z.string().url().optional(),
-            api: z.string().url().optional(),
-          }),
-        ),
+        links: z.object({
+          doc: z.string().url().optional(),
+          api: z.string().url().optional(),
+        }).optional(),
       }),
     }),
   }),
