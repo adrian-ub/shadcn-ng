@@ -75,6 +75,10 @@ export default defineConfig({
           attrs: { name: 'creator', content: 'adrianub' },
         },
       ],
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 5,
+      },
     }),
     angular({
       vite: {

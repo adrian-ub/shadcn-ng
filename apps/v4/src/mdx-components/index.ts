@@ -1,3 +1,4 @@
+import Callout from '@/components/Callout.astro'
 import CodeTabs from '@/components/CodeTabs.astro'
 import ComponentPreview from '@/components/ComponentPreview.astro'
 import ComponentsList from '@/components/ComponentsList.astro'
@@ -74,4 +75,5 @@ export const mdxComponents = {
   CodeTabs,
   ComponentSource,
   Button,
+  Callout,
 }

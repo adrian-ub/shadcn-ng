@@ -27,6 +27,16 @@ export const sidebar: StarlightUserConfig['sidebar'] = [
         label: 'Installation',
         slug: 'docs/installation',
       },
+      {
+        slug: 'docs/components-json',
+      },
+      {
+        slug: 'docs/theming',
+      },
+      {
+        label: 'CLI',
+        slug: 'docs/cli',
+      },
     ],
   },
   {

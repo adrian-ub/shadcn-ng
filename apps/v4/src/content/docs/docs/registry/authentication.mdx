@@ -1,0 +1,211 @@
+---
+title: Authentication
+description: Secure your registry with authentication for private and personalized components.
+---
+
+Authentication lets you run private registries, control who can access your components, and give different teams or users different content. This guide shows common authentication patterns and how to set them up.
+
+Authentication enables these use cases:
+
+- **Private Components**: Keep your business logic and internal components secure
+- **Team-Specific Resources**: Give different teams different components
+- **Access Control**: Limit who can see sensitive or experimental components
+- **Usage Analytics**: See who's using which components in your organization
+- **Licensing**: Control who gets premium or licensed components
+
+## Common Authentication Patterns
+
+### Token-Based Authentication
+
+The most common approach uses Bearer tokens or API keys:
+
+```json title="components.json"
+{
+  "registries": {
+    "@private": {
+      "url": "https://registry.company.com/{name}.json",
+      "headers": {
+        "Authorization": "Bearer ${REGISTRY_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+Set your token in environment variables:
+
+```bash title=".env.local"
+REGISTRY_TOKEN=your_secret_token_here
+```
+
+### API Key Authentication
+
+Some registries use API keys in headers:
+
+```json title="components.json"
+{
+  "registries": {
+    "@company": {
+      "url": "https://api.company.com/registry/{name}.json",
+      "headers": {
+        "X-API-Key": "${API_KEY}",
+        "X-Workspace-Id": "${WORKSPACE_ID}"
+      }
+    }
+  }
+}
+```
+
+### Query Parameter Authentication
+
+For simpler setups, use query parameters:
+
+```json title="components.json"
+{
+  "registries": {
+    "@internal": {
+      "url": "https://registry.company.com/{name}.json",
+      "params": {
+        "token": "${ACCESS_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+This creates: `https://registry.company.com/button.json?token=your_token`
+
+## Server-Side Implementation
+
+Here's how to add authentication to your registry server:
+
+### Express.js Example
+
+```javascript title="server.js"
+app.get("/registry/:name.json", (req, res) => {
+  const token = req.headers.authorization?.replace("Bearer ", "")
+
+  if (!isValidToken(token)) {
+    return res.status(401).json({ error: "Unauthorized" })
+  }
+
+  const component = getComponent(req.params.name)
+  if (!component) {
+    return res.status(404).json({ error: "Component not found" })
+  }
+
+  res.json(component)
+})
+```
+
+## Security Best Practices
+
+### Use Environment Variables
+
+Never commit tokens to version control. Always use environment variables:
+
+```bash title=".env.local"
+REGISTRY_TOKEN=your_secret_token_here
+API_KEY=your_api_key_here
+```
+
+Then reference them in `components.json`:
+
+```json
+{
+  "registries": {
+    "@private": {
+      "url": "https://registry.company.com/{name}.json",
+      "headers": {
+        "Authorization": "Bearer ${REGISTRY_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+### Use HTTPS
+
+Always use HTTPS URLs for registries to protect your tokens in transit:
+
+```json
+{
+  "@secure": "https://registry.company.com/{name}.json" // ✅
+  "@insecure": "http://registry.company.com/{name}.json" // ❌
+}
+```
+
+### Add Rate Limiting
+
+Protect your registry from abuse:
+
+```typescript
+import rateLimit from "express-rate-limit"
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+})
+
+app.use("/registry", limiter)
+```
+
+### Rotate Tokens
+
+Change access tokens regularly:
+
+```typescript
+// Create new token with expiration.
+function generateToken() {
+  const token = crypto.randomBytes(32).toString("hex")
+  const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days.
+
+  return { token, expiresAt }
+}
+```
+
+### Log Access
+
+Track registry access for security and analytics:
+
+```typescript
+async function logAccess(request: Request, component: string, userId: string) {
+  await db.accessLog.create({
+    timestamp: new Date(),
+    userId,
+    component,
+    ip: request.ip,
+    userAgent: request.headers["user-agent"],
+  })
+}
+```
+
+## Testing Authentication
+
+Test your authenticated registry locally:
+
+```bash
+# Test with curl.
+curl -H "Authorization: Bearer your_token" \
+  https://registry.company.com/button.json
+
+# Test with the CLI.
+REGISTRY_TOKEN=your_token npx shadcn-ng@latest add @private/button
+```
+
+## Error Handling
+
+The shadcn-ng CLI handles authentication errors gracefully:
+
+- **401 Unauthorized**: Token is invalid or missing
+- **403 Forbidden**: Token lacks permission for this resource
+- **429 Too Many Requests**: Rate limit exceeded
+
+## Next Steps
+
+To set up authentication with multiple registries and advanced patterns, see the [Namespaced Registries](/docs/registry/namespace) documentation. It covers:
+
+- Setting up multiple authenticated registries
+- Using different authentication per namespace
+- Cross-registry dependency resolution
+- Advanced authentication patterns

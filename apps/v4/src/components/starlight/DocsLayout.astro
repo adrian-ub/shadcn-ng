@@ -1,6 +1,6 @@
 ---
 function getTocItems() {
-  return Astro.locals.starlightRoute.toc.items.filter((item) => item.slug !== '_top')
+  return Astro.locals.starlightRoute.toc?.items.filter((item) => item.slug !== '_top') ?? []
 }
 ---
 
@@ -27,7 +27,7 @@ function getTocItems() {
               </a>
             ))}
           </div>
-          <div class="h-12" />
+          <div class="h-12"></div>
         </div>
       )
     }
@@ -45,7 +45,7 @@ function getTocItems() {
 <script>
   function initTOC(): void {
     const headingLinks = document.querySelectorAll('[data-heading-id]')
-    const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).filter((h) => h.id)
+    const headings = Array.from(document.querySelectorAll('h2, h3, h4, h5, h6')).filter((h) => h.id)
 
     if (headings.length === 0 || headingLinks.length === 0) {
       return
