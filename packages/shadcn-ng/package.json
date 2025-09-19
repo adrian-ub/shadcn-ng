@@ -1,7 +1,7 @@
 {
   "name": "shadcn-ng",
   "type": "module",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.",
   "author": "Adrián UB",
   "license": "MIT",

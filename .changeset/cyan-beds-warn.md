@@ -1,5 +1,0 @@
----
-"shadcn-ng": major
----
-
-reset
