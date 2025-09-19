@@ -6,7 +6,7 @@ import process from 'node:process'
 import { getRegistriesConfig } from '@/src/registry/api'
 import { getPackageRunner } from '@/src/utils/get-package-manager'
 
-const SHADCN_CLI_COMMAND = 'shadcn-ng@latest'
+const SHADCN_CLI_COMMAND = 'shadcn-ng@beta'
 
 export async function npxShadcn(command: string) {
   const packageRunner = await getPackageRunner(process.cwd())
