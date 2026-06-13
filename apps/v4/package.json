@@ -1,0 +1,39 @@
+{
+  "name": "v4",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.5.1",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "serve:ssr:v4": "node dist/v4/server/server.mjs"
+  },
+  "dependencies": {
+    "@angular/common": "^22.0.0",
+    "@angular/compiler": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
+    "@angular/platform-browser": "^22.0.0",
+    "@angular/platform-server": "^22.0.0",
+    "@angular/router": "^22.0.0",
+    "@angular/ssr": "^22.0.1",
+    "express": "^5.1.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.0.1",
+    "@angular/cli": "^22.0.1",
+    "@angular/compiler-cli": "^22.0.0",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.19",
+    "postcss": "^8.5.3",
+    "prettier": "^3.8.1",
+    "tailwindcss": "^4.1.12",
+    "typescript": "~6.0.2"
+  }
+}

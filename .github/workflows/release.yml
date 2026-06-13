@@ -1,0 +1,197 @@
+name: Release
+
+run-name: >-
+  ${{ github.event_name == 'pull_request' && format('Release Prerelease - PR {0}', github.event.number) || format('Release Stable - {0}', github.ref_name) }}
+
+on:
+  pull_request:
+    types: [labeled]
+    branches:
+      - main
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prerelease:
+    if: >-
+      ${{ github.event_name == 'pull_request' &&
+      (contains(github.event.pull_request.labels.*.name, 'release: beta') ||
+      contains(github.event.pull_request.labels.*.name, 'release: rc')) }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Select prerelease channel
+        id: prerelease
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const channels = [
+              { name: 'release: beta', channel: 'beta' },
+              { name: 'release: rc', channel: 'rc' },
+            ];
+
+            const bumpTypes = [
+              { name: 'release: prepatch', bump: 'prepatch' },
+              { name: 'release: preminor', bump: 'preminor' },
+              { name: 'release: premajor', bump: 'premajor' },
+            ];
+
+            const labels = context.payload.pull_request.labels.map((label) => label.name);
+            const selected = channels.filter((label) => labels.includes(label.name));
+            const selectedBump = bumpTypes.filter((label) => labels.includes(label.name));
+
+            if (selected.length !== 1) {
+              throw new Error(
+                `Expected exactly one prerelease label, found: ${
+                  selected.map((label) => label.name).join(', ') || 'none'
+                }.`
+              );
+            }
+
+            if (selectedBump.length > 1) {
+              throw new Error(
+                `Expected at most one bump type label, found: ${selectedBump.map((label) => label.name).join(', ')}.`
+              );
+            }
+
+            core.setOutput('channel', selected[0].channel);
+            core.setOutput('label', selected[0].name);
+            core.setOutput('bump', selectedBump[0]?.bump ?? 'prerelease');
+
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+        with:
+          version: 11.5.1
+          run_install: false
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org/
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Derive prerelease version
+        id: prerelease-version
+        run: |
+          pnpm exec bumpp packages/shadcn-ng/package.json --release ${{ steps.prerelease.outputs.bump }} --preid ${{ steps.prerelease.outputs.channel }} --no-commit --no-push --no-tag --yes
+
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          const packagePath = path.resolve('packages/shadcn-ng/package.json');
+          const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+          const shortSha = process.env.GITHUB_SHA.slice(0, 7);
+
+          const parts = packageJson.version.split('.');
+          parts[parts.length - 1] = shortSha;
+          packageJson.version = parts.join('.');
+
+          fs.writeFileSync(packagePath, `${JSON.stringify(packageJson, null, 2)}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `version=${packageJson.version}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `package_name=${packageJson.name}\n`);
+          NODE
+
+      - name: Check prerelease version on npm
+        id: package-exists
+        run: |
+          if npm view "${{ steps.prerelease-version.outputs.package_name }}@${{ steps.prerelease-version.outputs.version }}" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish prerelease to npm
+        if: ${{ steps.package-exists.outputs.exists == 'false' }}
+        run: pnpm --dir packages/shadcn-ng publish --tag ${{ steps.prerelease.outputs.channel }} --access public --no-git-checks
+
+      - name: Create metadata artifact
+        if: ${{ steps.package-exists.outputs.exists == 'false' }}
+        run: |
+          mkdir -p /tmp/prerelease-metadata
+          cat > /tmp/prerelease-metadata/metadata.txt <<EOF
+          package=${{ steps.prerelease-version.outputs.package_name }}
+          version=${{ steps.prerelease-version.outputs.version }}
+          channel=${{ steps.prerelease.outputs.channel }}
+          pr=${{ github.event.number }}
+          EOF
+
+      - name: Upload prerelease artifact
+        if: ${{ steps.package-exists.outputs.exists == 'false' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: npm-package-shadcn-ng@${{ steps.prerelease-version.outputs.version }}-pr-${{ github.event.number }}
+          path: /tmp/prerelease-metadata/
+
+      - name: Comment on PR
+        if: ${{ steps.package-exists.outputs.exists == 'false' }}
+        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0 # v3.0.4
+        with:
+          number: ${{ github.event.number }}
+          message: |
+            A new ${{ steps.prerelease.outputs.channel }} prerelease is available for testing:
+
+            ```sh
+            pnpm dlx shadcn-ng@${{ steps.prerelease-version.outputs.version }}
+            ```
+
+            https://www.npmx.dev/package/shadcn-ng/v/${{ steps.prerelease-version.outputs.version }}
+
+      - name: Remove prerelease label
+        if: ${{ steps.package-exists.outputs.exists == 'false' }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            try {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.number,
+                name: '${{ steps.prerelease.outputs.label }}',
+              });
+            } catch (error) {
+              if (error.status !== 404) {
+                throw error;
+              }
+              core.info('The prerelease label was already removed.');
+            }
+
+  release:
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org/
+          package-manager-cache: false
+
+      - run: pnpm dlx changelogithub
+        continue-on-error: true
+
+      - run: pnpm install
+      - run: pnpm -r publish --access public --no-git-checks

@@ -1,0 +1,32 @@
+shellEmulator: true
+ignoreWorkspaceRootCheck: true
+
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: true
+  lmdb: false
+  msgpackr-extract: false
+  sharp: false
+  simple-git-hooks: true
+
+minimumReleaseAgeExclude:
+  - '@tailwindcss/node@4.3.1'
+  - '@tailwindcss/oxide-android-arm64@4.3.1'
+  - '@tailwindcss/oxide-darwin-arm64@4.3.1'
+  - '@tailwindcss/oxide-darwin-x64@4.3.1'
+  - '@tailwindcss/oxide-freebsd-x64@4.3.1'
+  - '@tailwindcss/oxide-linux-arm-gnueabihf@4.3.1'
+  - '@tailwindcss/oxide-linux-arm64-gnu@4.3.1'
+  - '@tailwindcss/oxide-linux-arm64-musl@4.3.1'
+  - '@tailwindcss/oxide-linux-x64-gnu@4.3.1'
+  - '@tailwindcss/oxide-linux-x64-musl@4.3.1'
+  - '@tailwindcss/oxide-wasm32-wasi@4.3.1'
+  - '@tailwindcss/oxide-win32-arm64-msvc@4.3.1'
+  - '@tailwindcss/oxide-win32-x64-msvc@4.3.1'
+  - '@tailwindcss/oxide@4.3.1'
+  - '@tailwindcss/vite@4.3.1'
+  - tailwindcss@4.3.1
