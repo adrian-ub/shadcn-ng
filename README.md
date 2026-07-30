@@ -3,24 +3,23 @@
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![bundle][bundle-src]][bundle-href]
-[![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.
+A set of beautifully designed, accessible Angular components that you can copy and paste into your apps. Built on [@radix-ng/primitives](https://github.com/radix-ng/primitives). Free. Open Source. **Use this to build your own component library**.
 
-![hero](apps/www/public/og.jpg)
+![hero](apps/v4/public/opengraph-image.png)
 
-## Sponsors
+## Documentation
 
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/adrian-ub/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/adrian-ub/static/sponsors.svg'/>
-  </a>
-</p>
+Visit [ui.adrianub.dev](https://ui.adrianub.dev) to view the documentation.
+
+## Contributing
+
+Please read the [contributing guide](/CONTRIBUTING.md).
 
 ## License
 
-[MIT](./LICENSE) License © 2024-PRESENT [Adrián UB](https://github.com/adrian-ub)
+Licensed under the [MIT license](./LICENSE.md).
 
 <!-- Badges -->
 
@@ -32,5 +31,3 @@ Accessible and customizable components that you can copy and paste into your app
 [bundle-href]: https://bundlephobia.com/result?p=shadcn-ng
 [license-src]: https://img.shields.io/github/license/adrian-ub/shadcn-ng.svg?style=flat&colorA=080f12&colorB=1fa669
 [license-href]: https://github.com/adrian-ub/shadcn-ng/blob/main/LICENSE
-[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
-[jsdocs-href]: https://www.jsdocs.io/package/shadcn-ng

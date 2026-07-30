@@ -1,0 +1,77 @@
+{
+  "name": "shadcn-ng",
+  "version": "2.0.0-alpha.0",
+  "description": "Add components to your Angular apps. Free. Open Source.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Adrián UB",
+    "url": "https://github.com/adrian-ub"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrian-ub/shadcn-ng.git",
+    "directory": "packages/shadcn-ng"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "components",
+    "ui",
+    "tailwind",
+    "angular",
+    "radix-ng",
+    "shadcn-ng"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "default": "./dist/registry.mjs"
+    }
+  },
+  "sideEffects": false,
+  "bin": "./dist/cli.mjs",
+  "engines": {
+    "node": ">=20.18.1"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clack/prompts": "catalog:",
+    "commander": "catalog:",
+    "deepmerge": "catalog:",
+    "diff": "catalog:",
+    "fast-glob": "catalog:",
+    "https-proxy-agent": "catalog:",
+    "local-pkg": "catalog:",
+    "node-fetch": "catalog:",
+    "package-manager-detector": "catalog:",
+    "picocolors": "catalog:",
+    "postcss": "catalog:",
+    "stringify-object": "catalog:",
+    "tailwindcss": "catalog:",
+    "tinyexec": "catalog:",
+    "ts-morph": "catalog:",
+    "tsconfck": "catalog:",
+    "tsconfig-paths": "catalog:",
+    "unconfig": "catalog:",
+    "valibot": "catalog:"
+  },
+  "devDependencies": {
+    "@antfu/install-pkg": "catalog:",
+    "@types/diff": "catalog:",
+    "@types/node": "catalog:",
+    "@types/stringify-object": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
+  }
+}

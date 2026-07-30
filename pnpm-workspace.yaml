@@ -93,13 +93,15 @@ catalog:
   tsconfck: ^3.1.4
   tsconfig-paths: ^4.2.0
   tslib: ^2.8.1
+  tsdown: ^0.22.2
   tsx: ^4.19.2
+  turbo: ^2.9.18
   typescript: ^5.7.3
-  unbuild: ^3.3.1
   unconfig: ^0.6.1
   unist-builder: 3.0.0
   unist-util-visit: ^5.0.0
   valibot: 1.0.0
+  zod: ^3.24.2
   vite: ^6.0.7
   vitest: ^2.1.8
   zone.js: ~0.15.0
