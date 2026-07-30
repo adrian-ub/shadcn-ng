@@ -11,14 +11,14 @@ import postcss from 'postcss'
 import { highlighter } from '../../../utils/highlighter'
 import { spinner } from '../../../utils/spinner'
 import AtRule from 'postcss/lib/at-rule'
-import * as v from 'valibot'
+import { z } from 'zod'
 
 export async function updateCssVars(
-  cssVars: v.InferOutput<typeof RegistryItemCssVarsSchema> | undefined,
+  cssVars: z.infer<typeof RegistryItemCssVarsSchema> | undefined,
   config: Config,
   options: {
     tailwindVersion?: TailwindVersion
-    tailwindConfig?: v.InferOutput<typeof RegistryItemTailwindSchema>['config']
+    tailwindConfig?: z.infer<typeof RegistryItemTailwindSchema>['config']
   },
 ): Promise<void> {
   if (!config.resolvedPaths.tailwindCss || !Object.keys(cssVars ?? {}).length) {
@@ -47,11 +47,11 @@ export async function updateCssVars(
 
 export async function transformCssVars(
   input: string,
-  cssVars: v.InferOutput<typeof RegistryItemCssVarsSchema>,
+  cssVars: z.infer<typeof RegistryItemCssVarsSchema>,
   config: Config,
   options: {
     tailwindVersion?: TailwindVersion
-    tailwindConfig?: v.InferOutput<typeof RegistryItemTailwindSchema>['config']
+    tailwindConfig?: z.infer<typeof RegistryItemTailwindSchema>['config']
   } = {
     tailwindVersion: 'v3',
     tailwindConfig: undefined,
@@ -97,7 +97,7 @@ export async function transformCssVars(
 }
 
 function updateCssVarsPlugin(
-  cssVars: v.InferOutput<typeof RegistryItemCssVarsSchema>,
+  cssVars: z.infer<typeof RegistryItemCssVarsSchema>,
 ): { postcssPlugin: string, Once: (root: Root) => void } {
   return {
     postcssPlugin: 'update-css-vars',
@@ -199,7 +199,7 @@ function addCustomVariant({ params }: { params: string }): { postcssPlugin: stri
 }
 
 function updateCssVarsPluginV4(
-  cssVars: v.InferOutput<typeof RegistryItemCssVarsSchema>,
+  cssVars: z.infer<typeof RegistryItemCssVarsSchema>,
 ): { postcssPlugin: string, Once: (root: Root) => void } {
   return {
     postcssPlugin: 'update-css-vars-v4',
@@ -270,7 +270,7 @@ export function isLocalHSLValue(value: string): boolean {
   )
 }
 
-function updateThemePlugin(cssVars: v.InferOutput<typeof RegistryItemCssVarsSchema>): { postcssPlugin: string, Once: (root: Root) => void } {
+function updateThemePlugin(cssVars: z.infer<typeof RegistryItemCssVarsSchema>): { postcssPlugin: string, Once: (root: Root) => void } {
   return {
     postcssPlugin: 'update-theme',
     Once(root: Root) {
@@ -398,7 +398,7 @@ export function isColorValue(value: string): boolean {
   )
 }
 
-function updateTailwindConfigPlugin(tailwindConfig: v.InferOutput<typeof RegistryItemTailwindSchema>['config']): { postcssPlugin: string, Once: (root: Root) => void } {
+function updateTailwindConfigPlugin(tailwindConfig: z.infer<typeof RegistryItemTailwindSchema>['config']): { postcssPlugin: string, Once: (root: Root) => void } {
   return {
     postcssPlugin: 'update-tailwind-config',
     Once(root: Root) {
@@ -452,7 +452,7 @@ function getQuoteType(root: Root): 'single' | 'double' {
 }
 
 function updateTailwindConfigAnimationPlugin(
-  tailwindConfig: v.InferOutput<typeof RegistryItemTailwindSchema>['config'],
+  tailwindConfig: z.infer<typeof RegistryItemTailwindSchema>['config'],
 ): { postcssPlugin: string, Once: (root: Root) => void } {
   return {
     postcssPlugin: 'update-tailwind-config-animation',
@@ -467,13 +467,13 @@ function updateTailwindConfigAnimationPlugin(
           node.type === 'decl' && node.prop.startsWith('--animate-'),
       )
 
-      const parsedAnimationValue = v.safeParse(v
-        .record(v.string(), v.string()), tailwindConfig.theme.extend.animation)
+      const parsedAnimationValue = z
+        .record(z.string(), z.string()).safeParse(tailwindConfig.theme.extend.animation)
       if (!parsedAnimationValue.success) {
         return
       }
 
-      for (const [key, value] of Object.entries(parsedAnimationValue.output)) {
+      for (const [key, value] of Object.entries(parsedAnimationValue.data)) {
         const prop = `--animate-${key}`
         if (
           existingAnimationNodes?.find(
@@ -495,7 +495,7 @@ function updateTailwindConfigAnimationPlugin(
 }
 
 function updateTailwindConfigKeyframesPlugin(
-  tailwindConfig: v.InferOutput<typeof RegistryItemTailwindSchema>['config'],
+  tailwindConfig: z.infer<typeof RegistryItemTailwindSchema>['config'],
 ): { postcssPlugin: string, Once: (root: Root) => void } {
   return {
     postcssPlugin: 'update-tailwind-config-keyframes',
@@ -510,9 +510,9 @@ function updateTailwindConfigKeyframesPlugin(
           node.type === 'atrule' && node.name === 'keyframes',
       )
 
-      const keyframeValueSchema = v.record(
-        v.string(),
-        v.record(v.string(), v.string()),
+      const keyframeValueSchema = z.record(
+        z.string(),
+        z.record(z.string(), z.string()),
       )
 
       for (const [keyframeName, keyframeValue] of Object.entries(
@@ -522,7 +522,7 @@ function updateTailwindConfigKeyframesPlugin(
           continue
         }
 
-        const parsedKeyframeValue = v.safeParse(keyframeValueSchema, keyframeValue)
+        const parsedKeyframeValue = keyframeValueSchema.safeParse(keyframeValue)
 
         if (!parsedKeyframeValue.success) {
           continue
@@ -546,7 +546,7 @@ function updateTailwindConfigKeyframesPlugin(
           raws: { semicolon: true, between: ' ', before: '\n  ' },
         })
 
-        for (const [key, values] of Object.entries(parsedKeyframeValue.output)) {
+        for (const [key, values] of Object.entries(parsedKeyframeValue.data)) {
           const rule = postcss.rule({
             selector: key,
             nodes: Object.entries(values).map(([key, value]) =>

@@ -1,13 +1,13 @@
-import * as v from 'valibot'
+import { z } from 'zod'
 
-export const AddOptionsSchema = v.object({
-  components: v.optional(v.array(v.string())),
-  yes: v.boolean(),
-  overwrite: v.boolean(),
-  cwd: v.string(),
-  all: v.boolean(),
-  path: v.optional(v.string()),
-  cssVariables: v.boolean(),
+export const AddOptionsSchema = z.object({
+  components: z.array(z.string()).optional(),
+  yes: z.boolean(),
+  overwrite: z.boolean(),
+  cwd: z.string(),
+  all: z.boolean(),
+  path: z.string().optional(),
+  cssVariables: z.boolean(),
 })
 
-export type AddOptions = v.InferOutput<typeof AddOptionsSchema>
+export type AddOptions = z.infer<typeof AddOptionsSchema>

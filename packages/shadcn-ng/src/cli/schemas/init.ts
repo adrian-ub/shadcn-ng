@@ -1,12 +1,12 @@
-import * as v from 'valibot'
+import { z } from 'zod'
 
-export const InitSchema = v.object({
-  cwd: v.string(),
-  components: v.array(v.string()),
-  force: v.boolean(),
-  defaults: v.boolean(),
-  yes: v.boolean(),
-  cssVariables: v.boolean(),
+export const InitSchema = z.object({
+  cwd: z.string(),
+  components: z.array(z.string()),
+  force: z.boolean(),
+  defaults: z.boolean(),
+  yes: z.boolean(),
+  cssVariables: z.boolean(),
 })
 
-export type InitOptions = v.InferOutput<typeof InitSchema>
+export type InitOptions = z.infer<typeof InitSchema>

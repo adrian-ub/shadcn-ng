@@ -1,7 +1,7 @@
 import process from 'node:process'
 
 import { Command } from 'commander'
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { handleError } from '../../utils/handle-error'
 import { DiffOptionsSchema } from '../schemas/diff'
@@ -21,7 +21,7 @@ export const diff = new Command()
   .action(async (name, opts) => {
     header()
     try {
-      const options = v.parse(DiffOptionsSchema, {
+      const options = DiffOptionsSchema.parse({
         component: name,
         ...opts,
       })

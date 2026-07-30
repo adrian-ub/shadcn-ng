@@ -6,7 +6,7 @@ import { loadConfig as loadTsConfigPaths } from 'tsconfig-paths'
 
 import { highlighter } from '../../utils/highlighter'
 import { loadConfig } from 'unconfig'
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { ConfigSchema, RawConfigSchema } from '../../registry/schema'
 import { getProjectInfo } from './get-project-info'
@@ -51,7 +51,7 @@ export async function getRawConfig(cwd: string): Promise<RawConfig | null> {
       return null
     }
 
-    return v.parse(RawConfigSchema, configResult.config)
+    return RawConfigSchema.parse(configResult.config)
   }
   catch {
     const componentPath = `${cwd}/components.json`
@@ -72,7 +72,7 @@ export async function resolveConfigPaths(cwd: string, config: RawConfig): Promis
     )
   }
 
-  return v.parse(ConfigSchema, {
+  return ConfigSchema.parse({
     ...config,
     resolvedPaths: {
       cwd,

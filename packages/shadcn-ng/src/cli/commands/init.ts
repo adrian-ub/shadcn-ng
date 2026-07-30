@@ -2,7 +2,7 @@ import path from 'node:path'
 import process from 'node:process'
 
 import { Command } from 'commander'
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { highlighter } from '../../utils/highlighter'
 import { logger } from '../../utils/logger'
@@ -33,7 +33,7 @@ export const init = new Command()
   .action(async (components, opts) => {
     header()
     try {
-      const options = v.parse(InitSchema, {
+      const options = InitSchema.parse({
         ...opts,
         cwd: path.resolve(opts.cwd),
         components,

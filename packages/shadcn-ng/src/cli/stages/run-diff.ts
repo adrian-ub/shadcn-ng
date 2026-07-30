@@ -1,5 +1,5 @@
 import type { Change } from 'diff'
-import type * as v from 'valibot'
+import { z } from 'zod'
 import type { Config, RegistryIndexSchema } from '../../registry'
 import type { DiffOptions } from '../schemas/diff'
 
@@ -115,7 +115,7 @@ export async function runDiff(options: DiffOptions): Promise<void> {
 }
 
 async function diffComponent(
-  component: v.InferOutput<typeof RegistryIndexSchema>[number],
+  component: z.infer<typeof RegistryIndexSchema>[number],
   config: Config,
 ): Promise<{ filePath: string, patch: Change[] }[]> {
   const payload = await fetchTree(config.style, [component])

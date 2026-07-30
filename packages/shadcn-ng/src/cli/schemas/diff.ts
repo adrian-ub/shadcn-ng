@@ -1,10 +1,10 @@
-import * as v from 'valibot'
+import { z } from 'zod'
 
-export const DiffOptionsSchema = v.object({
-  component: v.optional(v.string()),
-  yes: v.boolean(),
-  cwd: v.string(),
-  path: v.optional(v.string()),
+export const DiffOptionsSchema = z.object({
+  component: z.string().optional(),
+  yes: z.boolean(),
+  cwd: z.string(),
+  path: z.string().optional(),
 })
 
-export type DiffOptions = v.InferOutput<typeof DiffOptionsSchema>
+export type DiffOptions = z.infer<typeof DiffOptionsSchema>

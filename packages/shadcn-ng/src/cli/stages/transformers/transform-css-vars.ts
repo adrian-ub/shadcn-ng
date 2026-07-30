@@ -1,4 +1,4 @@
-import type * as v from 'valibot'
+import { z } from 'zod'
 
 import type { Transformer } from '.'
 import type { RegistryBaseColorSchema } from '../../../registry'
@@ -61,7 +61,7 @@ const PREFIXES = ['bg-', 'text-', 'border-', 'ring-offset-', 'ring-']
 
 export function applyColorMapping(
   input: string,
-  mapping: v.InferOutput<typeof RegistryBaseColorSchema>['inlineColors'],
+  mapping: z.infer<typeof RegistryBaseColorSchema>['inlineColors'],
 ): string {
   // Handle border classes.
   if (input.includes(' border ')) {

@@ -2,7 +2,7 @@ import path from 'node:path'
 import process from 'node:process'
 
 import { Command } from 'commander'
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { handleError } from '../../utils/handle-error'
 import { BuildOptionsSchema } from '../schemas/build'
@@ -27,7 +27,7 @@ export const build = new Command()
     header()
 
     try {
-      const options = v.parse(BuildOptionsSchema, {
+      const options = BuildOptionsSchema.parse({
         cwd: path.resolve(opts.cwd),
         registryFile: registry,
         outputDir: opts.output,

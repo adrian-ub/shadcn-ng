@@ -1,9 +1,9 @@
-import * as v from 'valibot'
+import { z } from 'zod'
 
-export const BuildOptionsSchema = v.object({
-  cwd: v.string(),
-  registryFile: v.string(),
-  outputDir: v.string(),
+export const BuildOptionsSchema = z.object({
+  cwd: z.string(),
+  registryFile: z.string(),
+  outputDir: z.string(),
 })
 
-export type BuildOptions = v.InferOutput<typeof BuildOptionsSchema>
+export type BuildOptions = z.infer<typeof BuildOptionsSchema>

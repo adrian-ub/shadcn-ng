@@ -9,7 +9,7 @@ import prompts from 'prompts'
 
 import { highlighter } from '../../utils/highlighter'
 import { logger } from '../../utils/logger'
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { RawConfigSchema } from '../../registry/schema'
 import { getRegistryBaseColors, getRegistryStyles } from '../registry'
@@ -112,7 +112,7 @@ async function promptForMinimalConfig(
     cssVariables = opts.cssVariables
   }
 
-  return v.parse(RawConfigSchema, {
+  return RawConfigSchema.parse({
     $schema: defaultConfig?.$schema,
     style,
     tailwind: {
@@ -198,7 +198,7 @@ async function promptForConfig(defaultConfig: Config | null = null, projectInfo:
 
   const components = componentsResult.value as string
 
-  return v.parse(RawConfigSchema, {
+  return RawConfigSchema.parse({
     $schema,
     style: styleResult.value,
     tailwind: {

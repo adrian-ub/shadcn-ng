@@ -1,6 +1,6 @@
 import type { AddOptionsSchema } from '../schemas/add'
 
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { handleError } from '../../utils/handle-error'
 import { getRegistryIndex } from '../registry'
@@ -8,7 +8,7 @@ import { cancelProcess } from '../utils/cancel-process'
 import prompts from 'prompts'
 
 export async function promptForRegistryComponents(
-  options: v.InferOutput<typeof AddOptionsSchema>,
+  options: z.infer<typeof AddOptionsSchema>,
 ): Promise<string[]> {
   const registryIndex = await getRegistryIndex()
   if (!registryIndex) {
@@ -37,10 +37,10 @@ export async function promptForRegistryComponents(
     instructions: false,
   }, { onCancel: () => cancelProcess() })
 
-  const result = v.safeParse(v.array(v.string()), components)
+  const result = z.array(z.string()).safeParse(components)
   if (!result.success) {
     handleError(new Error('Something went wrong. Please try again.'))
     return []
   }
-  return result.output
+  return result.data
 }

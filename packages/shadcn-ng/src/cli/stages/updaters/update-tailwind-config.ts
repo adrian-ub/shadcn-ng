@@ -6,7 +6,7 @@ import type {
   SourceFile,
   VariableStatement,
 } from 'ts-morph'
-import type * as v from 'valibot'
+import { z } from 'zod'
 
 import type { Config, RegistryItemTailwindSchema } from '../../../registry'
 import type { TailwindVersion } from '../get-project-info'
@@ -35,7 +35,7 @@ export type UpdaterTailwindConfig = Omit<TailwindConfig, 'plugins'> & {
 
 export async function updateTailwindConfig(
   tailwindConfig:
-    | v.InferOutput<typeof RegistryItemTailwindSchema>['config']
+    | z.infer<typeof RegistryItemTailwindSchema>['config']
     | undefined,
   config: Config,
   options: {

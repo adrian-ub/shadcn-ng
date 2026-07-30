@@ -4,7 +4,7 @@ import process from 'node:process'
 
 import { Command } from 'commander'
 
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { handleError } from '../../utils/handle-error'
 import { AddOptionsSchema } from '../schemas/add'
@@ -34,7 +34,7 @@ export const add = new Command()
     header()
 
     try {
-      const options = v.parse(AddOptionsSchema, {
+      const options = AddOptionsSchema.parse({
         ...opts,
         components,
         cwd: path.resolve(opts.cwd),

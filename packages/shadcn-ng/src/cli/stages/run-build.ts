@@ -4,7 +4,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 
-import * as v from 'valibot'
+import { z } from 'zod'
 
 import { highlighter } from '../../utils/highlighter'
 import { logger } from '../../utils/logger'
@@ -17,7 +17,7 @@ export async function runBuild(options: BuildOptions): Promise<void> {
   const { resolvePaths } = await preFlightBuild(options)
   const content = await fs.readFile(resolvePaths.registryFile, 'utf-8')
 
-  const result = v.safeParse(RegistrySchema, JSON.parse(content))
+  const result = RegistrySchema.safeParse(JSON.parse(content))
 
   if (!result.success) {
     logger.error(
@@ -30,7 +30,7 @@ export async function runBuild(options: BuildOptions): Promise<void> {
 
   const buildSpinner = spinner('Building registry...').start()
 
-  for (const registryItem of result.output.items) {
+  for (const registryItem of result.data.items) {
     if (!registryItem.files) {
       continue
     }
@@ -49,7 +49,7 @@ export async function runBuild(options: BuildOptions): Promise<void> {
     }
 
     // Validate the registry item.
-    const result = v.safeParse(RegistryItemSchema, registryItem)
+    const result = RegistryItemSchema.safeParse(registryItem)
     if (!result.success) {
       logger.error(
         `Invalid registry item found for ${highlighter.info(
@@ -61,8 +61,8 @@ export async function runBuild(options: BuildOptions): Promise<void> {
 
     // Write the registry item to the output directory.
     await fs.writeFile(
-      path.resolve(resolvePaths.outputDir, `${result.output.name}.json`),
-      JSON.stringify(result.output, null, 2),
+      path.resolve(resolvePaths.outputDir, `${result.data.name}.json`),
+      JSON.stringify(result.data, null, 2),
     )
   }
   buildSpinner.succeed('Building registry.')

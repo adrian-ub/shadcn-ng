@@ -1,5 +1,5 @@
 import type { SourceFile } from 'ts-morph'
-import type * as v from 'valibot'
+import { z } from 'zod'
 
 import type { Config, RegistryBaseColorSchema } from '../../../registry'
 
@@ -15,7 +15,7 @@ export interface TransformOpts {
   filename: string
   raw: string
   config: Config
-  baseColor?: v.InferOutput<typeof RegistryBaseColorSchema>
+  baseColor?: z.infer<typeof RegistryBaseColorSchema>
 }
 
 export type Transformer<Output = SourceFile> = (

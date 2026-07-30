@@ -1,4 +1,4 @@
-import type * as v from 'valibot'
+import { z } from 'zod'
 
 import type { Config, RegistryItem, RegistryItemFileSchema } from '../../../registry'
 
@@ -165,7 +165,7 @@ export async function getNormalizedFileContent(content: string): Promise<string>
 }
 
 export function resolveFilePath(
-  file: v.InferOutput<typeof RegistryItemFileSchema>,
+  file: z.infer<typeof RegistryItemFileSchema>,
   config: Config,
 ): string {
   if (file.target) {
@@ -194,7 +194,7 @@ export function resolveFilePath(
 }
 
 function resolveFileTargetDirectory(
-  file: v.InferOutput<typeof RegistryItemFileSchema>,
+  file: z.infer<typeof RegistryItemFileSchema>,
   config: Config,
 ): string {
   if (file.type === 'registry:ui') {
