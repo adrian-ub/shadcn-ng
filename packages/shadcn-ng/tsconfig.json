@@ -10,7 +10,11 @@
     "noEmit": true,
     "esModuleInterop": true,
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
   },
-  "exclude": ["apps", "packages"]
+  "include": ["src", "test"]
 }

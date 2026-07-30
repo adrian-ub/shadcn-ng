@@ -38,25 +38,32 @@
     }
   },
   "sideEffects": false,
-  "bin": "./dist/cli.mjs",
+  "bin": {
+    "shadcn-ng": "./dist/cli.mjs"
+  },
   "engines": {
     "node": ">=20.18.1"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "@clack/prompts": "catalog:",
     "commander": "catalog:",
     "deepmerge": "catalog:",
     "diff": "catalog:",
     "fast-glob": "catalog:",
     "https-proxy-agent": "catalog:",
+    "kleur": "^4.1.5",
     "local-pkg": "catalog:",
     "node-fetch": "catalog:",
+    "ora": "^8.2.0",
     "package-manager-detector": "catalog:",
-    "picocolors": "catalog:",
     "postcss": "catalog:",
+    "prompts": "^2.4.2",
     "stringify-object": "catalog:",
     "tailwindcss": "catalog:",
     "tinyexec": "catalog:",
@@ -64,14 +71,17 @@
     "tsconfck": "catalog:",
     "tsconfig-paths": "catalog:",
     "unconfig": "catalog:",
-    "valibot": "catalog:"
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@antfu/install-pkg": "catalog:",
     "@types/diff": "catalog:",
     "@types/node": "catalog:",
+    "@types/prompts": "^2.4.9",
     "@types/stringify-object": "catalog:",
+    "ng-morph": "^5.0.1",
     "tsdown": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

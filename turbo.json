@@ -3,22 +3,24 @@
   "globalEnv": ["NODE_ENV", "REGISTRY_URL"],
   "tasks": {
     "build": {
+      "dependsOn": ["^build"],
       "outputs": ["dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
     },
     "lint": {
       "cache": false,
       "outputs": []
     },
     "test": {
+      "dependsOn": ["build"],
       "cache": false,
       "outputs": []
     },
     "typecheck": {
       "outputs": []
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
     }
   }
 }

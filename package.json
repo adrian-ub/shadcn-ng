@@ -1,7 +1,8 @@
 {
   "name": "shadcn-ng",
   "type": "module",
-  "version": "1.1.0",
+  "version": "2.0.0-alpha.0",
+  "private": true,
   "packageManager": "pnpm@10.33.4",
   "description": "Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.",
   "author": "Adrián UB",
@@ -17,48 +18,16 @@
     "components",
     "ui",
     "tailwind",
-    "radix-ui",
-    "shadcn",
-    "shadcn-ng",
-    "ng",
-    "angular"
-  ],
-  "sideEffects": false,
-  "exports": {
-    ".": "./dist/index.mjs",
-    "./registry": "./dist/registry.mjs"
-  },
-  "main": "dist/index.mjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./dist/index.d.ts"
-      ]
-    }
-  },
-  "bin": {
-    "shadcn-ng": "bin/shadcn-ng.mjs"
-  },
-  "files": [
-    "dist"
+    "angular",
+    "radix-ng",
+    "shadcn-ng"
   ],
   "scripts": {
-    "build": "tsdown",
-    "build:packages": "turbo run build",
-    "dev": "tsdown --watch",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "lint:direct": "eslint .",
-    "prepublishOnly": "nr build",
-    "release": "bumpp && pnpm publish",
-    "start": "tsx src/index.ts",
-    "start:cli": "cross-env REGISTRY_URL=http://localhost:4321/r tsx src/cli.ts",
     "test": "turbo run test",
-    "test:direct": "vitest",
     "typecheck": "turbo run typecheck",
-    "typecheck:direct": "tsc --noEmit",
     "prepare": "simple-git-hooks",
     "www:dev": "nr -C apps/www dev",
     "www:build": "nr -C apps/www build",
@@ -66,35 +35,9 @@
     "v4:build": "nr -C apps/v4 build",
     "v4:registry:build": "nr -C apps/v4 registry:build"
   },
-  "dependencies": {
-    "@antfu/install-pkg": "catalog:",
-    "@clack/prompts": "catalog:",
-    "commander": "catalog:",
-    "deepmerge": "catalog:",
-    "diff": "catalog:",
-    "fast-glob": "catalog:",
-    "https-proxy-agent": "catalog:",
-    "local-pkg": "catalog:",
-    "node-fetch": "catalog:",
-    "package-manager-detector": "catalog:",
-    "picocolors": "catalog:",
-    "postcss": "catalog:",
-    "stringify-object": "catalog:",
-    "tailwindcss": "catalog:",
-    "tinyexec": "catalog:",
-    "ts-morph": "catalog:",
-    "tsconfck": "catalog:",
-    "tsconfig-paths": "catalog:",
-    "unconfig": "catalog:",
-    "valibot": "catalog:",
-    "zod": "catalog:"
-  },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
     "@antfu/ni": "catalog:",
-    "@types/diff": "catalog:",
-    "@types/node": "catalog:",
-    "@types/stringify-object": "catalog:",
     "astro-eslint-parser": "catalog:",
     "bumpp": "catalog:",
     "cross-env": "catalog:",
@@ -102,15 +45,12 @@
     "eslint-plugin-astro": "catalog:",
     "eslint-plugin-format": "catalog:",
     "lint-staged": "catalog:",
-    "pnpm": "catalog:",
     "prettier-plugin-astro": "catalog:",
     "simple-git-hooks": "catalog:",
-    "tsdown": "catalog:",
     "tsx": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:",
-    "vite": "catalog:",
-    "vitest": "catalog:"
+    "vite": "catalog:"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
