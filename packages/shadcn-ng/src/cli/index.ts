@@ -2,6 +2,7 @@ import { Command } from 'commander'
 
 import { description, name, version } from '../../package.json'
 import { add } from './commands/add'
+import { apply } from './commands/apply'
 import { build } from './commands/build'
 import { diff } from './commands/diff'
 import { info } from './commands/info'
@@ -19,6 +20,7 @@ async function main(): Promise<void> {
 
   program.addCommand(init)
   program.addCommand(add)
+  program.addCommand(apply)
   program.addCommand(diff)
   program.addCommand(info)
   program.addCommand(build)
