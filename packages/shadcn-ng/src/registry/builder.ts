@@ -11,9 +11,12 @@ import {
 
 /**
  * Source file extensions the scanner treats as component entries.
- * Non-source files (e.g. `README.md`, `*.json`) are ignored.
+ * Angular components are TypeScript (`.ts`); there is no `.tsx` in Angular.
+ * Templates (`.html`) and styles (`.css`) belong to the component but are
+ * not separate entries — the registry item's `files` must list them
+ * explicitly. Non-source files (e.g. `README.md`, `*.json`) are ignored.
  */
-export const SOURCE_EXTENSIONS = ['.ts', '.tsx'] as const
+export const SOURCE_EXTENSIONS = ['.ts'] as const
 
 /**
  * Maps a base layout directory name to the registry item type its files
