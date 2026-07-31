@@ -24,6 +24,7 @@ export async function updateFiles(
     overwrite?: boolean
     force?: boolean
     isRemote?: boolean
+    path?: string
   },
 ): Promise<{ filesCreated: string[], filesUpdated: string[], filesSkipped: string[] }> {
   if (!files?.length) {
@@ -56,7 +57,7 @@ export async function updateFiles(
       continue
     }
 
-    const filePath = resolveFilePath(file, config)
+    const filePath = resolveFilePath(file, config, { path: options.path })
     const fileName = basename(file.path)
     const targetDir = path.dirname(filePath)
 
@@ -167,7 +168,18 @@ export async function getNormalizedFileContent(content: string): Promise<string>
 export function resolveFilePath(
   file: z.infer<typeof RegistryItemFileSchema>,
   config: Config,
+  options?: { path?: string },
 ): string {
+  // The `--path` flag overrides the target directory for the written files.
+  if (options?.path) {
+    const targetDir = path.resolve(config.resolvedPaths.cwd, options.path)
+    const relativePath = resolveNestedFilePath(
+      file.path,
+      resolveFileTargetDirectory(file, config),
+    )
+    return path.join(targetDir, relativePath)
+  }
+
   if (file.target) {
     if (file.target.startsWith('~/')) {
       return path.join(config.resolvedPaths.cwd, file.target.replace('~/', ''))

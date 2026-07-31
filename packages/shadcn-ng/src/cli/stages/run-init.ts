@@ -20,8 +20,14 @@ import { createProject } from './create-project'
 import { $schema, DEFAULT_COMPONENTS, DEFAULT_TAILWIND_CSS, DEFAULT_UTILS, getConfig, resolveConfigPaths } from './get-config'
 import { getProjectConfig, getProjectTailwindVersionFromConfig } from './get-project-info'
 import { preFlightInit } from './preflight-init'
+import { resolveTemplate } from './resolve-template'
 
 export async function runInit(options: InitOptions): Promise<Config> {
+  options.template = await resolveTemplate(options.template, {
+    defaults: options.defaults,
+  })
+  logger.info(`Using the ${highlighter.info(options.template)} template.`)
+
   const preflight = await preFlightInit(options)
 
   if (preflight.errors[ERRORS.MISSING_DIR_OR_EMPTY_PROJECT]) {

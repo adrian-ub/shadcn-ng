@@ -47,7 +47,9 @@ export async function runDiff(options: DiffOptions): Promise<void> {
     // Find all components that exist in the project.
     const projectComponents = registryIndex.filter((item) => {
       for (const file of item.files ?? []) {
-        const filePath = resolveFilePath(file, config)
+        const filePath = resolveFilePath(file, config, {
+          path: options.path,
+        })
         if (existsSync(filePath)) {
           return true
         }
@@ -59,7 +61,7 @@ export async function runDiff(options: DiffOptions): Promise<void> {
     // Check for updates.
     const componentsWithUpdates = []
     for (const component of projectComponents) {
-      const changes = await diffComponent(component, config)
+      const changes = await diffComponent(component, config, options)
       if (changes.length) {
         componentsWithUpdates.push({
           name: component.name,
@@ -101,7 +103,7 @@ export async function runDiff(options: DiffOptions): Promise<void> {
     process.exit(1)
   }
 
-  const changes = await diffComponent(component, config)
+  const changes = await diffComponent(component, config, options)
 
   if (!changes.length) {
     logger.info(`No updates found for ${options.component}.`)
@@ -117,6 +119,7 @@ export async function runDiff(options: DiffOptions): Promise<void> {
 async function diffComponent(
   component: z.infer<typeof RegistryIndexSchema>[number],
   config: Config,
+  options: DiffOptions,
 ): Promise<{ filePath: string, patch: Change[] }[]> {
   const payload = await fetchTree(config.style, [component])
   const baseColor = await getRegistryBaseColor(config.tailwind.baseColor)
@@ -129,7 +132,7 @@ async function diffComponent(
 
   for (const item of payload) {
     for (const file of item.files ?? []) {
-      const filePath = resolveFilePath(file, config)
+      const filePath = resolveFilePath(file, config, { path: options.path })
 
       if (!existsSync(filePath)) {
         continue
@@ -162,16 +165,39 @@ async function diffComponent(
 }
 
 async function printDiff(diff: Change[]): Promise<void> {
-  diff.forEach((part) => {
-    if (part) {
-      if (part.added) {
-        return process.stdout.write(highlighter.success(part.value))
-      }
-      if (part.removed) {
-        return process.stdout.write(highlighter.error(part.value))
-      }
+  process.stdout.write(formatDiffLines(diff))
+}
 
-      return process.stdout.write(part.value)
+/**
+ * Renders a diff as a unified output: added lines prefixed with `+ `,
+ * removed lines with `- `, and context lines indented by two spaces.
+ * Added and removed lines are colored via the highlighter.
+ */
+export function formatDiffLines(diff: Change[]): string {
+  const lines: string[] = []
+
+  for (const part of diff) {
+    if (!part) {
+      continue
     }
-  })
+
+    const body = part.value.split('\n')
+    if (body[body.length - 1] === '') {
+      body.pop()
+    }
+
+    for (const line of body) {
+      if (part.added) {
+        lines.push(highlighter.success(`+ ${line}`))
+      }
+      else if (part.removed) {
+        lines.push(highlighter.error(`- ${line}`))
+      }
+      else {
+        lines.push(`  ${line}`)
+      }
+    }
+  }
+
+  return lines.length ? `${lines.join('\n')}\n` : ''
 }

@@ -16,6 +16,7 @@ export async function addComponents(
   config: Config,
   options: {
     overwrite?: boolean
+    path?: string
   },
 ): Promise<void> {
   options = {
@@ -31,6 +32,7 @@ async function addProjectComponents(
   config: Config,
   options: {
     overwrite?: boolean
+    path?: string
   },
 ): Promise<void> {
   const registrySpinner = spinner('Checking registry.').start()
@@ -54,6 +56,7 @@ async function addProjectComponents(
 
   await updateFiles(tree.files, config, {
     overwrite: options.overwrite,
+    path: options.path,
   })
 
   if (tree.docs) {

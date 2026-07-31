@@ -7,6 +7,7 @@ export const InitSchema = z.object({
   defaults: z.boolean(),
   yes: z.boolean(),
   cssVariables: z.boolean(),
+  template: z.string().optional(),
 })
 
 export type InitOptions = z.infer<typeof InitSchema>

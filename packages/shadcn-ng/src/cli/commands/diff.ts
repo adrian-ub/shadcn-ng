@@ -18,6 +18,10 @@ export const diff = new Command()
     'the working directory. defaults to the current directory.',
     process.cwd(),
   )
+  .option(
+    '-p, --path <path>',
+    'the path to check for updates against.',
+  )
   .action(async (name, opts) => {
     header()
     try {

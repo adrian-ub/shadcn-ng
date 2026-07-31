@@ -13,6 +13,7 @@ import { ERRORS } from '../utils/errors'
 import { addComponents } from './add-components'
 import { createProject } from './create-project'
 import { preFlightAdd } from './preflight-add'
+import { DEFAULT_TEMPLATE } from './resolve-template'
 import { runInit } from './run-init'
 
 export async function runAdd(options: AddOptions): Promise<void> {
@@ -63,6 +64,7 @@ export async function runAdd(options: AddOptions): Promise<void> {
       defaults: false,
       components: [],
       cssVariables: options.cssVariables,
+      template: DEFAULT_TEMPLATE,
     })
   }
 
@@ -86,6 +88,7 @@ export async function runAdd(options: AddOptions): Promise<void> {
       defaults: false,
       components: [],
       cssVariables: options.cssVariables,
+      template: DEFAULT_TEMPLATE,
     })
   }
 

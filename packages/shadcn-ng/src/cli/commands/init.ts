@@ -26,7 +26,11 @@ export const init = new Command()
     process.cwd(),
   )
   .option('-f, --force', 'force overwrite of existing configuration.', false)
-  .option('-d, --defaults,', 'use default configuration.', false)
+  .option('-d, --defaults', 'use default configuration.', false)
+  .option(
+    '-t, --template <template>',
+    'the project template to use. defaults to standalone.',
+  )
   .option('-y, --yes', 'skip confirmation prompt.', true)
   .option('--css-variables', 'use css variables for theming.', true)
   .option('--no-css-variables', 'do not use css variables for theming.')
