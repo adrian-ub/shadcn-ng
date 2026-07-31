@@ -27,9 +27,7 @@ export const RegistryItemFileSchema = z.discriminatedUnion('type', [
     path: z.string(),
     content: z.string().optional(),
     type: RegistryItemTypeSchema
-      .refine(val => val !== 'registry:file' && val !== 'registry:page', {
-        message: 'Type must not be registry:file or registry:page',
-      }),
+      .exclude(['registry:file', 'registry:page']),
     target: z.string().optional(),
   }),
 ])

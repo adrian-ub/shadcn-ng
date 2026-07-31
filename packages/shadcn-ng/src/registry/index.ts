@@ -1,6 +1,16 @@
 export * from './api'
-export * from './schema'
+export {
+  RegistryBuilder,
+  SOURCE_EXTENSIONS,
+  writeManifest,
+} from './builder'
 
+export type {
+  BuildManifestOptions,
+  ComponentEntry,
+  ComponentScan,
+  RegistryManifest,
+} from './builder'
 export { TTLCache } from './cache'
 export { RegistryFetcher } from './fetcher'
 export type { RegistryFetcherOptions } from './fetcher'
@@ -9,11 +19,12 @@ export type {
   RegistryResolverOptions,
   ResolvedTree,
 } from './resolver'
+export * from './schema'
 export {
   DEFAULT_REGISTRY_URL,
-  REGISTRY_URL_ENV_VAR,
   getRegistryBaseUrl,
   parseRegistrySource,
+  REGISTRY_URL_ENV_VAR,
   resolveRegistrySource,
 } from './source'
 export type {
@@ -21,3 +32,9 @@ export type {
   RegistrySource,
   UrlRegistrySource,
 } from './source'
+export {
+  validate,
+  validateRegistryIndex,
+  validateRegistryItem,
+  validateRegistryManifest,
+} from './validator'
