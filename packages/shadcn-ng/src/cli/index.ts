@@ -9,6 +9,9 @@ import { docs } from './commands/docs'
 import { eject } from './commands/eject'
 import { info } from './commands/info'
 import { init } from './commands/init'
+import { mcp } from './commands/mcp'
+import { migrate } from './commands/migrate'
+import { preset } from './commands/preset'
 
 async function main(): Promise<void> {
   const program = new Command()
@@ -28,6 +31,9 @@ async function main(): Promise<void> {
   program.addCommand(eject)
   program.addCommand(info)
   program.addCommand(build)
+  program.addCommand(mcp)
+  program.addCommand(migrate)
+  program.addCommand(preset)
 
   program.parse()
 }
