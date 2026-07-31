@@ -12,6 +12,7 @@ import { init } from './commands/init'
 import { mcp } from './commands/mcp'
 import { migrate } from './commands/migrate'
 import { preset } from './commands/preset'
+import { search } from './commands/search'
 
 async function main(): Promise<void> {
   const program = new Command()
@@ -34,6 +35,7 @@ async function main(): Promise<void> {
   program.addCommand(mcp)
   program.addCommand(migrate)
   program.addCommand(preset)
+  program.addCommand(search)
 
   program.parse()
 }
