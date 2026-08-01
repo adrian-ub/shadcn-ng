@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 const packageRoot = resolve(import.meta.dirname, '..')       // packages/shadcn-ng/
-const projectRoot = resolve(import.meta.dirname, '../..')    // repo root
+const projectRoot = resolve(import.meta.dirname, '../../..') // repo root
 
 describe('P1.T2: Build migration — tsdown config', () => {
   it('has tsdown.config.ts in the package with tsdown import', () => {

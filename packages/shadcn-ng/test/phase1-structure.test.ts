@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { existsSync, readdirSync, statSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-const projectRoot = resolve(import.meta.dirname, '../..')
+const projectRoot = resolve(import.meta.dirname, '../../..')
 
 describe('P1.T1: Folder restructure — apps/v4/registry/bases/', () => {
   const basesDir = resolve(projectRoot, 'apps/v4/registry/bases')
