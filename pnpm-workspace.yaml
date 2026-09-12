@@ -3,3 +3,6 @@ ignoreWorkspaceRootCheck: true
 packages:
   - apps/*
   - packages/*
+
+allowBuilds:
+  esbuild: false
