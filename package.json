@@ -3,15 +3,7 @@
   "type": "module",
   "version": "1.1.0",
   "private": true,
-  "packageManager": "pnpm@9.15.4",
-  "description": "Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.",
+  "packageManager": "pnpm@12.4.1",
   "author": "Adrián UB",
-  "license": "MIT",
-  "funding": "https://github.com/sponsors/adrian-ub",
-  "homepage": "https://github.com/adrian-ub/shadcn-ng#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/adrian-ub/shadcn-ng.git"
-  },
-  "bugs": "https://github.com/adrian-ub/shadcn-ng/issues"
+  "license": "MIT"
 }

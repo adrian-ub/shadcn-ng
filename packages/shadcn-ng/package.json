@@ -1,0 +1,47 @@
+{
+  "name": "shadcn-ng",
+  "type": "module",
+  "version": "1.1.0",
+  "description": "Add components to your apps.",
+  "author": "Adrián UB",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/adrian-ub",
+  "homepage": "https://github.com/adrian-ub/shadcn-ng#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrian-ub/shadcn-ng.git",
+    "directory": "packages/shadcn-ng"
+  },
+  "bugs": {
+    "url": "https://github.com/adrian-ub/shadcn-ng/issues"
+  },
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "components",
+    "ui",
+    "tailwind",
+    "shadcn",
+    "shadcn-ng"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp",
+    "prepublishOnly": "pnpm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "bumpp": "^11.1.0",
+    "tsdown": "^0.22.5",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
