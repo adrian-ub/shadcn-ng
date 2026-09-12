@@ -19,6 +19,9 @@
     ".": "./dist/index.mjs",
     "./package.json": "./package.json"
   },
+  "bin": {
+    "shadcn-ng": "./dist/index.mjs"
+  },
   "files": [
     "dist"
   ],
@@ -36,6 +39,9 @@
     "typecheck": "tsc --noEmit",
     "release": "bumpp",
     "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "commander": "^15.0.0"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
