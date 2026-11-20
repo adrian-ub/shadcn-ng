@@ -1,8 +1,7 @@
 packages:
-  - playground
-  - apps/*
   - packages/*
-  - examples/*
+  - legacy
+  - legacy/apps/*
 catalog:
   '@alpinejs/focus': ^3.14.8
   '@analogjs/astro-angular': ^1.15.1
@@ -18,7 +17,7 @@ catalog:
   '@angular/language-service': ^19.2.6
   '@angular/platform-browser': ^19.2.6
   '@angular/platform-browser-dynamic': ^19.2.6
-  '@angular/platform-server': ^19.2.6
+  '@angular/platform-server': ^19.2.7
   '@angular/router': ^19.2.0
   '@angular/ssr': ^19.2.7
   '@antfu/eslint-config': ^4.12.0
@@ -31,6 +30,7 @@ catalog:
   '@astrojs/tailwind': ^6.0.2
   '@astrojs/ts-plugin': ^1.10.4
   '@clack/prompts': ^0.9.1
+  '@codspeed/vitest-plugin': ^4.0.1
   '@fontsource-variable/geist': ^5.2.5
   '@fontsource-variable/geist-mono': ^5.2.5
   '@ng-icons/core': ^30.2.0
@@ -71,6 +71,7 @@ catalog:
   node-fetch: ^3.3.2
   package-manager-detector: ^0.2.9
   picocolors: ^1.1.1
+  pkg-pr-new: ^0.0.94
   pnpm: ^9.15.4
   postcss: ^8.5.1
   prettier-plugin-astro: ^0.14.1
@@ -102,6 +103,7 @@ catalog:
   valibot: 1.0.0
   vite: ^6.0.7
   vitest: ^2.1.8
+  zod: ^4.6.7
   zone.js: ~0.15.0
 catalogs:
   conflicts_tailwindcss_h3_4_14:

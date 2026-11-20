@@ -2,8 +2,15 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["ESNext"],
+    "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "paths": {
+      "@ng/shared": ["packages/shared/src/index.ts"],
+      "@ng/core": ["packages/core/src/index.ts"],
+      "@ng/registry-builder": ["packages/registry-builder/src/index.ts"],
+      "@ng/fixtures": ["packages/fixtures/src/index.ts"]
+    },
     "resolveJsonModule": true,
     "strict": true,
     "strictNullChecks": true,
@@ -12,5 +19,13 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "exclude": ["apps"]
+  "include": [
+    "src/**/*.ts",
+    "packages/**/*.ts",
+    "test/**/*.ts",
+    "benchmarks/**/*.ts",
+    "*.config.ts",
+    "scripts/**/*.ts"
+  ],
+  "exclude": ["legacy", "node_modules"]
 }

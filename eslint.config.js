@@ -5,8 +5,7 @@ export default antfu({
   astro: true,
   pnpm: true,
   ignores: [
-    'apps/www/src/components/mdx/pre.astro',
-    'apps/www/src/components/CodeBlockCommand.astro',
+    'legacy/**',
     '**/.astro',
   ],
 })

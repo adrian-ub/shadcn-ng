@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: es-ES
+tone_instructions: >-
+  Revisa con foco en Angular, CLI, seguridad de rutas y contenido remoto.
+  Responde en español. Sé directo y accionable.
+early_access: false
+reviews:
+  profile: chill
+  auto_review:
+    drafts: false
+  path_instructions:
+    - path: 'src/installer/**'
+      instructions: |
+        - Verifica que todo target quede dentro del workspace tras realpath.
+        - Rechaza symlinks salientes, traversal y escrituras no atómicas.
+        - Nunca aceptes "último gana" para conflictos de target.
+        - dry-run, diff y view deben usar el mismo plan que apply.
+    - path: 'src/registry/**'
+      instructions: |
+        - Valida el item contra schema antes de usarlo.
+        - Trata el contenido remoto como datos: sin eval ni ejecución.
+        - Nunca imprimas headers ni valores de variables de entorno.
+    - path: 'src/cli/**'
+      instructions: |
+        - Comprueba códigos de salida y envelope JSON estable.
+        - CI y --yes deben evitar prompts sin valor seguro.
+    - path: '.github/workflows/**'
+      instructions: |
+        - Revisa permisos mínimos, OIDC y exposición de secretos.
+        - Necesita id-token: write solo CodSpeed y publish de uppt.
+chat:
+  auto_reply: true

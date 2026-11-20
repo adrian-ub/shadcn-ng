@@ -1,1 +1,1 @@
-export * from './registry/index'
+export {}

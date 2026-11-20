@@ -1,0 +1,34 @@
+name: pr-lens
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions: {}
+
+concurrency:
+  group: pr-lens-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  lens:
+    name: Map pull request
+    # Fork PRs do not receive secrets. The hosted GitHub App covers those.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: coldteadotai/pr-lens/packages/action@v0
+        with:
+          api-key: ${{ secrets.GEMINI_API_KEY }}

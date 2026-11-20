@@ -1,53 +1,48 @@
-name: CI
+name: ci
 
 on:
   push:
     branches:
       - main
-
   pull_request:
     branches:
       - main
 
+permissions: {}
+
 jobs:
-  lint:
+  check:
+    name: lint, typecheck, build, test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
         with:
-          run_install: false
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 22
           cache: pnpm
 
-      - run: pnpm i -g @antfu/ni
-      - run: nci
-      - run: nr lint
-      - run: nr typecheck
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-  test:
-    runs-on: ${{ matrix.os }}
+      - name: Lint
+        run: pnpm lint
 
-    strategy:
-      matrix:
-        node: [lts/*]
-        os: [ubuntu-latest, windows-latest, macos-latest]
-      fail-fast: false
+      - name: Typecheck
+        run: pnpm typecheck
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: false
-      - name: Set node ${{ matrix.node }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
+      - name: Build
+        run: pnpm build
 
-      - run: pnpm i -g @antfu/ni
-      - run: nci
-      - run: nr build
-      - run: nr test
+      - name: Test
+        run: pnpm test -- --run
+
+      # pkg.pr.new publishes a preview tarball to its own npm-compatible URL.
+      # It does not touch the npm registry. The GitHub App must be installed.
+      - name: Publish PR preview
+        if: github.event_name == 'pull_request'
+        run: pnpm exec pkg-pr-new publish --pnpm --bin --previewVersion --commentWithSha .

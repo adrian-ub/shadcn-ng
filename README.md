@@ -1,36 +1,50 @@
 # shadcn-ng
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![bundle][bundle-src]][bundle-href]
-[![JSDocs][jsdocs-src]][jsdocs-href]
-[![License][license-src]][license-href]
+CLI que distribuye código, configuración y recursos para proyectos Angular desde un registry estático.
 
-Accessible and customizable components that you can copy and paste into your apps. Free. Open Source. Use this to build your own component library.
+El producto es la CLI. El Registry distribuye recursos. El Installer Engine conecta ambos. `button` es la única prueba de integración del MVP.
 
-![hero](apps/www/public/og.jpg)
+## Estado
 
-## Sponsors
+Versión `0.1.0`, pre-1.0. Publicación prevista con `--tag beta` o `--tag next`. `latest` queda intacto hasta GA.
 
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/adrian-ub/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/adrian-ub/static/sponsors.svg'/>
-  </a>
-</p>
+## Comandos del MVP
 
-## License
+```text
+init
+info
+add <items...>
+view <items...>
+search [query]
+list
+diff <items...>
+build [registry]
+```
 
-[MIT](./LICENSE) License © 2024-PRESENT [Adrián UB](https://github.com/adrian-ub)
+## Desarrollo
 
-<!-- Badges -->
+```bash
+pnpm install --frozen-lockfile
+pnpm build
+pnpm typecheck
+pnpm test:run
+pnpm lint
+```
 
-[npm-version-src]: https://img.shields.io/npm/v/shadcn-ng?style=flat&colorA=080f12&colorB=1fa669
-[npm-version-href]: https://npmjs.com/package/shadcn-ng
-[npm-downloads-src]: https://img.shields.io/npm/dm/shadcn-ng?style=flat&colorA=080f12&colorB=1fa669
-[npm-downloads-href]: https://npmjs.com/package/shadcn-ng
-[bundle-src]: https://img.shields.io/bundlephobia/minzip/shadcn-ng?style=flat&colorA=080f12&colorB=1fa669&label=minzip
-[bundle-href]: https://bundlephobia.com/result?p=shadcn-ng
-[license-src]: https://img.shields.io/github/license/adrian-ub/shadcn-ng.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/adrian-ub/shadcn-ng/blob/main/LICENSE
-[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
-[jsdocs-href]: https://www.jsdocs.io/package/shadcn-ng
+## Estructura
+
+```text
+packages/shared            hashing, URLs, redacción y errores
+packages/core              detección, config, registry, resolver e installer
+packages/registry-builder  generador determinista del registry
+packages/fixtures          utilidades de testing
+registry/                  fuente del único item del MVP
+legacy/                    código 1.x conservado con su historial
+docs/                      arquitectura, decisiones y progreso
+```
+
+## Advertencias
+
+- El código anterior vive en `legacy/`. No se reescribió el historial de Git.
+- Los paquetes bajo `packages/*` son privados y se inlinen en `dist`.
+- Este README documenta la línea `0.1.0`. La documentación `1.x` está en `legacy/README.md`.
